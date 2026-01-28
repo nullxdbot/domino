@@ -37,7 +37,6 @@ function updateScore(player, amount) {
     saveGameData();
     render();
     renderHistory();
-    updateLeadingIndicator();
     checkWin(player);
 }
 
@@ -113,27 +112,7 @@ function renderHistory() {
     }
 }
 
-// ===== FITUR BARU: LEADING INDICATOR =====
-function updateLeadingIndicator() {
-    const card0 = document.getElementById('card-0');
-    const card1 = document.getElementById('card-1');
-    
-    // Reset semua dulu
-    card0.classList.remove('leading');
-    card1.classList.remove('leading');
-    
-    // Jangan highlight kalau masih 0 vs 0
-    if(scores[0] === 0 && scores[1] === 0) return;
-    
-    // Highlight yang skor lebih tinggi
-    if(scores[0] > scores[1]) {
-        card0.classList.add('leading');
-    } else if(scores[1] > scores[0]) {
-        card1.classList.add('leading');
-    }
-}
-
-// ===== FITUR BARU: LAST WINNER BADGE =====
+// ===== FITUR: LAST WINNER BADGE =====
 function renderLastWinnerBadge() {
     const badge0 = document.getElementById('badge-0');
     const badge1 = document.getElementById('badge-1');
@@ -191,7 +170,6 @@ function loadGameData() {
         setTheme(currentTheme); 
         render();
         renderHistory();
-        updateLeadingIndicator();
     }
 }
 
@@ -236,7 +214,6 @@ function performResetRound() {
     saveGameData();
     render();
     renderHistory();
-    updateLeadingIndicator();
 }
 
 function performHardReset() {
@@ -252,7 +229,6 @@ function performHardReset() {
     saveGameData();
     render();
     renderHistory();
-    updateLeadingIndicator();
 }
 
 // ===== CALCULATOR =====
