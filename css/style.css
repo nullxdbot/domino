@@ -266,7 +266,7 @@ body {
 /* Quick Reset Button */
 .quick-reset-btn {
     position: absolute;
-    top: 50px;
+    top: 65px;
     right: 15px;
     background: rgba(255, 107, 107, 0.2);
     border: 1px solid rgba(255, 107, 107, 0.3);
