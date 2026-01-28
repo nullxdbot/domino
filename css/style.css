@@ -266,20 +266,20 @@ body {
 /* Quick Reset Button */
 .quick-reset-btn {
     position: absolute;
-    top: 15px;
-    left: 15px;
+    top: 50px;
+    right: 15px;
     background: rgba(255, 107, 107, 0.2);
     border: 1px solid rgba(255, 107, 107, 0.3);
     color: #ff6b6b;
-    width: 32px;
-    height: 32px;
+    width: 28px;
+    height: 28px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     transition: all 0.3s ease;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     z-index: 5;
 }
 
