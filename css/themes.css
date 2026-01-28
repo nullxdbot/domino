@@ -1,0 +1,285 @@
+/* ===== COLOR THEMES ===== */
+
+/* Default Theme (Purple) - Already in main CSS */
+[data-theme="default"],
+:root {
+    --theme-bg-start: #667eea;
+    --theme-bg-end: #764ba2;
+    --theme-player1: #4a9eff;
+    --theme-player2: #ff5555;
+}
+
+/* Dark Theme */
+[data-theme="dark"] {
+    --theme-bg-start: #1a1a2e;
+    --theme-bg-end: #16213e;
+    --theme-player1: #0abdc6;
+    --theme-player2: #ea3323;
+    
+    --bg-glass: rgba(255, 255, 255, 0.05);
+    --bg-overlay: rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="dark"] body {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+}
+
+/* Ocean Theme */
+[data-theme="ocean"] {
+    --theme-bg-start: #2E3192;
+    --theme-bg-end: #1BFFFF;
+    --theme-player1: #00d4ff;
+    --theme-player2: #0088ff;
+}
+
+[data-theme="ocean"] body {
+    background: linear-gradient(135deg, #2E3192 0%, #1BFFFF 100%);
+}
+
+/* Sunset Theme */
+[data-theme="sunset"] {
+    --theme-bg-start: #ff6b6b;
+    --theme-bg-end: #feca57;
+    --theme-player1: #ee5a6f;
+    --theme-player2: #f79f1f;
+}
+
+[data-theme="sunset"] body {
+    background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
+}
+
+/* Forest Theme */
+[data-theme="forest"] {
+    --theme-bg-start: #134e4a;
+    --theme-bg-end: #14b8a6;
+    --theme-player1: #2dd4bf;
+    --theme-player2: #10b981;
+}
+
+[data-theme="forest"] body {
+    background: linear-gradient(135deg, #134e4a 0%, #14b8a6 100%);
+}
+
+/* Neon Theme */
+[data-theme="neon"] {
+    --theme-bg-start: #0f0c29;
+    --theme-bg-end: #302b63;
+    --theme-player1: #00fff9;
+    --theme-player2: #ff0080;
+}
+
+[data-theme="neon"] body {
+    background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+}
+
+[data-theme="neon"] .player-name,
+[data-theme="neon"] .score-display {
+    text-shadow: 
+        0 0 7px currentColor,
+        0 0 10px currentColor,
+        0 0 21px currentColor;
+}
+
+/* Rose Theme */
+[data-theme="rose"] {
+    --theme-bg-start: #ec4899;
+    --theme-bg-end: #f472b6;
+    --theme-player1: #f9a8d4;
+    --theme-player2: #fbbf24;
+}
+
+[data-theme="rose"] body {
+    background: linear-gradient(135deg, #ec4899 0%, #f472b6 100%);
+}
+
+/* Sky Theme */
+[data-theme="sky"] {
+    --theme-bg-start: #0ea5e9;
+    --theme-bg-end: #38bdf8;
+    --theme-player1: #7dd3fc;
+    --theme-player2: #0284c7;
+}
+
+[data-theme="sky"] body {
+    background: linear-gradient(135deg, #0ea5e9 0%, #38bdf8 100%);
+}
+
+/* Grape Theme */
+[data-theme="grape"] {
+    --theme-bg-start: #7c3aed;
+    --theme-bg-end: #a78bfa;
+    --theme-player1: #c4b5fd;
+    --theme-player2: #8b5cf6;
+}
+
+[data-theme="grape"] body {
+    background: linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%);
+}
+
+/* Fire Theme */
+[data-theme="fire"] {
+    --theme-bg-start: #dc2626;
+    --theme-bg-end: #f97316;
+    --theme-player1: #fb923c;
+    --theme-player2: #fbbf24;
+}
+
+[data-theme="fire"] body {
+    background: linear-gradient(135deg, #dc2626 0%, #f97316 100%);
+}
+
+/* Midnight Theme */
+[data-theme="midnight"] {
+    --theme-bg-start: #1e293b;
+    --theme-bg-end: #334155;
+    --theme-player1: #60a5fa;
+    --theme-player2: #a78bfa;
+}
+
+[data-theme="midnight"] body {
+    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+}
+
+/* Candy Theme */
+[data-theme="candy"] {
+    --theme-bg-start: #ff71ce;
+    --theme-bg-end: #01cdfe;
+    --theme-player1: #05ffa1;
+    --theme-player2: #fffb96;
+}
+
+[data-theme="candy"] body {
+    background: linear-gradient(135deg, #ff71ce 0%, #01cdfe 100%);
+}
+
+/* Aurora Theme */
+[data-theme="aurora"] {
+    --theme-bg-start: #a8edea;
+    --theme-bg-end: #fed6e3;
+    --theme-player1: #96e6a1;
+    --theme-player2: #d4a5a5;
+}
+
+[data-theme="aurora"] body {
+    background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+}
+
+/* Theme Switcher Buttons */
+.theme-switcher {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.theme-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.theme-btn:hover {
+    transform: scale(1.1);
+    border-color: rgba(255, 255, 255, 0.8);
+}
+
+.theme-btn.active {
+    border-color: white;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}
+
+.theme-btn.active::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-weight: bold;
+}
+
+/* Individual Theme Button Colors */
+.theme-btn[data-theme="default"] {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+}
+
+.theme-btn[data-theme="dark"] {
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+}
+
+.theme-btn[data-theme="ocean"] {
+    background: linear-gradient(135deg, #2E3192, #1BFFFF);
+}
+
+.theme-btn[data-theme="sunset"] {
+    background: linear-gradient(135deg, #ff6b6b, #feca57);
+}
+
+.theme-btn[data-theme="forest"] {
+    background: linear-gradient(135deg, #134e4a, #14b8a6);
+}
+
+.theme-btn[data-theme="neon"] {
+    background: linear-gradient(135deg, #0f0c29, #302b63);
+}
+
+.theme-btn[data-theme="rose"] {
+    background: linear-gradient(135deg, #ec4899, #f472b6);
+}
+
+.theme-btn[data-theme="sky"] {
+    background: linear-gradient(135deg, #0ea5e9, #38bdf8);
+}
+
+.theme-btn[data-theme="grape"] {
+    background: linear-gradient(135deg, #7c3aed, #a78bfa);
+}
+
+.theme-btn[data-theme="fire"] {
+    background: linear-gradient(135deg, #dc2626, #f97316);
+}
+
+.theme-btn[data-theme="midnight"] {
+    background: linear-gradient(135deg, #1e293b, #334155);
+}
+
+.theme-btn[data-theme="candy"] {
+    background: linear-gradient(135deg, #ff71ce, #01cdfe);
+}
+
+.theme-btn[data-theme="aurora"] {
+    background: linear-gradient(135deg, #a8edea, #fed6e3);
+}
+
+/* Apply Theme Colors to Players */
+.player-1 .plus-btn {
+    background: var(--theme-player1, #4a9eff);
+}
+
+.player-1 .player-name,
+.player-1 .score-display,
+.player-1 .footer-score {
+    color: var(--theme-player1, #4a9eff);
+}
+
+.player-2 .plus-btn {
+    background: var(--theme-player2, #ff5555);
+}
+
+.player-2 .player-name,
+.player-2 .score-display,
+.player-2 .footer-score {
+    color: var(--theme-player2, #ff5555);
+}
+
+/* Smooth Theme Transition */
+body,
+.player-name,
+.score-display,
+.footer-score,
+.plus-btn {
+    transition: all 0.5s ease;
+}

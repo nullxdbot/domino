@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Domino Score</title>
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/efekteks.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/utilities.css">
+    <link rel="stylesheet" href="css/themes.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Header -->
+    <div class="header animate-fadeInDown">
+        <div class="header-title">
+            <div class="logo animate-pulse">🎲</div>
+            <h1 class="text-gradient-primary">Domino Score</h1>
+        </div>
+        <button class="menu-btn btn-ripple" onclick="toggleSettings()">☰</button>
+    </div>
+
+    <!-- Settings Panel -->
+    <div class="settings-panel" id="settingsPanel">
+        <button class="close-settings" onclick="toggleSettings()">✕</button>
+        <h2>⚙️ Pengaturan</h2>
+        
+        <!-- Theme Switcher -->
+        <div class="settings-item">
+            <label>🎨 Pilih Tema</label>
+            <div class="theme-switcher">
+                <button class="theme-btn" data-theme="default" onclick="changeTheme('default')" title="Purple"></button>
+                <button class="theme-btn" data-theme="dark" onclick="changeTheme('dark')" title="Dark"></button>
+                <button class="theme-btn" data-theme="ocean" onclick="changeTheme('ocean')" title="Ocean"></button>
+                <button class="theme-btn" data-theme="sunset" onclick="changeTheme('sunset')" title="Sunset"></button>
+                <button class="theme-btn" data-theme="forest" onclick="changeTheme('forest')" title="Forest"></button>
+                <button class="theme-btn" data-theme="neon" onclick="changeTheme('neon')" title="Neon"></button>
+                <button class="theme-btn" data-theme="rose" onclick="changeTheme('rose')" title="Rose"></button>
+                <button class="theme-btn" data-theme="sky" onclick="changeTheme('sky')" title="Sky"></button>
+                <button class="theme-btn" data-theme="fire" onclick="changeTheme('fire')" title="Fire"></button>
+                <button class="theme-btn" data-theme="midnight" onclick="changeTheme('midnight')" title="Midnight"></button>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+        
+        <!-- Losing Score -->
+        <div class="settings-item">
+            <label>🎯 Batas Skor Kalah</label>
+            <input type="number" id="winningScore" value="101" min="50" max="500" 
+                   class="input" onchange="updateWinningScore()">
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Reset Button -->
+        <div class="settings-item">
+            <button class="reset-btn btn-ripple w-100" onclick="resetGame()">
+                🔄 Reset Game
+            </button>
+        </div>
+    </div>
+
+    <!-- Players Container -->
+    <div class="players-container">
+        <!-- Player 1 -->
+        <div class="player player-1 glass-card animate-fadeInUp">
+            <div class="player-header">
+                <input type="text" class="player-name text-shadow-md" 
+                       value="Pemain 1" data-player="0" 
+                       onchange="updatePlayerName(0, this.value)">
+                <div class="score-badge badge-glass">
+                    <span class="trophy">🏆</span>
+                    <span id="badge-0">0</span>
+                </div>
+            </div>
+
+            <!-- Progress Bar to Losing Score -->
+            <div class="progress mb-3 w-100">
+                <div class="progress-bar" id="progress-0" style="width: 0%"></div>
+            </div>
+
+            <div class="score-display text-glow animate-pulse" id="score-0">0</div>
+            
+            <div class="controls">
+                <button class="control-btn plus-btn btn-ripple animate-float" 
+                        onclick="openCalculator(0)">+</button>
+                <button class="control-btn minus-btn btn-ripple" 
+                        onclick="subtractScore(0)">−</button>
+            </div>
+            
+            <div class="footer-score text-shadow-lg" id="footer-0">0</div>
+        </div>
+
+        <!-- Player 2 -->
+        <div class="player player-2 glass-card animate-fadeInUp delay-100">
+            <div class="player-header">
+                <input type="text" class="player-name text-shadow-md" 
+                       value="Pemain 2" data-player="1" 
+                       onchange="updatePlayerName(1, this.value)">
+                <div class="score-badge badge-glass">
+                    <span class="trophy">🏆</span>
+                    <span id="badge-1">0</span>
+                </div>
+            </div>
+
+            <!-- Progress Bar to Losing Score -->
+            <div class="progress mb-3 w-100">
+                <div class="progress-bar" id="progress-1" style="width: 0%"></div>
+            </div>
+
+            <div class="score-display text-glow animate-pulse" id="score-1">0</div>
+            
+            <div class="controls">
+                <button class="control-btn plus-btn btn-ripple animate-float" 
+                        onclick="openCalculator(1)">+</button>
+                <button class="control-btn minus-btn btn-ripple" 
+                        onclick="subtractScore(1)">−</button>
+            </div>
+            
+            <div class="footer-score text-shadow-lg" id="footer-1">0</div>
+        </div>
+    </div>
+
+    <!-- Calculator Overlay -->
+    <div class="calculator-overlay" id="calculatorOverlay" onclick="closeCalculatorOnOutside(event)">
+        <div class="calculator animate-slideUp" onclick="event.stopPropagation()">
+            <div class="calc-display" id="calcDisplay">0</div>
+            <div class="calc-buttons">
+                <button class="calc-btn function btn-ripple" onclick="clearCalc()">AC</button>
+                <button class="calc-btn function btn-ripple" onclick="backspace()">⌫</button>
+                <button class="calc-btn operator btn-ripple" onclick="appendOperator('/')">÷</button>
+                <button class="calc-btn operator btn-ripple" onclick="appendOperator('*')">×</button>
+                
+                <button class="calc-btn btn-ripple" onclick="appendNumber('7')">7</button>
+                <button class="calc-btn btn-ripple" onclick="appendNumber('8')">8</button>
+                <button class="calc-btn btn-ripple" onclick="appendNumber('9')">9</button>
+                <button class="calc-btn operator btn-ripple" onclick="appendOperator('-')">−</button>
+                
+                <button class="calc-btn btn-ripple" onclick="appendNumber('4')">4</button>
+                <button class="calc-btn btn-ripple" onclick="appendNumber('5')">5</button>
+                <button class="calc-btn btn-ripple" onclick="appendNumber('6')">6</button>
+                <button class="calc-btn operator btn-ripple" onclick="appendOperator('+')">+</button>
+                
+                <button class="calc-btn btn-ripple" onclick="appendNumber('1')">1</button>
+                <button class="calc-btn btn-ripple" onclick="appendNumber('2')">2</button>
+                <button class="calc-btn btn-ripple" onclick="appendNumber('3')">3</button>
+                <button class="calc-btn done btn-ripple" onclick="doneCalculator()">Done</button>
+                
+                <button class="calc-btn zero btn-ripple" onclick="appendNumber('0')">0</button>
+                <button class="calc-btn btn-ripple" onclick="appendNumber('.')">.</button>
+                <button class="calc-btn cancel btn-ripple" onclick="closeCalculator()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Winner/Loser Overlay -->
+    <div class="winner-overlay modal-overlay" id="winnerOverlay">
+        <div class="winner-content modal animate-bounceIn">
+            <div class="winner-trophy animate-bounce">💀</div>
+            <div class="winner-text text-gradient" id="winnerName">Pemain 1</div>
+            <div class="text-neon-pink mb-2" style="font-size: 24px; font-weight: 700;">KALAH!</div>
+            <div class="winner-score text-shadow-xl" id="winnerScore">101</div>
+            <button class="reset-btn btn-ripple" onclick="resetGame()">Main Lagi</button>
+        </div>
+    </div>
+
+    <!-- Confetti Container -->
+    <div id="confetti-container"></div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
