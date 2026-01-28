@@ -1,0 +1,21 @@
+{
+  "name": "Domino Score NullXD",
+  "short_name": "Domino NullXD",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#0f1020",
+  "theme_color": "#0f1020",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "https://files.catbox.moe/zbkmtd.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg"
+    },
+    {
+      "src": "https://files.catbox.moe/zbkmtd.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
+}
