@@ -1,3 +1,4 @@
+// ===== STATE MANAGEMENT =====
 let scores = [0, 0];
 let wins = [0, 0];
 let limit = 101;
@@ -7,47 +8,57 @@ let activePlayer = 0;
 const sfxClick = document.getElementById('sfx-click');
 const sfxWin = document.getElementById('sfx-win');
 
+// ===== INITIALIZATION (AUTO-LOAD) =====
+// Fungsi ini otomatis jalan saat aplikasi dibuka untuk mengambil data lama
+document.addEventListener('DOMContentLoaded', () => {
+    loadGameData();
+});
+
 function playClick() { if(sfxClick) { sfxClick.currentTime = 0; sfxClick.play().catch(()=>{}); } }
 function playWin() { if(sfxWin) sfxWin.play().catch(()=>{}); if(navigator.vibrate) navigator.vibrate([200, 100, 200]); }
 
-// Game Logic
+// ===== GAME LOGIC =====
 function updateScore(player, amount) {
     playClick();
     if (scores[player] + amount < 0) return;
     scores[player] += amount;
+    
+    saveGameData(); // <--- Simpan setiap skor berubah
     render();
     checkWin(player);
 }
 
-function updateName(player, name) { /* Logic simpan nama */ }
+function updateName(player, name) {
+    saveGameData(); // <--- Simpan setiap nama berubah
+}
 
 function checkWin(player) {
     if (scores[player] >= limit) {
-        gameOver(player); // Pemain ini kalah (jika aturan > 101 kalah)
+        gameOver(player);
     }
-    // Atau jika aturan siapa cepat 101 menang, ubah logika di sini
-    // Asumsi: Mencapai 101 = KALAH (Aturan umum domino gaple)
-    // Jika Anda ingin Mencapai 101 = MENANG, ganti teks di HTML Modal.
 }
 
 function gameOver(loserIndex) {
     playWin();
-    // Jika yang mencapai limit kalah, maka lawannya menang
     const winnerIndex = loserIndex === 0 ? 1 : 0;
     wins[winnerIndex]++;
     
-    // Update data modal
-    const winnerName = document.querySelectorAll('.player-input')[winnerIndex].value;
+    // Ambil nama terbaru dari input
+    const inputs = document.querySelectorAll('.player-input');
+    const winnerName = inputs[winnerIndex].value || `Pemain ${winnerIndex + 1}`;
+    
     document.getElementById('winnerName').innerText = winnerName;
-    document.getElementById('finalScore').innerText = scores[winnerIndex]; // Tampilkan skor pemenang
+    document.getElementById('finalScore').innerText = scores[winnerIndex];
     document.getElementById('win-' + winnerIndex).innerText = wins[winnerIndex];
     
     document.getElementById('gameOverModal').classList.add('active');
+    saveGameData();
 }
 
 function resetGame() {
     scores = [0, 0];
     document.querySelectorAll('.overlay').forEach(el => el.classList.remove('active'));
+    saveGameData();
     render();
 }
 
@@ -56,7 +67,46 @@ function render() {
     document.getElementById('score-1').innerText = scores[1];
 }
 
-// Calculator Logic
+// ===== LOCAL STORAGE (FITUR AUTO-SAVE) =====
+function saveGameData() {
+    const inputs = document.querySelectorAll('.player-input');
+    const p1Name = inputs[0].value;
+    const p2Name = inputs[1].value;
+
+    const gameData = {
+        scores: scores,
+        wins: wins,
+        names: [p1Name, p2Name],
+        limit: limit
+    };
+    localStorage.setItem('dominoScoreData', JSON.stringify(gameData));
+}
+
+function loadGameData() {
+    const saved = localStorage.getItem('dominoScoreData');
+    if (saved) {
+        const data = JSON.parse(saved);
+        scores = data.scores || [0, 0];
+        wins = data.wins || [0, 0];
+        limit = data.limit || 101;
+        
+        // Restore Names
+        const inputs = document.querySelectorAll('.player-input');
+        if(data.names && data.names[0]) inputs[0].value = data.names[0];
+        if(data.names && data.names[1]) inputs[1].value = data.names[1];
+
+        // Restore Wins UI
+        document.getElementById('win-0').innerText = wins[0];
+        document.getElementById('win-1').innerText = wins[1];
+        
+        // Restore Limit Input
+        document.getElementById('limitInput').value = limit;
+        
+        render();
+    }
+}
+
+// ===== CALCULATOR LOGIC =====
 let calcVal = '0';
 let lastOp = null;
 let prevVal = null;
@@ -117,17 +167,17 @@ function clearCalc() {
     document.getElementById('calcDisplay').innerText = '0';
 }
 
-// Settings
+// ===== SETTINGS =====
 function toggleSettings() {
     document.getElementById('settingsOverlay').classList.toggle('active');
 }
 
 function updateLimit(val) {
     limit = parseInt(val) || 101;
+    saveGameData(); // Simpan setting limit juga
 }
 
 function setTheme(theme) {
     document.querySelectorAll('.t-circle').forEach(el => el.classList.remove('active'));
-    // Tambahkan logika ganti warna CSS variable jika diperlukan
-    // Saat ini hanya visual selection
+    // Logika tema visual (jika ingin dikembangkan lebih lanjut)
 }
