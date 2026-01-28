@@ -19,6 +19,7 @@ const sfxWin = document.getElementById('sfx-win');
 // ===== INITIALIZATION =====
 document.addEventListener('DOMContentLoaded', () => {
     loadGameData();
+    initParticles();
 });
 
 function playClick() { if(sfxClick) { sfxClick.currentTime = 0; sfxClick.play().catch(()=>{}); } }
@@ -31,13 +32,75 @@ function vibrateLight() {
     if(vibrationEnabled && navigator.vibrate) navigator.vibrate(50);
 }
 
+// ===== PARTICLES ANIMATION =====
+function initParticles() {
+    const canvas = document.getElementById('particles-canvas');
+    if (!canvas) return;
+    
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    
+    const particles = [];
+    const particleCount = 50;
+    
+    class Particle {
+        constructor() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.size = Math.random() * 2 + 0.5;
+            this.speedX = Math.random() * 0.5 - 0.25;
+            this.speedY = Math.random() * 0.5 - 0.25;
+            this.opacity = Math.random() * 0.3 + 0.1;
+        }
+        
+        update() {
+            this.x += this.speedX;
+            this.y += this.speedY;
+            
+            if (this.x > canvas.width) this.x = 0;
+            if (this.x < 0) this.x = canvas.width;
+            if (this.y > canvas.height) this.y = 0;
+            if (this.y < 0) this.y = canvas.height;
+        }
+        
+        draw() {
+            ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
+        }
+    }
+    
+    for (let i = 0; i < particleCount; i++) {
+        particles.push(new Particle());
+    }
+    
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        for (let particle of particles) {
+            particle.update();
+            particle.draw();
+        }
+        
+        requestAnimationFrame(animate);
+    }
+    
+    animate();
+    
+    window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    });
+}
+
 // ===== GAME LOGIC =====
 function updateScore(player, amount) {
     playClick();
     vibrateLight();
     if (scores[player] + amount < 0) return;
     
-    // Catat ke riwayat jika bukan 0
     if (amount !== 0) {
         roundHistory[player].push(amount);
     }
@@ -77,18 +140,15 @@ function gameOver(loserIndex) {
 }
 
 function render() {
-    // 1. Render Skor Utama dengan Color Code
     const score0El = document.getElementById('score-0');
     const score1El = document.getElementById('score-1');
     
     score0El.innerText = scores[0];
     score1El.innerText = scores[1];
     
-    // Color Code berdasarkan progress ke limit
     updateScoreColor(0, score0El);
     updateScoreColor(1, score1El);
 
-    // 2. Render Sisa Poin (Indikator)
     const sisa0 = limit - scores[0];
     const sisa1 = limit - scores[1];
 
@@ -105,33 +165,28 @@ function render() {
         el1.style.color = sisa1 <= 20 ? '#ff6b6b' : 'rgba(255,255,255,0.4)';
     }
 
-    // 3. Render Round Count
     const roundEl = document.getElementById('roundCount');
     if(roundEl) roundEl.innerText = roundCount;
 
-    // 4. Render Last Winner Badge
     renderLastWinnerBadge();
 }
 
-// ===== FITUR BARU: COLOR CODE SKOR =====
 function updateScoreColor(player, element) {
     const progress = scores[player] / limit;
     
-    // Remove existing color classes
     element.classList.remove('score-low', 'score-medium', 'score-high', 'score-critical');
     
     if (progress < 0.3) {
-        element.classList.add('score-low'); // Hijau
+        element.classList.add('score-low');
     } else if (progress < 0.6) {
-        element.classList.add('score-medium'); // Kuning
+        element.classList.add('score-medium');
     } else if (progress < 0.85) {
-        element.classList.add('score-high'); // Orange
+        element.classList.add('score-high');
     } else {
-        element.classList.add('score-critical'); // Merah
+        element.classList.add('score-critical');
     }
 }
 
-// ===== FITUR BARU: SELISIH SKOR =====
 function updateScoreDifference() {
     const diffEl = document.getElementById('scoreDiff');
     if (!diffEl) return;
@@ -142,13 +197,11 @@ function updateScoreDifference() {
         diffEl.innerHTML = '<i class="fas fa-equals"></i> Seri';
         diffEl.className = 'score-difference neutral';
     } else if (scores[0] < scores[1]) {
-        // Tim 1 skornya lebih rendah = lebih unggul (lebih jauh dari 101)
         const inputs = document.querySelectorAll('.player-input');
         const name = inputs[0].value || 'Tim 1';
         diffEl.innerHTML = `<i class="fas fa-arrow-up"></i> ${name} unggul +${diff}`;
         diffEl.className = 'score-difference leading-p1';
     } else {
-        // Tim 2 skornya lebih rendah = lebih unggul
         const inputs = document.querySelectorAll('.player-input');
         const name = inputs[1].value || 'Tim 2';
         diffEl.innerHTML = `<i class="fas fa-arrow-up"></i> ${name} unggul +${diff}`;
@@ -172,16 +225,13 @@ function renderHistory() {
     }
 }
 
-// ===== FITUR: LAST WINNER BADGE =====
 function renderLastWinnerBadge() {
     const badge0 = document.getElementById('badge-0');
     const badge1 = document.getElementById('badge-1');
     
-    // Sembunyikan semua badge dulu
     if(badge0) badge0.style.display = 'none';
     if(badge1) badge1.style.display = 'none';
     
-    // Tampilkan badge pada pemenang terakhir
     if(lastWinner === 0 && badge0) {
         badge0.style.display = 'flex';
     } else if(lastWinner === 1 && badge1) {
@@ -189,7 +239,6 @@ function renderLastWinnerBadge() {
     }
 }
 
-// ===== FITUR BARU: QUICK RESET PLAYER =====
 function quickResetPlayer(player) {
     playClick();
     vibrateLight();
@@ -205,14 +254,12 @@ function performQuickReset(player) {
     updateScoreDifference();
 }
 
-// ===== FITUR BARU: VIBRATION TOGGLE =====
 function toggleVibration() {
     vibrationEnabled = document.getElementById('vibrationToggle').checked;
     saveGameData();
     vibrateLight();
 }
 
-// ===== FITUR BARU: COMPACT MODE =====
 function toggleCompactMode() {
     compactMode = document.getElementById('compactToggle').checked;
     const scoreboard = document.getElementById('scoreboard');
