@@ -3,7 +3,7 @@ let wins = [0, 0];
 let limit = 101;
 let activePlayer = 0;
 
-// Audio
+// Audio Elements
 const sfxClick = document.getElementById('sfx-click');
 const sfxWin = document.getElementById('sfx-win');
 
@@ -11,25 +11,37 @@ function playClick() { if(sfxClick) { sfxClick.currentTime = 0; sfxClick.play().
 function playWin() { if(sfxWin) sfxWin.play().catch(()=>{}); if(navigator.vibrate) navigator.vibrate([200, 100, 200]); }
 
 // Game Logic
-function updateScore(p, val) {
+function updateScore(player, amount) {
     playClick();
-    if(scores[p] + val < 0) return;
-    scores[p] += val;
+    if (scores[player] + amount < 0) return;
+    scores[player] += amount;
     render();
-    if(scores[p] >= limit) gameOver(p);
+    checkWin(player);
 }
 
-function updateName(p, name) { /* Bisa tambah save localstorage */ }
+function updateName(player, name) { /* Logic simpan nama */ }
 
-function gameOver(loser) {
+function checkWin(player) {
+    if (scores[player] >= limit) {
+        gameOver(player); // Pemain ini kalah (jika aturan > 101 kalah)
+    }
+    // Atau jika aturan siapa cepat 101 menang, ubah logika di sini
+    // Asumsi: Mencapai 101 = KALAH (Aturan umum domino gaple)
+    // Jika Anda ingin Mencapai 101 = MENANG, ganti teks di HTML Modal.
+}
+
+function gameOver(loserIndex) {
     playWin();
-    const winner = loser === 0 ? 1 : 0;
-    wins[winner]++;
-    document.getElementById('win-'+winner).innerText = wins[winner];
+    // Jika yang mencapai limit kalah, maka lawannya menang
+    const winnerIndex = loserIndex === 0 ? 1 : 0;
+    wins[winnerIndex]++;
     
-    const loserName = document.querySelectorAll('.player-name')[loser].value;
-    document.getElementById('loserName').innerText = loserName;
-    document.getElementById('finalScore').innerText = scores[loser];
+    // Update data modal
+    const winnerName = document.querySelectorAll('.player-input')[winnerIndex].value;
+    document.getElementById('winnerName').innerText = winnerName;
+    document.getElementById('finalScore').innerText = scores[winnerIndex]; // Tampilkan skor pemenang
+    document.getElementById('win-' + winnerIndex).innerText = wins[winnerIndex];
+    
     document.getElementById('gameOverModal').classList.add('active');
 }
 
@@ -44,60 +56,78 @@ function render() {
     document.getElementById('score-1').innerText = scores[1];
 }
 
-// Calculator
-let calcVal = '0', lastOp = null, prevVal = null;
+// Calculator Logic
+let calcVal = '0';
+let lastOp = null;
+let prevVal = null;
 
-function openCalculator(p) {
-    activePlayer = p; calcVal = '0'; lastOp = null;
+function openCalculator(player) {
+    activePlayer = player;
+    calcVal = '0';
+    lastOp = null;
+    prevVal = null;
     document.getElementById('calcDisplay').innerText = '0';
     document.getElementById('calculatorOverlay').classList.add('active');
 }
-function closeCalculator() { document.getElementById('calculatorOverlay').classList.remove('active'); }
-function closeCalculatorOnOutside(e) { if(e.target.id === 'calculatorOverlay') closeCalculator(); }
 
-function appendNumber(n) {
+function closeCalculatorOnOutside(e) {
+    if(e.target.id === 'calculatorOverlay') document.getElementById('calculatorOverlay').classList.remove('active');
+}
+
+function appendNumber(num) {
     playClick();
-    if(calcVal === '0' && n !== '.') calcVal = n; else calcVal += n;
+    if(calcVal === '0' && num !== '.') calcVal = num;
+    else calcVal += num;
     document.getElementById('calcDisplay').innerText = calcVal;
 }
+
 function appendOperator(op) {
     playClick();
     if(lastOp) calculate();
-    prevVal = parseFloat(calcVal); lastOp = op; calcVal = '0';
+    prevVal = parseFloat(calcVal);
+    lastOp = op;
+    calcVal = '0';
 }
+
 function calculate() {
-    const cur = parseFloat(calcVal);
-    if(lastOp === '+') prevVal += cur;
-    if(lastOp === '-') prevVal -= cur;
-    if(lastOp === '*') prevVal *= cur;
-    if(lastOp === '/') prevVal /= cur;
-    calcVal = prevVal.toString(); lastOp = null;
+    const current = parseFloat(calcVal);
+    if(lastOp === '+') prevVal += current;
+    if(lastOp === '-') prevVal -= current;
+    if(lastOp === '*') prevVal *= current;
+    if(lastOp === '/') prevVal /= current;
+    calcVal = prevVal.toString();
+    lastOp = null;
     document.getElementById('calcDisplay').innerText = calcVal;
 }
+
 function doneCalculator() {
     if(lastOp) calculate();
-    const res = Math.floor(parseFloat(calcVal));
-    if(!isNaN(res)) updateScore(activePlayer, res);
-    closeCalculator();
+    const result = Math.floor(parseFloat(calcVal));
+    if(!isNaN(result)) updateScore(activePlayer, result);
+    document.getElementById('calculatorOverlay').classList.remove('active');
 }
-function backspace() { calcVal = calcVal.slice(0,-1)||'0'; document.getElementById('calcDisplay').innerText = calcVal; }
-function clearCalc() { calcVal = '0'; lastOp = null; document.getElementById('calcDisplay').innerText = '0'; }
 
-// Settings & Theme
-function toggleSettings() { document.getElementById('settingsOverlay').classList.toggle('active'); }
-function updateLimit(v) { limit = parseInt(v) || 101; }
+function backspace() {
+    calcVal = calcVal.slice(0, -1) || '0';
+    document.getElementById('calcDisplay').innerText = calcVal;
+}
+
+function clearCalc() {
+    calcVal = '0'; lastOp = null;
+    document.getElementById('calcDisplay').innerText = '0';
+}
+
+// Settings
+function toggleSettings() {
+    document.getElementById('settingsOverlay').classList.toggle('active');
+}
+
+function updateLimit(val) {
+    limit = parseInt(val) || 101;
+}
 
 function setTheme(theme) {
-    const root = document.querySelector('.app-frame').style;
-    document.querySelectorAll('.dot').forEach(d => d.classList.remove('active'));
-    document.querySelector('.'+theme).classList.add('active');
-    
-    let bg = '';
-    if(theme === 'purp') bg = 'linear-gradient(135deg, #667eea, #764ba2)';
-    if(theme === 'ocean') bg = 'linear-gradient(135deg, #00c6ff, #0072ff)';
-    if(theme === 'fire') bg = 'linear-gradient(135deg, #f093fb, #f5576c)';
-    if(theme === 'dark') bg = 'linear-gradient(135deg, #434343, #000000)';
-    
-    root.background = bg;
-    document.querySelector('.wallpaper-bg').style.background = bg;
+    document.querySelectorAll('.t-circle').forEach(el => el.classList.remove('active'));
+    // Tambahkan logika ganti warna CSS variable jika diperlukan
+    // Saat ini hanya visual selection
 }
