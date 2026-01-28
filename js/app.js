@@ -189,4 +189,7 @@ function setTheme(themeName) {
     }
     document.querySelectorAll('.t-circle').forEach(el => el.classList.remove('active'));
     const activeBtn = document.querySelector(`.t-${themeName}`);
-    if (activeBtn) activeBtn.classList.add('active
+    if (activeBtn) activeBtn.classList.add('active');
+    currentTheme = themeName;
+    saveGameData();
+}
