@@ -179,15 +179,16 @@ body {
 .btn-soft-reset { background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2); }
 .btn-hard-reset { background: #ef233c; color: white; box-shadow: 0 4px 15px rgba(239, 35, 60, 0.3); }
 
-/* Winner Modal */
+/* Winner & Confirm Modal */
 .winner-box {
     background: white; color: black; padding: 40px; border-radius: 30px; text-align: center;
     width: 90%; max-width: 350px; transform: scale(0.8); transition: 0.3s;
+    background: #1f202e; color: white; border: 1px solid rgba(255,255,255,0.1); /* Dark Mode Modal */
 }
 .overlay.active .winner-box { transform: scale(1); }
 .glow-icon { font-size: 4rem; color: #ffb703; margin-bottom: 10px; filter: drop-shadow(0 0 10px gold); }
 .winner-score { font-size: 4rem; font-weight: 900; margin: 10px 0; color: #4361ee; }
-.btn-primary { padding: 12px 30px; background: #000; color: white; border-radius: 50px; border: none; font-weight: 700; cursor: pointer; }
+.btn-primary { padding: 12px 30px; background: #4361ee; color: white; border-radius: 50px; border: none; font-weight: 700; cursor: pointer; }
 
 /* Developer Footer */
 .app-footer {

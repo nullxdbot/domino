@@ -5,6 +5,9 @@ let limit = 101;
 let activePlayer = 0;
 let currentTheme = 'blue';
 
+// Variabel untuk menyimpan aksi (Reset Ronde atau Reset Total)
+let pendingAction = null; 
+
 // Audio Elements
 const sfxClick = document.getElementById('sfx-click');
 const sfxWin = document.getElementById('sfx-win');
@@ -28,9 +31,7 @@ function updateScore(player, amount) {
     checkWin(player);
 }
 
-function updateName(player, name) {
-    saveGameData();
-}
+function updateName(player, name) { saveGameData(); }
 
 function checkWin(player) {
     if (scores[player] >= limit) {
@@ -96,28 +97,57 @@ function loadGameData() {
     }
 }
 
-// ===== RESET LOGIC =====
-function resetRound() {
-    if (confirm("Mulai ronde baru? Skor akan kembali 0.")) {
-        scores = [0, 0];
-        playClick();
-        document.querySelectorAll('.overlay').forEach(el => el.classList.remove('active'));
-        saveGameData();
-        render();
+// ===== CUSTOM CONFIRM MODAL LOGIC =====
+
+function openConfirmModal(message, actionType) {
+    document.getElementById('confirmMessage').innerText = message;
+    pendingAction = actionType;
+    document.getElementById('confirmModal').classList.add('active');
+}
+
+function closeConfirmModal() {
+    document.getElementById('confirmModal').classList.remove('active');
+    pendingAction = null;
+}
+
+function executeConfirm() {
+    if (pendingAction === 'round') {
+        performResetRound();
+    } else if (pendingAction === 'hard') {
+        performHardReset();
     }
+    closeConfirmModal();
+}
+
+// ===== RESET TRIGGER (DARI TOMBOL SETTINGS) =====
+
+function resetRound() {
+    openConfirmModal("Mulai ronde baru? Skor akan kembali ke 0.", "round");
 }
 
 function hardReset() {
-    if (confirm("Reset total? Skor & Mahkota kemenangan akan hilang.")) {
-        scores = [0, 0];
-        wins = [0, 0];
-        playClick();
-        document.getElementById('win-0').innerText = "0";
-        document.getElementById('win-1').innerText = "0";
-        document.querySelectorAll('.overlay').forEach(el => el.classList.remove('active'));
-        saveGameData();
-        render();
-    }
+    openConfirmModal("Hapus semua data? Skor dan Mahkota kemenangan akan hilang.", "hard");
+}
+
+// ===== FUNGSI RESET EKSEKUTOR =====
+
+function performResetRound() {
+    scores = [0, 0];
+    playClick();
+    document.querySelectorAll('.overlay').forEach(el => el.classList.remove('active'));
+    saveGameData();
+    render();
+}
+
+function performHardReset() {
+    scores = [0, 0];
+    wins = [0, 0];
+    playClick();
+    document.getElementById('win-0').innerText = "0";
+    document.getElementById('win-1').innerText = "0";
+    document.querySelectorAll('.overlay').forEach(el => el.classList.remove('active'));
+    saveGameData();
+    render();
 }
 
 // ===== CALCULATOR =====
@@ -159,7 +189,4 @@ function setTheme(themeName) {
     }
     document.querySelectorAll('.t-circle').forEach(el => el.classList.remove('active'));
     const activeBtn = document.querySelector(`.t-${themeName}`);
-    if (activeBtn) activeBtn.classList.add('active');
-    currentTheme = themeName;
-    saveGameData();
-}
+    if (activeBtn) activeBtn.classList.add('active
