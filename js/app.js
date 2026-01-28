@@ -122,7 +122,7 @@ function updateScore(player, amount) {
     updateScoreDifference();
     checkWin(player);
     
-    // Play sound after DOM updates for better responsiveness
+    // Play sound only when score changes
     playClick();
 }
 
@@ -430,7 +430,7 @@ function updateDisplay() {
     document.getElementById('calcDisplay').innerText = calcVal;
 }
 
-// Optimized: Append number with sound feedback
+// Optimized: Append number without sound (sound only on score change)
 function appendNumber(num) {
     if(calcVal === '0' && num !== '.') {
         calcVal = num;
@@ -438,7 +438,6 @@ function appendNumber(num) {
         calcVal += num;
     }
     updateDisplay();
-    playClick(); // Sound hanya saat input angka
 }
 
 // Optimized: Operator without audio for instant response
