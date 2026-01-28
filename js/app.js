@@ -5,6 +5,8 @@ let limit = 101;
 let activePlayer = 0;
 let currentTheme = 'blue';
 let roundHistory = [[], []];
+let roundCount = 1;
+let lastWinner = null;
 
 let pendingAction = null; 
 
@@ -35,6 +37,7 @@ function updateScore(player, amount) {
     saveGameData();
     render();
     renderHistory();
+    updateLeadingIndicator();
     checkWin(player);
 }
 
@@ -50,6 +53,7 @@ function gameOver(loserIndex) {
     playWin();
     const winnerIndex = loserIndex === 0 ? 1 : 0;
     wins[winnerIndex]++;
+    lastWinner = winnerIndex;
     
     const inputs = document.querySelectorAll('.player-input');
     const winnerName = inputs[winnerIndex].value || `Pemain ${winnerIndex + 1}`;
@@ -67,7 +71,7 @@ function render() {
     document.getElementById('score-0').innerText = scores[0];
     document.getElementById('score-1').innerText = scores[1];
 
-    // 2. BARU: Render Sisa Poin (Indikator)
+    // 2. Render Sisa Poin (Indikator)
     const sisa0 = limit - scores[0];
     const sisa1 = limit - scores[1];
 
@@ -84,6 +88,13 @@ function render() {
         el1.innerText = sisa1 > 0 ? `Kurang ${sisa1} lagi` : "MENANG!";
         el1.style.color = sisa1 <= 20 ? '#ff6b6b' : 'rgba(255,255,255,0.4)';
     }
+
+    // 3. Render Round Count
+    const roundEl = document.getElementById('roundCount');
+    if(roundEl) roundEl.innerText = roundCount;
+
+    // 4. Render Last Winner Badge
+    renderLastWinnerBadge();
 }
 
 function renderHistory() {
@@ -102,6 +113,43 @@ function renderHistory() {
     }
 }
 
+// ===== FITUR BARU: LEADING INDICATOR =====
+function updateLeadingIndicator() {
+    const card0 = document.getElementById('card-0');
+    const card1 = document.getElementById('card-1');
+    
+    // Reset semua dulu
+    card0.classList.remove('leading');
+    card1.classList.remove('leading');
+    
+    // Jangan highlight kalau masih 0 vs 0
+    if(scores[0] === 0 && scores[1] === 0) return;
+    
+    // Highlight yang skor lebih tinggi
+    if(scores[0] > scores[1]) {
+        card0.classList.add('leading');
+    } else if(scores[1] > scores[0]) {
+        card1.classList.add('leading');
+    }
+}
+
+// ===== FITUR BARU: LAST WINNER BADGE =====
+function renderLastWinnerBadge() {
+    const badge0 = document.getElementById('badge-0');
+    const badge1 = document.getElementById('badge-1');
+    
+    // Sembunyikan semua badge dulu
+    if(badge0) badge0.style.display = 'none';
+    if(badge1) badge1.style.display = 'none';
+    
+    // Tampilkan badge pada pemenang terakhir
+    if(lastWinner === 0 && badge0) {
+        badge0.style.display = 'flex';
+    } else if(lastWinner === 1 && badge1) {
+        badge1.style.display = 'flex';
+    }
+}
+
 // ===== LOCAL STORAGE =====
 function saveGameData() {
     const inputs = document.querySelectorAll('.player-input');
@@ -111,7 +159,9 @@ function saveGameData() {
         names: [inputs[0].value, inputs[1].value],
         limit: limit,
         theme: currentTheme,
-        history: roundHistory
+        history: roundHistory,
+        roundCount: roundCount,
+        lastWinner: lastWinner
     };
     localStorage.setItem('dominoScoreData', JSON.stringify(gameData));
 }
@@ -125,6 +175,8 @@ function loadGameData() {
         limit = parseInt(data.limit) || 101;
         currentTheme = data.theme || 'blue';
         roundHistory = data.history || [[], []];
+        roundCount = data.roundCount || 1;
+        lastWinner = data.lastWinner !== undefined ? data.lastWinner : null;
         
         const inputs = document.querySelectorAll('.player-input');
         if(data.names) {
@@ -139,6 +191,7 @@ function loadGameData() {
         setTheme(currentTheme); 
         render();
         renderHistory();
+        updateLeadingIndicator();
     }
 }
 
@@ -176,17 +229,22 @@ function hardReset() {
 function performResetRound() {
     scores = [0, 0];
     roundHistory = [[], []];
+    roundCount++;
+    lastWinner = null; // Reset badge pemenang terakhir
     playClick();
     document.querySelectorAll('.overlay').forEach(el => el.classList.remove('active'));
     saveGameData();
     render();
     renderHistory();
+    updateLeadingIndicator();
 }
 
 function performHardReset() {
     scores = [0, 0];
     wins = [0, 0];
     roundHistory = [[], []];
+    roundCount = 1;
+    lastWinner = null;
     playClick();
     document.getElementById('win-0').innerText = "0";
     document.getElementById('win-1').innerText = "0";
@@ -194,6 +252,7 @@ function performHardReset() {
     saveGameData();
     render();
     renderHistory();
+    updateLeadingIndicator();
 }
 
 // ===== CALCULATOR =====
@@ -221,7 +280,7 @@ function toggleSettings() {
 
 function updateLimit(val) { 
     let newVal = parseInt(val);
-    if (!isNaN(newVal) && newVal > 0) { limit = newVal; saveGameData(); }
+    if (!isNaN(newVal) && newVal > 0) { limit = newVal; saveGameData(); render(); }
 }
 
 const themeConfig = {

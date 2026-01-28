@@ -38,6 +38,31 @@ body {
     display: flex; justify-content: space-between; align-items: center; padding: 10px 0 20px 0; position: relative; z-index: 50; 
 }
 .brand { font-weight: 900; letter-spacing: 1px; font-size: 1rem; display: flex; align-items: center; gap: 10px; }
+
+/* BARU: Header Right dengan Round Counter */
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.round-counter {
+    background: rgba(255, 255, 255, 0.08);
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.round-counter i {
+    color: var(--primary);
+}
+
 .btn-icon { background: rgba(255,255,255,0.1); border: none; color: white; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; transition: 0.2s; }
 .btn-icon:hover { background: rgba(255,255,255,0.2); }
 
@@ -57,11 +82,52 @@ body {
     flex: 1; background: var(--card-bg); border: 1px solid var(--glass-border);
     border-radius: 24px; padding: 20px; display: flex; flex-direction: column;
     justify-content: space-between; position: relative; backdrop-filter: blur(20px);
-    transition: transform 0.2s; box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    transition: all 0.3s ease; box-shadow: 0 10px 30px rgba(0,0,0,0.2);
 }
 
 .p1 { border-top: 4px solid var(--primary); background: linear-gradient(180deg, rgba(67, 97, 238, 0.1) 0%, rgba(255,255,255,0.02) 100%); }
 .p2 { border-top: 4px solid var(--accent); background: linear-gradient(180deg, rgba(247, 37, 133, 0.1) 0%, rgba(255,255,255,0.02) 100%); }
+
+/* BARU: Leading Indicator - Card yang unggul akan glow */
+.player-card.leading {
+    border-width: 2px;
+    box-shadow: 0 0 30px rgba(67, 97, 238, 0.4), 0 10px 30px rgba(0,0,0,0.2);
+    transform: scale(1.02);
+}
+
+.player-card.p2.leading {
+    box-shadow: 0 0 30px rgba(247, 37, 133, 0.4), 0 10px 30px rgba(0,0,0,0.2);
+}
+
+/* BARU: Last Winner Badge */
+.last-winner-badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #ffd700, #ffed4e);
+    color: #000;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 800;
+    display: none;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.5);
+    z-index: 10;
+    letter-spacing: 0.5px;
+    animation: badgePulse 2s ease-in-out infinite;
+}
+
+@keyframes badgePulse {
+    0%, 100% { transform: translateX(-50%) scale(1); }
+    50% { transform: translateX(-50%) scale(1.05); }
+}
+
+.last-winner-badge i {
+    font-size: 0.75rem;
+}
 
 .card-info { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
 .player-label { font-size: 0.75rem; font-weight: 800; opacity: 0.7; letter-spacing: 1px; }
@@ -173,7 +239,7 @@ body {
 .hist-item { font-size: 1rem; font-weight: 600; color: rgba(255,255,255,0.7); animation: fadeIn 0.3s ease; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
 
-/* BARU: Teks Sisa Poin */
+/* Teks Sisa Poin */
 .remaining-text {
     font-size: 0.75rem;
     color: rgba(255, 255, 255, 0.4);
@@ -184,4 +250,16 @@ body {
     font-weight: 600;
     text-transform: uppercase;
     transition: color 0.3s;
+}
+
+/* Responsive untuk mobile kecil */
+@media (max-width: 400px) {
+    .round-counter {
+        font-size: 0.75rem;
+        padding: 6px 12px;
+    }
+    
+    .brand {
+        font-size: 0.85rem;
+    }
 }
