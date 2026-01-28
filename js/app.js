@@ -4,6 +4,8 @@ let wins = [0, 0];
 let limit = 101;
 let activePlayer = 0;
 let currentTheme = 'blue';
+// BARU: Menyimpan riwayat angka
+let roundHistory = [[], []];
 
 let pendingAction = null; 
 
@@ -23,10 +25,17 @@ function playWin() { if(sfxWin) sfxWin.play().catch(()=>{}); if(navigator.vibrat
 function updateScore(player, amount) {
     playClick();
     if (scores[player] + amount < 0) return;
+    
+    // BARU: Catat ke riwayat jika bukan 0
+    if (amount !== 0) {
+        roundHistory[player].push(amount);
+    }
+
     scores[player] += amount;
     
     saveGameData();
     render();
+    renderHistory(); // Update tampilan riwayat
     checkWin(player);
 }
 
@@ -59,6 +68,25 @@ function render() {
     document.getElementById('score-1').innerText = scores[1];
 }
 
+// BARU: Fungsi menampilkan riwayat
+function renderHistory() {
+    // Render Pemain 1
+    const list0 = document.getElementById('history-0');
+    if(list0) {
+        list0.innerHTML = roundHistory[0].map(num => 
+            `<div class="hist-item">${num > 0 ? '+' + num : num}</div>`
+        ).join('');
+    }
+
+    // Render Pemain 2
+    const list1 = document.getElementById('history-1');
+    if(list1) {
+        list1.innerHTML = roundHistory[1].map(num => 
+            `<div class="hist-item">${num > 0 ? '+' + num : num}</div>`
+        ).join('');
+    }
+}
+
 // ===== LOCAL STORAGE =====
 function saveGameData() {
     const inputs = document.querySelectorAll('.player-input');
@@ -67,7 +95,8 @@ function saveGameData() {
         wins: wins,
         names: [inputs[0].value, inputs[1].value],
         limit: limit,
-        theme: currentTheme
+        theme: currentTheme,
+        history: roundHistory // Simpan riwayat juga
     };
     localStorage.setItem('dominoScoreData', JSON.stringify(gameData));
 }
@@ -80,6 +109,7 @@ function loadGameData() {
         wins = data.wins || [0, 0];
         limit = parseInt(data.limit) || 101;
         currentTheme = data.theme || 'blue';
+        roundHistory = data.history || [[], []]; // Load riwayat
         
         const inputs = document.querySelectorAll('.player-input');
         if(data.names) {
@@ -93,6 +123,7 @@ function loadGameData() {
         
         setTheme(currentTheme); 
         render();
+        renderHistory(); // Tampilkan riwayat saat loading
     }
 }
 
@@ -129,21 +160,25 @@ function hardReset() {
 // ===== FUNGSI RESET EKSEKUTOR =====
 function performResetRound() {
     scores = [0, 0];
+    roundHistory = [[], []]; // BARU: Kosongkan riwayat saat reset ronde
     playClick();
     document.querySelectorAll('.overlay').forEach(el => el.classList.remove('active'));
     saveGameData();
     render();
+    renderHistory();
 }
 
 function performHardReset() {
     scores = [0, 0];
     wins = [0, 0];
+    roundHistory = [[], []]; // BARU: Kosongkan riwayat total
     playClick();
     document.getElementById('win-0').innerText = "0";
     document.getElementById('win-1').innerText = "0";
     document.querySelectorAll('.overlay').forEach(el => el.classList.remove('active'));
     saveGameData();
     render();
+    renderHistory();
 }
 
 // ===== CALCULATOR =====
@@ -193,3 +228,31 @@ function setTheme(themeName) {
     currentTheme = themeName;
     saveGameData();
 }
+
+// ==========================================
+// BARU: FITUR ANTI-TIDUR (SCREEN WAKE LOCK)
+// ==========================================
+let wakeLock = null;
+
+async function activateWakeLock() {
+  if ('wakeLock' in navigator) {
+    try {
+      wakeLock = await navigator.wakeLock.request('screen');
+      console.log('Anti-Tidur: Aktif');
+      wakeLock.addEventListener('release', () => console.log('Anti-Tidur: Lepas'));
+    } catch (err) {
+      console.log('Gagal mengunci layar:', err);
+    }
+  }
+}
+
+// Pancing fitur ini saat layar disentuh pertama kali
+document.addEventListener('click', async () => {
+  if (!wakeLock) await activateWakeLock();
+});
+
+document.addEventListener('visibilitychange', async () => {
+  if (wakeLock !== null && document.visibilityState === 'visible') {
+    await activateWakeLock();
+  }
+});
