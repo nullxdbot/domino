@@ -8,6 +8,7 @@ let roundHistory = [[], []];
 let roundCount = 1;
 let lastWinner = null;
 let compactMode = false;
+let soundEnabled = true;
 
 let pendingAction = null; 
 
@@ -21,16 +22,25 @@ document.addEventListener('DOMContentLoaded', () => {
     initParticles();
 });
 
-// Optimized audio and vibration functions with reduced overhead
+// Optimized audio functions with sound toggle
 function playClick() { 
-    if(sfxClick && sfxClick.readyState >= 2) { 
-        sfxClick.currentTime = 0; 
+    if(soundEnabled && sfxClick && sfxClick.readyState >= 2) { 
+        sfxClick.currentTime = 0;
+        sfxClick.volume = 0.3;
         sfxClick.play().catch(()=>{}); 
     } 
 }
 
 function playWin() { 
-    if(sfxWin) sfxWin.play().catch(()=>{}); 
+    if(soundEnabled && sfxWin) {
+        sfxWin.volume = 0.5;
+        sfxWin.play().catch(()=>{}); 
+    }
+}
+
+function toggleSound() {
+    soundEnabled = document.getElementById('soundToggle').checked;
+    saveGameData();
 }
 
 // ===== PARTICLES ANIMATION =====
@@ -142,8 +152,9 @@ function render() {
     const score0El = document.getElementById('score-0');
     const score1El = document.getElementById('score-1');
     
-    score0El.innerText = scores[0];
-    score1El.innerText = scores[1];
+    // Animate score changes
+    animateScore(score0El, scores[0]);
+    animateScore(score1El, scores[1]);
     
     updateScoreColor(0, score0El);
     updateScoreColor(1, score1El);
@@ -168,6 +179,31 @@ function render() {
     if(roundEl) roundEl.innerText = roundCount;
 
     renderLastWinnerBadge();
+}
+
+// Animated counter for score
+function animateScore(element, targetScore) {
+    const currentScore = parseInt(element.innerText) || 0;
+    if (currentScore === targetScore) return;
+    
+    const diff = targetScore - currentScore;
+    const duration = 500;
+    const steps = 20;
+    const stepValue = diff / steps;
+    const stepDuration = duration / steps;
+    
+    let currentStep = 0;
+    
+    const interval = setInterval(() => {
+        currentStep++;
+        if (currentStep >= steps) {
+            element.innerText = targetScore;
+            clearInterval(interval);
+        } else {
+            const newValue = Math.round(currentScore + (stepValue * currentStep));
+            element.innerText = newValue;
+        }
+    }, stepDuration);
 }
 
 function updateScoreColor(player, element) {
@@ -271,7 +307,8 @@ function saveGameData() {
         history: roundHistory,
         roundCount: roundCount,
         lastWinner: lastWinner,
-        compactMode: compactMode
+        compactMode: compactMode,
+        soundEnabled: soundEnabled
     };
     localStorage.setItem('dominoScoreData', JSON.stringify(gameData));
 }
@@ -288,11 +325,13 @@ function loadGameData() {
         roundCount = data.roundCount || 1;
         lastWinner = data.lastWinner !== undefined ? data.lastWinner : null;
         compactMode = data.compactMode || false;
+        soundEnabled = data.soundEnabled !== undefined ? data.soundEnabled : true;
 
         document.getElementById('win-0').innerText = wins[0];
         document.getElementById('win-1').innerText = wins[1];
         document.getElementById('limitInput').value = limit;
         document.getElementById('compactToggle').checked = compactMode;
+        document.getElementById('soundToggle').checked = soundEnabled;
         
         if (compactMode) {
             document.getElementById('scoreboard').classList.add('compact');
@@ -461,6 +500,67 @@ function clearCalc() {
     lastOp = null;
     prevVal = null;
     updateDisplay();
+}
+
+// ===== EXPORT / IMPORT DATA =====
+function exportData() {
+    const gameData = {
+        scores: scores,
+        wins: wins,
+        limit: limit,
+        theme: currentTheme,
+        history: roundHistory,
+        roundCount: roundCount,
+        lastWinner: lastWinner,
+        compactMode: compactMode,
+        soundEnabled: soundEnabled,
+        exportDate: new Date().toISOString()
+    };
+    
+    const dataStr = JSON.stringify(gameData, null, 2);
+    const dataBlob = new Blob([dataStr], { type: 'application/json' });
+    const url = URL.createObjectURL(dataBlob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `domino-score-backup-${Date.now()}.json`;
+    link.click();
+    URL.revokeObjectURL(url);
+    
+    playClick();
+}
+
+function importData() {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'application/json';
+    input.onchange = (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        
+        const reader = new FileReader();
+        reader.onload = (event) => {
+            try {
+                const data = JSON.parse(event.target.result);
+                
+                scores = data.scores || [0, 0];
+                wins = data.wins || [0, 0];
+                limit = data.limit || 101;
+                currentTheme = data.theme || 'blue';
+                roundHistory = data.history || [[], []];
+                roundCount = data.roundCount || 1;
+                lastWinner = data.lastWinner;
+                compactMode = data.compactMode || false;
+                soundEnabled = data.soundEnabled !== undefined ? data.soundEnabled : true;
+                
+                saveGameData();
+                location.reload();
+            } catch (err) {
+                alert('Error: File tidak valid!');
+            }
+        };
+        reader.readAsText(file);
+    };
+    input.click();
 }
 
 // ===== SETTINGS & THEME =====

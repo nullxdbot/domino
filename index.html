@@ -157,6 +157,14 @@
                 <input type="number" id="limitInput" value="101" onchange="updateLimit(this.value)">
             </div>
 
+            <!-- Toggle Sound -->
+            <div class="setting-row">
+                <label>
+                    <input type="checkbox" id="soundToggle" onchange="toggleSound()" checked>
+                    Sound Effects
+                </label>
+            </div>
+
             <!-- Toggle Compact Mode -->
             <div class="setting-row">
                 <label>
@@ -166,6 +174,12 @@
             </div>
 
             <div class="reset-actions">
+                <button class="btn-action-settings btn-export" onclick="exportData()">
+                    <i class="fas fa-download"></i> Export Data (Backup)
+                </button>
+                <button class="btn-action-settings btn-import" onclick="importData()">
+                    <i class="fas fa-upload"></i> Import Data (Restore)
+                </button>
                 <button class="btn-action-settings btn-soft-reset" onclick="resetRound()">
                     <i class="fas fa-sync-alt"></i> Reset Skor (Ronde Baru)
                 </button>
