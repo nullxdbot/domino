@@ -153,6 +153,42 @@ body {
     box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
 }
 
+/* ===== SCORE DIFFERENCE INDICATOR ===== */
+.score-difference {
+    text-align: center;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin: 0 auto 15px auto;
+    max-width: 280px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    animation: fadeIn 0.5s ease;
+    transition: all 0.3s ease;
+}
+
+.score-difference.neutral {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.score-difference.leading-p1 {
+    background: linear-gradient(135deg, rgba(67, 97, 238, 0.2), rgba(67, 97, 238, 0.1));
+    color: #6eb5ff;
+    box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+}
+
+.score-difference.leading-p2 {
+    background: linear-gradient(135deg, rgba(247, 37, 133, 0.2), rgba(247, 37, 133, 0.1));
+    color: #ff70a6;
+    box-shadow: 0 4px 15px rgba(247, 37, 133, 0.3);
+}
+
 /* Scoreboard Layout */
 .scoreboard {
     flex: 1; 
@@ -161,6 +197,23 @@ body {
     gap: 20px; 
     padding-bottom: 20px; 
     overflow-y: auto;
+}
+
+/* Compact Mode */
+.scoreboard.compact .player-card {
+    padding: 16px;
+}
+
+.scoreboard.compact .score-val {
+    font-size: 4rem !important;
+}
+
+.scoreboard.compact .history-container {
+    height: 60px;
+}
+
+.scoreboard.compact .btn-action {
+    height: 50px;
 }
 
 @media (min-width: 768px) {
@@ -208,6 +261,36 @@ body {
         0 20px 60px rgba(0, 0, 0, 0.3),
         inset 0 1px 0 rgba(255, 255, 255, 0.1);
     animation: fadeInUp 0.8s ease;
+}
+
+/* Quick Reset Button */
+.quick-reset-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(255, 107, 107, 0.2);
+    border: 1px solid rgba(255, 107, 107, 0.3);
+    color: #ff6b6b;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.8rem;
+    z-index: 5;
+}
+
+.quick-reset-btn:hover {
+    background: rgba(255, 107, 107, 0.3);
+    transform: rotate(180deg) scale(1.1);
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+}
+
+.quick-reset-btn:active {
+    transform: rotate(180deg) scale(0.95);
 }
 
 @keyframes fadeInUp {
@@ -360,10 +443,45 @@ body {
     text-shadow: 
         0 0 40px rgba(255,255,255,0.3),
         0 5px 20px rgba(0, 0, 0, 0.5);
-    transition: all 0.3s ease;
+    transition: all 0.5s ease;
     background: linear-gradient(135deg, #fff, rgba(255, 255, 255, 0.8));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+}
+
+/* Color Coding untuk Skor */
+.score-val.score-low {
+    background: linear-gradient(135deg, #4ade80, #22c55e);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 40px rgba(74, 222, 128, 0.4);
+}
+
+.score-val.score-medium {
+    background: linear-gradient(135deg, #fbbf24, #f59e0b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 40px rgba(251, 191, 36, 0.4);
+}
+
+.score-val.score-high {
+    background: linear-gradient(135deg, #fb923c, #f97316);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 40px rgba(251, 146, 60, 0.4);
+}
+
+.score-val.score-critical {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 40px rgba(239, 68, 68, 0.5);
+    animation: scorePulse 1.5s ease-in-out infinite;
+}
+
+@keyframes scorePulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
 }
 
 /* Buttons */
@@ -629,6 +747,17 @@ body {
     margin-bottom: 12px; 
     color: var(--text-muted);
     font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.setting-row input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: var(--primary);
 }
 
 .theme-picker { 

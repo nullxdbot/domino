@@ -36,17 +36,25 @@
             </div>
         </header>
 
-        <main class="scoreboard">
+        <!-- Selisih Skor Indicator -->
+        <div class="score-difference" id="scoreDiff">
+            <i class="fas fa-equals"></i> Seri
+        </div>
+
+        <main class="scoreboard" id="scoreboard">
             
             <div class="player-card p1" id="card-0">
                 <div class="last-winner-badge" id="badge-0">
                     <i class="fas fa-trophy"></i> Menang Terakhir
                 </div>
+                <button class="quick-reset-btn" onclick="quickResetPlayer(0)" title="Reset skor pemain ini">
+                    <i class="fas fa-redo"></i>
+                </button>
                 <div class="card-info">
                     <span class="player-label">PEMAIN 1</span>
                     <div class="win-count"><i class="fas fa-crown"></i> <span id="win-0">0</span></div>
                 </div>
-                <input type="text" class="player-input" value="Nama Pemain" onchange="updateName(0, this.value)">
+                <input type="text" class="player-input" value="Tim 1" onchange="updateName(0, this.value)">
                 
                 <div class="score-area" onclick="openCalculator(0)">
                     <span class="score-val" id="score-0">0</span>
@@ -70,11 +78,14 @@
                 <div class="last-winner-badge" id="badge-1">
                     <i class="fas fa-trophy"></i> Menang Terakhir
                 </div>
+                <button class="quick-reset-btn" onclick="quickResetPlayer(1)" title="Reset skor pemain ini">
+                    <i class="fas fa-redo"></i>
+                </button>
                 <div class="card-info">
                     <span class="player-label">PEMAIN 2</span>
                     <div class="win-count"><i class="fas fa-crown"></i> <span id="win-1">0</span></div>
                 </div>
-                <input type="text" class="player-input" value="Nama Pemain" onchange="updateName(1, this.value)">
+                <input type="text" class="player-input" value="Tim 2" onchange="updateName(1, this.value)">
                 
                 <div class="score-area" onclick="openCalculator(1)">
                     <span class="score-val" id="score-1">0</span>
@@ -147,6 +158,22 @@
                 <input type="number" id="limitInput" value="101" onchange="updateLimit(this.value)">
             </div>
 
+            <!-- Toggle Vibration -->
+            <div class="setting-row">
+                <label>
+                    <input type="checkbox" id="vibrationToggle" onchange="toggleVibration()" checked>
+                    Getaran
+                </label>
+            </div>
+
+            <!-- Toggle Compact Mode -->
+            <div class="setting-row">
+                <label>
+                    <input type="checkbox" id="compactToggle" onchange="toggleCompactMode()">
+                    Mode Compact
+                </label>
+            </div>
+
             <div class="reset-actions">
                 <button class="btn-action-settings btn-soft-reset" onclick="resetRound()">
                     <i class="fas fa-sync-alt"></i> Reset Skor (Ronde Baru)
@@ -172,7 +199,7 @@
     <div class="overlay center-content" id="gameOverModal">
         <div class="winner-box">
             <div class="glow-icon"><i class="fas fa-trophy"></i></div>
-            <h2 id="winnerName">Pemain 1</h2>
+            <h2 id="winnerName">Tim 1</h2>
             <p>MEMENANGKAN PERTANDINGAN</p>
             <div class="winner-score" id="finalScore">105</div>
             <button class="btn-primary" onclick="resetRound()">Lanjut Ronde Baru</button>

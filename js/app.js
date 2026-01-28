@@ -7,6 +7,8 @@ let currentTheme = 'blue';
 let roundHistory = [[], []];
 let roundCount = 1;
 let lastWinner = null;
+let vibrationEnabled = true;
+let compactMode = false;
 
 let pendingAction = null; 
 
@@ -20,11 +22,19 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function playClick() { if(sfxClick) { sfxClick.currentTime = 0; sfxClick.play().catch(()=>{}); } }
-function playWin() { if(sfxWin) sfxWin.play().catch(()=>{}); if(navigator.vibrate) navigator.vibrate([200, 100, 200]); }
+function playWin() { 
+    if(sfxWin) sfxWin.play().catch(()=>{}); 
+    if(vibrationEnabled && navigator.vibrate) navigator.vibrate([200, 100, 200]); 
+}
+
+function vibrateLight() {
+    if(vibrationEnabled && navigator.vibrate) navigator.vibrate(50);
+}
 
 // ===== GAME LOGIC =====
 function updateScore(player, amount) {
     playClick();
+    vibrateLight();
     if (scores[player] + amount < 0) return;
     
     // Catat ke riwayat jika bukan 0
@@ -37,6 +47,7 @@ function updateScore(player, amount) {
     saveGameData();
     render();
     renderHistory();
+    updateScoreDifference();
     checkWin(player);
 }
 
@@ -55,7 +66,7 @@ function gameOver(loserIndex) {
     lastWinner = winnerIndex;
     
     const inputs = document.querySelectorAll('.player-input');
-    const winnerName = inputs[winnerIndex].value || `Pemain ${winnerIndex + 1}`;
+    const winnerName = inputs[winnerIndex].value || `Tim ${winnerIndex + 1}`;
     
     document.getElementById('winnerName').innerText = winnerName;
     document.getElementById('finalScore').innerText = scores[winnerIndex];
@@ -66,9 +77,16 @@ function gameOver(loserIndex) {
 }
 
 function render() {
-    // 1. Render Skor Utama
-    document.getElementById('score-0').innerText = scores[0];
-    document.getElementById('score-1').innerText = scores[1];
+    // 1. Render Skor Utama dengan Color Code
+    const score0El = document.getElementById('score-0');
+    const score1El = document.getElementById('score-1');
+    
+    score0El.innerText = scores[0];
+    score1El.innerText = scores[1];
+    
+    // Color Code berdasarkan progress ke limit
+    updateScoreColor(0, score0El);
+    updateScoreColor(1, score1El);
 
     // 2. Render Sisa Poin (Indikator)
     const sisa0 = limit - scores[0];
@@ -79,7 +97,6 @@ function render() {
 
     if(el0) {
         el0.innerText = sisa0 > 0 ? `Kurang ${sisa0} lagi` : "MENANG!";
-        // Ubah jadi merah kalau sisa <= 20
         el0.style.color = sisa0 <= 20 ? '#ff6b6b' : 'rgba(255,255,255,0.4)';
     }
 
@@ -94,6 +111,47 @@ function render() {
 
     // 4. Render Last Winner Badge
     renderLastWinnerBadge();
+}
+
+// ===== FITUR BARU: COLOR CODE SKOR =====
+function updateScoreColor(player, element) {
+    const progress = scores[player] / limit;
+    
+    // Remove existing color classes
+    element.classList.remove('score-low', 'score-medium', 'score-high', 'score-critical');
+    
+    if (progress < 0.3) {
+        element.classList.add('score-low'); // Hijau
+    } else if (progress < 0.6) {
+        element.classList.add('score-medium'); // Kuning
+    } else if (progress < 0.85) {
+        element.classList.add('score-high'); // Orange
+    } else {
+        element.classList.add('score-critical'); // Merah
+    }
+}
+
+// ===== FITUR BARU: SELISIH SKOR =====
+function updateScoreDifference() {
+    const diffEl = document.getElementById('scoreDiff');
+    if (!diffEl) return;
+    
+    const diff = Math.abs(scores[0] - scores[1]);
+    
+    if (diff === 0) {
+        diffEl.innerHTML = '<i class="fas fa-equals"></i> Seri';
+        diffEl.className = 'score-difference neutral';
+    } else if (scores[0] > scores[1]) {
+        const inputs = document.querySelectorAll('.player-input');
+        const name = inputs[0].value || 'Tim 1';
+        diffEl.innerHTML = `<i class="fas fa-arrow-up"></i> ${name} unggul +${diff}`;
+        diffEl.className = 'score-difference leading-p1';
+    } else {
+        const inputs = document.querySelectorAll('.player-input');
+        const name = inputs[1].value || 'Tim 2';
+        diffEl.innerHTML = `<i class="fas fa-arrow-up"></i> ${name} unggul +${diff}`;
+        diffEl.className = 'score-difference leading-p2';
+    }
 }
 
 function renderHistory() {
@@ -129,6 +187,43 @@ function renderLastWinnerBadge() {
     }
 }
 
+// ===== FITUR BARU: QUICK RESET PLAYER =====
+function quickResetPlayer(player) {
+    playClick();
+    vibrateLight();
+    openConfirmModal(`Reset skor ${player === 0 ? 'Tim 1' : 'Tim 2'} ke 0?`, `quickreset-${player}`);
+}
+
+function performQuickReset(player) {
+    scores[player] = 0;
+    roundHistory[player] = [];
+    saveGameData();
+    render();
+    renderHistory();
+    updateScoreDifference();
+}
+
+// ===== FITUR BARU: VIBRATION TOGGLE =====
+function toggleVibration() {
+    vibrationEnabled = document.getElementById('vibrationToggle').checked;
+    saveGameData();
+    vibrateLight();
+}
+
+// ===== FITUR BARU: COMPACT MODE =====
+function toggleCompactMode() {
+    compactMode = document.getElementById('compactToggle').checked;
+    const scoreboard = document.getElementById('scoreboard');
+    
+    if (compactMode) {
+        scoreboard.classList.add('compact');
+    } else {
+        scoreboard.classList.remove('compact');
+    }
+    
+    saveGameData();
+}
+
 // ===== LOCAL STORAGE =====
 function saveGameData() {
     const inputs = document.querySelectorAll('.player-input');
@@ -140,7 +235,9 @@ function saveGameData() {
         theme: currentTheme,
         history: roundHistory,
         roundCount: roundCount,
-        lastWinner: lastWinner
+        lastWinner: lastWinner,
+        vibrationEnabled: vibrationEnabled,
+        compactMode: compactMode
     };
     localStorage.setItem('dominoScoreData', JSON.stringify(gameData));
 }
@@ -156,20 +253,29 @@ function loadGameData() {
         roundHistory = data.history || [[], []];
         roundCount = data.roundCount || 1;
         lastWinner = data.lastWinner !== undefined ? data.lastWinner : null;
+        vibrationEnabled = data.vibrationEnabled !== undefined ? data.vibrationEnabled : true;
+        compactMode = data.compactMode || false;
         
         const inputs = document.querySelectorAll('.player-input');
         if(data.names) {
-            inputs[0].value = data.names[0] || "Nama Pemain";
-            inputs[1].value = data.names[1] || "Nama Pemain";
+            inputs[0].value = data.names[0] || "Tim 1";
+            inputs[1].value = data.names[1] || "Tim 2";
         }
 
         document.getElementById('win-0').innerText = wins[0];
         document.getElementById('win-1').innerText = wins[1];
         document.getElementById('limitInput').value = limit;
+        document.getElementById('vibrationToggle').checked = vibrationEnabled;
+        document.getElementById('compactToggle').checked = compactMode;
+        
+        if (compactMode) {
+            document.getElementById('scoreboard').classList.add('compact');
+        }
         
         setTheme(currentTheme); 
         render();
         renderHistory();
+        updateScoreDifference();
     }
 }
 
@@ -190,6 +296,10 @@ function executeConfirm() {
         performResetRound();
     } else if (pendingAction === 'hard') {
         performHardReset();
+    } else if (pendingAction === 'quickreset-0') {
+        performQuickReset(0);
+    } else if (pendingAction === 'quickreset-1') {
+        performQuickReset(1);
     }
     closeConfirmModal();
 }
@@ -208,12 +318,13 @@ function performResetRound() {
     scores = [0, 0];
     roundHistory = [[], []];
     roundCount++;
-    lastWinner = null; // Reset badge pemenang terakhir
+    lastWinner = null;
     playClick();
     document.querySelectorAll('.overlay').forEach(el => el.classList.remove('active'));
     saveGameData();
     render();
     renderHistory();
+    updateScoreDifference();
 }
 
 function performHardReset() {
@@ -229,6 +340,7 @@ function performHardReset() {
     saveGameData();
     render();
     renderHistory();
+    updateScoreDifference();
 }
 
 // ===== CALCULATOR =====
@@ -256,7 +368,12 @@ function toggleSettings() {
 
 function updateLimit(val) { 
     let newVal = parseInt(val);
-    if (!isNaN(newVal) && newVal > 0) { limit = newVal; saveGameData(); render(); }
+    if (!isNaN(newVal) && newVal > 0) { 
+        limit = newVal; 
+        saveGameData(); 
+        render();
+        updateScoreDifference();
+    }
 }
 
 const themeConfig = {
