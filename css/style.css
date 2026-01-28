@@ -240,8 +240,7 @@ body {
 }
 
 /* Container untuk header card agar tidak bentrok dengan reset button */
-.player-card .card-info,
-.player-card .player-input {
+.player-card .card-info {
     padding-right: 48px;
 }
 
@@ -276,29 +275,6 @@ body {
 
 .win-count i {
     font-size: 14px;
-}
-
-/* ===== PLAYER INPUT ===== */
-.player-input {
-    width: 100%;
-    background: transparent;
-    border: none;
-    color: var(--text-primary);
-    font-size: 24px;
-    font-weight: 700;
-    padding: 8px 0;
-    margin-bottom: 20px;
-    outline: none;
-    font-family: 'Outfit', sans-serif;
-    transition: all 0.3s ease;
-}
-
-.player-input:focus {
-    color: var(--primary);
-}
-
-.p2 .player-input:focus {
-    color: var(--secondary);
 }
 
 /* ===== SCORE AREA ===== */

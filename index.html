@@ -52,10 +52,9 @@
                     <i class="fas fa-redo"></i>
                 </button>
                 <div class="card-info">
-                    <span class="player-label">PEMAIN 1</span>
+                    <span class="player-label">TIM 1</span>
                     <div class="win-count"><i class="fas fa-crown"></i> <span id="win-0">0</span></div>
                 </div>
-                <input type="text" class="player-input" value="Tim 1" onchange="updateName(0, this.value)">
                 
                 <div class="score-area" onclick="openCalculator(0)">
                     <span class="score-val" id="score-0">0</span>
@@ -83,10 +82,9 @@
                     <i class="fas fa-redo"></i>
                 </button>
                 <div class="card-info">
-                    <span class="player-label">PEMAIN 2</span>
+                    <span class="player-label">TIM 2</span>
                     <div class="win-count"><i class="fas fa-crown"></i> <span id="win-1">0</span></div>
                 </div>
-                <input type="text" class="player-input" value="Tim 2" onchange="updateName(1, this.value)">
                 
                 <div class="score-area" onclick="openCalculator(1)">
                     <span class="score-val" id="score-1">0</span>
@@ -157,14 +155,6 @@
             <div class="setting-row">
                 <label>Batas Poin Kalah</label>
                 <input type="number" id="limitInput" value="101" onchange="updateLimit(this.value)">
-            </div>
-
-            <!-- Toggle Vibration -->
-            <div class="setting-row">
-                <label>
-                    <input type="checkbox" id="vibrationToggle" onchange="toggleVibration()" checked>
-                    Getaran
-                </label>
             </div>
 
             <!-- Toggle Compact Mode -->

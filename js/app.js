@@ -7,7 +7,6 @@ let currentTheme = 'blue';
 let roundHistory = [[], []];
 let roundCount = 1;
 let lastWinner = null;
-let vibrationEnabled = true;
 let compactMode = false;
 
 let pendingAction = null; 
@@ -32,10 +31,6 @@ function playClick() {
 
 function playWin() { 
     if(sfxWin) sfxWin.play().catch(()=>{}); 
-}
-
-function vibrateLight() {
-    if(vibrationEnabled && navigator.vibrate) navigator.vibrate(50);
 }
 
 // ===== PARTICLES ANIMATION =====
@@ -121,8 +116,6 @@ function updateScore(player, amount) {
     playClick();
 }
 
-function updateName(player, name) { saveGameData(); }
-
 function checkWin(player) {
     if (scores[player] >= limit) {
         gameOver(player);
@@ -135,8 +128,7 @@ function gameOver(loserIndex) {
     wins[winnerIndex]++;
     lastWinner = winnerIndex;
     
-    const inputs = document.querySelectorAll('.player-input');
-    const winnerName = inputs[winnerIndex].value || `Tim ${winnerIndex + 1}`;
+    const winnerName = `Tim ${winnerIndex + 1}`;
     
     document.getElementById('winnerName').innerText = winnerName;
     document.getElementById('finalScore').innerText = scores[winnerIndex];
@@ -204,14 +196,10 @@ function updateScoreDifference() {
         diffEl.innerHTML = '<i class="fas fa-equals"></i> Seri';
         diffEl.className = 'score-difference neutral';
     } else if (scores[0] < scores[1]) {
-        const inputs = document.querySelectorAll('.player-input');
-        const name = inputs[0].value || 'Tim 1';
-        diffEl.innerHTML = `<i class="fas fa-arrow-up"></i> ${name} unggul +${diff}`;
+        diffEl.innerHTML = `<i class="fas fa-arrow-up"></i> Tim 1 unggul +${diff}`;
         diffEl.className = 'score-difference leading-p1';
     } else {
-        const inputs = document.querySelectorAll('.player-input');
-        const name = inputs[1].value || 'Tim 2';
-        diffEl.innerHTML = `<i class="fas fa-arrow-up"></i> ${name} unggul +${diff}`;
+        diffEl.innerHTML = `<i class="fas fa-arrow-up"></i> Tim 2 unggul +${diff}`;
         diffEl.className = 'score-difference leading-p2';
     }
 }
@@ -260,11 +248,6 @@ function performQuickReset(player) {
     updateScoreDifference();
 }
 
-function toggleVibration() {
-    vibrationEnabled = document.getElementById('vibrationToggle').checked;
-    saveGameData();
-}
-
 function toggleCompactMode() {
     compactMode = document.getElementById('compactToggle').checked;
     const scoreboard = document.getElementById('scoreboard');
@@ -280,17 +263,14 @@ function toggleCompactMode() {
 
 // ===== LOCAL STORAGE =====
 function saveGameData() {
-    const inputs = document.querySelectorAll('.player-input');
     const gameData = {
         scores: scores,
         wins: wins,
-        names: [inputs[0].value, inputs[1].value],
         limit: limit,
         theme: currentTheme,
         history: roundHistory,
         roundCount: roundCount,
         lastWinner: lastWinner,
-        vibrationEnabled: vibrationEnabled,
         compactMode: compactMode
     };
     localStorage.setItem('dominoScoreData', JSON.stringify(gameData));
@@ -307,19 +287,11 @@ function loadGameData() {
         roundHistory = data.history || [[], []];
         roundCount = data.roundCount || 1;
         lastWinner = data.lastWinner !== undefined ? data.lastWinner : null;
-        vibrationEnabled = data.vibrationEnabled !== undefined ? data.vibrationEnabled : true;
         compactMode = data.compactMode || false;
-        
-        const inputs = document.querySelectorAll('.player-input');
-        if(data.names) {
-            inputs[0].value = data.names[0] || "Tim 1";
-            inputs[1].value = data.names[1] || "Tim 2";
-        }
 
         document.getElementById('win-0').innerText = wins[0];
         document.getElementById('win-1').innerText = wins[1];
         document.getElementById('limitInput').value = limit;
-        document.getElementById('vibrationToggle').checked = vibrationEnabled;
         document.getElementById('compactToggle').checked = compactMode;
         
         if (compactMode) {
