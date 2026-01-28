@@ -2,173 +2,120 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Domino Score</title>
-    <link rel="stylesheet" href="css/variables.css">
-    <link rel="stylesheet" href="css/animations.css">
-    <link rel="stylesheet" href="css/efekteks.css">
-    <link rel="stylesheet" href="css/components.css">
-    <link rel="stylesheet" href="css/utilities.css">
-    <link rel="stylesheet" href="css/themes.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Domino Score Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <!-- Header -->
-    <div class="header animate-fadeInDown">
-        <div class="header-title">
-            <div class="logo animate-pulse">🎲</div>
-            <h1 class="text-gradient-primary">Domino Score</h1>
-        </div>
-        <button class="menu-btn btn-ripple" onclick="toggleSettings()">☰</button>
+
+    <div class="bg-animation">
+        <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>
     </div>
 
-    <!-- Settings Panel -->
-    <div class="settings-panel" id="settingsPanel">
-        <button class="close-settings" onclick="toggleSettings()">✕</button>
-        <h2>⚙️ Pengaturan</h2>
-        
-        <!-- Theme Switcher -->
-        <div class="settings-item">
-            <label>🎨 Pilih Tema</label>
-            <div class="theme-switcher">
-                <button class="theme-btn" data-theme="default" onclick="changeTheme('default')" title="Purple"></button>
-                <button class="theme-btn" data-theme="dark" onclick="changeTheme('dark')" title="Dark"></button>
-                <button class="theme-btn" data-theme="ocean" onclick="changeTheme('ocean')" title="Ocean"></button>
-                <button class="theme-btn" data-theme="sunset" onclick="changeTheme('sunset')" title="Sunset"></button>
-                <button class="theme-btn" data-theme="forest" onclick="changeTheme('forest')" title="Forest"></button>
-                <button class="theme-btn" data-theme="neon" onclick="changeTheme('neon')" title="Neon"></button>
-                <button class="theme-btn" data-theme="rose" onclick="changeTheme('rose')" title="Rose"></button>
-                <button class="theme-btn" data-theme="sky" onclick="changeTheme('sky')" title="Sky"></button>
-                <button class="theme-btn" data-theme="fire" onclick="changeTheme('fire')" title="Fire"></button>
-                <button class="theme-btn" data-theme="midnight" onclick="changeTheme('midnight')" title="Midnight"></button>
-            </div>
+    <div class="header">
+        <div class="logo">
+            <i class="fas fa-dice-five"></i>
+            <span>Domino Score</span>
         </div>
-
-        <div class="divider"></div>
-        
-        <!-- Losing Score -->
-        <div class="settings-item">
-            <label>🎯 Batas Skor Kalah</label>
-            <input type="number" id="winningScore" value="101" min="50" max="500" 
-                   class="input" onchange="updateWinningScore()">
-        </div>
-
-        <div class="divider"></div>
-
-        <!-- Reset Button -->
-        <div class="settings-item">
-            <button class="reset-btn btn-ripple w-100" onclick="resetGame()">
-                🔄 Reset Game
-            </button>
-        </div>
+        <button class="btn-icon" onclick="toggleSettings()"><i class="fas fa-cog"></i></button>
     </div>
 
-    <!-- Players Container -->
-    <div class="players-container">
-        <!-- Player 1 -->
-        <div class="player player-1 glass-card animate-fadeInUp">
-            <div class="player-header">
-                <input type="text" class="player-name text-shadow-md" 
-                       value="Pemain 1" data-player="0" 
-                       onchange="updatePlayerName(0, this.value)">
-                <div class="score-badge badge-glass">
-                    <span class="trophy">🏆</span>
-                    <span id="badge-0">0</span>
-                </div>
-            </div>
-
-            <!-- Progress Bar to Losing Score -->
-            <div class="progress mb-3 w-100">
-                <div class="progress-bar" id="progress-0" style="width: 0%"></div>
-            </div>
-
-            <div class="score-display text-glow animate-pulse" id="score-0">0</div>
-            
+    <div class="container">
+        <div class="player-card" id="card-0">
+            <div class="trophy"><i class="fas fa-trophy"></i> <span id="win-0">0</span></div>
+            <input type="text" class="player-name" value="Pemain 1" onchange="updateName(0, this.value)">
+            <div class="score-display" id="score-0">0</div>
             <div class="controls">
-                <button class="control-btn plus-btn btn-ripple animate-float" 
-                        onclick="openCalculator(0)">+</button>
-                <button class="control-btn minus-btn btn-ripple" 
-                        onclick="subtractScore(0)">−</button>
+                <button class="btn-circle btn-min" onclick="updateScore(0, -1)"><i class="fas fa-minus"></i></button>
+                <button class="btn-circle btn-plus" onclick="openCalculator(0)"><i class="fas fa-plus"></i></button>
             </div>
-            
-            <div class="footer-score text-shadow-lg" id="footer-0">0</div>
         </div>
 
-        <!-- Player 2 -->
-        <div class="player player-2 glass-card animate-fadeInUp delay-100">
-            <div class="player-header">
-                <input type="text" class="player-name text-shadow-md" 
-                       value="Pemain 2" data-player="1" 
-                       onchange="updatePlayerName(1, this.value)">
-                <div class="score-badge badge-glass">
-                    <span class="trophy">🏆</span>
-                    <span id="badge-1">0</span>
-                </div>
-            </div>
-
-            <!-- Progress Bar to Losing Score -->
-            <div class="progress mb-3 w-100">
-                <div class="progress-bar" id="progress-1" style="width: 0%"></div>
-            </div>
-
-            <div class="score-display text-glow animate-pulse" id="score-1">0</div>
-            
+        <div class="player-card" id="card-1">
+            <div class="trophy"><i class="fas fa-trophy"></i> <span id="win-1">0</span></div>
+            <input type="text" class="player-name" value="Pemain 2" onchange="updateName(1, this.value)">
+            <div class="score-display" id="score-1">0</div>
             <div class="controls">
-                <button class="control-btn plus-btn btn-ripple animate-float" 
-                        onclick="openCalculator(1)">+</button>
-                <button class="control-btn minus-btn btn-ripple" 
-                        onclick="subtractScore(1)">−</button>
+                <button class="btn-circle btn-min" onclick="updateScore(1, -1)"><i class="fas fa-minus"></i></button>
+                <button class="btn-circle btn-plus" onclick="openCalculator(1)"><i class="fas fa-plus"></i></button>
             </div>
-            
-            <div class="footer-score text-shadow-lg" id="footer-1">0</div>
         </div>
     </div>
 
-    <!-- Calculator Overlay -->
     <div class="calculator-overlay" id="calculatorOverlay" onclick="closeCalculatorOnOutside(event)">
-        <div class="calculator animate-slideUp" onclick="event.stopPropagation()">
-            <div class="calc-display" id="calcDisplay">0</div>
-            <div class="calc-buttons">
-                <button class="calc-btn function btn-ripple" onclick="clearCalc()">AC</button>
-                <button class="calc-btn function btn-ripple" onclick="backspace()">⌫</button>
-                <button class="calc-btn operator btn-ripple" onclick="appendOperator('/')">÷</button>
-                <button class="calc-btn operator btn-ripple" onclick="appendOperator('*')">×</button>
+        <div class="calculator" onclick="event.stopPropagation()">
+            <div class="calc-header">
+                <div class="calc-display" id="calcDisplay">0</div>
+            </div>
+            <div class="calc-grid">
+                <button class="c-btn btn-red" onclick="clearCalc()">AC</button>
+                <button class="c-btn btn-red" onclick="backspace()"><i class="fas fa-backspace"></i></button>
+                <button class="c-btn btn-orange" onclick="appendOperator('/')">÷</button>
+                <button class="c-btn btn-orange" onclick="appendOperator('*')">×</button>
                 
-                <button class="calc-btn btn-ripple" onclick="appendNumber('7')">7</button>
-                <button class="calc-btn btn-ripple" onclick="appendNumber('8')">8</button>
-                <button class="calc-btn btn-ripple" onclick="appendNumber('9')">9</button>
-                <button class="calc-btn operator btn-ripple" onclick="appendOperator('-')">−</button>
+                <button class="c-btn btn-white" onclick="appendNumber('7')">7</button>
+                <button class="c-btn btn-white" onclick="appendNumber('8')">8</button>
+                <button class="c-btn btn-white" onclick="appendNumber('9')">9</button>
+                <button class="c-btn btn-orange" onclick="appendOperator('-')">−</button>
                 
-                <button class="calc-btn btn-ripple" onclick="appendNumber('4')">4</button>
-                <button class="calc-btn btn-ripple" onclick="appendNumber('5')">5</button>
-                <button class="calc-btn btn-ripple" onclick="appendNumber('6')">6</button>
-                <button class="calc-btn operator btn-ripple" onclick="appendOperator('+')">+</button>
+                <button class="c-btn btn-white" onclick="appendNumber('4')">4</button>
+                <button class="c-btn btn-white" onclick="appendNumber('5')">5</button>
+                <button class="c-btn btn-white" onclick="appendNumber('6')">6</button>
+                <button class="c-btn btn-orange" onclick="appendOperator('+')">+</button>
                 
-                <button class="calc-btn btn-ripple" onclick="appendNumber('1')">1</button>
-                <button class="calc-btn btn-ripple" onclick="appendNumber('2')">2</button>
-                <button class="calc-btn btn-ripple" onclick="appendNumber('3')">3</button>
-                <button class="calc-btn done btn-ripple" onclick="doneCalculator()">Done</button>
+                <button class="c-btn btn-white" onclick="appendNumber('1')">1</button>
+                <button class="c-btn btn-white" onclick="appendNumber('2')">2</button>
+                <button class="c-btn btn-white" onclick="appendNumber('3')">3</button>
+                <button class="c-btn btn-green row-span-2" onclick="doneCalculator()">Done</button>
                 
-                <button class="calc-btn zero btn-ripple" onclick="appendNumber('0')">0</button>
-                <button class="calc-btn btn-ripple" onclick="appendNumber('.')">.</button>
-                <button class="calc-btn cancel btn-ripple" onclick="closeCalculator()">Cancel</button>
+                <button class="c-btn btn-white col-span-2" onclick="appendNumber('0')">0</button>
+                <button class="c-btn btn-white" onclick="appendNumber('.')">.</button>
+            </div>
+            <button class="btn-cancel-calc" onclick="closeCalculator()">Batal</button>
+        </div>
+    </div>
+
+    <div class="drawer-overlay" id="drawerOverlay" onclick="toggleSettings()"></div>
+    <div class="drawer" id="settingsDrawer">
+        <div class="drawer-header">
+            <h3>Pengaturan</h3>
+            <button class="btn-close" onclick="toggleSettings()"><i class="fas fa-times"></i></button>
+        </div>
+        
+        <div class="setting-item">
+            <label>Tema Warna</label>
+            <div class="theme-options">
+                <div class="theme-dot t-purple active" onclick="setTheme('purple', this)"></div>
+                <div class="theme-dot t-blue" onclick="setTheme('blue', this)"></div>
+                <div class="theme-dot t-orange" onclick="setTheme('orange', this)"></div>
+                <div class="theme-dot t-dark" onclick="setTheme('dark', this)"></div>
             </div>
         </div>
-    </div>
 
-    <!-- Winner/Loser Overlay -->
-    <div class="winner-overlay modal-overlay" id="winnerOverlay">
-        <div class="winner-content modal animate-bounceIn">
-            <div class="winner-trophy animate-bounce">💀</div>
-            <div class="winner-text text-gradient" id="winnerName">Pemain 1</div>
-            <div class="text-neon-pink mb-2" style="font-size: 24px; font-weight: 700;">KALAH!</div>
-            <div class="winner-score text-shadow-xl" id="winnerScore">101</div>
-            <button class="reset-btn btn-ripple" onclick="resetGame()">Main Lagi</button>
+        <div class="setting-item">
+            <label>Batas Skor Kalah</label>
+            <input type="number" id="limitInput" value="101" class="input-limit" onchange="updateLimit(this.value)">
+        </div>
+
+        <div class="drawer-footer">
+            <button class="btn-reset" onclick="resetGame()">Reset Game</button>
         </div>
     </div>
 
-    <!-- Confetti Container -->
-    <div id="confetti-container"></div>
+    <div class="modal-overlay" id="gameOverModal">
+        <div class="modal-card">
+            <div class="skull-icon"><i class="fas fa-skull"></i></div>
+            <h2 id="loserName">Pemain 1</h2>
+            <div class="modal-badge">KALAH!</div>
+            <div class="final-score" id="finalScore">105</div>
+            <button class="btn-play-again" onclick="resetGame()">Main Lagi</button>
+        </div>
+    </div>
+
+    <audio id="sfx-click" src="https://assets.mixkit.co/sfx/preview/mixkit-modern-technology-select-3124.mp3"></audio>
+    <audio id="sfx-win" src="https://assets.mixkit.co/sfx/preview/mixkit-winning-chimes-2015.mp3"></audio>
 
     <script src="js/app.js"></script>
 </body>

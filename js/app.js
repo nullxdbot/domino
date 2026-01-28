@@ -1,367 +1,165 @@
-// ===== GAME STATE =====
+// ===== STATE =====
 let scores = [0, 0];
-let playerNames = ['Pemain 1', 'Pemain 2'];
-let winningScore = 101;
-let currentPlayer = 0;
-let currentTheme = 'default';
+let wins = [0, 0];
+let limit = 101;
+let activePlayer = 0;
 
-// ===== CALCULATOR STATE =====
-let calcValue = '0';
-let lastOperator = null;
-let previousValue = null;
+// Audio
+const sfxClick = document.getElementById('sfx-click');
+const sfxWin = document.getElementById('sfx-win');
 
-// ===== LOAD GAME =====
-function loadGame() {
-    const saved = localStorage.getItem('dominoScore');
-    if (saved) {
-        try {
-            const data = JSON.parse(saved);
-            scores = data.scores || [0, 0];
-            playerNames = data.playerNames || ['Pemain 1', 'Pemain 2'];
-            winningScore = data.winningScore || 101;
-            currentTheme = data.theme || 'default';
-            
-            updateAllDisplays();
-            
-            const winningScoreEl = document.getElementById('winningScore');
-            if (winningScoreEl) {
-                winningScoreEl.value = winningScore;
-            }
-            
-            playerNames.forEach((name, i) => {
-                const playerEl = document.querySelector(`[data-player="${i}"]`);
-                if (playerEl) {
-                    playerEl.value = name;
-                }
-            });
-
-            // Apply saved theme
-            applyTheme(currentTheme);
-        } catch (e) {
-            console.error('Error loading game:', e);
-        }
-    }
+// ===== AUDIO & HAPTIC =====
+function playClick() {
+    if(sfxClick) { sfxClick.currentTime = 0; sfxClick.play().catch(()=>{}); }
+    if(navigator.vibrate) navigator.vibrate(10);
 }
 
-// ===== SAVE GAME =====
-function saveGame() {
-    try {
-        localStorage.setItem('dominoScore', JSON.stringify({
-            scores: scores,
-            playerNames: playerNames,
-            winningScore: winningScore,
-            theme: currentTheme
-        }));
-    } catch (e) {
-        console.error('Error saving game:', e);
-    }
+function playWin() {
+    if(sfxWin) sfxWin.play().catch(()=>{});
+    if(navigator.vibrate) navigator.vibrate([100, 50, 100]);
 }
 
-// ===== UPDATE DISPLAYS =====
-function updateDisplay(player) {
-    const scoreEl = document.getElementById(`score-${player}`);
-    const badgeEl = document.getElementById(`badge-${player}`);
-    const footerEl = document.getElementById(`footer-${player}`);
-    const progressEl = document.getElementById(`progress-${player}`);
-    
-    if (scoreEl) {
-        scoreEl.textContent = scores[player];
-        // Add pop animation
-        scoreEl.classList.remove('animate-scorePop');
-        void scoreEl.offsetWidth; // Trigger reflow
-        scoreEl.classList.add('animate-scorePop');
-    }
-    
-    if (badgeEl) badgeEl.textContent = scores[player];
-    if (footerEl) footerEl.textContent = scores[player];
-    
-    // Update progress bar
-    if (progressEl) {
-        const percentage = (scores[player] / winningScore) * 100;
-        progressEl.style.width = Math.min(percentage, 100) + '%';
-    }
-}
-
-function updateAllDisplays() {
-    scores.forEach((_, i) => updateDisplay(i));
-}
-
-// ===== SCORE MANAGEMENT =====
-function addScore(player, amount = 1) {
+// ===== GAME LOGIC =====
+function updateScore(player, amount) {
+    playClick();
+    if(scores[player] + amount < 0) return;
     scores[player] += amount;
-    updateDisplay(player);
-    saveGame();
-    
-    // Show confetti if near losing score
-    if (scores[player] >= winningScore - 10 && scores[player] < winningScore) {
-        showMiniConfetti();
-    }
-    
-    checkWinner();
+    render();
+    checkGame();
 }
 
-function subtractScore(player) {
-    if (scores[player] > 0) {
-        scores[player]--;
-        updateDisplay(player);
-        saveGame();
-    }
+function updateName(player, val) {
+    // Simpan nama jika perlu (bisa via localStorage)
 }
 
-// ===== CHECK WINNER/LOSER =====
-function checkWinner() {
-    scores.forEach((score, player) => {
-        if (score >= winningScore) {
-            showLoser(player);
-        }
-    });
+function checkGame() {
+    if (scores[0] >= limit) gameOver(0);
+    else if (scores[1] >= limit) gameOver(1);
 }
 
-function showLoser(player) {
-    const winnerNameEl = document.getElementById('winnerName');
-    const winnerScoreEl = document.getElementById('winnerScore');
-    const overlayEl = document.getElementById('winnerOverlay');
+function gameOver(loserIndex) {
+    playWin();
+    const winnerIndex = loserIndex === 0 ? 1 : 0;
+    wins[winnerIndex]++;
     
-    if (winnerNameEl) winnerNameEl.textContent = playerNames[player];
-    if (winnerScoreEl) winnerScoreEl.textContent = scores[player];
-    if (overlayEl) overlayEl.classList.add('active');
+    document.getElementById('loserName').innerText = 
+        document.querySelectorAll('.player-name')[loserIndex].value;
+    document.getElementById('finalScore').innerText = scores[loserIndex];
+    document.getElementById('gameOverModal').classList.add('active');
     
-    // Show big confetti
-    showConfetti();
+    // Update Wins UI
+    document.getElementById(`win-${winnerIndex}`).innerText = wins[winnerIndex];
 }
 
-// ===== RESET GAME =====
 function resetGame() {
-    if (confirm('Reset semua skor ke 0?')) {
-        scores = [0, 0];
-        updateAllDisplays();
-        saveGame();
-        const overlayEl = document.getElementById('winnerOverlay');
-        if (overlayEl) overlayEl.classList.remove('active');
-    }
+    playClick();
+    scores = [0, 0];
+    document.getElementById('gameOverModal').classList.remove('active');
+    document.getElementById('drawerOverlay').classList.remove('active');
+    document.getElementById('settingsDrawer').classList.remove('active');
+    render();
 }
 
-// ===== PLAYER NAME =====
-function updatePlayerName(player, name) {
-    playerNames[player] = name || `Pemain ${player + 1}`;
-    saveGame();
+function render() {
+    document.getElementById('score-0').innerText = scores[0];
+    document.getElementById('score-1').innerText = scores[1];
 }
 
-// ===== WINNING SCORE =====
-function updateWinningScore() {
-    const valueEl = document.getElementById('winningScore');
-    if (valueEl) {
-        const value = parseInt(valueEl.value);
-        if (value >= 50 && value <= 500) {
-            winningScore = value;
-            saveGame();
-            updateAllDisplays(); // Update progress bars
-        }
-    }
-}
+// ===== CALCULATOR LOGIC =====
+let calcVal = '0';
+let lastOp = null;
+let prevVal = null;
 
-// ===== SETTINGS PANEL =====
-function toggleSettings() {
-    const panel = document.getElementById('settingsPanel');
-    if (panel) panel.classList.toggle('active');
-}
-
-// ===== THEME SWITCHER =====
-function changeTheme(theme) {
-    currentTheme = theme;
-    applyTheme(theme);
-    saveGame();
-}
-
-function applyTheme(theme) {
-    document.documentElement.setAttribute('data-theme', theme);
-    
-    // Update active theme button
-    document.querySelectorAll('.theme-btn').forEach(btn => {
-        btn.classList.remove('active');
-        if (btn.getAttribute('data-theme') === theme) {
-            btn.classList.add('active');
-        }
-    });
-}
-
-// ===== CALCULATOR FUNCTIONS =====
 function openCalculator(player) {
-    currentPlayer = player;
-    calcValue = '0';
-    lastOperator = null;
-    previousValue = null;
+    playClick();
+    activePlayer = player;
+    calcVal = '0';
+    lastOp = null;
+    prevVal = null;
     updateCalcDisplay();
-    const overlayEl = document.getElementById('calculatorOverlay');
-    if (overlayEl) overlayEl.classList.add('active');
+    document.getElementById('calculatorOverlay').classList.add('active');
 }
 
 function closeCalculator() {
-    const overlayEl = document.getElementById('calculatorOverlay');
-    if (overlayEl) overlayEl.classList.remove('active');
+    document.getElementById('calculatorOverlay').classList.remove('active');
 }
 
-function closeCalculatorOnOutside(event) {
-    if (event.target.id === 'calculatorOverlay') {
-        closeCalculator();
-    }
-}
-
-function updateCalcDisplay() {
-    const displayEl = document.getElementById('calcDisplay');
-    if (displayEl) {
-        displayEl.textContent = calcValue;
-    }
+function closeCalculatorOnOutside(e) {
+    if(e.target.id === 'calculatorOverlay') closeCalculator();
 }
 
 function appendNumber(num) {
-    if (calcValue === '0' || calcValue === 'Error') {
-        calcValue = num;
-    } else {
-        calcValue += num;
-    }
+    playClick();
+    if (calcVal === '0' && num !== '.') calcVal = num;
+    else calcVal += num;
     updateCalcDisplay();
 }
 
 function appendOperator(op) {
-    if (lastOperator && previousValue !== null) {
-        calculate();
-    }
-    previousValue = parseFloat(calcValue);
-    lastOperator = op;
-    calcValue = '0';
+    playClick();
+    if (lastOp !== null) calculate();
+    prevVal = parseFloat(calcVal);
+    lastOp = op;
+    calcVal = '0';
 }
 
 function calculate() {
-    if (previousValue === null || lastOperator === null) return;
-    
-    const current = parseFloat(calcValue);
-    let result;
-    
-    switch (lastOperator) {
-        case '+':
-            result = previousValue + current;
-            break;
-        case '-':
-            result = previousValue - current;
-            break;
-        case '*':
-            result = previousValue * current;
-            break;
-        case '/':
-            result = current !== 0 ? previousValue / current : 'Error';
-            break;
-    }
-    
-    if (result === 'Error') {
-        calcValue = 'Error';
-    } else {
-        calcValue = result.toString();
-    }
-    
-    previousValue = null;
-    lastOperator = null;
-    updateCalcDisplay();
-}
-
-function clearCalc() {
-    calcValue = '0';
-    lastOperator = null;
-    previousValue = null;
-    updateCalcDisplay();
-}
-
-function backspace() {
-    if (calcValue.length > 1) {
-        calcValue = calcValue.slice(0, -1);
-    } else {
-        calcValue = '0';
-    }
+    const current = parseFloat(calcVal);
+    if (lastOp === '+') prevVal += current;
+    if (lastOp === '-') prevVal -= current;
+    if (lastOp === '*') prevVal *= current;
+    if (lastOp === '/') prevVal /= current;
+    calcVal = prevVal.toString();
+    lastOp = null;
     updateCalcDisplay();
 }
 
 function doneCalculator() {
-    if (lastOperator) {
-        calculate();
-    }
-    
-    const value = parseFloat(calcValue);
-    if (!isNaN(value) && value > 0) {
-        addScore(currentPlayer, Math.floor(value));
+    playClick();
+    if (lastOp) calculate();
+    const result = Math.floor(parseFloat(calcVal));
+    if (!isNaN(result)) {
+        // Mode tambah skor (bukan replace)
+        updateScore(activePlayer, result); 
     }
     closeCalculator();
 }
 
-// ===== CONFETTI EFFECT =====
-function showConfetti() {
-    const container = document.getElementById('confetti-container');
-    if (!container) return;
-    
-    const colors = ['#ff0080', '#00fff9', '#ffff00', '#00ff00', '#ff8c00'];
-    const confettiCount = 100;
-    
-    for (let i = 0; i < confettiCount; i++) {
-        const confetti = document.createElement('div');
-        confetti.style.position = 'fixed';
-        confetti.style.width = '10px';
-        confetti.style.height = '10px';
-        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-        confetti.style.left = Math.random() * 100 + '%';
-        confetti.style.top = '-10px';
-        confetti.style.opacity = '1';
-        confetti.style.transform = 'rotate(0deg)';
-        confetti.style.animation = 'confetti-fall ' + (2 + Math.random() * 2) + 's linear';
-        confetti.style.zIndex = '9999';
-        confetti.style.pointerEvents = 'none';
-        
-        container.appendChild(confetti);
-        
-        setTimeout(() => {
-            confetti.remove();
-        }, 4000);
-    }
+function backspace() {
+    playClick();
+    calcVal = calcVal.slice(0, -1) || '0';
+    updateCalcDisplay();
 }
 
-function showMiniConfetti() {
-    const container = document.getElementById('confetti-container');
-    if (!container) return;
-    
-    const colors = ['#ff0080', '#00fff9'];
-    const confettiCount = 20;
-    
-    for (let i = 0; i < confettiCount; i++) {
-        const confetti = document.createElement('div');
-        confetti.style.position = 'fixed';
-        confetti.style.width = '8px';
-        confetti.style.height = '8px';
-        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-        confetti.style.left = Math.random() * 100 + '%';
-        confetti.style.top = '-10px';
-        confetti.style.opacity = '1';
-        confetti.style.animation = 'confetti-fall 1.5s linear';
-        confetti.style.zIndex = '9999';
-        confetti.style.pointerEvents = 'none';
-        
-        container.appendChild(confetti);
-        
-        setTimeout(() => {
-            confetti.remove();
-        }, 1500);
-    }
+function clearCalc() {
+    playClick();
+    calcVal = '0';
+    lastOp = null;
+    prevVal = null;
+    updateCalcDisplay();
 }
 
-// ===== EVENT LISTENERS =====
-document.addEventListener('click', (e) => {
-    const panel = document.getElementById('settingsPanel');
-    const menuBtn = document.querySelector('.menu-btn');
-    if (panel && menuBtn && !panel.contains(e.target) && !menuBtn.contains(e.target)) {
-        panel.classList.remove('active');
-    }
-});
+function updateCalcDisplay() {
+    document.getElementById('calcDisplay').innerText = calcVal;
+}
 
-// ===== INITIALIZE =====
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', loadGame);
-} else {
-    loadGame();
+// ===== SETTINGS =====
+function toggleSettings() {
+    document.getElementById('settingsDrawer').classList.toggle('active');
+    document.getElementById('drawerOverlay').classList.toggle('active');
+}
+
+function updateLimit(val) {
+    limit = parseInt(val) || 101;
+}
+
+function setTheme(name, el) {
+    document.querySelectorAll('.theme-dot').forEach(d => d.classList.remove('active'));
+    el.classList.add('active');
+    
+    const root = document.documentElement.style;
+    if(name === 'purple') { root.setProperty('--bg-1', '#667eea'); root.setProperty('--bg-2', '#764ba2'); }
+    if(name === 'blue') { root.setProperty('--bg-1', '#4facfe'); root.setProperty('--bg-2', '#00f2fe'); }
+    if(name === 'orange') { root.setProperty('--bg-1', '#f093fb'); root.setProperty('--bg-2', '#f5576c'); }
+    if(name === 'dark') { root.setProperty('--bg-1', '#232526'); root.setProperty('--bg-2', '#414345'); }
 }
