@@ -22,7 +22,14 @@ document.addEventListener('DOMContentLoaded', () => {
     initParticles();
 });
 
-function playClick() { if(sfxClick) { sfxClick.currentTime = 0; sfxClick.play().catch(()=>{}); } }
+// Optimized audio and vibration functions with reduced overhead
+function playClick() { 
+    if(sfxClick && sfxClick.readyState >= 2) { 
+        sfxClick.currentTime = 0; 
+        sfxClick.play().catch(()=>{}); 
+    } 
+}
+
 function playWin() { 
     if(sfxWin) sfxWin.play().catch(()=>{}); 
     if(vibrationEnabled && navigator.vibrate) navigator.vibrate([200, 100, 200]); 
@@ -42,7 +49,7 @@ function initParticles() {
     canvas.height = window.innerHeight;
     
     const particles = [];
-    const particleCount = 50;
+    const particleCount = 30; // Reduced from 50 for better performance
     
     class Particle {
         constructor() {
@@ -97,8 +104,6 @@ function initParticles() {
 
 // ===== GAME LOGIC =====
 function updateScore(player, amount) {
-    playClick();
-    vibrateLight();
     if (scores[player] + amount < 0) return;
     
     if (amount !== 0) {
@@ -112,6 +117,10 @@ function updateScore(player, amount) {
     renderHistory();
     updateScoreDifference();
     checkWin(player);
+    
+    // Play sound and vibrate after DOM updates for better responsiveness
+    playClick();
+    vibrateLight();
 }
 
 function updateName(player, name) { saveGameData(); }
@@ -392,22 +401,99 @@ function performHardReset() {
     updateScoreDifference();
 }
 
-// ===== CALCULATOR =====
-let calcVal = '0', lastOp = null, prevVal = null;
+// ===== CALCULATOR - OPTIMIZED VERSION =====
+let calcVal = '0';
+let lastOp = null;
+let prevVal = null;
 
 function openCalculator(player) {
     activePlayer = player;
-    calcVal = '0'; lastOp = null; prevVal = null;
-    document.getElementById('calcDisplay').innerText = '0';
+    calcVal = '0';
+    lastOp = null;
+    prevVal = null;
+    updateDisplay();
     document.getElementById('calculatorOverlay').classList.add('active');
 }
-function closeCalculatorOnOutside(e) { if(e.target.id === 'calculatorOverlay') document.getElementById('calculatorOverlay').classList.remove('active'); }
-function appendNumber(num) { playClick(); if(calcVal === '0' && num !== '.') calcVal = num; else calcVal += num; document.getElementById('calcDisplay').innerText = calcVal; }
-function appendOperator(op) { playClick(); if(lastOp) calculate(); prevVal = parseFloat(calcVal); lastOp = op; calcVal = '0'; }
-function calculate() { const current = parseFloat(calcVal); if(lastOp === '+') prevVal += current; if(lastOp === '-') prevVal -= current; if(lastOp === '*') prevVal *= current; if(lastOp === '/') prevVal /= current; calcVal = prevVal.toString(); lastOp = null; document.getElementById('calcDisplay').innerText = calcVal; }
-function doneCalculator() { if(lastOp) calculate(); const result = Math.floor(parseFloat(calcVal)); if(!isNaN(result)) updateScore(activePlayer, result); document.getElementById('calculatorOverlay').classList.remove('active'); }
-function backspace() { calcVal = calcVal.slice(0, -1) || '0'; document.getElementById('calcDisplay').innerText = calcVal; }
-function clearCalc() { calcVal = '0'; lastOp = null; document.getElementById('calcDisplay').innerText = '0'; }
+
+function closeCalculatorOnOutside(e) {
+    if(e.target.id === 'calculatorOverlay') {
+        document.getElementById('calculatorOverlay').classList.remove('active');
+    }
+}
+
+// Optimized: Update display without playing sound
+function updateDisplay() {
+    document.getElementById('calcDisplay').innerText = calcVal;
+}
+
+// Optimized: Append number without audio/vibration for instant response
+function appendNumber(num) {
+    if(calcVal === '0' && num !== '.') {
+        calcVal = num;
+    } else {
+        calcVal += num;
+    }
+    updateDisplay();
+}
+
+// Optimized: Operator without audio for instant response
+function appendOperator(op) {
+    if(lastOp) {
+        calculate();
+    }
+    prevVal = parseFloat(calcVal);
+    lastOp = op;
+    calcVal = '0';
+    updateDisplay();
+}
+
+// Optimized: Calculate function
+function calculate() {
+    const current = parseFloat(calcVal);
+    
+    if(lastOp === '+') {
+        prevVal += current;
+    } else if(lastOp === '-') {
+        prevVal -= current;
+    } else if(lastOp === '*') {
+        prevVal *= current;
+    } else if(lastOp === '/') {
+        prevVal /= current;
+    }
+    
+    calcVal = prevVal.toString();
+    lastOp = null;
+    updateDisplay();
+}
+
+// Optimized: Done button with single sound at the end
+function doneCalculator() {
+    if(lastOp) {
+        calculate();
+    }
+    
+    const result = Math.floor(parseFloat(calcVal));
+    
+    if(!isNaN(result)) {
+        updateScore(activePlayer, result);
+    }
+    
+    document.getElementById('calculatorOverlay').classList.remove('active');
+}
+
+// Optimized: Backspace
+function backspace() {
+    calcVal = calcVal.slice(0, -1) || '0';
+    updateDisplay();
+}
+
+// Optimized: Clear
+function clearCalc() {
+    calcVal = '0';
+    lastOp = null;
+    prevVal = null;
+    updateDisplay();
+}
 
 // ===== SETTINGS & THEME =====
 function toggleSettings() { 
