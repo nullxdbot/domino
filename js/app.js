@@ -271,7 +271,6 @@ function renderLastWinnerBadge() {
 }
 
 function quickResetPlayer(player) {
-    playClick();
     openConfirmModal(`Reset skor ${player === 0 ? 'Tim 1' : 'Tim 2'} ke 0?`, `quickreset-${player}`);
 }
 
@@ -384,7 +383,6 @@ function performResetRound() {
     roundHistory = [[], []];
     roundCount++;
     lastWinner = null;
-    playClick();
     document.querySelectorAll('.overlay').forEach(el => el.classList.remove('active'));
     saveGameData();
     render();
@@ -398,7 +396,6 @@ function performHardReset() {
     roundHistory = [[], []];
     roundCount = 1;
     lastWinner = null;
-    playClick();
     document.getElementById('win-0').innerText = "0";
     document.getElementById('win-1').innerText = "0";
     document.querySelectorAll('.overlay').forEach(el => el.classList.remove('active'));
@@ -433,7 +430,7 @@ function updateDisplay() {
     document.getElementById('calcDisplay').innerText = calcVal;
 }
 
-// Optimized: Append number without audio/vibration for instant response
+// Optimized: Append number with sound feedback
 function appendNumber(num) {
     if(calcVal === '0' && num !== '.') {
         calcVal = num;
@@ -441,6 +438,7 @@ function appendNumber(num) {
         calcVal += num;
     }
     updateDisplay();
+    playClick(); // Sound hanya saat input angka
 }
 
 // Optimized: Operator without audio for instant response
@@ -500,67 +498,6 @@ function clearCalc() {
     lastOp = null;
     prevVal = null;
     updateDisplay();
-}
-
-// ===== EXPORT / IMPORT DATA =====
-function exportData() {
-    const gameData = {
-        scores: scores,
-        wins: wins,
-        limit: limit,
-        theme: currentTheme,
-        history: roundHistory,
-        roundCount: roundCount,
-        lastWinner: lastWinner,
-        compactMode: compactMode,
-        soundEnabled: soundEnabled,
-        exportDate: new Date().toISOString()
-    };
-    
-    const dataStr = JSON.stringify(gameData, null, 2);
-    const dataBlob = new Blob([dataStr], { type: 'application/json' });
-    const url = URL.createObjectURL(dataBlob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = `domino-score-backup-${Date.now()}.json`;
-    link.click();
-    URL.revokeObjectURL(url);
-    
-    playClick();
-}
-
-function importData() {
-    const input = document.createElement('input');
-    input.type = 'file';
-    input.accept = 'application/json';
-    input.onchange = (e) => {
-        const file = e.target.files[0];
-        if (!file) return;
-        
-        const reader = new FileReader();
-        reader.onload = (event) => {
-            try {
-                const data = JSON.parse(event.target.result);
-                
-                scores = data.scores || [0, 0];
-                wins = data.wins || [0, 0];
-                limit = data.limit || 101;
-                currentTheme = data.theme || 'blue';
-                roundHistory = data.history || [[], []];
-                roundCount = data.roundCount || 1;
-                lastWinner = data.lastWinner;
-                compactMode = data.compactMode || false;
-                soundEnabled = data.soundEnabled !== undefined ? data.soundEnabled : true;
-                
-                saveGameData();
-                location.reload();
-            } catch (err) {
-                alert('Error: File tidak valid!');
-            }
-        };
-        reader.readAsText(file);
-    };
-    input.click();
 }
 
 // ===== SETTINGS & THEME =====
