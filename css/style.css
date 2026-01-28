@@ -239,11 +239,6 @@ body {
     border-top: 3px solid var(--secondary);
 }
 
-/* Container untuk header card agar tidak bentrok dengan reset button */
-.player-card .card-info {
-    padding-right: 48px;
-}
-
 /* ===== CARD INFO ===== */
 .card-info {
     display: flex;
@@ -480,8 +475,8 @@ body {
 
 .quick-reset-btn {
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: 28px;
+    right: 24px;
     width: 36px;
     height: 36px;
     border-radius: 10px;
