@@ -141,12 +141,14 @@ function updateScoreDifference() {
     if (diff === 0) {
         diffEl.innerHTML = '<i class="fas fa-equals"></i> Seri';
         diffEl.className = 'score-difference neutral';
-    } else if (scores[0] > scores[1]) {
+    } else if (scores[0] < scores[1]) {
+        // Tim 1 skornya lebih rendah = lebih unggul (lebih jauh dari 101)
         const inputs = document.querySelectorAll('.player-input');
         const name = inputs[0].value || 'Tim 1';
         diffEl.innerHTML = `<i class="fas fa-arrow-up"></i> ${name} unggul +${diff}`;
         diffEl.className = 'score-difference leading-p1';
     } else {
+        // Tim 2 skornya lebih rendah = lebih unggul
         const inputs = document.querySelectorAll('.player-input');
         const name = inputs[1].value || 'Tim 2';
         diffEl.innerHTML = `<i class="fas fa-arrow-up"></i> ${name} unggul +${diff}`;
