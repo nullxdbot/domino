@@ -239,13 +239,18 @@ body {
     border-top: 3px solid var(--secondary);
 }
 
+/* Container untuk header card agar tidak bentrok dengan reset button */
+.player-card .card-info,
+.player-card .player-input {
+    padding-right: 48px;
+}
+
 /* ===== CARD INFO ===== */
 .card-info {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 12px;
-    padding-right: 40px;
 }
 
 .player-label {
@@ -499,11 +504,11 @@ body {
 
 .quick-reset-btn {
     position: absolute;
-    top: 16px;
-    right: 16px;
-    width: 32px;
-    height: 32px;
-    border-radius: 8px;
+    top: 20px;
+    right: 20px;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
     background: rgba(239, 68, 68, 0.1);
     border: 1px solid rgba(239, 68, 68, 0.2);
     color: var(--danger);
@@ -513,12 +518,12 @@ body {
     justify-content: center;
     transition: all 0.3s ease;
     z-index: 5;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .quick-reset-btn:hover {
     background: rgba(239, 68, 68, 0.2);
-    transform: rotate(180deg) scale(1.1);
+    transform: rotate(180deg) scale(1.05);
 }
 
 /* ===== OVERLAYS ===== */
