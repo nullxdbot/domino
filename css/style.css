@@ -245,6 +245,7 @@ body {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 12px;
+    padding-right: 50px;
 }
 
 .player-label {
@@ -266,6 +267,8 @@ body {
     font-size: 14px;
     font-weight: 700;
     color: #ffd700;
+    margin-right: auto;
+    margin-left: 16px;
 }
 
 .win-count i {
@@ -476,7 +479,7 @@ body {
 .quick-reset-btn {
     position: absolute;
     top: 28px;
-    right: 80px;
+    right: 24px;
     width: 32px;
     height: 32px;
     border-radius: 8px;
