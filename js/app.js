@@ -505,6 +505,27 @@ function toggleSettings() {
     if(el) el.classList.toggle('active');
 }
 
+function openAbout() {
+    // Close settings first
+    const settings = document.getElementById('settingsOverlay');
+    if(settings) settings.classList.remove('active');
+    
+    // Open about
+    const about = document.getElementById('aboutOverlay');
+    if(about) about.classList.add('active');
+}
+
+function closeAbout() {
+    const about = document.getElementById('aboutOverlay');
+    if(about) about.classList.remove('active');
+}
+
+function closeAboutOnOutside(e) {
+    if(e.target.id === 'aboutOverlay') {
+        closeAbout();
+    }
+}
+
 function updateLimit(val) { 
     let newVal = parseInt(val);
     if (!isNaN(newVal) && newVal > 0) { 
