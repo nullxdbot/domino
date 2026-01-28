@@ -5,7 +5,6 @@ let limit = 101;
 let activePlayer = 0;
 let currentTheme = 'blue';
 
-// Variabel untuk menyimpan aksi (Reset Ronde atau Reset Total)
 let pendingAction = null; 
 
 // Audio Elements
@@ -98,7 +97,6 @@ function loadGameData() {
 }
 
 // ===== CUSTOM CONFIRM MODAL LOGIC =====
-
 function openConfirmModal(message, actionType) {
     document.getElementById('confirmMessage').innerText = message;
     pendingAction = actionType;
@@ -119,8 +117,7 @@ function executeConfirm() {
     closeConfirmModal();
 }
 
-// ===== RESET TRIGGER (DARI TOMBOL SETTINGS) =====
-
+// ===== RESET TRIGGER =====
 function resetRound() {
     openConfirmModal("Mulai ronde baru? Skor akan kembali ke 0.", "round");
 }
@@ -130,7 +127,6 @@ function hardReset() {
 }
 
 // ===== FUNGSI RESET EKSEKUTOR =====
-
 function performResetRound() {
     scores = [0, 0];
     playClick();
@@ -168,7 +164,11 @@ function backspace() { calcVal = calcVal.slice(0, -1) || '0'; document.getElemen
 function clearCalc() { calcVal = '0'; lastOp = null; document.getElementById('calcDisplay').innerText = '0'; }
 
 // ===== SETTINGS & THEME =====
-function toggleSettings() { document.getElementById('settingsOverlay').classList.toggle('active'); }
+function toggleSettings() { 
+    const el = document.getElementById('settingsOverlay');
+    if(el) el.classList.toggle('active');
+}
+
 function updateLimit(val) { 
     let newVal = parseInt(val);
     if (!isNaN(newVal) && newVal > 0) { limit = newVal; saveGameData(); }
