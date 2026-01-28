@@ -4,7 +4,6 @@ let wins = [0, 0];
 let limit = 101;
 let activePlayer = 0;
 let currentTheme = 'blue';
-// BARU: Menyimpan riwayat angka
 let roundHistory = [[], []];
 
 let pendingAction = null; 
@@ -26,7 +25,7 @@ function updateScore(player, amount) {
     playClick();
     if (scores[player] + amount < 0) return;
     
-    // BARU: Catat ke riwayat jika bukan 0
+    // Catat ke riwayat jika bukan 0
     if (amount !== 0) {
         roundHistory[player].push(amount);
     }
@@ -35,7 +34,7 @@ function updateScore(player, amount) {
     
     saveGameData();
     render();
-    renderHistory(); // Update tampilan riwayat
+    renderHistory();
     checkWin(player);
 }
 
@@ -64,13 +63,30 @@ function gameOver(loserIndex) {
 }
 
 function render() {
+    // 1. Render Skor Utama
     document.getElementById('score-0').innerText = scores[0];
     document.getElementById('score-1').innerText = scores[1];
+
+    // 2. BARU: Render Sisa Poin (Indikator)
+    const sisa0 = limit - scores[0];
+    const sisa1 = limit - scores[1];
+
+    const el0 = document.getElementById('remain-0');
+    const el1 = document.getElementById('remain-1');
+
+    if(el0) {
+        el0.innerText = sisa0 > 0 ? `Kurang ${sisa0} lagi` : "MENANG!";
+        // Ubah jadi merah kalau sisa <= 20
+        el0.style.color = sisa0 <= 20 ? '#ff6b6b' : 'rgba(255,255,255,0.4)';
+    }
+
+    if(el1) {
+        el1.innerText = sisa1 > 0 ? `Kurang ${sisa1} lagi` : "MENANG!";
+        el1.style.color = sisa1 <= 20 ? '#ff6b6b' : 'rgba(255,255,255,0.4)';
+    }
 }
 
-// BARU: Fungsi menampilkan riwayat
 function renderHistory() {
-    // Render Pemain 1
     const list0 = document.getElementById('history-0');
     if(list0) {
         list0.innerHTML = roundHistory[0].map(num => 
@@ -78,7 +94,6 @@ function renderHistory() {
         ).join('');
     }
 
-    // Render Pemain 2
     const list1 = document.getElementById('history-1');
     if(list1) {
         list1.innerHTML = roundHistory[1].map(num => 
@@ -96,7 +111,7 @@ function saveGameData() {
         names: [inputs[0].value, inputs[1].value],
         limit: limit,
         theme: currentTheme,
-        history: roundHistory // Simpan riwayat juga
+        history: roundHistory
     };
     localStorage.setItem('dominoScoreData', JSON.stringify(gameData));
 }
@@ -109,7 +124,7 @@ function loadGameData() {
         wins = data.wins || [0, 0];
         limit = parseInt(data.limit) || 101;
         currentTheme = data.theme || 'blue';
-        roundHistory = data.history || [[], []]; // Load riwayat
+        roundHistory = data.history || [[], []];
         
         const inputs = document.querySelectorAll('.player-input');
         if(data.names) {
@@ -123,7 +138,7 @@ function loadGameData() {
         
         setTheme(currentTheme); 
         render();
-        renderHistory(); // Tampilkan riwayat saat loading
+        renderHistory();
     }
 }
 
@@ -160,7 +175,7 @@ function hardReset() {
 // ===== FUNGSI RESET EKSEKUTOR =====
 function performResetRound() {
     scores = [0, 0];
-    roundHistory = [[], []]; // BARU: Kosongkan riwayat saat reset ronde
+    roundHistory = [[], []];
     playClick();
     document.querySelectorAll('.overlay').forEach(el => el.classList.remove('active'));
     saveGameData();
@@ -171,7 +186,7 @@ function performResetRound() {
 function performHardReset() {
     scores = [0, 0];
     wins = [0, 0];
-    roundHistory = [[], []]; // BARU: Kosongkan riwayat total
+    roundHistory = [[], []];
     playClick();
     document.getElementById('win-0').innerText = "0";
     document.getElementById('win-1').innerText = "0";
@@ -229,9 +244,7 @@ function setTheme(themeName) {
     saveGameData();
 }
 
-// ==========================================
-// BARU: FITUR ANTI-TIDUR (SCREEN WAKE LOCK)
-// ==========================================
+// ===== FITUR ANTI-TIDUR (WAKE LOCK) =====
 let wakeLock = null;
 
 async function activateWakeLock() {
@@ -246,7 +259,6 @@ async function activateWakeLock() {
   }
 }
 
-// Pancing fitur ini saat layar disentuh pertama kali
 document.addEventListener('click', async () => {
   if (!wakeLock) await activateWakeLock();
 });
