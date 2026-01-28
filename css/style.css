@@ -245,6 +245,7 @@ body {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 12px;
+    padding-right: 40px;
 }
 
 .player-label {
@@ -479,8 +480,9 @@ body {
 /* ===== BADGES ===== */
 .last-winner-badge {
     position: absolute;
-    top: -12px;
-    left: 20px;
+    top: -16px;
+    left: 50%;
+    transform: translateX(-50%);
     background: linear-gradient(135deg, #ffd700, #ffed4e);
     color: #000;
     padding: 6px 16px;
@@ -497,24 +499,25 @@ body {
 
 .quick-reset-btn {
     position: absolute;
-    top: -12px;
-    right: 20px;
-    width: 36px;
-    height: 36px;
-    border-radius: 10px;
-    background: rgba(239, 68, 68, 0.15);
-    border: 1px solid rgba(239, 68, 68, 0.3);
+    top: 16px;
+    right: 16px;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.2);
     color: var(--danger);
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
-    z-index: 10;
+    z-index: 5;
+    font-size: 14px;
 }
 
 .quick-reset-btn:hover {
-    background: rgba(239, 68, 68, 0.25);
+    background: rgba(239, 68, 68, 0.2);
     transform: rotate(180deg) scale(1.1);
 }
 

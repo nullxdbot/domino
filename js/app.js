@@ -32,7 +32,6 @@ function playClick() {
 
 function playWin() { 
     if(sfxWin) sfxWin.play().catch(()=>{}); 
-    if(vibrationEnabled && navigator.vibrate) navigator.vibrate([200, 100, 200]); 
 }
 
 function vibrateLight() {
@@ -118,9 +117,8 @@ function updateScore(player, amount) {
     updateScoreDifference();
     checkWin(player);
     
-    // Play sound and vibrate after DOM updates for better responsiveness
+    // Play sound after DOM updates for better responsiveness
     playClick();
-    vibrateLight();
 }
 
 function updateName(player, name) { saveGameData(); }
@@ -250,7 +248,6 @@ function renderLastWinnerBadge() {
 
 function quickResetPlayer(player) {
     playClick();
-    vibrateLight();
     openConfirmModal(`Reset skor ${player === 0 ? 'Tim 1' : 'Tim 2'} ke 0?`, `quickreset-${player}`);
 }
 
@@ -266,7 +263,6 @@ function performQuickReset(player) {
 function toggleVibration() {
     vibrationEnabled = document.getElementById('vibrationToggle').checked;
     saveGameData();
-    vibrateLight();
 }
 
 function toggleCompactMode() {
