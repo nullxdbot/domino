@@ -11,7 +11,6 @@
 <body>
 
     <div class="bg-gradient"></div>
-    <div class="bg-glow"></div>
 
     <div class="app-container">
         
@@ -62,11 +61,15 @@
                 </div>
             </div>
         </main>
+
+        <footer class="app-footer">
+            Developed by <span class="dev-name">Farrel Aulia Irfealdo</span>
+        </footer>
+
     </div>
 
     <div class="overlay" id="calculatorOverlay" onclick="closeCalculatorOnOutside(event)">
         <div class="sheet-modal">
-            <div class="drag-handle"></div>
             <div class="calc-display-area">
                 <span id="calcDisplay">0</span>
             </div>
@@ -103,6 +106,7 @@
                 <h3>Pengaturan</h3>
                 <button onclick="toggleSettings()"><i class="fas fa-times"></i></button>
             </div>
+            
             <div class="setting-row">
                 <label>Tema</label>
                 <div class="theme-picker">
@@ -111,11 +115,20 @@
                     <div class="t-circle t-dark" onclick="setTheme('dark')"></div>
                 </div>
             </div>
+
             <div class="setting-row">
-                <label>Batas Poin</label>
+                <label>Batas Poin Kalah</label>
                 <input type="number" id="limitInput" value="101" onchange="updateLimit(this.value)">
             </div>
-            <button class="btn-full-reset" onclick="resetGame()">Reset Game</button>
+
+            <div class="reset-actions">
+                <button class="btn-action-settings btn-soft-reset" onclick="resetRound()">
+                    <i class="fas fa-sync-alt"></i> Reset Skor (Ronde Baru)
+                </button>
+                <button class="btn-action-settings btn-hard-reset" onclick="hardReset()">
+                    <i class="fas fa-crown"></i> Reset Total & Mahkota
+                </button>
+            </div>
         </div>
     </div>
 
@@ -125,7 +138,7 @@
             <h2 id="winnerName">Pemain 1</h2>
             <p>MEMENANGKAN PERTANDINGAN</p>
             <div class="winner-score" id="finalScore">105</div>
-            <button class="btn-primary" onclick="resetGame()">Main Lagi</button>
+            <button class="btn-primary" onclick="resetRound()">Lanjut Ronde Baru</button>
         </div>
     </div>
 
