@@ -3,7 +3,7 @@ let scores = [0, 0];
 let wins = [0, 0];
 let limit = 101;
 let activePlayer = 0;
-let currentTheme = 'blue';
+let currentTheme = 'purple';
 let roundHistory = [[], []];
 let roundCount = 1;
 let lastWinner = null;
@@ -166,19 +166,29 @@ function render() {
     const el1 = document.getElementById('remain-1');
 
     if(el0) {
-        el0.innerText = sisa0 > 0 ? `Kurang ${sisa0} lagi` : "MENANG!";
-        el0.style.color = sisa0 <= 20 ? '#ff6b6b' : 'rgba(255,255,255,0.4)';
+        el0.innerText = `${scores[0]} / ${limit}`;
     }
 
     if(el1) {
-        el1.innerText = sisa1 > 0 ? `Kurang ${sisa1} lagi` : "MENANG!";
-        el1.style.color = sisa1 <= 20 ? '#ff6b6b' : 'rgba(255,255,255,0.4)';
+        el1.innerText = `${scores[1]} / ${limit}`;
     }
+
+    // Update progress bars
+    updateProgressBar(0, scores[0]);
+    updateProgressBar(1, scores[1]);
 
     const roundEl = document.getElementById('roundCount');
     if(roundEl) roundEl.innerText = roundCount;
 
     renderLastWinnerBadge();
+}
+
+function updateProgressBar(player, score) {
+    const progressEl = document.getElementById(`progress-${player}`);
+    if (progressEl) {
+        const percentage = Math.min((score / limit) * 100, 100);
+        progressEl.style.width = percentage + '%';
+    }
 }
 
 // Animated counter for score
@@ -229,36 +239,44 @@ function updateScoreDifference() {
     const diff = Math.abs(scores[0] - scores[1]);
     
     if (diff === 0) {
-        diffEl.innerHTML = '<i class="fas fa-equals"></i> Seri';
-        diffEl.className = 'score-difference neutral';
+        diffEl.querySelector('.diff-text').textContent = 'Pertandingan Seimbang';
+        diffEl.className = 'score-diff-card neutral';
     } else if (scores[0] < scores[1]) {
-        diffEl.innerHTML = `<i class="fas fa-arrow-up"></i> Tim 1 unggul +${diff}`;
-        diffEl.className = 'score-difference leading-p1';
+        diffEl.querySelector('.diff-text').textContent = `Tim Alpha Unggul +${diff}`;
+        diffEl.className = 'score-diff-card leading-p1';
     } else {
-        diffEl.innerHTML = `<i class="fas fa-arrow-up"></i> Tim 2 unggul +${diff}`;
-        diffEl.className = 'score-difference leading-p2';
+        diffEl.querySelector('.diff-text').textContent = `Tim Beta Unggul +${diff}`;
+        diffEl.className = 'score-diff-card leading-p2';
     }
 }
 
 function renderHistory() {
     const list0 = document.getElementById('history-0');
     if(list0) {
-        list0.innerHTML = roundHistory[0].map((num, index) => 
-            `<div class="hist-item" onclick="confirmDeleteScore(0, ${index})" title="Klik untuk hapus">
-                <span>${num > 0 ? '+' + num : num}</span>
-                <i class="fas fa-times hist-delete-icon"></i>
-            </div>`
-        ).join('');
+        if (roundHistory[0].length === 0) {
+            list0.innerHTML = '<div class="empty-history">No scores yet</div>';
+        } else {
+            list0.innerHTML = roundHistory[0].map((num, index) => 
+                `<div class="hist-item" onclick="confirmDeleteScore(0, ${index})" title="Klik untuk hapus">
+                    <span>${num > 0 ? '+' + num : num}</span>
+                    <i class="fas fa-times hist-delete-icon"></i>
+                </div>`
+            ).join('');
+        }
     }
 
     const list1 = document.getElementById('history-1');
     if(list1) {
-        list1.innerHTML = roundHistory[1].map((num, index) => 
-            `<div class="hist-item" onclick="confirmDeleteScore(1, ${index})" title="Klik untuk hapus">
-                <span>${num > 0 ? '+' + num : num}</span>
-                <i class="fas fa-times hist-delete-icon"></i>
-            </div>`
-        ).join('');
+        if (roundHistory[1].length === 0) {
+            list1.innerHTML = '<div class="empty-history">No scores yet</div>';
+        } else {
+            list1.innerHTML = roundHistory[1].map((num, index) => 
+                `<div class="hist-item" onclick="confirmDeleteScore(1, ${index})" title="Klik untuk hapus">
+                    <span>${num > 0 ? '+' + num : num}</span>
+                    <i class="fas fa-times hist-delete-icon"></i>
+                </div>`
+            ).join('');
+        }
     }
 }
 
@@ -325,7 +343,7 @@ function loadGameData() {
         scores = data.scores || [0, 0];
         wins = data.wins || [0, 0];
         limit = parseInt(data.limit) || 101;
-        currentTheme = data.theme || 'blue';
+        currentTheme = data.theme || 'purple';
         roundHistory = data.history || [[], []];
         roundCount = data.roundCount || 1;
         lastWinner = data.lastWinner !== undefined ? data.lastWinner : null;
@@ -543,9 +561,10 @@ function updateLimit(val) {
 }
 
 const themeConfig = {
-    'blue': { primary: '#4361ee', accent: '#f72585' },
-    'purple': { primary: '#7209b7', accent: '#4cc9f0' },
-    'dark': { primary: '#e63946', accent: '#ffb703' }
+    'purple': { primary: '#8b5cf6', secondary: '#ec4899' },
+    'blue': { primary: '#3b82f6', secondary: '#06b6d4' },
+    'green': { primary: '#10b981', secondary: '#34d399' },
+    'pink': { primary: '#ec4899', secondary: '#f472b6' }
 };
 
 function setTheme(themeName) {
@@ -553,10 +572,10 @@ function setTheme(themeName) {
     const theme = themeConfig[themeName];
     if (theme) {
         root.style.setProperty('--primary', theme.primary);
-        root.style.setProperty('--accent', theme.accent);
+        root.style.setProperty('--secondary', theme.secondary);
     }
-    document.querySelectorAll('.t-circle').forEach(el => el.classList.remove('active'));
-    const activeBtn = document.querySelector(`.t-${themeName}`);
+    document.querySelectorAll('.theme-option').forEach(el => el.classList.remove('active'));
+    const activeBtn = document.querySelector(`.theme-option.${themeName}`);
     if (activeBtn) activeBtn.classList.add('active');
     currentTheme = themeName;
     saveGameData();
@@ -620,27 +639,4 @@ function executeDeleteScore() {
     }
 }
 
-// ===== FITUR ANTI-TIDUR (WAKE LOCK) =====
-let wakeLock = null;
 
-async function activateWakeLock() {
-  if ('wakeLock' in navigator) {
-    try {
-      wakeLock = await navigator.wakeLock.request('screen');
-      console.log('Anti-Tidur: Aktif');
-      wakeLock.addEventListener('release', () => console.log('Anti-Tidur: Lepas'));
-    } catch (err) {
-      console.log('Gagal mengunci layar:', err);
-    }
-  }
-}
-
-document.addEventListener('click', async () => {
-  if (!wakeLock) await activateWakeLock();
-});
-
-document.addEventListener('visibilitychange', async () => {
-  if (wakeLock !== null && document.visibilityState === 'visible') {
-    await activateWakeLock();
-  }
-});

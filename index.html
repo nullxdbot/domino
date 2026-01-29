@@ -5,384 +5,467 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Domino Score NullXD</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="style.css">
     
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#6366f1">
+    <meta name="theme-color" content="#8b5cf6">
     
     <link rel="icon" href="img/icon-192.png" type="image/png">
     <link rel="apple-touch-icon" href="img/icon-192.png">
 </head>
 <body>
 
-    <div class="bg-gradient"></div>
+    <!-- Animated Background -->
+    <div class="animated-bg">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+    </div>
     <canvas id="particles-canvas"></canvas>
 
     <div class="app-container">
         
+        <!-- Modern Header with Glass Effect -->
         <header class="app-header">
-            <div class="brand">
-                <i class="fas fa-cubes"></i> DOMINO SCORE NULLXD
-            </div>
-            <div class="header-right">
-                <div class="round-counter">
-                    <i class="fas fa-repeat"></i> Ronde: <span id="roundCount">1</span>
+            <div class="brand-container">
+                <div class="brand-icon">
+                    <i class="fas fa-dice-d6"></i>
                 </div>
-                <button class="btn-icon" onclick="toggleSettings()">
-                    <i class="fas fa-cog"></i>
+                <div class="brand-text">
+                    <span class="brand-title">DOMINO SCORE</span>
+                    <span class="brand-subtitle">by NullXD</span>
+                </div>
+            </div>
+            <div class="header-actions">
+                <div class="round-badge">
+                    <div class="badge-content">
+                        <i class="fas fa-crown"></i>
+                        <span>Round <strong id="roundCount">1</strong></span>
+                    </div>
+                </div>
+                <button class="btn-icon modern" onclick="toggleSettings()">
+                    <i class="fas fa-sliders"></i>
                 </button>
             </div>
         </header>
 
-        <!-- Selisih Skor Indicator -->
-        <div class="score-difference" id="scoreDiff">
-            <i class="fas fa-equals"></i> Seri
+        <!-- Score Difference Indicator -->
+        <div class="score-diff-card" id="scoreDiff">
+            <div class="diff-icon">
+                <i class="fas fa-balance-scale"></i>
+            </div>
+            <div class="diff-text">Pertandingan Seimbang</div>
         </div>
 
         <main class="scoreboard" id="scoreboard">
             
-            <div class="player-card p1" id="card-0">
-                <div class="last-winner-badge" id="badge-0">
-                    <i class="fas fa-trophy"></i> Menang Terakhir
-                </div>
-                <button class="quick-reset-btn" onclick="quickResetPlayer(0)" title="Reset skor pemain ini">
-                    <i class="fas fa-redo"></i>
-                </button>
-                <div class="card-info">
-                    <span class="player-label">TIM 1</span>
-                    <div class="win-count"><i class="fas fa-crown"></i> <span id="win-0">0</span></div>
+            <!-- Player 1 Card -->
+            <div class="modern-player-card player-1" id="card-0">
+                <div class="card-glow"></div>
+                <div class="winner-ribbon" id="badge-0">
+                    <i class="fas fa-trophy"></i>
+                    <span>Last Winner!</span>
                 </div>
                 
-                <div class="score-area" onclick="openCalculator(0)">
-                    <span class="score-val" id="score-0">0</span>
+                <button class="quick-reset modern" onclick="quickResetPlayer(0)" title="Reset skor pemain">
+                    <i class="fas fa-rotate-right"></i>
+                </button>
+                
+                <div class="player-header">
+                    <div class="player-info">
+                        <span class="player-number">01</span>
+                        <span class="player-name">TIM ALPHA</span>
+                    </div>
+                    <div class="win-badge">
+                        <i class="fas fa-star"></i>
+                        <span id="win-0">0</span>
+                    </div>
+                </div>
+                
+                <div class="score-display" onclick="openCalculator(0)">
+                    <div class="score-value" id="score-0">0</div>
+                    <div class="score-tap-hint">
+                        <i class="fas fa-hand-pointer"></i>
+                        <span>Tap to add</span>
+                    </div>
                 </div>
 
-                <div class="remaining-text" id="remain-0">Kurang 101 lagi</div>
-
-                <div class="history-container">
-                    <div class="history-list" id="history-0"></div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-0" style="width: 0%"></div>
+                    <div class="progress-text" id="remain-0">0 / 101</div>
                 </div>
 
-                <div class="actions">
-                    <button class="btn-action btn-minus" onclick="updateScore(0, -1)"><i class="fas fa-minus"></i></button>
-                    <button class="btn-action btn-add" onclick="openCalculator(0)"><i class="fas fa-plus"></i></button>
+                <div class="history-section">
+                    <div class="history-header">
+                        <i class="fas fa-history"></i>
+                        <span>History</span>
+                    </div>
+                    <div class="history-chips" id="history-0">
+                        <div class="empty-history">No scores yet</div>
+                    </div>
+                </div>
+
+                <div class="card-actions">
+                    <button class="action-btn minus" onclick="updateScore(0, -1)">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <button class="action-btn plus" onclick="openCalculator(0)">
+                        <i class="fas fa-plus"></i>
+                        <span>Add Score</span>
+                    </button>
                 </div>
             </div>
 
-            <div class="vs-divider">VS</div>
-
-            <div class="player-card p2" id="card-1">
-                <div class="last-winner-badge" id="badge-1">
-                    <i class="fas fa-trophy"></i> Menang Terakhir
+            <!-- VS Divider -->
+            <div class="vs-section">
+                <div class="vs-circle">
+                    <span>VS</span>
                 </div>
-                <button class="quick-reset-btn" onclick="quickResetPlayer(1)" title="Reset skor pemain ini">
-                    <i class="fas fa-redo"></i>
-                </button>
-                <div class="card-info">
-                    <span class="player-label">TIM 2</span>
-                    <div class="win-count"><i class="fas fa-crown"></i> <span id="win-1">0</span></div>
+            </div>
+
+            <!-- Player 2 Card -->
+            <div class="modern-player-card player-2" id="card-1">
+                <div class="card-glow"></div>
+                <div class="winner-ribbon" id="badge-1">
+                    <i class="fas fa-trophy"></i>
+                    <span>Last Winner!</span>
                 </div>
                 
-                <div class="score-area" onclick="openCalculator(1)">
-                    <span class="score-val" id="score-1">0</span>
+                <button class="quick-reset modern" onclick="quickResetPlayer(1)" title="Reset skor pemain">
+                    <i class="fas fa-rotate-right"></i>
+                </button>
+                
+                <div class="player-header">
+                    <div class="player-info">
+                        <span class="player-number">02</span>
+                        <span class="player-name">TIM BETA</span>
+                    </div>
+                    <div class="win-badge">
+                        <i class="fas fa-star"></i>
+                        <span id="win-1">0</span>
+                    </div>
+                </div>
+                
+                <div class="score-display" onclick="openCalculator(1)">
+                    <div class="score-value" id="score-1">0</div>
+                    <div class="score-tap-hint">
+                        <i class="fas fa-hand-pointer"></i>
+                        <span>Tap to add</span>
+                    </div>
                 </div>
 
-                <div class="remaining-text" id="remain-1">Kurang 101 lagi</div>
-
-                <div class="history-container">
-                    <div class="history-list" id="history-1"></div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-1" style="width: 0%"></div>
+                    <div class="progress-text" id="remain-1">0 / 101</div>
                 </div>
 
-                <div class="actions">
-                    <button class="btn-action btn-minus" onclick="updateScore(1, -1)"><i class="fas fa-minus"></i></button>
-                    <button class="btn-action btn-add" onclick="openCalculator(1)"><i class="fas fa-plus"></i></button>
+                <div class="history-section">
+                    <div class="history-header">
+                        <i class="fas fa-history"></i>
+                        <span>History</span>
+                    </div>
+                    <div class="history-chips" id="history-1">
+                        <div class="empty-history">No scores yet</div>
+                    </div>
+                </div>
+
+                <div class="card-actions">
+                    <button class="action-btn minus" onclick="updateScore(1, -1)">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <button class="action-btn plus" onclick="openCalculator(1)">
+                        <i class="fas fa-plus"></i>
+                        <span>Add Score</span>
+                    </button>
                 </div>
             </div>
         </main>
     </div>
 
+    <!-- Modern Calculator Modal -->
     <div class="overlay" id="calculatorOverlay" onclick="closeCalculatorOnOutside(event)">
-        <div class="sheet-modal">
-            <div class="calc-display-area">
-                <span id="calcDisplay">0</span>
-            </div>
-            <div class="calc-grid">
-                <button class="c-btn fn" onclick="clearCalc()">AC</button>
-                <button class="c-btn fn" onclick="backspace()"><i class="fas fa-backspace"></i></button>
-                <button class="c-btn op" onclick="appendOperator('/')">÷</button>
-                <button class="c-btn op" onclick="appendOperator('*')">×</button>
-                
-                <button class="c-btn num" onclick="appendNumber('7')">7</button>
-                <button class="c-btn num" onclick="appendNumber('8')">8</button>
-                <button class="c-btn num" onclick="appendNumber('9')">9</button>
-                <button class="c-btn op" onclick="appendOperator('-')">−</button>
-                
-                <button class="c-btn num" onclick="appendNumber('4')">4</button>
-                <button class="c-btn num" onclick="appendNumber('5')">5</button>
-                <button class="c-btn num" onclick="appendNumber('6')">6</button>
-                <button class="c-btn op" onclick="appendOperator('+')">+</button>
-                
-                <button class="c-btn num" onclick="appendNumber('1')">1</button>
-                <button class="c-btn num" onclick="appendNumber('2')">2</button>
-                <button class="c-btn num" onclick="appendNumber('3')">3</button>
-                <button class="c-btn submit tall" onclick="doneCalculator()">Done</button>
-                
-                <button class="c-btn num wide" onclick="appendNumber('0')">0</button>
-                <button class="c-btn num" onclick="appendNumber('.')">.</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="overlay" id="settingsOverlay" onclick="toggleSettings()">
-        <div class="sheet-modal small">
-            <div class="modal-header">
-                <h3>Pengaturan</h3>
-                <button onclick="toggleSettings()"><i class="fas fa-times"></i></button>
+        <div class="modern-modal calculator-modal">
+            <div class="modal-handle"></div>
+            
+            <div class="calc-header">
+                <span>Calculator</span>
+                <button class="close-btn" onclick="document.getElementById('calculatorOverlay').classList.remove('active')">
+                    <i class="fas fa-times"></i>
+                </button>
             </div>
             
-            <div class="setting-row">
-                <label>Tema</label>
-                <div class="theme-picker">
-                    <div class="t-circle t-blue active" onclick="setTheme('blue')"></div>
-                    <div class="t-circle t-purple" onclick="setTheme('purple')"></div>
-                    <div class="t-circle t-dark" onclick="setTheme('dark')"></div>
-                </div>
+            <div class="calc-display">
+                <span id="calcDisplay">0</span>
             </div>
-
-            <div class="setting-row">
-                <label>Batas Poin Kalah</label>
-                <input type="number" id="limitInput" value="101" onchange="updateLimit(this.value)">
-            </div>
-
-            <!-- Toggle Sound -->
-            <div class="setting-row">
-                <label>
-                    <input type="checkbox" id="soundToggle" onchange="toggleSound()" checked>
-                    Sound Effects
-                </label>
-            </div>
-
-            <!-- Toggle Compact Mode -->
-            <div class="setting-row">
-                <label>
-                    <input type="checkbox" id="compactToggle" onchange="toggleCompactMode()">
-                    Mode Compact
-                </label>
-            </div>
-
-            <div class="reset-actions">
-                <button class="btn-action-settings btn-about" onclick="openAbout()">
-                    <i class="fas fa-info-circle"></i> Tentang Aplikasi
+            
+            <div class="calc-buttons">
+                <button class="calc-btn function" onclick="clearCalc()">AC</button>
+                <button class="calc-btn function" onclick="backspace()"><i class="fas fa-delete-left"></i></button>
+                <button class="calc-btn operator" onclick="appendOperator('/')">÷</button>
+                <button class="calc-btn operator" onclick="appendOperator('*')">×</button>
+                
+                <button class="calc-btn number" onclick="appendNumber('7')">7</button>
+                <button class="calc-btn number" onclick="appendNumber('8')">8</button>
+                <button class="calc-btn number" onclick="appendNumber('9')">9</button>
+                <button class="calc-btn operator" onclick="appendOperator('-')">−</button>
+                
+                <button class="calc-btn number" onclick="appendNumber('4')">4</button>
+                <button class="calc-btn number" onclick="appendNumber('5')">5</button>
+                <button class="calc-btn number" onclick="appendNumber('6')">6</button>
+                <button class="calc-btn operator" onclick="appendOperator('+')">+</button>
+                
+                <button class="calc-btn number" onclick="appendNumber('1')">1</button>
+                <button class="calc-btn number" onclick="appendNumber('2')">2</button>
+                <button class="calc-btn number" onclick="appendNumber('3')">3</button>
+                <button class="calc-btn submit" onclick="doneCalculator()">
+                    <i class="fas fa-check"></i>
                 </button>
-                <button class="btn-action-settings btn-soft-reset" onclick="resetRound()">
-                    <i class="fas fa-sync-alt"></i> Reset Skor (Ronde Baru)
-                </button>
-                <button class="btn-action-settings btn-hard-reset" onclick="hardReset()">
-                    <i class="fas fa-trash-alt"></i> Hapus Semua Data
-                </button>
-            </div>
-
-            <div class="dev-section">
-                <div class="dev-divider"></div>
-                <div class="dev-label">CONNECT WITH DEVELOPER</div>
-                <div class="social-links-settings">
-                    <a href="https://instagram.com/farrelauliairfealdo_" target="_blank" class="soc-btn-mini ig"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="https://tiktok.com/@farrel.aulia.irfealdo" target="_blank" class="soc-btn-mini tk"><i class="fa-brands fa-tiktok"></i></a>
-                    <a href="https://t.me/farrelauliairfealdo" target="_blank" class="soc-btn-mini tg"><i class="fa-brands fa-telegram"></i></a>
-                </div>
-                <div class="dev-name-settings">Farrel Aulia Irfealdo</div>
+                
+                <button class="calc-btn number zero" onclick="appendNumber('0')">0</button>
+                <button class="calc-btn number" onclick="appendNumber('.')">.</button>
             </div>
         </div>
     </div>
 
-    <div class="overlay center-content" id="gameOverModal">
-        <div class="winner-box">
-            <div class="glow-icon"><i class="fas fa-trophy"></i></div>
-            <h2 id="winnerName">Tim 1</h2>
-            <p>MEMENANGKAN PERTANDINGAN</p>
-            <div class="winner-score" id="finalScore">105</div>
-            <button class="btn-primary" onclick="resetRound()">Lanjut Ronde Baru</button>
+    <!-- Settings Modal -->
+    <div class="overlay" id="settingsOverlay" onclick="if(event.target.id==='settingsOverlay') toggleSettings()">
+        <div class="modern-modal settings-modal">
+            <div class="modal-handle"></div>
+            
+            <div class="modal-header">
+                <h3><i class="fas fa-sliders"></i> Settings</h3>
+                <button class="close-btn" onclick="toggleSettings()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="settings-content">
+                <!-- Theme Selection -->
+                <div class="setting-group">
+                    <div class="setting-label">
+                        <i class="fas fa-palette"></i>
+                        <span>Color Theme</span>
+                    </div>
+                    <div class="theme-options">
+                        <button class="theme-option purple active" onclick="setTheme('purple')">
+                            <div class="theme-preview"></div>
+                            <span>Purple</span>
+                        </button>
+                        <button class="theme-option blue" onclick="setTheme('blue')">
+                            <div class="theme-preview"></div>
+                            <span>Blue</span>
+                        </button>
+                        <button class="theme-option green" onclick="setTheme('green')">
+                            <div class="theme-preview"></div>
+                            <span>Green</span>
+                        </button>
+                        <button class="theme-option pink" onclick="setTheme('pink')">
+                            <div class="theme-preview"></div>
+                            <span>Pink</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Limit Setting -->
+                <div class="setting-group">
+                    <div class="setting-label">
+                        <i class="fas fa-flag-checkered"></i>
+                        <span>Score Limit</span>
+                    </div>
+                    <div class="input-group">
+                        <input type="number" id="limitInput" value="101" onchange="updateLimit(this.value)" min="10" max="999">
+                        <span class="input-suffix">points</span>
+                    </div>
+                </div>
+
+                <!-- Sound Toggle -->
+                <div class="setting-group">
+                    <div class="setting-label">
+                        <i class="fas fa-volume-high"></i>
+                        <span>Sound Effects</span>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="soundToggle" onchange="toggleSound()" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+
+                <!-- Compact Mode -->
+                <div class="setting-group">
+                    <div class="setting-label">
+                        <i class="fas fa-compress"></i>
+                        <span>Compact Mode</span>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="compactToggle" onchange="toggleCompactMode()">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="settings-actions">
+                    <button class="settings-btn primary" onclick="resetRound()">
+                        <i class="fas fa-rotate"></i>
+                        <span>New Round</span>
+                    </button>
+                    <button class="settings-btn danger" onclick="hardReset()">
+                        <i class="fas fa-trash"></i>
+                        <span>Reset All</span>
+                    </button>
+                    <button class="settings-btn info" onclick="openAbout()">
+                        <i class="fas fa-info-circle"></i>
+                        <span>About</span>
+                    </button>
+                </div>
+
+                <!-- Social Links -->
+                <div class="social-section">
+                    <p class="social-label">Follow Me:</p>
+                    <div class="social-links">
+                        <a href="https://instagram.com/farrelauliairfealdo_" target="_blank" class="social-link ig">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="https://tiktok.com/@farrel.aulia.irfealdo" target="_blank" class="social-link tk">
+                            <i class="fa-brands fa-tiktok"></i>
+                        </a>
+                        <a href="https://t.me/farrelauliairfealdo" target="_blank" class="social-link tg">
+                            <i class="fa-brands fa-telegram"></i>
+                        </a>
+                    </div>
+                    <p class="developer-credit">Made with ❤️ by Farrel Aulia</p>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="overlay center-content" id="confirmModal">
-        <div class="winner-box" style="padding: 30px; max-width: 320px;">
-            <div class="glow-icon" style="color: #ff6b6b; font-size: 3rem; margin-bottom: 15px;"><i class="fas fa-exclamation-triangle"></i></div>
-            <h3 style="margin-bottom: 10px;">Konfirmasi</h3>
-            <p id="confirmMessage" style="color: #ccc; margin-bottom: 25px; font-size: 0.9rem;">Apakah anda yakin?</p>
-            <div style="display: flex; gap: 10px; justify-content: center;">
-                <button class="btn-action-settings" style="background: rgba(255,255,255,0.1); color: white;" onclick="closeConfirmModal()">Batal</button>
-                <button class="btn-action-settings" style="background: #ef233c; color: white;" onclick="executeConfirm()">Ya, Lanjutkan</button>
+    <!-- Game Over Modal -->
+    <div class="overlay" id="gameOverModal">
+        <div class="modern-modal gameover-modal">
+            <div class="confetti-container" id="confetti"></div>
+            
+            <div class="trophy-icon">
+                <i class="fas fa-trophy"></i>
+            </div>
+            
+            <h2 class="congrats-text">Victory!</h2>
+            <p class="winner-announce">
+                <span id="winnerName">Tim 1</span> Wins!
+            </p>
+            
+            <div class="final-score-display">
+                <span class="final-score-label">Final Score</span>
+                <span class="final-score-value" id="finalScore">0</span>
+            </div>
+            
+            <div class="gameover-actions">
+                <button class="gameover-btn primary" onclick="resetRound(); document.getElementById('gameOverModal').classList.remove('active')">
+                    <i class="fas fa-play"></i>
+                    New Round
+                </button>
+                <button class="gameover-btn secondary" onclick="document.getElementById('gameOverModal').classList.remove('active')">
+                    <i class="fas fa-eye"></i>
+                    View Scores
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirm Modal -->
+    <div class="overlay" id="confirmModal">
+        <div class="modern-modal confirm-modal">
+            <div class="confirm-icon">
+                <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <h3 id="confirmMessage">Are you sure?</h3>
+            <div class="confirm-actions">
+                <button class="confirm-btn cancel" onclick="closeConfirmModal()">Cancel</button>
+                <button class="confirm-btn confirm" onclick="executeConfirm()">Confirm</button>
             </div>
         </div>
     </div>
 
     <!-- Delete Score Modal -->
-    <div class="overlay center-content" id="deleteScoreModal">
-        <div class="winner-box" style="padding: 30px; max-width: 320px;">
-            <div class="glow-icon" style="color: #ff6b6b; font-size: 3rem; margin-bottom: 15px;"><i class="fas fa-trash-alt"></i></div>
-            <h3 style="margin-bottom: 10px;">Hapus Input Skor?</h3>
-            <p id="deleteScoreMessage" style="color: #ccc; margin-bottom: 25px; font-size: 0.9rem;">Hapus skor ini dari TIM 1?</p>
-            <div style="display: flex; gap: 10px; justify-content: center;">
-                <button class="btn-action-settings" style="background: rgba(255,255,255,0.1); color: white;" onclick="closeDeleteScoreModal()">Batal</button>
-                <button class="btn-action-settings" style="background: #ef233c; color: white;" onclick="executeDeleteScore()">
-                    <i class="fas fa-trash"></i> Hapus
-                </button>
+    <div class="delete-modal" id="deleteScoreModal">
+        <div class="delete-modal-content">
+            <div class="delete-icon">
+                <i class="fas fa-trash-alt"></i>
+            </div>
+            <p id="deleteScoreMessage">Delete this score?</p>
+            <div class="delete-actions">
+                <button class="delete-btn cancel" onclick="closeDeleteScoreModal()">Cancel</button>
+                <button class="delete-btn confirm" onclick="executeDeleteScore()">Delete</button>
             </div>
         </div>
     </div>
 
     <!-- About Modal -->
-    <div class="overlay" id="aboutOverlay" onclick="closeAboutOnOutside(event)">
-        <div class="sheet-modal about-modal">
+    <div class="overlay" id="aboutOverlay" onclick="if(event.target.id==='aboutOverlay') closeAbout()">
+        <div class="modern-modal about-modal">
+            <div class="modal-handle"></div>
+            
             <div class="modal-header">
-                <h3><i class="fas fa-info-circle"></i> Tentang Aplikasi</h3>
-                <button onclick="closeAbout()"><i class="fas fa-times"></i></button>
+                <h3><i class="fas fa-info-circle"></i> About</h3>
+                <button class="close-btn" onclick="closeAbout()">
+                    <i class="fas fa-times"></i>
+                </button>
             </div>
             
             <div class="about-content">
-                <!-- App Info -->
-                <div class="about-section">
+                <div class="app-logo-section">
                     <div class="app-logo">
-                        <i class="fas fa-cubes"></i>
+                        <i class="fas fa-dice-d6"></i>
                     </div>
-                    <h2 class="app-title">Domino Score NullXD</h2>
-                    <p class="app-version">Version 1.0.0</p>
-                    <p class="app-desc">Aplikasi pencatat skor domino modern dengan fitur lengkap dan antarmuka yang elegan untuk pengalaman bermain yang lebih menyenangkan.</p>
+                    <h2>Domino Score NullXD</h2>
+                    <p class="version">Version 2.0.0</p>
                 </div>
 
-                <!-- Features -->
                 <div class="about-section">
-                    <h3 class="section-title"><i class="fas fa-star"></i> Fitur Utama</h3>
-                    <ul class="features-list">
-                        <li><i class="fas fa-check-circle"></i> Score tracking untuk 2 pemain</li>
-                        <li><i class="fas fa-check-circle"></i> Calculator terintegrasi</li>
-                        <li><i class="fas fa-check-circle"></i> History tracking per ronde</li>
-                        <li><i class="fas fa-check-circle"></i> Win counter & last winner badge</li>
-                        <li><i class="fas fa-check-circle"></i> 3 pilihan tema warna</li>
-                        <li><i class="fas fa-check-circle"></i> Sound effects & compact mode</li>
-                        <li><i class="fas fa-check-circle"></i> Data tersimpan otomatis (LocalStorage)</li>
-                        <li><i class="fas fa-check-circle"></i> Anti-sleep mode (Wake Lock)</li>
-                        <li><i class="fas fa-check-circle"></i> PWA ready - Install ke home screen</li>
-                        <li><i class="fas fa-check-circle"></i> Animated particles background</li>
+                    <h4><i class="fas fa-star"></i> Features</h4>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i> Modern & Beautiful UI</li>
+                        <li><i class="fas fa-check"></i> Real-time Score Tracking</li>
+                        <li><i class="fas fa-check"></i> Built-in Calculator</li>
+                        <li><i class="fas fa-check"></i> Multiple Theme Options</li>
+                        <li><i class="fas fa-check"></i> Score History</li>
+                        <li><i class="fas fa-check"></i> Auto-save Progress</li>
+                        <li><i class="fas fa-check"></i> PWA Support</li>
                     </ul>
                 </div>
 
-                <!-- How to Use -->
                 <div class="about-section">
-                    <h3 class="section-title"><i class="fas fa-book"></i> Cara Penggunaan</h3>
-                    <div class="guide-list">
-                        <div class="guide-item">
-                            <span class="guide-number">1</span>
-                            <div>
-                                <strong>Menambah Skor</strong>
-                                <p>Klik area skor atau tombol <i class="fas fa-plus"></i> untuk membuka calculator</p>
-                            </div>
-                        </div>
-                        <div class="guide-item">
-                            <span class="guide-number">2</span>
-                            <div>
-                                <strong>Mengurangi Skor</strong>
-                                <p>Klik tombol <i class="fas fa-minus"></i> untuk mengurangi 1 poin</p>
-                            </div>
-                        </div>
-                        <div class="guide-item">
-                            <span class="guide-number">3</span>
-                            <div>
-                                <strong>Reset Pemain</strong>
-                                <p>Klik tombol <i class="fas fa-redo"></i> di pojok card untuk reset skor pemain</p>
-                            </div>
-                        </div>
-                        <div class="guide-item">
-                            <span class="guide-number">4</span>
-                            <div>
-                                <strong>Ganti Tema</strong>
-                                <p>Buka Settings <i class="fas fa-cog"></i> dan pilih tema favorit Anda</p>
-                            </div>
-                        </div>
-                        <div class="guide-item">
-                            <span class="guide-number">5</span>
-                            <div>
-                                <strong>Install App</strong>
-                                <p>Klik tombol "Add to Home Screen" di browser untuk akses cepat</p>
-                            </div>
-                        </div>
-                    </div>
+                    <h4><i class="fas fa-code"></i> Developer</h4>
+                    <p class="dev-info">
+                        Created by <strong>Farrel Aulia Irfealdo</strong><br>
+                        with love from Indonesia 🇮🇩
+                    </p>
                 </div>
 
-                <!-- Changelog -->
-                <div class="about-section">
-                    <h3 class="section-title"><i class="fas fa-history"></i> Changelog</h3>
-                    <div class="changelog">
-                        <div class="changelog-item">
-                            <div class="changelog-version">v1.0.0 <span>29 Jan 2026</span></div>
-                            <ul>
-                                <li>🎉 Initial release</li>
-                                <li>✨ Basic score tracking system</li>
-                                <li>🧮 Integrated calculator</li>
-                                <li>🎨 Multiple theme options</li>
-                                <li>💾 Auto-save functionality</li>
-                                <li>🏆 Win tracking & badges</li>
-                                <li>📱 PWA support</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Credits -->
-                <div class="about-section">
-                    <h3 class="section-title"><i class="fas fa-heart"></i> Credits</h3>
-                    <div class="credits-list">
-                        <p><strong>Fonts:</strong> Outfit & Space Mono (Google Fonts)</p>
-                        <p><strong>Icons:</strong> Font Awesome 6.4.0</p>
-                        <p><strong>Developer:</strong> Farrel Aulia Irfealdo</p>
-                    </div>
-                </div>
-
-                <!-- Support Section -->
-                <div class="about-section support-section">
-                    <h3 class="section-title"><i class="fas fa-coffee"></i> Dukung Developer</h3>
-                    <p class="support-text">Jika aplikasi ini bermanfaat, Anda bisa mendukung pengembangan lebih lanjut melalui:</p>
-                    <a href="https://saweria.co/nullxd" target="_blank" class="btn-donate">
-                        <i class="fas fa-heart"></i> Donasi via Saweria
+                <div class="donate-section">
+                    <a href="https://saweria.co/nullxd" target="_blank" class="donate-btn">
+                        <i class="fas fa-coffee"></i>
+                        Support via Saweria
                     </a>
-                    <div class="social-links-about">
-                        <a href="https://instagram.com/farrelauliairfealdo_" target="_blank" class="social-btn ig" title="Instagram">
-                            <i class="fa-brands fa-instagram"></i>
-                        </a>
-                        <a href="https://tiktok.com/@farrel.aulia.irfealdo" target="_blank" class="social-btn tk" title="TikTok">
-                            <i class="fa-brands fa-tiktok"></i>
-                        </a>
-                        <a href="https://t.me/farrelauliairfealdo" target="_blank" class="social-btn tg" title="Telegram">
-                            <i class="fa-brands fa-telegram"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Copyright -->
-                <div class="about-footer">
-                    <p>© 2026 Farrel Aulia Irfealdo. All rights reserved.</p>
-                    <p class="made-with">Made with <i class="fas fa-heart"></i> in Indonesia</p>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Audio Elements -->
     <audio id="sfx-click" src="sfx-click.wav"></audio>
     <audio id="sfx-win" src="sfx-win.m4a"></audio>
 
-    <script src="js/app.js"></script>
+    <script src="app.js"></script>
 
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', function() {
                 navigator.serviceWorker.register('sw.js').then(function(registration) {
-                    console.log('ServiceWorker success: ', registration.scope);
+                    console.log('ServiceWorker registered');
                 }, function(err) {
-                    console.log('ServiceWorker failed: ', err);
+                    console.log('ServiceWorker failed:', err);
                 });
             });
         }
