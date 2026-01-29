@@ -389,6 +389,33 @@ body {
     font-weight: 600;
     font-family: 'Space Mono', monospace;
     color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    position: relative;
+}
+
+.hist-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--primary);
+    transform: translateY(-2px);
+}
+
+.hist-item:active {
+    transform: translateY(0);
+}
+
+.hist-delete-icon {
+    font-size: 10px;
+    opacity: 0;
+    transition: opacity 0.2s;
+    color: #ef4444;
+}
+
+.hist-item:hover .hist-delete-icon {
+    opacity: 1;
 }
 
 /* ===== ACTIONS ===== */

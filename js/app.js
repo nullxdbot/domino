@@ -243,15 +243,21 @@ function updateScoreDifference() {
 function renderHistory() {
     const list0 = document.getElementById('history-0');
     if(list0) {
-        list0.innerHTML = roundHistory[0].map(num => 
-            `<div class="hist-item">${num > 0 ? '+' + num : num}</div>`
+        list0.innerHTML = roundHistory[0].map((num, index) => 
+            `<div class="hist-item" onclick="confirmDeleteScore(0, ${index})" title="Klik untuk hapus">
+                <span>${num > 0 ? '+' + num : num}</span>
+                <i class="fas fa-times hist-delete-icon"></i>
+            </div>`
         ).join('');
     }
 
     const list1 = document.getElementById('history-1');
     if(list1) {
-        list1.innerHTML = roundHistory[1].map(num => 
-            `<div class="hist-item">${num > 0 ? '+' + num : num}</div>`
+        list1.innerHTML = roundHistory[1].map((num, index) => 
+            `<div class="hist-item" onclick="confirmDeleteScore(1, ${index})" title="Klik untuk hapus">
+                <span>${num > 0 ? '+' + num : num}</span>
+                <i class="fas fa-times hist-delete-icon"></i>
+            </div>`
         ).join('');
     }
 }
@@ -554,6 +560,64 @@ function setTheme(themeName) {
     if (activeBtn) activeBtn.classList.add('active');
     currentTheme = themeName;
     saveGameData();
+}
+
+// ===== DELETE INDIVIDUAL SCORE =====
+let deleteScorePlayer = null;
+let deleteScoreIndex = null;
+
+function confirmDeleteScore(player, index) {
+    playClick();
+    deleteScorePlayer = player;
+    deleteScoreIndex = index;
+    
+    const teamName = player === 0 ? 'TIM 1' : 'TIM 2';
+    const scoreValue = roundHistory[player][index];
+    const scoreText = scoreValue > 0 ? '+' + scoreValue : scoreValue;
+    
+    const modal = document.getElementById('deleteScoreModal');
+    const message = document.getElementById('deleteScoreMessage');
+    
+    if (message) {
+        message.textContent = `Hapus skor ${scoreText} dari ${teamName}?`;
+    }
+    
+    if (modal) {
+        modal.style.display = 'flex';
+    }
+}
+
+function closeDeleteScoreModal() {
+    playClick();
+    const modal = document.getElementById('deleteScoreModal');
+    if (modal) {
+        modal.style.display = 'none';
+    }
+    deleteScorePlayer = null;
+    deleteScoreIndex = null;
+}
+
+function executeDeleteScore() {
+    playClick();
+    
+    if (deleteScorePlayer !== null && deleteScoreIndex !== null) {
+        const scoreValue = roundHistory[deleteScorePlayer][deleteScoreIndex];
+        
+        // Kurangi score
+        scores[deleteScorePlayer] -= scoreValue;
+        
+        // Hapus dari history
+        roundHistory[deleteScorePlayer].splice(deleteScoreIndex, 1);
+        
+        // Update UI
+        saveGameData();
+        render();
+        renderHistory();
+        updateScoreDifference();
+        
+        // Close modal
+        closeDeleteScoreModal();
+    }
 }
 
 // ===== FITUR ANTI-TIDUR (WAKE LOCK) =====
