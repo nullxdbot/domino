@@ -65,21 +65,21 @@
     {
       "src": "img/screenshot1.png",
       "sizes": "540x720",
-      "type": "image/png",
+      "type": "image/jpeg",
       "form_factor": "narrow",
       "label": "Main score tracking screen"
     },
     {
       "src": "img/screenshot2.png",
       "sizes": "540x720",
-      "type": "image/png",
+      "type": "image/jpeg",
       "form_factor": "narrow",
       "label": "Calculator interface"
     },
     {
       "src": "img/screenshot3.png",
       "sizes": "540x720",
-      "type": "image/png",
+      "type": "image/jpeg",
       "form_factor": "narrow",
       "label": "Settings panel"
     }
