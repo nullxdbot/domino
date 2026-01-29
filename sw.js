@@ -5,7 +5,9 @@ const urlsToCache = [
   '/css/style.css',
   '/js/app.js',
   '/manifest.json',
-  'https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap',
+  '/img/icon-192.png',
+  '/img/icon-512.png',
+  'https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap',
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css'
 ];
 
