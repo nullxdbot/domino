@@ -183,10 +183,12 @@ function updateScoreDifference() {
     if (diff === 0) {
         diffEl.querySelector('.diff-text').textContent = 'Pertandingan Seimbang';
         diffEl.className = 'score-diff-card neutral';
-    } else if (scores[0] < scores[1]) {
+    } else if (scores[0] > scores[1]) {
+        // FIXED: Tim Alpha (player 0) unggul jika scores[0] > scores[1]
         diffEl.querySelector('.diff-text').textContent = `Tim Alpha Unggul +${diff}`;
         diffEl.className = 'score-diff-card leading-p1';
     } else {
+        // FIXED: Tim Beta (player 1) unggul jika scores[1] > scores[0]
         diffEl.querySelector('.diff-text').textContent = `Tim Beta Unggul +${diff}`;
         diffEl.className = 'score-diff-card leading-p2';
     }

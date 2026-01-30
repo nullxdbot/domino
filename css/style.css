@@ -45,9 +45,9 @@ body {
 .app-container {
     max-width: 600px;
     margin: 0 auto;
-    padding: 20px;
-    padding-top: max(20px, env(safe-area-inset-top));
-    padding-bottom: max(20px, env(safe-area-inset-bottom));
+    padding: 12px;
+    padding-top: max(12px, env(safe-area-inset-top));
+    padding-bottom: max(12px, env(safe-area-inset-bottom));
     min-height: 100vh;
     position: relative;
     z-index: 1;
@@ -59,8 +59,8 @@ body {
     backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: var(--border-radius);
-    padding: 20px 24px;
-    margin-bottom: 24px;
+    padding: 14px 20px;
+    margin-bottom: 12px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -188,11 +188,11 @@ body {
     backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: var(--border-radius-sm);
-    padding: 16px 20px;
-    margin-bottom: 24px;
+    padding: 10px 16px;
+    margin-bottom: 12px;
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     transition: var(--transition);
 }
 
@@ -238,7 +238,7 @@ body {
 .scoreboard {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 12px;
 }
 
 .modern-player-card {
@@ -246,7 +246,7 @@ body {
     backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: var(--border-radius);
-    padding: 24px;
+    padding: 16px;
     position: relative;
     overflow: hidden;
 }
@@ -317,7 +317,7 @@ body {
 
 /* Player Header */
 .player-header {
-    margin-bottom: 20px;
+    margin-bottom: 12px;
 }
 
 .player-info {
@@ -377,11 +377,11 @@ body {
 .score-display {
     background: rgba(255, 255, 255, 0.02);
     border-radius: var(--border-radius-sm);
-    padding: 32px 20px;
+    padding: 20px 16px;
     text-align: center;
     cursor: pointer;
     transition: var(--transition);
-    margin-bottom: 16px;
+    margin-bottom: 10px;
     position: relative;
     overflow: hidden;
 }
@@ -412,7 +412,7 @@ body {
 }
 
 .score-value {
-    font-size: 72px;
+    font-size: 56px;
     font-weight: 900;
     font-family: 'JetBrains Mono', monospace;
     line-height: 1;
@@ -462,8 +462,8 @@ body {
     align-items: center;
     justify-content: center;
     gap: 8px;
-    margin-top: 12px;
-    font-size: 12px;
+    margin-top: 8px;
+    font-size: 11px;
     font-weight: 500;
     color: var(--text-muted);
     opacity: 0.6;
@@ -477,10 +477,10 @@ body {
 .progress-bar {
     background: rgba(255, 255, 255, 0.05);
     border-radius: 12px;
-    height: 40px;
+    height: 32px;
     position: relative;
     overflow: hidden;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
 }
 
 .progress-fill {
@@ -515,10 +515,10 @@ body {
 /* Remaining Text */
 .remaining-text {
     text-align: center;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 600;
     color: var(--text-secondary);
-    margin-bottom: 16px;
+    margin-bottom: 10px;
     letter-spacing: 0.5px;
 }
 
@@ -526,18 +526,18 @@ body {
 .history-section {
     background: rgba(255, 255, 255, 0.02);
     border-radius: var(--border-radius-sm);
-    padding: 16px;
-    margin-bottom: 20px;
+    padding: 10px;
+    margin-bottom: 12px;
 }
 
 .history-header {
     display: flex;
     align-items: center;
     gap: 8px;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 600;
     color: var(--text-secondary);
-    margin-bottom: 12px;
+    margin-bottom: 8px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
@@ -545,8 +545,8 @@ body {
 .history-chips {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
-    max-height: 80px;
+    gap: 6px;
+    max-height: 60px;
     overflow-y: auto;
 }
 
@@ -609,12 +609,12 @@ body {
 /* Card Actions */
 .card-actions {
     display: flex;
-    gap: 12px;
+    gap: 10px;
 }
 
 .action-btn {
     flex: 1;
-    height: 56px;
+    height: 48px;
     border: none;
     border-radius: var(--border-radius-sm);
     cursor: pointer;
@@ -659,19 +659,19 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 12px 0;
+    padding: 8px 0;
     position: relative;
 }
 
 .vs-circle {
-    width: 64px;
-    height: 64px;
+    width: 52px;
+    height: 52px;
     background: linear-gradient(135deg, var(--primary), var(--secondary));
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 900;
     letter-spacing: 2px;
     box-shadow: 0 8px 24px rgba(139, 92, 246, 0.4);
