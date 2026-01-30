@@ -317,11 +317,7 @@ body {
 
 /* Player Header */
 .player-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     margin-bottom: 20px;
-    padding-right: 44px;
 }
 
 .player-info {
