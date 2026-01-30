@@ -10,76 +10,6 @@
     
     <link rel="stylesheet" href="css/style.css">
     
-    <!-- Critical CSS Fallback - jika style.css gagal load -->
-    <style>
-        /* Base styling sebagai fallback */
-        body { 
-            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: #0f0f1e;
-            color: #ffffff;
-            margin: 0;
-            padding: 0;
-        }
-        .app-container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        /* Loading Indicator */
-        #cssLoadCheck {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #0f0f1e;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            transition: opacity 0.3s ease;
-        }
-        #cssLoadCheck.loaded {
-            opacity: 0;
-            pointer-events: none;
-            display: none;
-        }
-        .spinner {
-            width: 50px;
-            height: 50px;
-            border: 5px solid rgba(255,255,255,0.1);
-            border-top-color: #8b5cf6;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        .load-text {
-            color: #94a3b8;
-            margin-top: 20px;
-            font-size: 14px;
-        }
-        .error-msg {
-            display: none;
-            color: #ef4444;
-            margin-top: 20px;
-            text-align: center;
-            padding: 20px;
-            background: rgba(239, 68, 68, 0.1);
-            border-radius: 12px;
-            max-width: 400px;
-        }
-        .error-msg a {
-            color: #8b5cf6;
-            text-decoration: none;
-        }
-        .show-error {
-            display: block !important;
-        }
-    </style>
-    
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#8b5cf6">
     
@@ -87,24 +17,6 @@
     <link rel="apple-touch-icon" href="img/icon-192.png">
 </head>
 <body>
-
-    <!-- Loading Indicator -->
-    <div id="cssLoadCheck">
-        <div class="spinner"></div>
-        <p class="load-text">Loading...</p>
-        <div class="error-msg" id="errorMsg">
-            ⚠️ CSS tidak ter-load!<br>
-            <small>Coba refresh (Ctrl+Shift+R) atau <a href="javascript:location.reload(true)">klik di sini</a></small>
-        </div>
-    </div>
-
-    <!-- Animated Background -->
-    <div class="animated-bg">
-        <div class="gradient-orb orb-1"></div>
-        <div class="gradient-orb orb-2"></div>
-        <div class="gradient-orb orb-3"></div>
-    </div>
-    <canvas id="particles-canvas"></canvas>
 
     <div class="app-container">
         
@@ -126,7 +38,7 @@
                         <span>Round <strong id="roundCount">1</strong></span>
                     </div>
                 </div>
-                <button class="btn-icon modern" onclick="toggleSettings()">
+                <button class="btn-icon modern" onclick="toggleSettings(); console.log('Button clicked!');" style="position: relative; z-index: 10000; cursor: pointer;">
                     <i class="fas fa-sliders"></i>
                 </button>
             </div>
@@ -144,7 +56,6 @@
             
             <!-- Player 1 Card -->
             <div class="modern-player-card player-1" id="card-0">
-                <div class="card-glow"></div>
                 <div class="winner-ribbon" id="badge-0">
                     <i class="fas fa-trophy"></i>
                     <span>Last Winner!</span>
@@ -208,7 +119,6 @@
 
             <!-- Player 2 Card -->
             <div class="modern-player-card player-2" id="card-1">
-                <div class="card-glow"></div>
                 <div class="winner-ribbon" id="badge-1">
                     <i class="fas fa-trophy"></i>
                     <span>Last Winner!</span>
@@ -540,43 +450,6 @@
     <script src="js/app.js"></script>
 
     <script>
-        // Check if CSS loaded properly
-        window.addEventListener('load', function() {
-            setTimeout(function() {
-                const loader = document.getElementById('cssLoadCheck');
-                const testEl = document.querySelector('.app-header');
-                
-                if (!testEl) {
-                    // Element tidak ada, CSS pasti gagal
-                    document.getElementById('errorMsg').classList.add('show-error');
-                    console.error('CSS failed to load. Check if style.css exists and is accessible.');
-                    // Hapus loader setelah 3 detik meskipun error
-                    setTimeout(() => {
-                        if (loader) loader.remove();
-                    }, 3000);
-                    return;
-                }
-                
-                const computed = window.getComputedStyle(testEl);
-                
-                // Check if CSS actually applied
-                if (computed.backdropFilter !== 'none' && computed.backdropFilter !== '') {
-                    // CSS loaded successfully
-                    loader.classList.add('loaded');
-                    setTimeout(() => loader.remove(), 300);
-                } else {
-                    // CSS failed to load - show error but still remove loader
-                    document.getElementById('errorMsg').classList.add('show-error');
-                    console.error('CSS failed to load. Check if style.css exists and is accessible.');
-                    // Hapus loader setelah 2 detik agar user bisa interaksi
-                    setTimeout(() => {
-                        loader.classList.add('loaded');
-                        setTimeout(() => loader.remove(), 300);
-                    }, 2000);
-                }
-            }, 100);
-        });
-        
         // Service Worker
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', function() {
