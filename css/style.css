@@ -480,16 +480,15 @@ body {
     height: 40px;
     position: relative;
     overflow: hidden;
-    margin-bottom: 20px;
+    margin-bottom: 12px;
 }
 
 .progress-fill {
     height: 100%;
     background: linear-gradient(90deg, var(--primary), var(--secondary));
-    border-radius: 12px;
+    border-radius: 0;
     transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
-    overflow: hidden;
 }
 
 .player-1 .progress-fill {
