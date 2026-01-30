@@ -20,6 +20,25 @@
 
     <div class="app-container">
         
+        <!-- Update Announcement Banner -->
+        <div class="update-banner" id="updateBanner">
+            <div class="update-content">
+                <div class="update-icon">
+                    <i class="fas fa-sparkles"></i>
+                </div>
+                <div class="update-text">
+                    <strong>v2.0.1 Update!</strong>
+                    <span>Bug fixes & no-scroll layout</span>
+                </div>
+                <button class="update-details-btn" onclick="showChangelogFromBanner()">
+                    Details
+                </button>
+            </div>
+            <button class="update-close" onclick="dismissUpdateBanner()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
         <!-- Modern Header with Glass Effect -->
         <header class="app-header">
             <div class="brand-container">
@@ -191,41 +210,44 @@
                 </button>
             </div>
             
-            <div class="calc-display">
-                <span id="calcDisplay">0</span>
-            </div>
+            <div class="calc-display" id="calcDisplay">0</div>
             
             <div class="calc-buttons">
-                <button class="calc-btn function" onclick="clearCalc()">AC</button>
-                <button class="calc-btn function" onclick="backspace()"><i class="fas fa-delete-left"></i></button>
-                <button class="calc-btn operator" onclick="appendOperator('/')">÷</button>
+                <button class="calc-btn operator" onclick="clearCalc()">C</button>
+                <button class="calc-btn operator" onclick="backspace()">
+                    <i class="fas fa-delete-left"></i>
+                </button>
+                <button class="calc-btn operator" onclick="appendOperator('/')">/</button>
                 <button class="calc-btn operator" onclick="appendOperator('*')">×</button>
                 
-                <button class="calc-btn number" onclick="appendNumber('7')">7</button>
-                <button class="calc-btn number" onclick="appendNumber('8')">8</button>
-                <button class="calc-btn number" onclick="appendNumber('9')">9</button>
-                <button class="calc-btn operator" onclick="appendOperator('-')">−</button>
+                <button class="calc-btn" onclick="appendNumber('7')">7</button>
+                <button class="calc-btn" onclick="appendNumber('8')">8</button>
+                <button class="calc-btn" onclick="appendNumber('9')">9</button>
+                <button class="calc-btn operator" onclick="appendOperator('-')">-</button>
                 
-                <button class="calc-btn number" onclick="appendNumber('4')">4</button>
-                <button class="calc-btn number" onclick="appendNumber('5')">5</button>
-                <button class="calc-btn number" onclick="appendNumber('6')">6</button>
+                <button class="calc-btn" onclick="appendNumber('4')">4</button>
+                <button class="calc-btn" onclick="appendNumber('5')">5</button>
+                <button class="calc-btn" onclick="appendNumber('6')">6</button>
                 <button class="calc-btn operator" onclick="appendOperator('+')">+</button>
                 
-                <button class="calc-btn number" onclick="appendNumber('1')">1</button>
-                <button class="calc-btn number" onclick="appendNumber('2')">2</button>
-                <button class="calc-btn number" onclick="appendNumber('3')">3</button>
-                <button class="calc-btn submit" onclick="doneCalculator()">
-                    <i class="fas fa-check"></i>
-                </button>
+                <button class="calc-btn" onclick="appendNumber('1')">1</button>
+                <button class="calc-btn" onclick="appendNumber('2')">2</button>
+                <button class="calc-btn" onclick="appendNumber('3')">3</button>
+                <button class="calc-btn equals" onclick="calculate()" style="grid-row: span 2">=</button>
                 
-                <button class="calc-btn number zero" onclick="appendNumber('0')">0</button>
-                <button class="calc-btn number" onclick="appendNumber('.')">.</button>
+                <button class="calc-btn zero" onclick="appendNumber('0')">0</button>
+                <button class="calc-btn" onclick="appendNumber('.')">.</button>
             </div>
+            
+            <button class="calc-done" onclick="doneCalculator()">
+                <i class="fas fa-check"></i>
+                Done
+            </button>
         </div>
     </div>
 
     <!-- Settings Modal -->
-    <div class="overlay" id="settingsOverlay" onclick="if(event.target.id==='settingsOverlay') toggleSettings()">
+    <div class="overlay" id="settingsOverlay" onclick="if(event.target.id === 'settingsOverlay') toggleSettings()">
         <div class="modern-modal settings-modal">
             <div class="modal-handle"></div>
             
@@ -237,41 +259,23 @@
             </div>
             
             <div class="settings-content">
-                <!-- Theme Selection -->
-                <div class="setting-group">
-                    <div class="setting-label">
-                        <i class="fas fa-palette"></i>
-                        <span>Color Theme</span>
-                    </div>
-                    <div class="theme-options">
-                        <button class="theme-option purple active" onclick="setTheme('purple')">
-                            <div class="theme-preview"></div>
-                            <span>Purple</span>
-                        </button>
-                        <button class="theme-option blue" onclick="setTheme('blue')">
-                            <div class="theme-preview"></div>
-                            <span>Blue</span>
-                        </button>
-                        <button class="theme-option green" onclick="setTheme('green')">
-                            <div class="theme-preview"></div>
-                            <span>Green</span>
-                        </button>
-                        <button class="theme-option pink" onclick="setTheme('pink')">
-                            <div class="theme-preview"></div>
-                            <span>Pink</span>
-                        </button>
-                    </div>
+                <!-- Score Limit -->
+                <div class="setting-item">
+                    <label>
+                        <i class="fas fa-flag-checkered"></i>
+                        Score Limit
+                    </label>
+                    <input type="number" id="limitInput" value="101" min="10" onchange="updateLimit(this.value)" class="limit-input">
                 </div>
 
-                <!-- Limit Setting -->
-                <div class="setting-group">
-                    <div class="setting-label">
-                        <i class="fas fa-flag-checkered"></i>
-                        <span>Score Limit</span>
-                    </div>
-                    <div class="input-group">
-                        <input type="number" id="limitInput" value="101" onchange="updateLimit(this.value)" min="10" max="999">
-                        <span class="input-suffix">points</span>
+                <!-- Theme Selector -->
+                <div class="setting-item">
+                    <label><i class="fas fa-palette"></i> Theme</label>
+                    <div class="theme-selector">
+                        <button class="theme-option purple active" onclick="setTheme('purple')"></button>
+                        <button class="theme-option blue" onclick="setTheme('blue')"></button>
+                        <button class="theme-option green" onclick="setTheme('green')"></button>
+                        <button class="theme-option pink" onclick="setTheme('pink')"></button>
                     </div>
                 </div>
 
@@ -413,7 +417,57 @@
                         <i class="fas fa-dice-d6"></i>
                     </div>
                     <h2>Domino Score NullXD</h2>
-                    <p class="version">Version 2.0.0</p>
+                    <p class="version">Version 2.0.1</p>
+                </div>
+
+                <!-- Changelog Section -->
+                <div class="about-section changelog-section">
+                    <h4><i class="fas fa-sparkles"></i> What's New</h4>
+                    <div class="changelog-container">
+                        
+                        <!-- Version 2.0.1 -->
+                        <div class="changelog-item">
+                            <div class="changelog-header">
+                                <span class="changelog-version">v2.0.1</span>
+                                <span class="changelog-date">30 Jan 2026</span>
+                            </div>
+                            <ul class="changelog-list">
+                                <li><i class="fas fa-bug-slash"></i> Fixed score difference indicator bug</li>
+                                <li><i class="fas fa-arrows-up-down"></i> Removed vertical scrolling</li>
+                                <li><i class="fas fa-mobile-screen"></i> Improved mobile layout</li>
+                                <li><i class="fas fa-palette"></i> Better color contrast</li>
+                            </ul>
+                        </div>
+
+                        <!-- Version 2.0.0 -->
+                        <div class="changelog-item">
+                            <div class="changelog-header">
+                                <span class="changelog-version">v2.0.0</span>
+                                <span class="changelog-date">15 Jan 2026</span>
+                            </div>
+                            <ul class="changelog-list">
+                                <li><i class="fas fa-sparkles"></i> Complete UI redesign</li>
+                                <li><i class="fas fa-calculator"></i> Built-in calculator</li>
+                                <li><i class="fas fa-crown"></i> Winner tracking system</li>
+                                <li><i class="fas fa-history"></i> Score history chips</li>
+                                <li><i class="fas fa-palette"></i> Multiple theme options</li>
+                            </ul>
+                        </div>
+
+                        <!-- Version 1.0.0 -->
+                        <div class="changelog-item">
+                            <div class="changelog-header">
+                                <span class="changelog-version">v1.0.0</span>
+                                <span class="changelog-date">1 Dec 2025</span>
+                            </div>
+                            <ul class="changelog-list">
+                                <li><i class="fas fa-rocket"></i> Initial release</li>
+                                <li><i class="fas fa-gamepad"></i> Basic score tracking</li>
+                                <li><i class="fas fa-save"></i> Auto-save feature</li>
+                            </ul>
+                        </div>
+                        
+                    </div>
                 </div>
 
                 <div class="about-section">
