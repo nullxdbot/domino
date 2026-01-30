@@ -102,11 +102,11 @@ function render() {
     const el1 = document.getElementById('remain-1');
 
     if(el0) {
-        el0.innerText = `${scores[0]} / ${limit}`;
+        el0.innerText = sisa0 > 0 ? `Kurang ${sisa0} lagi` : "MENANG!";
     }
 
     if(el1) {
-        el1.innerText = `${scores[1]} / ${limit}`;
+        el1.innerText = sisa1 > 0 ? `Kurang ${sisa1} lagi` : "MENANG!";
     }
 
     // Update progress bars

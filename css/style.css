@@ -513,6 +513,16 @@ body {
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
+/* Remaining Text */
+.remaining-text {
+    text-align: center;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+    letter-spacing: 0.5px;
+}
+
 /* History Section */
 .history-section {
     background: rgba(255, 255, 255, 0.02);
