@@ -8,7 +8,76 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Critical CSS Fallback - jika style.css gagal load -->
+    <style>
+        /* Base styling sebagai fallback */
+        body { 
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0f0f1e;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+        }
+        .app-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        /* Loading Indicator */
+        #cssLoadCheck {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0f0f1e;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.3s ease;
+        }
+        #cssLoadCheck.loaded {
+            opacity: 0;
+            pointer-events: none;
+        }
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255,255,255,0.1);
+            border-top-color: #8b5cf6;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .load-text {
+            color: #94a3b8;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+        .error-msg {
+            display: none;
+            color: #ef4444;
+            margin-top: 20px;
+            text-align: center;
+            padding: 20px;
+            background: rgba(239, 68, 68, 0.1);
+            border-radius: 12px;
+            max-width: 400px;
+        }
+        .error-msg a {
+            color: #8b5cf6;
+            text-decoration: none;
+        }
+        .show-error {
+            display: block !important;
+        }
+    </style>
     
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#8b5cf6">
@@ -17,6 +86,16 @@
     <link rel="apple-touch-icon" href="img/icon-192.png">
 </head>
 <body>
+
+    <!-- Loading Indicator -->
+    <div id="cssLoadCheck">
+        <div class="spinner"></div>
+        <p class="load-text">Loading...</p>
+        <div class="error-msg" id="errorMsg">
+            ⚠️ CSS tidak ter-load!<br>
+            <small>Coba refresh (Ctrl+Shift+R) atau <a href="javascript:location.reload(true)">klik di sini</a></small>
+        </div>
+    </div>
 
     <!-- Animated Background -->
     <div class="animated-bg">
@@ -457,9 +536,30 @@
     <audio id="sfx-click" src="sfx-click.wav"></audio>
     <audio id="sfx-win" src="sfx-win.m4a"></audio>
 
-    <script src="app.js"></script>
+    <script src="js/app.js"></script>
 
     <script>
+        // Check if CSS loaded properly
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                const testEl = document.querySelector('.app-header');
+                const computed = window.getComputedStyle(testEl);
+                const loader = document.getElementById('cssLoadCheck');
+                
+                // Check if CSS actually applied (backdrop-filter is dari CSS kita)
+                if (computed.backdropFilter !== 'none' && computed.backdropFilter !== '') {
+                    // CSS loaded successfully
+                    loader.classList.add('loaded');
+                    setTimeout(() => loader.remove(), 300);
+                } else {
+                    // CSS failed to load - show error
+                    document.getElementById('errorMsg').classList.add('show-error');
+                    console.error('CSS failed to load. Check if style.css exists and is accessible.');
+                }
+            }, 100);
+        });
+        
+        // Service Worker
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', function() {
                 navigator.serviceWorker.register('sw.js').then(function(registration) {
