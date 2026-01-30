@@ -11,18 +11,6 @@ Aplikasi web modern untuk pencatat skor permainan domino dengan antarmuka elegan
 
 ---
 
-## 📸 Screenshots
-
-<div align="center">
-  <img src="https://via.placeholder.com/300x600/8b5cf6/ffffff?text=Main+Screen" alt="Main Screen" width="250"/>
-  <img src="https://via.placeholder.com/300x600/3b82f6/ffffff?text=Calculator" alt="Calculator" width="250"/>
-  <img src="https://via.placeholder.com/300x600/10b981/ffffff?text=Settings" alt="Settings" width="250"/>
-</div>
-
-> **Note:** Replace placeholder images dengan screenshot aplikasi sebenarnya
-
----
-
 ## 🚀 Quick Start
 
 ```bash
