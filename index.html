@@ -43,6 +43,7 @@
         #cssLoadCheck.loaded {
             opacity: 0;
             pointer-events: none;
+            display: none;
         }
         .spinner {
             width: 50px;
@@ -542,19 +543,36 @@
         // Check if CSS loaded properly
         window.addEventListener('load', function() {
             setTimeout(function() {
-                const testEl = document.querySelector('.app-header');
-                const computed = window.getComputedStyle(testEl);
                 const loader = document.getElementById('cssLoadCheck');
+                const testEl = document.querySelector('.app-header');
                 
-                // Check if CSS actually applied (backdrop-filter is dari CSS kita)
+                if (!testEl) {
+                    // Element tidak ada, CSS pasti gagal
+                    document.getElementById('errorMsg').classList.add('show-error');
+                    console.error('CSS failed to load. Check if style.css exists and is accessible.');
+                    // Hapus loader setelah 3 detik meskipun error
+                    setTimeout(() => {
+                        if (loader) loader.remove();
+                    }, 3000);
+                    return;
+                }
+                
+                const computed = window.getComputedStyle(testEl);
+                
+                // Check if CSS actually applied
                 if (computed.backdropFilter !== 'none' && computed.backdropFilter !== '') {
                     // CSS loaded successfully
                     loader.classList.add('loaded');
                     setTimeout(() => loader.remove(), 300);
                 } else {
-                    // CSS failed to load - show error
+                    // CSS failed to load - show error but still remove loader
                     document.getElementById('errorMsg').classList.add('show-error');
                     console.error('CSS failed to load. Check if style.css exists and is accessible.');
+                    // Hapus loader setelah 2 detik agar user bisa interaksi
+                    setTimeout(() => {
+                        loader.classList.add('loaded');
+                        setTimeout(() => loader.remove(), 300);
+                    }, 2000);
                 }
             }, 100);
         });

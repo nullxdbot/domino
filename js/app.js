@@ -524,9 +524,15 @@ function clearCalc() {
 }
 
 // ===== SETTINGS & THEME =====
-function toggleSettings() { 
+function toggleSettings() {
+    console.log('toggleSettings called'); // Debug log
     const el = document.getElementById('settingsOverlay');
-    if(el) el.classList.toggle('active');
+    if(el) {
+        el.classList.toggle('active');
+        console.log('Settings overlay toggled:', el.classList.contains('active'));
+    } else {
+        console.error('settingsOverlay element not found!');
+    }
 }
 
 function openAbout() {
