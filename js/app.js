@@ -121,9 +121,15 @@ function render() {
 
 function updateProgressBar(player, score) {
     const progressEl = document.getElementById(`progress-${player}`);
+    const progressTextEl = document.getElementById(`progress-text-${player}`);
+    
     if (progressEl) {
         const percentage = Math.min((score / limit) * 100, 100);
         progressEl.style.width = percentage + '%';
+    }
+    
+    if (progressTextEl) {
+        progressTextEl.innerText = `${score} / ${limit}`;
     }
 }
 
