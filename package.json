@@ -1,0 +1,37 @@
+{
+  "name": "domino-score-nullxd",
+  "version": "2.0.1",
+  "description": "Modern, beautiful, and feature-rich score keeper untuk permainan domino",
+  "main": "index.html",
+  "scripts": {
+    "start": "python -m http.server 8000",
+    "serve": "npx http-server -p 8000",
+    "dev": "npx http-server -p 8000 -o"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nullxdbot/domino.git"
+  },
+  "keywords": [
+    "domino",
+    "score-keeper",
+    "pwa",
+    "game",
+    "scorecard",
+    "progressive-web-app",
+    "offline-first",
+    "mobile-app"
+  ],
+  "author": {
+    "name": "Farrel Aulia Irfealdo",
+    "email": "farelauliairfealdo99999@gmail.com",
+    "url": "https://github.com/nullxdbot"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nullxdbot/domino/issues"
+  },
+  "homepage": "https://nullxdbot.github.io/domino/",
+  "devDependencies": {},
+  "dependencies": {}
+}

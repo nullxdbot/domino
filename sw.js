@@ -1,13 +1,17 @@
-const CACHE_NAME = 'domino-score-v1';
+const CACHE_NAME = 'domino-score-v2.0.1';
+const BASE_PATH = '/domino';
+
 const urlsToCache = [
-  '/',
-  '/index.html',
-  '/css/style.css',
-  '/js/app.js',
-  '/manifest.json',
-  '/img/icon-192.png',
-  '/img/icon-512.png',
-  'https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap',
+  `${BASE_PATH}/`,
+  `${BASE_PATH}/index.html`,
+  `${BASE_PATH}/css/style.css`,
+  `${BASE_PATH}/js/app.js`,
+  `${BASE_PATH}/manifest.json`,
+  `${BASE_PATH}/img/icon-192.png`,
+  `${BASE_PATH}/img/icon-512.png`,
+  `${BASE_PATH}/sfx/sfx-click.wav`,
+  `${BASE_PATH}/sfx/sfx-win.m4a`,
+  'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap',
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css'
 ];
 
@@ -17,9 +21,12 @@ self.addEventListener('install', (event) => {
     caches.open(CACHE_NAME)
       .then((cache) => {
         console.log('Opened cache');
-        return cache.addAll(urlsToCache);
+        return cache.addAll(urlsToCache).catch((error) => {
+          console.log('Cache addAll error:', error);
+        });
       })
   );
+  self.skipWaiting();
 });
 
 // Fetch from cache
@@ -30,7 +37,21 @@ self.addEventListener('fetch', (event) => {
         if (response) {
           return response;
         }
-        return fetch(event.request);
+        return fetch(event.request).then((response) => {
+          // Don't cache if not a success response
+          if (!response || response.status !== 200 || response.type !== 'basic') {
+            return response;
+          }
+          
+          // Clone the response
+          const responseToCache = response.clone();
+          
+          caches.open(CACHE_NAME).then((cache) => {
+            cache.put(event.request, responseToCache);
+          });
+          
+          return response;
+        });
       }
     )
   );
@@ -44,10 +65,12 @@ self.addEventListener('activate', (event) => {
       return Promise.all(
         cacheNames.map((cacheName) => {
           if (cacheWhitelist.indexOf(cacheName) === -1) {
+            console.log('Deleting old cache:', cacheName);
             return caches.delete(cacheName);
           }
         })
       );
     })
   );
+  self.clients.claim();
 });

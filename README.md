@@ -1,365 +1,64 @@
 # 🎲 Domino Score NullXD
 
-Aplikasi web modern untuk pencatat skor permainan domino dengan antarmuka elegan dan fitur lengkap.
+[![Version](https://img.shields.io/badge/version-2.0.1-blue.svg)](https://github.com/nullxdbot/domino)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![PWA](https://img.shields.io/badge/PWA-enabled-purple.svg)](https://web.dev/progressive-web-apps/)
 
-[![Version](https://img.shields.io/badge/version-2.0.1-blue)](https://github.com/nullxdbot/domino)
-[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
-[![PWA](https://img.shields.io/badge/PWA-ready-orange)](https://github.com/nullxdbot/domino)
-[![Status](https://img.shields.io/badge/status-optimized-success)](https://github.com/nullxdbot/domino)
+> Modern, beautiful, and feature-rich score keeper untuk permainan domino 🃏
 
-**[🎮 Live Demo](https://nullxdbot.github.io/domino/)** | **[📖 Documentation](#-fitur-utama)** | **[🐛 Report Bug](https://github.com/nullxdbot/domino/issues)**
+[Live Demo](https://nullxdbot.github.io/domino/) | [Report Bug](https://github.com/nullxdbot/domino/issues) | [Request Feature](https://github.com/nullxdbot/domino/issues)
+
+---
+
+## 📸 Screenshots
+
+<div align="center">
+  <img src="img/screenshot1.png" width="250" alt="Main Screen"/>
+  <img src="img/screenshot2.png" width="250" alt="Calculator"/>
+  <img src="img/screenshot3.png" width="250" alt="Settings"/>
+</div>
+
+---
+
+## ✨ Features
+
+### 🎯 Core Features
+- ✅ **Real-time Score Tracking** - Update skor secara langsung
+- ✅ **Built-in Calculator** - Kalkulator terintegrasi untuk perhitungan cepat
+- ✅ **Score History** - Track semua perubahan skor
+- ✅ **Win Counter** - Hitung jumlah kemenangan tiap tim
+- ✅ **Progress Bar** - Visual indicator progress menuju target
+- ✅ **Score Difference Indicator** - Lihat selisih skor real-time
+
+### 🎨 Design & UX
+- ✅ **Modern UI/UX** - Interface yang clean dan intuitive
+- ✅ **4 Color Themes** - Purple, Blue, Green, Pink
+- ✅ **Dark Mode** - Eye-friendly untuk main malam
+- ✅ **Glassmorphism Effect** - Modern visual aesthetics
+- ✅ **Smooth Animations** - Transisi yang mulus
+- ✅ **Responsive Design** - Support semua ukuran layar
+- ✅ **No-Scroll Layout** - Both cards fit perfectly on screen
+
+### 🔧 Advanced Features
+- ✅ **PWA Support** - Install sebagai aplikasi
+- ✅ **Offline Mode** - Bekerja tanpa internet
+- ✅ **Auto-save** - Data tersimpan otomatis
+- ✅ **Sound Effects** - Audio feedback (dapat di-toggle)
+- ✅ **Compact Mode** - Mode tampilan ringkas
+- ✅ **Customizable Score Limit** - Atur target skor sesuka hati
 
 ---
 
 ## 🚀 Quick Start
 
-```bash
-# Clone repository
-git clone https://github.com/nullxdbot/domino.git
+### Method 1: GitHub Pages (Recommended)
 
-# Buka di browser
-open index.html
-```
+**Live Demo:** [https://nullxdbot.github.io/domino/](https://nullxdbot.github.io/domino/)
 
-**Atau langsung coba:** [nullxdbot.github.io/domino](https://nullxdbot.github.io/domino/)
+Simply open the link and start playing! 🎮
 
----
+### Method 2: Clone & Run Locally
 
-## ✨ Fitur Utama
-
-### 🎮 Core Features
-- **2 Player Mode** - Pencatatan skor untuk 2 pemain/tim
-- **Win Counter** - Badge mahkota kemenangan dengan tracking jumlah menang
-- **Calculator Built-in** - Kalkulator terintegrasi untuk hitung skor cepat
-- **Score History** - Riwayat input skor per ronde dengan visual chips
-- **Delete Score** - Hapus skor individual dari history dengan konfirmasi
-- **Last Winner Badge** - Indikator pemenang ronde terakhir
-- **Quick Reset** - Reset skor individual per pemain
-- **Auto-Save** - Data otomatis tersimpan di LocalStorage
-- **Score Difference Display** - Real-time selisih skor antar tim (✅ **FIXED!**)
-
-### 🎨 UI/UX Features
-- **4 Color Themes** - Purple (default), Blue, Green, Pink
-- **Optimized Layout** - ✅ **Kedua card muat sempurna tanpa scroll!**
-- **Score Color Indicator** - Warna berubah sesuai progress (hijau → kuning → orange → merah)
-- **Progress Bar** - Visual progress menuju batas skor
-- **Compact Mode** - Mode tampilan ringkas
-- **Smooth Animations** - Animasi score counter, transitions, dan effects
-- **Glass Morphism** - Card dengan backdrop blur effect
-- **Responsive Design** - Optimal di mobile dan desktop
-- **VS Indicator** - Badge VS di tengah untuk membedakan kedua tim
-
-### ⚙️ Settings & Customization
-- **Custom Score Limit** - Atur batas poin kalah (default: 101)
-- **Sound Effects Toggle** - Aktifkan/nonaktifkan efek suara
-- **Compact Mode Toggle** - Mode tampilan compact
-- **Theme Selector** - Pilih dari 4 tema warna
-- **About Page** - Informasi lengkap aplikasi
-
-### 📱 Progressive Web App (PWA)
-- **Installable** - Dapat di-install ke home screen
-- **Service Worker** - Dukungan offline
-- **App Manifest** - Icon dan splash screen custom
-- **Mobile Optimized** - Safe area support untuk notch devices
-
----
-
-## 🎯 What's New in v2.0.1
-
-### 🐛 Bug Fixes
-- **Fixed Score Difference Logic** - Indikator "Tim Unggul" sekarang menampilkan tim yang benar
-  - Before: Logic terbalik (Tim Alpha unggul saat scores[0] < scores[1]) ❌
-  - After: Logic benar (Tim Alpha unggul saat scores[0] > scores[1]) ✅
-
-### 🎨 Layout Optimization
-- **No More Scrolling!** - Kedua player card sekarang muat sempurna dalam 1 layar
-- **Reduced Padding** - 30-50% pengurangan pada semua spacing
-- **Smaller Fonts** - Score: 72px → 56px untuk tampilan lebih compact
-- **Optimized Elements** - Progress bar, history, buttons semua lebih compact
-- **Total Height Saved** - ~200-250px lebih pendek!
-
-### 📱 Mobile Experience
-- Tested pada berbagai device (iPhone SE hingga Pro Max)
-- Perfect fit pada layar 375px - 430px width
-- Smooth scrolling di history section saja (bukan full page)
-- Better touch targets dan spacing
-
-**Result:** User experience jauh lebih baik! 🎉
-
----
-
-## 📂 Struktur Project
-
-```
-domino/
-├── index.html              # Main HTML file
-├── css/
-│   └── style.css           # Optimized styles (32 KB)
-├── js/
-│   └── app.js              # JavaScript logic with bug fixes (17 KB)
-├── img/
-│   └── icon-192.png        # App icon 192x192
-│   └── icon-512.png        # App icon 512x512
-├── sfx-click.wav           # Click sound effect
-├── sfx-win.m4a             # Win sound effect
-├── manifest.json           # PWA manifest
-├── sw.js                   # Service Worker
-├── README.md               # Documentation
-└── CHANGELOG.md            # Version history & changes
-```
-
-## 🚀 Instalasi & Penggunaan
-
-### Via GitHub Pages
-1. Fork atau clone repository ini
-2. Upload ke GitHub repository Anda
-3. Aktifkan GitHub Pages di Settings → Pages
-4. Akses via `https://nullxdbot.github.io/domino/`
-
-### Local Development
-1. Clone repository:
-   ```bash
-   git clone https://github.com/nullxdbot/domino.git
-   ```
-2. Buka `index.html` di browser modern
-3. Atau gunakan local server:
-   ```bash
-   python -m http.server 8000
-   # atau
-   npx http-server
-   ```
-
-### Install sebagai PWA
-1. Buka aplikasi di browser mobile (Chrome/Safari)
-2. Tap menu "Add to Home Screen"
-3. Icon aplikasi akan muncul di home screen
-4. Akses seperti native app!
-
-## 🎯 Cara Bermain
-
-### Memulai Permainan
-1. Buka aplikasi
-2. Skor dimulai dari 0 untuk kedua tim (Tim Alpha & Tim Beta)
-3. Ronde dimulai dari Ronde 1
-4. Target default: 101 poin (bisa diubah di Settings)
-
-### Menambah Skor
-1. **Cara 1**: Tap area skor besar (angka di tengah card)
-2. **Cara 2**: Tap tombol **+ Add Score** di bawah card
-3. Calculator akan terbuka
-4. Hitung total skor dari domino Anda
-5. Gunakan operator matematika (+, -, ×, ÷) jika perlu
-6. Tap **Done** untuk menambahkan ke skor
-
-### Mengurangi Skor
-- Tap tombol **−** untuk mengurangi 1 poin sekaligus
-- Berguna untuk koreksi kesalahan input
-
-### Menghapus Score dari History
-- Tap salah satu chip di History section
-- Konfirmasi penghapusan
-- Skor akan dikurangi otomatis sesuai nilai yang dihapus
-
-### Quick Reset Per Pemain
-- Tap icon **↻** di pojok kanan atas card
-- Hanya reset skor pemain tersebut tanpa mempengaruhi pemain lain
-- Memerlukan konfirmasi
-
-### Indikator Visual
-- **Progress Bar** - Visual bar menunjukkan progress menuju limit
-  - Angka menunjukkan: Skor Sekarang / Batas Skor
-- **"Kurang X lagi"** - Menunjukkan sisa poin hingga kalah
-- **Score Color**:
-  - 🟢 Hijau (0-30% menuju limit)
-  - 🟡 Kuning (30-60% menuju limit)
-  - 🟠 Orange (60-85% menuju limit)
-  - 🔴 Merah (>85% menuju limit, dengan pulse animation)
-- **Selisih Skor** - Banner di atas menunjukkan:
-  - "Pertandingan Seimbang" (skor sama)
-  - "Tim Alpha Unggul +X" (Tim Alpha lebih tinggi)
-  - "Tim Beta Unggul +X" (Tim Beta lebih tinggi)
-
-### Game Over
-- Pemain pertama yang mencapai **batas skor (default: 101)** = **KALAH**
-- Yang menang adalah lawannya!
-- Modal pemenang muncul dengan:
-  - Trophy icon dengan bounce animation
-  - Nama pemenang
-  - Skor akhir pemenang
-  - Win counter +1 untuk pemenang
-- Tombol "New Round" untuk melanjutkan
-- Tombol "View Scores" untuk melihat skor final
-
-### History Tracking
-- Setiap input skor tercatat dalam chips history
-- Format: +10, +15, -1, dll
-- Tap chip untuk menghapus score tersebut
-- Icon × muncul saat hover/tap
-- Auto-update total skor setelah penghapusan
-
-## ⚙️ Pengaturan (Settings)
-
-Tap icon **⚙️** di header untuk membuka menu settings:
-
-### Tema Warna
-- **Purple** - Gradient ungu-pink (default)
-- **Blue** - Gradient biru-cyan
-- **Green** - Gradient hijau-light green
-- **Pink** - Gradient pink-light pink
-
-### Batas Poin Kalah
-- Default: 101 point
-- Range: 1 - 999+ (bisa custom)
-- Perubahan langsung diterapkan ke semua elemen
-- Progress bar otomatis menyesuaikan
-
-### Sound Effects
-- Toggle ON/OFF efek suara
-- Click sound saat menambah/mengurangi skor
-- Win sound saat game over
-- Berfungsi dengan graceful fallback jika file audio tidak tersedia
-
-### Compact Mode
-- Mode tampilan lebih ringkas
-- History section disembunyikan
-- Score dan padding lebih kecil
-- Hemat ruang layar
-
-### Reset Options
-- **New Round**: 
-  - Skor kembali 0
-  - Ronde +1
-  - Win counter tetap
-  - History direset
-- **Reset All**: 
-  - Reset total (skor, wins, history, ronde kembali ke 1)
-  - Memerlukan konfirmasi
-
-### About Page
-Tap tombol **About** untuk melihat:
-- Informasi aplikasi lengkap
-- Daftar fitur aplikasi
-- Informasi developer
-- Link donasi (Saweria)
-- Social media links
-
-## 🛠️ Teknologi
-
-### Frontend
-- **HTML5** - Semantic markup
-- **CSS3** - Modern styling dengan CSS Variables
-- **Vanilla JavaScript** - No framework, no dependencies
-- **Google Fonts** - Poppins & JetBrains Mono
-- **Font Awesome 6.4.0** - Icons
-
-### Storage & Data
-- **LocalStorage API** - Persistent data storage
-- **JSON** - Data serialization format
-
-### PWA Technologies
-- **Service Worker** - Offline capability & caching
-- **Web App Manifest** - Install to home screen
-- **Theme Color** - Native app-like appearance
-
-### Performance
-- **Lightweight** - Total ~70 KB (excluding external fonts)
-- **Vanilla JS** - No heavy frameworks
-- **LocalStorage** - Fast data access
-- **CSS Animations** - Hardware accelerated
-- **Optimized Layout** - No unnecessary scrolling
-
-## 📱 Kompatibilitas Browser
-
-| Browser | Version | Status |
-|---------|---------|--------|
-| Chrome (Desktop) | 90+ | ✅ Fully Supported |
-| Chrome (Android) | 90+ | ✅ Fully Supported |
-| Safari (iOS) | 14+ | ✅ Fully Supported |
-| Safari (macOS) | 14+ | ✅ Fully Supported |
-| Firefox | 88+ | ✅ Fully Supported |
-| Edge | 90+ | ✅ Fully Supported |
-| Opera | 76+ | ✅ Fully Supported |
-| Samsung Internet | 14+ | ✅ Fully Supported |
-
-### Screen Sizes Tested
-- ✅ iPhone SE (375×667)
-- ✅ iPhone 8 Plus (414×736)
-- ✅ iPhone X (375×812)
-- ✅ iPhone 12/13 (390×844)
-- ✅ iPhone 14 Pro Max (430×932)
-- ✅ Samsung Galaxy S21 (360×800)
-- ✅ iPad (768×1024)
-- ✅ Desktop (1920×1080+)
-
-### Required Features
-- CSS Variables
-- LocalStorage API
-- ES6+ JavaScript
-- Backdrop Filter (untuk glass effect)
-- Flexbox & Grid
-
-## 🎨 Kustomisasi
-
-### Mengubah Tema Default
-Edit di `js/app.js`:
-```javascript
-let currentTheme = 'purple'; // Ganti: 'purple', 'blue', 'green', 'pink'
-```
-
-### Menambah Tema Baru
-1. Edit `js/app.js`:
-```javascript
-const themeConfig = {
-    'purple': { primary: '#8b5cf6', secondary: '#ec4899' },
-    'newtheme': { primary: '#yourcolor', secondary: '#yourcolor2' }
-};
-```
-
-2. Edit `index.html` (theme selector):
-```html
-<button class="theme-option newtheme" onclick="setTheme('newtheme')" title="Your Theme">
-    <div class="theme-preview" style="background: linear-gradient(135deg, #yourcolor, #yourcolor2)"></div>
-</button>
-```
-
-### Mengubah Batas Default
-Edit di `js/app.js`:
-```javascript
-let limit = 101; // Ganti dengan angka yang diinginkan
-```
-
-### Mengubah Nama Tim
-Edit di `index.html`:
-```html
-<span class="player-name">TIM ALPHA</span>  <!-- Tim 1 -->
-<span class="player-name">TIM BETA</span>   <!-- Tim 2 -->
-```
-
-## 📊 Data Structure
-
-Data yang tersimpan di LocalStorage:
-```javascript
-{
-  "scores": [0, 0],              // Skor Tim Alpha dan Tim Beta
-  "wins": [0, 0],                 // Jumlah kemenangan
-  "limit": 101,                   // Batas skor kalah
-  "theme": "purple",              // Tema aktif
-  "history": [[], []],            // History input skor per tim
-  "roundCount": 1,                // Nomor ronde
-  "lastWinner": null,             // Index pemenang terakhir (0/1)
-  "compactMode": false,           // Status compact mode
-  "soundEnabled": true            // Status sound effects
-}
-```
-
-## 🔧 Development
-
-### Prerequisites
-- Text editor (VS Code, Sublime, dll)
-- Browser modern dengan DevTools
-- (Optional) Local server untuk testing PWA
-
-### Setup Development
 ```bash
 # Clone repository
 git clone https://github.com/nullxdbot/domino.git
@@ -367,150 +66,358 @@ git clone https://github.com/nullxdbot/domino.git
 # Masuk ke folder
 cd domino
 
-# Buka di editor
-code .
+# Run dengan Python
+python -m http.server 8000
 
-# (Optional) Jalankan local server
+# Atau dengan Node.js
+npx http-server
+
+# Buka browser
+# http://localhost:8000
+```
+
+### Method 3: Download ZIP
+
+1. Download ZIP dari [Releases](https://github.com/nullxdbot/domino/releases)
+2. Extract ke folder
+3. Buka `index.html` di browser
+
+---
+
+## 📱 Installation (PWA)
+
+### Desktop (Chrome/Edge)
+1. Buka aplikasi di browser
+2. Klik icon **Install** di address bar
+3. Follow installation prompts
+
+### Mobile (Android/iOS)
+1. Buka aplikasi di browser
+2. Tap menu (⋮) → **Add to Home Screen**
+3. Tap **Add**
+
+---
+
+## 🔧 Installation di Termux (Android)
+
+### Step 1: Install Termux
+Download Termux dari [F-Droid](https://f-droid.org/packages/com.termux/) (bukan dari Play Store)
+
+### Step 2: Setup Termux
+
+```bash
+# Update package list
+pkg update && pkg upgrade
+
+# Install Git
+pkg install git
+
+# Install Python (untuk HTTP server)
+pkg install python
+
+# Atau install Node.js
+pkg install nodejs
+```
+
+### Step 3: Clone Repository
+
+```bash
+# Clone project
+git clone https://github.com/nullxdbot/domino.git
+
+# Masuk ke folder
+cd domino
+```
+
+### Step 4: Run Server
+
+**Option A: Python Server**
+```bash
 python -m http.server 8000
 ```
 
-### Testing
-1. Buka browser DevTools (F12)
-2. Test di berbagai viewport sizes (Responsive mode)
-3. Test LocalStorage di Application tab
-4. Test Service Worker di Application → Service Workers
-5. Test PWA installability
-6. Test pada device fisik untuk memastikan no-scroll design
-
-### Build untuk Production
-File sudah production-ready, tidak perlu build process.
-
-Optional minification:
+**Option B: Node.js Server**
 ```bash
-# Minify CSS
-npx csso css/style.css -o css/style.min.css
+# Install http-server
+npm install -g http-server
 
-# Minify JS
-npx terser js/app.js -o js/app.min.js
+# Run server
+http-server -p 8000
 ```
 
-## 🐛 Known Issues & Solutions
+### Step 5: Access di Browser
 
-### Fixed in v2.0.1:
-- ✅ Score difference indicator showing wrong team (FIXED)
-- ✅ Layout requiring scroll on mobile devices (FIXED)
+```bash
+# Server berjalan di:
+http://localhost:8000
 
-### Current Known Issues:
-- Service Worker butuh HTTPS untuk production (gunakan GitHub Pages atau hosting dengan SSL)
-- Audio files bersifat optional (app tetap berfungsi tanpa audio)
+# Atau via IP lokal (untuk akses dari device lain):
+# Cek IP dengan:
+ifconfig
+
+# Access via:
+http://192.168.x.x:8000
+```
+
+**📖 Full Termux Guide:** [TERMUX_GUIDE.md](TERMUX_GUIDE.md)
+
+---
+
+## 📁 Project Structure
+
+```
+domino/
+├── index.html              # Main HTML file
+├── manifest.json           # PWA manifest
+├── sw.js                   # Service Worker
+├── README.md               # This file
+├── CHANGELOG.md            # Version history
+│
+├── css/
+│   └── style.css           # Main stylesheet
+│
+├── js/
+│   └── app.js              # Main JavaScript
+│
+├── img/
+│   ├── icon-*.png          # PWA icons (72-512px)
+│   └── screenshot*.png     # App screenshots
+│
+└── sfx/
+    ├── sfx-click.wav       # Click sound effect
+    └── sfx-win.m4a         # Victory sound effect
+```
+
+---
+
+## 🎮 How to Use
+
+### Basic Usage
+
+1. **Start Game**
+   - Open aplikasi
+   - Set score limit (default 101)
+   - Pilih tema warna favorit
+
+2. **Add Score**
+   - Tap tombol **"+"** atau tap pada angka skor
+   - Masukkan angka di calculator
+   - Tekan **✓** untuk confirm
+
+3. **Remove Score**
+   - Tap tombol **"-"** untuk kurangi 1 poin
+   - Atau tap history item untuk hapus score tertentu
+
+4. **New Round**
+   - Setelah ada pemenang
+   - Tap **"New Round"** untuk mulai lagi
+   - Win counter akan bertambah
+
+5. **Reset All**
+   - Settings → **"Reset All"**
+   - Menghapus semua data termasuk win counter
+
+### Advanced Features
+
+**Calculator Mode:**
+- Support operasi: `+`, `-`, `×`, `÷`
+- Dapat chain operations
+- Backspace untuk hapus digit
+
+**History:**
+- Tap pada history chip untuk hapus score
+- History tersimpan otomatis
+
+**Themes:**
+- 4 pilihan tema: Purple, Blue, Green, Pink
+- Auto-save preference
+
+**Compact Mode:**
+- Toggle untuk tampilan lebih ringkas
+- Ideal untuk layar kecil
+
+**Sound Effects:**
+- Toggle on/off di settings
+- Click sound & victory sound
+
+---
+
+## ⚙️ Configuration
+
+### Change Score Limit
+
+Settings → **Score Limit** → Enter nilai (contoh: 50, 101, 200)
+
+### Change Theme
+
+Settings → **Color Theme** → Pilih warna
+
+### Toggle Features
+
+- **Sound Effects**: ON/OFF
+- **Compact Mode**: ON/OFF
+
+---
+
+## 🛠️ Development
+
+### Prerequisites
+
+```bash
+# Node.js (optional, untuk development server)
+node --version
+
+# Python (alternative, untuk simple server)
+python --version
+
+# Git
+git --version
+```
+
+### Local Development
+
+```bash
+# Clone repo
+git clone https://github.com/nullxdbot/domino.git
+cd domino
+
+# Run development server
+python -m http.server 8000
+# atau
+npx http-server
+```
+
+### Tech Stack
+
+- **Frontend**: Vanilla JavaScript (ES6+)
+- **Styling**: CSS3 (Custom Properties, Flexbox, Grid)
+- **PWA**: Service Worker, Web App Manifest
+- **Storage**: LocalStorage API
+- **Audio**: HTML5 Audio API
+- **Icons**: Font Awesome 6.4.0
+- **Fonts**: Google Fonts (Poppins, JetBrains Mono)
+
+---
 
 ## 📝 Changelog
 
-### Version 2.0.1 (30 Jan 2026)
-- 🐛 **FIXED**: Score difference logic - sekarang menampilkan tim yang benar
-- 🎨 **OPTIMIZED**: Layout untuk mobile - kedua card muat tanpa scroll
-- ✂️ **REDUCED**: Padding dan margin sebesar 30-50% pada semua elemen
-- 📏 **ADJUSTED**: Font sizes untuk lebih compact
-- 📊 **IMPROVED**: Progress bar height (40px → 32px)
-- 🎯 **ENHANCED**: History section lebih compact (80px → 60px max height)
-- ⚡ **PERFORMANCE**: Hemat ~200-250px tinggi total layout
-- 📱 **MOBILE**: Tested pada berbagai ukuran layar (375px - 430px width)
-- 📖 **DOCS**: Tambahan CHANGELOG.md dengan detail perubahan
+### Version 2.0.1 (Current)
+- 🐛 **Fixed**: Score difference indicator showing wrong team
+- 🎨 **Optimized**: Layout untuk no-scroll design
+- ✅ **Improved**: Both player cards now fit perfectly on screen
 
-### Version 1.0.0 (29 Jan 2026)
-- ✨ Initial release
-- ✨ Basic 2-player score tracking
-- ✨ Integrated calculator
-- ✨ Win counter with crown badge
-- ✨ Score history tracking with delete function
-- ✨ 4 color themes (Purple, Blue, Green, Pink)
-- ✨ Sound effects toggle
-- ✨ Compact mode
-- ✨ Auto-save to LocalStorage
-- ✨ PWA support with Service Worker
-- ✨ About page with app info
-- ✨ Confirmation modals
-- ✨ Quick player reset
-- ✨ Last winner badge
-- ✨ Score difference indicator
+### Version 2.0.0
+- ✨ Complete UI/UX redesign
+- ✨ Added PWA support
+- ✨ Added sound effects
+- ✨ Added 4 color themes
+- ✨ Added compact mode
+- ✨ Added score history with delete
+- ✨ Added calculator mode
+- ✨ Added auto-save functionality
 
-## 🤝 Kontribusi
+**📖 Full Changelog:** [CHANGELOG.md](CHANGELOG.md)
 
-Kontribusi sangat diterima! Untuk berkontribusi:
+---
 
-1. Fork repository ini
-2. Buat branch baru (`git checkout -b feature/AmazingFeature`)
-3. Commit perubahan (`git commit -m 'Add some AmazingFeature'`)
-4. Push ke branch (`git push origin feature/AmazingFeature`)
-5. Buat Pull Request
+## 🤝 Contributing
 
-### Areas for Contribution
-- 🌍 Internationalization (i18n)
-- 🎨 Additional themes
-- ✨ New features
-- 🐛 Bug fixes
-- 📖 Documentation improvements
-- ♿ Accessibility enhancements
+Contributions are welcome! 🎉
 
-## 💝 Support Developer
+### How to Contribute
 
-Jika aplikasi ini bermanfaat, Anda bisa mendukung developer:
+1. **Fork** the repository
+2. **Create** your feature branch
+   ```bash
+   git checkout -b feature/AmazingFeature
+   ```
+3. **Commit** your changes
+   ```bash
+   git commit -m 'Add some AmazingFeature'
+   ```
+4. **Push** to the branch
+   ```bash
+   git push origin feature/AmazingFeature
+   ```
+5. **Open** a Pull Request
 
-- ☕ [Donasi via Saweria](https://saweria.co/nullxd)
-- ⭐ Star repository ini di GitHub
-- 🐛 Report bugs atau request features
-- 📢 Share ke teman-teman
-- 📝 Write a review atau testimonial
+**📖 Contributing Guide:** [CONTRIBUTING.md](CONTRIBUTING.md)
 
-## 📞 Contact
+---
 
-**Developer**: Farrel Aulia Irfealdo (NullXD)
+## 🐛 Known Issues
 
-- Instagram: [@farrelauliairfealdo_](https://instagram.com/farrelauliairfealdo_)
-- TikTok: [@farrel.aulia.irfealdo](https://tiktok.com/@farrel.aulia.irfealdo)
-- Telegram: [@farrelauliairfealdo](https://t.me/farrelauliairfealdo)
+- Audio autoplay might be blocked by browser (requires user interaction)
+- Some browsers might not support all CSS features (use modern browsers)
+
+---
+
+## 📋 Roadmap
+
+- [ ] Multi-player support (3-4 players)
+- [ ] Game statistics & analytics
+- [ ] Export/Import game data
+- [ ] Share score via social media
+- [ ] Tournament mode
+- [ ] Online multiplayer (optional)
+- [ ] Multiple languages (i18n)
+
+---
 
 ## 📄 License
 
-MIT License
+This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
 
-Copyright (c) 2026 Farrel Aulia Irfealdo
+---
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+## 👨‍💻 Author
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+**Farrel Aulia Irfealdo** (NullXD)
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+- 📧 Email: farelauliairfealdo99999@gmail.com
+- 🐙 GitHub: [@nullxdbot](https://github.com/nullxdbot)
+- 📱 Instagram: [@farrelauliairfealdo_](https://instagram.com/farrelauliairfealdo_)
+- 🎵 TikTok: [@farrel.aulia.irfealdo](https://tiktok.com/@farrel.aulia.irfealdo)
+- 💬 Telegram: [@farrelauliairfealdo](https://t.me/farrelauliairfealdo)
+
+---
+
+## 💖 Support
+
+Suka dengan project ini? 
+
+[![Support via Saweria](https://img.shields.io/badge/Support-Saweria-orange.svg)](https://saweria.co/nullxd)
+
+- ⭐ **Star** repository ini
+- 🐛 Report bugs
+- 💡 Suggest new features
+- ☕ [Buy me a coffee](https://saweria.co/nullxd)
+
+---
 
 ## 🙏 Acknowledgments
 
-- Font Awesome for the icon library
-- Google Fonts for Poppins & JetBrains Mono
-- Claude AI (Anthropic) for optimization assistance
-- The domino gaming community for inspiration
+- [Font Awesome](https://fontawesome.com/) - Icons
+- [Google Fonts](https://fonts.google.com/) - Typography
+- Inspired by modern score keeper apps
+- Thanks to all contributors! 🎉
+
+---
+
+## 📞 Contact & Support
+
+- **Issues**: [GitHub Issues](https://github.com/nullxdbot/domino/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/nullxdbot/domino/discussions)
+- **Email**: farelauliairfealdo99999@gmail.com
 
 ---
 
 <div align="center">
 
-**Made with ❤️ in Indonesia 🇮🇩**
+**Made with ❤️ by Farrel Aulia Irfealdo**
 
-🎲 **Domino Score NullXD** - Score Tracker untuk Pecinta Domino
+🇮🇩 **Indonesia**
 
-**[⭐ Star](https://github.com/nullxdbot/domino) · [🐛 Report Bug](https://github.com/nullxdbot/domino/issues) · [✨ Request Feature](https://github.com/nullxdbot/domino/issues)**
-
-*Version 2.0.1 - Optimized & Bug Fixed Edition*
+[⬆ Back to Top](#-domino-score-nullxd)
 
 </div>
