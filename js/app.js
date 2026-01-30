@@ -16,55 +16,10 @@ let pendingAction = null;
 const sfxClick = document.getElementById('sfx-click');
 const sfxWin = document.getElementById('sfx-win');
 
-// APP VERSION (Update this for new versions)
-const APP_VERSION = '2.0.1';
-
 // ===== INITIALIZATION =====
 document.addEventListener('DOMContentLoaded', () => {
     loadGameData();
-    checkUpdateBanner();
 });
-
-// ===== UPDATE BANNER MANAGEMENT =====
-function checkUpdateBanner() {
-    const dismissedVersion = localStorage.getItem('dismissedUpdateVersion');
-    const banner = document.getElementById('updateBanner');
-    
-    // Show banner if user hasn't dismissed this version yet
-    if (dismissedVersion !== APP_VERSION && banner) {
-        // Add a small delay for smooth appearance
-        setTimeout(() => {
-            banner.classList.add('show');
-        }, 500);
-    }
-}
-
-function dismissUpdateBanner() {
-    playClick();
-    const banner = document.getElementById('updateBanner');
-    
-    if (banner) {
-        banner.classList.remove('show');
-        // Save dismissed version to localStorage
-        localStorage.setItem('dismissedUpdateVersion', APP_VERSION);
-    }
-}
-
-function showChangelogFromBanner() {
-    playClick();
-    // Dismiss banner
-    dismissUpdateBanner();
-    // Open About modal (which contains changelog)
-    openAbout();
-    
-    // Scroll to changelog section after modal opens
-    setTimeout(() => {
-        const changelogSection = document.querySelector('.changelog-section');
-        if (changelogSection) {
-            changelogSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-    }, 300);
-}
 
 // Optimized audio functions with sound toggle
 function playClick() { 
@@ -335,22 +290,18 @@ function loadGameData() {
         currentTheme = data.theme || 'purple';
         roundHistory = data.history || [[], []];
         roundCount = data.roundCount || 1;
-        lastWinner = data.lastWinner;
+        lastWinner = data.lastWinner !== undefined ? data.lastWinner : null;
         compactMode = data.compactMode || false;
         soundEnabled = data.soundEnabled !== undefined ? data.soundEnabled : true;
 
-        const limitInput = document.getElementById('limitInput');
-        if(limitInput) limitInput.value = limit;
-
-        const soundToggle = document.getElementById('soundToggle');
-        if(soundToggle) soundToggle.checked = soundEnabled;
-
-        const compactToggle = document.getElementById('compactToggle');
-        if(compactToggle) compactToggle.checked = compactMode;
+        document.getElementById('win-0').innerText = wins[0];
+        document.getElementById('win-1').innerText = wins[1];
+        document.getElementById('limitInput').value = limit;
+        document.getElementById('compactToggle').checked = compactMode;
+        document.getElementById('soundToggle').checked = soundEnabled;
         
-        if(compactMode) {
-            const scoreboard = document.getElementById('scoreboard');
-            if(scoreboard) scoreboard.classList.add('compact');
+        if (compactMode) {
+            document.getElementById('scoreboard').classList.add('compact');
         }
         
         setTheme(currentTheme); 
@@ -637,4 +588,5 @@ function executeDeleteScore() {
         closeDeleteScoreModal();
     }
 }
+
 
