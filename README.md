@@ -3,10 +3,11 @@
 [![Version](https://img.shields.io/badge/version-2.0.1-blue.svg)](https://github.com/nullxdbot/domino)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![PWA](https://img.shields.io/badge/PWA-enabled-purple.svg)](https://web.dev/progressive-web-apps/)
+[![APK](https://img.shields.io/badge/APK-Download-orange.svg)](https://www.mediafire.com/file/kqw6b4msiiejfoq/Domino_NullXD.apk/file)
 
 > Modern, beautiful, and feature-rich score keeper untuk permainan domino 🃏
 
-[Live Demo](https://nullxdbot.github.io/domino/) | [Report Bug](https://github.com/nullxdbot/domino/issues) | [Request Feature](https://github.com/nullxdbot/domino/issues)
+[🎮 Live Demo](https://nullxdbot.github.io/domino/) | [📱 Download APK](https://www.mediafire.com/file/kqw6b4msiiejfoq/Domino_NullXD.apk/file) | [🐛 Report Bug](https://github.com/nullxdbot/domino/issues) | [✨ Request Feature](https://github.com/nullxdbot/domino/issues)
 
 ---
 
@@ -81,6 +82,29 @@ npx http-server
 1. Download ZIP dari [Releases](https://github.com/nullxdbot/domino/releases)
 2. Extract ke folder
 3. Buka `index.html` di browser
+
+### Method 4: Download APK (Android) 📱
+
+Download aplikasi Android dari salah satu mirror berikut:
+
+<div align="center">
+
+| Mirror | Link | Status |
+|--------|------|--------|
+| 🔥 **MediaFire** | [Download APK](https://www.mediafire.com/file/kqw6b4msiiejfoq/Domino_NullXD.apk/file) | ⚡ Fast |
+| 📦 **APKAdmin** | [Download APK](https://apkadmin.com/tce0avsfx59j/Domino_NullXD.apk.html) | ✅ Mirror 1 |
+| 💾 **SFile** | [Download APK](https://sfile.co/LMdAq1vsvQN) | ✅ Mirror 2 |
+
+</div>
+
+**Installation Steps:**
+1. Download APK dari salah satu link di atas
+2. Enable "Install from Unknown Sources" di Settings
+3. Buka file APK yang sudah didownload
+4. Tap "Install"
+5. Selesai! 🎉
+
+> ⚠️ **Note:** APK ini adalah PWA wrapper, bukan native Android app. Memerlukan koneksi internet untuk first load, setelah itu bisa digunakan offline.
 
 ---
 
@@ -342,6 +366,64 @@ Contributions are welcome! 🎉
 5. **Open** a Pull Request
 
 **📖 Contributing Guide:** [CONTRIBUTING.md](CONTRIBUTING.md)
+
+---
+
+## ❓ FAQ (Frequently Asked Questions)
+
+### 📱 APK Download & Installation
+
+**Q: Apakah APK ini aman?**  
+A: Ya, APK ini adalah PWA (Progressive Web App) wrapper yang aman. Tidak ada akses ke data sensitif.
+
+**Q: Kenapa butuh internet saat pertama kali buka?**  
+A: APK ini adalah PWA wrapper yang perlu load assets dari web. Setelah first load, bisa digunakan offline.
+
+**Q: Apakah ini native Android app?**  
+A: Bukan, ini adalah PWA yang di-wrap menjadi APK. Performa sama dengan versi web tapi bisa diinstall seperti app biasa.
+
+**Q: Kenapa size APK-nya kecil?**  
+A: Karena ini PWA wrapper, mayoritas assets di-load dari web saat first run. APK hanya berisi wrapper-nya saja.
+
+**Q: Apakah bisa diupdate otomatis?**  
+A: Ya, karena menggunakan PWA, app akan auto-update saat ada versi baru di web.
+
+**Q: Link download APK tidak bisa diakses?**  
+A: Gunakan mirror alternatif yang tersedia (MediaFire, APKAdmin, atau SFile). Jika semua tidak bisa, hubungi developer.
+
+### 🎮 Gameplay
+
+**Q: Bagaimana cara menghitung skor?**  
+A: Tap area skor atau tombol "+", lalu gunakan calculator untuk hitung total dari kartu domino Anda.
+
+**Q: Apa yang terjadi jika mencapai 101 poin?**  
+A: Tim yang mencapai 101 poin = KALAH. Lawan adalah pemenangnya!
+
+**Q: Bisa ubah batas skor?**  
+A: Ya, masuk ke Settings → Score Limit, ubah sesuai keinginan (default 101).
+
+**Q: Data tersimpan dimana?**  
+A: Data disimpan di LocalStorage browser/app. Tidak perlu koneksi server.
+
+**Q: Bagaimana cara hapus score dari history?**  
+A: Tap salah satu chip di History section, lalu konfirmasi penghapusan.
+
+### 🔧 Technical
+
+**Q: Apakah bisa digunakan offline?**  
+A: Ya, setelah first load, aplikasi bisa digunakan offline berkat Service Worker.
+
+**Q: Support browser apa saja?**  
+A: Chrome, Firefox, Safari, Edge (semua browser modern yang support PWA).
+
+**Q: Bisa install di iOS?**  
+A: Ya, via Safari → Share → Add to Home Screen. Tidak ada APK untuk iOS.
+
+**Q: Apakah ada iklan?**  
+A: Tidak ada iklan sama sekali. 100% gratis dan clean.
+
+**Q: Data hilang setelah clear browser cache?**  
+A: Ya, karena data disimpan di LocalStorage. Untuk backup, gunakan fitur Export (coming soon).
 
 ---
 
