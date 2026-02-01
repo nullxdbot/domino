@@ -3,13 +3,13 @@
 [![Version](https://img.shields.io/badge/version-2.2-blue.svg)](https://github.com/nullxdbot/domino)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![PWA](https://img.shields.io/badge/PWA-enabled-purple.svg)](https://web.dev/progressive-web-apps/)
-[![APK](https://img.shields.io/badge/APK-Download-orange.svg)](https://www.mediafire.com/file/iu0i5jiqk7udv8z/DominoNullXD_V2.2.apk/file)
+[![APK](https://img.shields.io/badge/APK-Download-orange.svg)](https://github.com/nullxdbot/domino/releases/latest)
 
 > Modern, beautiful, and feature-rich score keeper for domino games 🃏
 
 🌐 **Language:** [English](README_EN.md) | [Indonesia](README.md)
 
-[🎮 Live Demo](https://nullxdbot.github.io/domino/) | [📱 Download APK v2.2](https://www.mediafire.com/file/iu0i5jiqk7udv8z/DominoNullXD_V2.2.apk/file) | [🐛 Report Bug](https://github.com/nullxdbot/domino/issues) | [✨ Request Feature](https://github.com/nullxdbot/domino/issues)
+[🎮 Live Demo](https://nullxdbot.github.io/domino/) | [📱 Download APK v2.2](https://github.com/nullxdbot/domino/releases/latest) | [🐛 Report Bug](https://github.com/nullxdbot/domino/issues) | [✨ Request Feature](https://github.com/nullxdbot/domino/issues)
 
 ---
 
@@ -87,15 +87,19 @@ npx http-server
 
 ### Method 4: Download APK (Android) 📱
 
-Download the latest Android application (v2.2) from one of the following mirrors:
+Download the latest Android application (v2.2):
+
+**🚀 Recommended: [Download from GitHub Releases](https://github.com/nullxdbot/domino/releases/latest)**
+
+**Alternative Mirrors:**
 
 <div align="center">
 
 | Mirror | Link | Status |
 |---|---|---|
-| 🔥 MediaFire | [Download APK](https://www.mediafire.com/file/iu0i5jiqk7udv8z/DominoNullXD_V2.2.apk/file) | ⚡ Recommended |
-| 📦 APKAdmin | Download APK | ✅ Mirror 1 |
-| 💾 SFile | Download APK | ✅ Mirror 2 |
+| 🔥 MediaFire | [Download APK](https://www.mediafire.com/file/iu0i5jiqk7udv8z/DominoNullXD_V2.2.apk/file) | ⚡ Fast |
+| 📂 SFile.mobi | [Download APK](https://sfile.co/DP4SPKHLDmP) | ✅ Mirror 1 |
+| 📦 APKAdmin | [Download APK](https://apkadmin.com/c0r9030ioaod/DominoNullXD_V2.2.apk.html) | ✅ Mirror 2 |
 
 </div>
 
