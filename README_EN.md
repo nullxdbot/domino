@@ -5,9 +5,9 @@
 [![PWA](https://img.shields.io/badge/PWA-enabled-purple.svg)](https://web.dev/progressive-web-apps/)
 [![APK](https://img.shields.io/badge/APK-Download-orange.svg)](https://www.mediafire.com/file/iu0i5jiqk7udv8z/DominoNullXD_V2.2.apk/file)
 
-> Modern, beautiful, and feature-rich score keeper untuk permainan domino 🃏
+> Modern, beautiful, and feature-rich score keeper for domino games 🃏
 
-🌐 **Bahasa:** [English](README_EN.md) | [Indonesia](README.md)
+🌐 **Language:** [English](README_EN.md) | [Indonesia](README.md)
 
 [🎮 Live Demo](https://nullxdbot.github.io/domino/) | [📱 Download APK v2.2](https://www.mediafire.com/file/iu0i5jiqk7udv8z/DominoNullXD_V2.2.apk/file) | [🐛 Report Bug](https://github.com/nullxdbot/domino/issues) | [✨ Request Feature](https://github.com/nullxdbot/domino/issues)
 
@@ -27,29 +27,29 @@
 ## ✨ Features
 
 ### 🎯 Core Features
-- ✅ **Real-time Score Tracking** - Update skor secara langsung
-- ✅ **Built-in Calculator** - Kalkulator terintegrasi untuk perhitungan cepat
-- ✅ **Score History** - Track semua perubahan skor
-- ✅ **Win Counter** - Hitung jumlah kemenangan tiap tim
-- ✅ **Progress Bar** - Visual indicator progress menuju target
-- ✅ **Score Difference Indicator** - Lihat selisih skor real-time (Fixed Logic)
+- ✅ **Real-time Score Tracking** - Update scores instantly
+- ✅ **Built-in Calculator** - Integrated calculator for quick calculations
+- ✅ **Score History** - Track all score changes
+- ✅ **Win Counter** - Count wins for each team
+- ✅ **Progress Bar** - Visual indicator of progress towards target
+- ✅ **Score Difference Indicator** - See real-time score difference (Fixed Logic)
 
 ### 🎨 Design & UX
-- ✅ **Modern UI/UX** - Interface yang clean dan intuitive
+- ✅ **Modern UI/UX** - Clean and intuitive interface
 - ✅ **4 Color Themes** - Purple, Blue, Green, Pink
-- ✅ **Dark Mode** - Eye-friendly untuk main malam
+- ✅ **Dark Mode** - Eye-friendly for night gaming
 - ✅ **Glassmorphism Effect** - Modern visual aesthetics
-- ✅ **Smooth Animations** - Transisi yang mulus (Hardware Accelerated)
-- ✅ **Responsive Design** - Support semua ukuran layar
+- ✅ **Smooth Animations** - Smooth transitions (Hardware Accelerated)
+- ✅ **Responsive Design** - Supports all screen sizes
 - ✅ **No-Scroll Layout** - Both cards fit perfectly on screen (Android Optimized)
 
 ### 🔧 Advanced Features
-- ✅ **Native APK** - Full screen experience tanpa browser bar
-- ✅ **Offline Mode** - Bekerja tanpa internet
-- ✅ **Auto-save** - Data tersimpan otomatis
-- ✅ **Sound Effects** - Audio feedback (dapat di-toggle)
-- ✅ **Safety Dialogs** - Konfirmasi sebelum Reset/Exit
-- ✅ **Customizable Score Limit** - Atur target skor sesuka hati
+- ✅ **Native APK** - Full screen experience without browser bar
+- ✅ **Offline Mode** - Works without internet connection
+- ✅ **Auto-save** - Data saved automatically
+- ✅ **Sound Effects** - Audio feedback (can be toggled)
+- ✅ **Safety Dialogs** - Confirmation before Reset/Exit
+- ✅ **Customizable Score Limit** - Set target score as you like
 
 ---
 
@@ -67,27 +67,27 @@ Simply open the link and start playing! 🎮
 # Clone repository
 git clone https://github.com/nullxdbot/domino.git
 
-# Masuk ke folder
+# Enter folder
 cd domino
 
-# Run dengan Python
+# Run with Python
 python -m http.server 8000
 
-# Atau dengan Node.js
+# Or with Node.js
 npx http-server
 
-# Buka browser
+# Open browser
 # http://localhost:8000
 ```
 
 ### Method 3: Download ZIP
-* Download ZIP dari Releases
-* Extract ke folder
-* Buka index.html di browser
+* Download ZIP from Releases
+* Extract to folder
+* Open index.html in browser
 
 ### Method 4: Download APK (Android) 📱
 
-Download aplikasi Android versi terbaru (v2.2) dari salah satu mirror berikut:
+Download the latest Android application (v2.2) from one of the following mirrors:
 
 <div align="center">
 
@@ -100,34 +100,34 @@ Download aplikasi Android versi terbaru (v2.2) dari salah satu mirror berikut:
 </div>
 
 **Installation Steps:**
-* Download APK dari salah satu link di atas
-* Enable "Install from Unknown Sources" di Settings
-* Buka file APK yang sudah didownload
+* Download APK from one of the links above
+* Enable "Install from Unknown Sources" in Settings
+* Open the downloaded APK file
 * Tap "Install"
-* Selesai! 🎉
+* Done! 🎉
 
-> ⚠️ **Note:** APK ini adalah PWA wrapper yang sudah dioptimalkan menjadi Native App. Memerlukan koneksi internet untuk first load, setelah itu bisa digunakan offline sepenuhnya.
+> ⚠️ **Note:** This APK is a PWA wrapper optimized into a Native App. Requires internet connection for first load, then can be used completely offline.
 
 ---
 
 ## 📱 Installation (PWA)
 
 ### Desktop (Chrome/Edge)
-* Buka aplikasi di browser
-* Klik icon Install di address bar
+* Open the app in browser
+* Click the Install icon in address bar
 * Follow installation prompts
 
 ### Mobile (Android/iOS)
-* Buka aplikasi di browser
+* Open the app in browser
 * Tap menu (⋮) → Add to Home Screen
 * Tap Add
 
 ---
 
-## 🔧 Installation di Termux (Android)
+## 🔧 Installation on Termux (Android)
 
 ### Step 1: Install Termux
-Download Termux dari F-Droid (bukan dari Play Store)
+Download Termux from F-Droid (not from Play Store)
 
 ### Step 2: Setup Termux
 ```bash
@@ -137,10 +137,10 @@ pkg update && pkg upgrade
 # Install Git
 pkg install git
 
-# Install Python (untuk HTTP server)
+# Install Python (for HTTP server)
 pkg install python
 
-# Atau install Node.js
+# Or install Node.js
 pkg install nodejs
 ```
 
@@ -149,7 +149,7 @@ pkg install nodejs
 # Clone project
 git clone https://github.com/nullxdbot/domino.git
 
-# Masuk ke folder
+# Enter folder
 cd domino
 ```
 
@@ -169,13 +169,13 @@ npm install -g http-server
 http-server -p 8000
 ```
 
-### Step 5: Access di Browser
+### Step 5: Access in Browser
 ```bash
-# Server berjalan di:
+# Server running at:
 http://localhost:8000
 
-# Atau via IP lokal (untuk akses dari device lain):
-# Cek IP dengan:
+# Or via local IP (for access from other devices):
+# Check IP with:
 ifconfig
 
 # Access via:
@@ -218,49 +218,49 @@ domino/
 ### Basic Usage
 
 **Start Game**
-* Open aplikasi
+* Open application
 * Set score limit (default 101)
-* Pilih tema warna favorit
+* Choose your favorite color theme
 
 **Add Score**
-* Tap tombol "+" atau tap pada angka skor
-* Masukkan angka di calculator
-* Tekan ✓ untuk confirm
+* Tap "+" button or tap on score number
+* Enter number in calculator
+* Press ✓ to confirm
 
 **Remove Score**
-* Tap tombol "-" untuk kurangi 1 poin
-* Atau tap history item untuk hapus score tertentu
+* Tap "-" button to reduce 1 point
+* Or tap history item to remove specific score
 
 **New Round**
-* Setelah ada pemenang
-* Tap "New Round" untuk mulai lagi
-* Win counter akan bertambah
+* After there's a winner
+* Tap "New Round" to start again
+* Win counter will increase
 
 **Reset All**
 * Settings → "Reset All"
-* Menghapus semua data termasuk win counter
+* Deletes all data including win counter
 
 ### Advanced Features
 
 **Calculator Mode:**
-* Support operasi: +, -, ×, ÷
-* Dapat chain operations
-* Backspace untuk hapus digit
+* Supports operations: +, -, ×, ÷
+* Can chain operations
+* Backspace to delete digit
 
 **History:**
-* Tap pada history chip untuk hapus score
-* History tersimpan otomatis
+* Tap on history chip to remove score
+* History saved automatically
 
 **Themes:**
-* 4 pilihan tema: Purple, Blue, Green, Pink
+* 4 theme choices: Purple, Blue, Green, Pink
 * Auto-save preference
 
 **Compact Mode:**
-* Toggle untuk tampilan lebih ringkas
-* Ideal untuk layar kecil
+* Toggle for more compact display
+* Ideal for small screens
 
 **Sound Effects:**
-* Toggle on/off di settings
+* Toggle on/off in settings
 * Click sound & victory sound
 
 ---
@@ -268,10 +268,10 @@ domino/
 ## ⚙️ Configuration
 
 ### Change Score Limit
-Settings → Score Limit → Enter nilai (contoh: 50, 101, 200)
+Settings → Score Limit → Enter value (example: 50, 101, 200)
 
 ### Change Theme
-Settings → Color Theme → Pilih warna
+Settings → Color Theme → Choose color
 
 ### Toggle Features
 * Sound Effects: ON/OFF
@@ -284,10 +284,10 @@ Settings → Color Theme → Pilih warna
 ### Prerequisites
 
 ```bash
-# Node.js (optional, untuk development server)
+# Node.js (optional, for development server)
 node --version
 
-# Python (alternative, untuk simple server)
+# Python (alternative, for simple server)
 python --version
 
 # Git
@@ -303,7 +303,7 @@ cd domino
 
 # Run development server
 python -m http.server 8000
-# atau
+# or
 npx http-server
 ```
 
@@ -364,34 +364,34 @@ Contributions are welcome! 🎉
 
 ### 📱 APK Download & Installation
 
-**Q: Apakah APK ini aman?**  
-A: Ya, APK ini adalah PWA (Progressive Web App) wrapper yang aman. Tidak ada akses ke data sensitif.
+**Q: Is this APK safe?**  
+A: Yes, this APK is a safe PWA (Progressive Web App) wrapper. No access to sensitive data.
 
-**Q: Kenapa butuh internet saat pertama kali buka?**  
-A: APK ini adalah PWA wrapper yang perlu load assets dari web. Setelah first load, bisa digunakan offline.
+**Q: Why does it need internet when first opened?**  
+A: This APK is a PWA wrapper that needs to load assets from the web. After first load, it can be used completely offline.
 
-**Q: Apakah ini native Android app?**  
-A: Versi 2.2 ini adalah Hybrid. Menggunakan teknologi Web tetapi dibungkus sebagai Native App untuk pengalaman Full Screen tanpa browser bar.
+**Q: Is this a native Android app?**  
+A: Version 2.2 is Hybrid. Uses Web technology but wrapped as a Native App for Full Screen experience without browser bar.
 
-**Q: Kenapa size APK-nya kecil?**  
-A: Karena asset utama di-load secara efisien dari web saat first run.
+**Q: Why is the APK size small?**  
+A: Because main assets are loaded efficiently from the web at first run.
 
-**Q: Link download APK tidak bisa diakses?**  
-A: Gunakan mirror alternatif yang tersedia (MediaFire, APKAdmin, atau SFile).
+**Q: APK download link not accessible?**  
+A: Use available alternative mirrors (MediaFire, APKAdmin, or SFile).
 
 ### 🎮 Gameplay
 
-**Q: Bagaimana cara menghitung skor?**  
-A: Tap area skor atau tombol "+", lalu gunakan calculator untuk hitung total dari kartu domino Anda.
+**Q: How to calculate score?**  
+A: Tap the score area or "+" button, then use calculator to count total from your domino cards.
 
-**Q: Apa yang terjadi jika mencapai 101 poin?**  
-A: Tim yang mencapai 101 poin = KALAH. Lawan adalah pemenangnya!
+**Q: What happens when reaching 101 points?**  
+A: Team that reaches 101 points = LOSES. Opponent is the winner!
 
-**Q: Bisa ubah batas skor?**  
-A: Ya, masuk ke Settings → Score Limit, ubah sesuai keinginan (default 101).
+**Q: Can I change the score limit?**  
+A: Yes, go to Settings → Score Limit, change as desired (default 101).
 
-**Q: Data tersimpan dimana?**  
-A: Data disimpan di LocalStorage browser/app. Tidak perlu koneksi server.
+**Q: Where is data saved?**  
+A: Data is saved in browser/app LocalStorage. No server connection needed.
 
 ---
 
@@ -432,9 +432,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 💖 Support
 
-Suka dengan project ini?
+Like this project?
 
-* ⭐ Star repository ini
+* ⭐ Star this repository
 * 🐛 Report bugs
 * 💡 Suggest new features
 * ☕ Buy me a coffee

@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="css/style.css">
     
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#8b5cf6">
+    <meta name="theme-color" content="#6366f1">
     
     <link rel="icon" href="img/icon-192.png" type="image/png">
     <link rel="apple-touch-icon" href="img/icon-192.png">
@@ -20,7 +20,7 @@
 
     <div class="app-container">
         
-        <!-- Modern Header with Glass Effect -->
+        <!-- Header -->
         <header class="app-header">
             <div class="brand-container">
                 <div class="brand-icon">
@@ -35,10 +35,10 @@
                 <div class="round-badge">
                     <div class="badge-content">
                         <i class="fas fa-crown"></i>
-                        <span>Round <strong id="roundCount">1</strong></span>
+                        <span>Ronde <strong id="roundCount">1</strong></span>
                     </div>
                 </div>
-                <button class="btn-icon modern" onclick="toggleSettings(); console.log('Button clicked!');" style="position: relative; z-index: 10000; cursor: pointer;">
+                <button class="btn-icon modern" onclick="toggleSettings()">
                     <i class="fas fa-sliders"></i>
                 </button>
             </div>
@@ -58,18 +58,18 @@
             <div class="modern-player-card player-1" id="card-0">
                 <div class="winner-ribbon" id="badge-0">
                     <i class="fas fa-trophy"></i>
-                    <span>Last Winner!</span>
+                    <span>Pemenang!</span>
                 </div>
                 
-                <button class="quick-reset modern" onclick="quickResetPlayer(0)" title="Reset skor pemain">
+                <button class="quick-reset modern" onclick="quickResetPlayer(0)" title="Reset skor">
                     <i class="fas fa-rotate-right"></i>
                 </button>
                 
                 <div class="player-header">
                     <div class="player-info">
                         <span class="player-number">01</span>
-                        <span class="player-name">TIM ALPHA</span>
-                        <div class="win-badge">
+                        <span class="player-name editable-name" id="player-name-0" onclick="openEditName(0)" title="Ketuk untuk ubah nama">TIM ALPHA</span>
+                        <div class="win-badge" title="Total kemenangan">
                             <i class="fas fa-star"></i>
                             <span id="win-0">0</span>
                         </div>
@@ -80,7 +80,7 @@
                     <div class="score-value" id="score-0">0</div>
                     <div class="score-tap-hint">
                         <i class="fas fa-hand-pointer"></i>
-                        <span>Tap to add</span>
+                        <span>Ketuk untuk tambah</span>
                     </div>
                 </div>
 
@@ -89,25 +89,28 @@
                     <div class="progress-text" id="progress-text-0">0 / 101</div>
                 </div>
 
-                <div class="remaining-text" id="remain-0">Kurang 101 lagi</div>
+                <div class="remaining-text" id="remain-0">Batas tersisa: 101</div>
 
                 <div class="history-section">
                     <div class="history-header">
                         <i class="fas fa-history"></i>
-                        <span>History</span>
+                        <span>Riwayat</span>
                     </div>
                     <div class="history-chips" id="history-0">
-                        <div class="empty-history">No scores yet</div>
+                        <div class="empty-history">Belum ada skor</div>
                     </div>
                 </div>
 
                 <div class="card-actions">
-                    <button class="action-btn minus" onclick="updateScore(0, -1)">
+                    <button class="action-btn undo" id="undo-btn-0" onclick="undoLastScore(0)" style="display:none;" title="Batalkan skor terakhir">
+                        <i class="fas fa-rotate-left"></i>
+                    </button>
+                    <button class="action-btn minus" onclick="updateScore(0, -1)" title="Kurangi 1">
                         <i class="fas fa-minus"></i>
                     </button>
                     <button class="action-btn plus" onclick="openCalculator(0)">
                         <i class="fas fa-plus"></i>
-                        <span>Add Score</span>
+                        <span>Tambah Skor</span>
                     </button>
                 </div>
             </div>
@@ -123,18 +126,18 @@
             <div class="modern-player-card player-2" id="card-1">
                 <div class="winner-ribbon" id="badge-1">
                     <i class="fas fa-trophy"></i>
-                    <span>Last Winner!</span>
+                    <span>Pemenang!</span>
                 </div>
                 
-                <button class="quick-reset modern" onclick="quickResetPlayer(1)" title="Reset skor pemain">
+                <button class="quick-reset modern" onclick="quickResetPlayer(1)" title="Reset skor">
                     <i class="fas fa-rotate-right"></i>
                 </button>
                 
                 <div class="player-header">
                     <div class="player-info">
                         <span class="player-number">02</span>
-                        <span class="player-name">TIM BETA</span>
-                        <div class="win-badge">
+                        <span class="player-name editable-name" id="player-name-1" onclick="openEditName(1)" title="Ketuk untuk ubah nama">TIM BETA</span>
+                        <div class="win-badge" title="Total kemenangan">
                             <i class="fas fa-star"></i>
                             <span id="win-1">0</span>
                         </div>
@@ -145,7 +148,7 @@
                     <div class="score-value" id="score-1">0</div>
                     <div class="score-tap-hint">
                         <i class="fas fa-hand-pointer"></i>
-                        <span>Tap to add</span>
+                        <span>Ketuk untuk tambah</span>
                     </div>
                 </div>
 
@@ -154,38 +157,41 @@
                     <div class="progress-text" id="progress-text-1">0 / 101</div>
                 </div>
 
-                <div class="remaining-text" id="remain-1">Kurang 101 lagi</div>
+                <div class="remaining-text" id="remain-1">Batas tersisa: 101</div>
 
                 <div class="history-section">
                     <div class="history-header">
                         <i class="fas fa-history"></i>
-                        <span>History</span>
+                        <span>Riwayat</span>
                     </div>
                     <div class="history-chips" id="history-1">
-                        <div class="empty-history">No scores yet</div>
+                        <div class="empty-history">Belum ada skor</div>
                     </div>
                 </div>
 
                 <div class="card-actions">
-                    <button class="action-btn minus" onclick="updateScore(1, -1)">
+                    <button class="action-btn undo" id="undo-btn-1" onclick="undoLastScore(1)" style="display:none;" title="Batalkan skor terakhir">
+                        <i class="fas fa-rotate-left"></i>
+                    </button>
+                    <button class="action-btn minus" onclick="updateScore(1, -1)" title="Kurangi 1">
                         <i class="fas fa-minus"></i>
                     </button>
                     <button class="action-btn plus" onclick="openCalculator(1)">
                         <i class="fas fa-plus"></i>
-                        <span>Add Score</span>
+                        <span>Tambah Skor</span>
                     </button>
                 </div>
             </div>
         </main>
     </div>
 
-    <!-- Modern Calculator Modal -->
+    <!-- Calculator Modal -->
     <div class="overlay" id="calculatorOverlay" onclick="closeCalculatorOnOutside(event)">
         <div class="modern-modal calculator-modal">
             <div class="modal-handle"></div>
             
             <div class="calc-header">
-                <span>Calculator</span>
+                <span>Kalkulator</span>
                 <button class="close-btn" onclick="document.getElementById('calculatorOverlay').classList.remove('active')">
                     <i class="fas fa-times"></i>
                 </button>
@@ -230,7 +236,7 @@
             <div class="modal-handle"></div>
             
             <div class="modal-header">
-                <h3><i class="fas fa-sliders"></i> Settings</h3>
+                <h3><i class="fas fa-sliders"></i> Pengaturan</h3>
                 <button class="close-btn" onclick="toggleSettings()">
                     <i class="fas fa-times"></i>
                 </button>
@@ -238,10 +244,10 @@
             
             <div class="settings-content">
                 <!-- Theme Selection -->
-                <div class="setting-group">
+                <div class="setting-group setting-group-theme">
                     <div class="setting-label">
                         <i class="fas fa-palette"></i>
-                        <span>Color Theme</span>
+                        <span>Tema Warna</span>
                     </div>
                     <div class="theme-options">
                         <button class="theme-option purple active" onclick="setTheme('purple')">
@@ -267,11 +273,11 @@
                 <div class="setting-group">
                     <div class="setting-label">
                         <i class="fas fa-flag-checkered"></i>
-                        <span>Score Limit</span>
+                        <span>Batas Skor</span>
                     </div>
                     <div class="input-group">
                         <input type="number" id="limitInput" value="101" onchange="updateLimit(this.value)" min="10" max="999">
-                        <span class="input-suffix">points</span>
+                        <span class="input-suffix">poin</span>
                     </div>
                 </div>
 
@@ -279,7 +285,7 @@
                 <div class="setting-group">
                     <div class="setting-label">
                         <i class="fas fa-volume-high"></i>
-                        <span>Sound Effects</span>
+                        <span>Efek Suara</span>
                     </div>
                     <label class="toggle-switch">
                         <input type="checkbox" id="soundToggle" onchange="toggleSound()" checked>
@@ -291,7 +297,7 @@
                 <div class="setting-group">
                     <div class="setting-label">
                         <i class="fas fa-compress"></i>
-                        <span>Compact Mode</span>
+                        <span>Mode Ringkas</span>
                     </div>
                     <label class="toggle-switch">
                         <input type="checkbox" id="compactToggle" onchange="toggleCompactMode()">
@@ -303,21 +309,21 @@
                 <div class="settings-actions">
                     <button class="settings-btn primary" onclick="resetRound()">
                         <i class="fas fa-rotate"></i>
-                        <span>New Round</span>
+                        <span>Ronde Baru</span>
                     </button>
                     <button class="settings-btn danger" onclick="hardReset()">
                         <i class="fas fa-trash"></i>
-                        <span>Reset All</span>
+                        <span>Reset Semua</span>
                     </button>
                     <button class="settings-btn info" onclick="openAbout()">
                         <i class="fas fa-info-circle"></i>
-                        <span>About</span>
+                        <span>Tentang Aplikasi</span>
                     </button>
                 </div>
 
                 <!-- Social Links -->
                 <div class="social-section">
-                    <p class="social-label">Follow Me:</p>
+                    <p class="social-label">Ikuti Saya:</p>
                     <div class="social-links">
                         <a href="https://www.instagram.com/farrelauliairfealdo_" target="_blank" class="social-link ig">
                             <i class="fa-brands fa-instagram"></i>
@@ -329,7 +335,7 @@
                             <i class="fa-brands fa-telegram"></i>
                         </a>
                     </div>
-                    <p class="developer-credit">Made with ❤️ by Farrel Aulia Irfealdo</p>
+                    <p class="developer-credit">Dibuat dengan ❤️ oleh Farrel Aulia Irfealdo</p>
                 </div>
             </div>
         </div>
@@ -344,24 +350,32 @@
                 <i class="fas fa-trophy"></i>
             </div>
             
-            <h2 class="congrats-text">Victory!</h2>
+            <h2 class="congrats-text">Menang!</h2>
             <p class="winner-announce">
-                <span id="winnerName">Tim 1</span> Wins!
+                <span id="winnerName">Tim 1</span> Memenangkan Ronde Ini!
             </p>
             
+            <!-- Kedua skor ditampilkan -->
             <div class="final-score-display">
-                <span class="final-score-label">Final Score</span>
-                <span class="final-score-value" id="finalScore">0</span>
+                <div class="final-score-row winner-row">
+                    <span class="final-score-name" id="finalWinnerName">—</span>
+                    <span class="final-score-value winner" id="finalScoreWinner">0</span>
+                </div>
+                <div class="final-score-divider">VS</div>
+                <div class="final-score-row loser-row">
+                    <span class="final-score-name" id="finalLoserName">—</span>
+                    <span class="final-score-value loser" id="finalScoreLoser">0</span>
+                </div>
             </div>
             
             <div class="gameover-actions">
                 <button class="gameover-btn primary" onclick="resetRound(); document.getElementById('gameOverModal').classList.remove('active')">
                     <i class="fas fa-play"></i>
-                    New Round
+                    Ronde Baru
                 </button>
                 <button class="gameover-btn secondary" onclick="document.getElementById('gameOverModal').classList.remove('active')">
                     <i class="fas fa-eye"></i>
-                    View Scores
+                    Lihat Skor
                 </button>
             </div>
         </div>
@@ -373,10 +387,10 @@
             <div class="confirm-icon">
                 <i class="fas fa-exclamation-triangle"></i>
             </div>
-            <h3 id="confirmMessage">Are you sure?</h3>
+            <h3 id="confirmMessage">Apakah Anda yakin?</h3>
             <div class="confirm-actions">
-                <button class="confirm-btn cancel" onclick="closeConfirmModal()">Cancel</button>
-                <button class="confirm-btn confirm" onclick="executeConfirm()">Confirm</button>
+                <button class="confirm-btn cancel" onclick="closeConfirmModal()">Batal</button>
+                <button class="confirm-btn confirm" onclick="executeConfirm()">Konfirmasi</button>
             </div>
         </div>
     </div>
@@ -387,10 +401,27 @@
             <div class="delete-icon">
                 <i class="fas fa-trash-alt"></i>
             </div>
-            <p id="deleteScoreMessage">Delete this score?</p>
+            <p id="deleteScoreMessage">Hapus skor ini?</p>
             <div class="delete-actions">
-                <button class="delete-btn cancel" onclick="closeDeleteScoreModal()">Cancel</button>
-                <button class="delete-btn confirm" onclick="executeDeleteScore()">Delete</button>
+                <button class="delete-btn cancel" onclick="closeDeleteScoreModal()">Batal</button>
+                <button class="delete-btn confirm" onclick="executeDeleteScore()">Hapus</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Name Modal -->
+    <div class="delete-modal" id="editNameModal">
+        <div class="delete-modal-content">
+            <div class="delete-icon" style="color: var(--primary);">
+                <i class="fas fa-pen"></i>
+            </div>
+            <p>Ubah Nama Tim</p>
+            <input type="hidden" id="editNamePlayer" value="0">
+            <input type="text" id="editNameInput" class="edit-name-input" placeholder="Nama tim..." maxlength="16"
+                   onkeydown="if(event.key==='Enter') saveEditName()">
+            <div class="delete-actions">
+                <button class="delete-btn cancel" onclick="closeEditNameModal()">Batal</button>
+                <button class="delete-btn confirm" style="background: linear-gradient(135deg, var(--primary), var(--secondary)); border: none;" onclick="saveEditName()">Simpan</button>
             </div>
         </div>
     </div>
@@ -401,7 +432,7 @@
             <div class="modal-handle"></div>
             
             <div class="modal-header">
-                <h3><i class="fas fa-info-circle"></i> About</h3>
+                <h3><i class="fas fa-info-circle"></i> Tentang Aplikasi</h3>
                 <button class="close-btn" onclick="closeAbout()">
                     <i class="fas fa-times"></i>
                 </button>
@@ -413,34 +444,35 @@
                         <i class="fas fa-dice-d6"></i>
                     </div>
                     <h2>Domino Score NullXD</h2>
-                    <p class="version">Version 2.0.1</p>
+                    <p class="version">Versi 2.2</p>
                 </div>
 
                 <div class="about-section">
-                    <h4><i class="fas fa-star"></i> Features</h4>
+                    <h4><i class="fas fa-star"></i> Fitur</h4>
                     <ul class="feature-list">
-                        <li><i class="fas fa-check"></i> Modern & Beautiful UI</li>
-                        <li><i class="fas fa-check"></i> Real-time Score Tracking</li>
-                        <li><i class="fas fa-check"></i> Built-in Calculator</li>
-                        <li><i class="fas fa-check"></i> Multiple Theme Options</li>
-                        <li><i class="fas fa-check"></i> Score History</li>
-                        <li><i class="fas fa-check"></i> Auto-save Progress</li>
-                        <li><i class="fas fa-check"></i> PWA Support</li>
+                        <li><i class="fas fa-check"></i> UI Modern & Elegan</li>
+                        <li><i class="fas fa-check"></i> Pelacakan Skor Real-time</li>
+                        <li><i class="fas fa-check"></i> Kalkulator Bawaan</li>
+                        <li><i class="fas fa-check"></i> Pilihan Tema Warna</li>
+                        <li><i class="fas fa-check"></i> Riwayat Skor & Undo</li>
+                        <li><i class="fas fa-check"></i> Nama Tim Dapat Diedit</li>
+                        <li><i class="fas fa-check"></i> Penyimpanan Otomatis</li>
+                        <li><i class="fas fa-check"></i> Dukungan PWA</li>
                     </ul>
                 </div>
 
                 <div class="about-section">
-                    <h4><i class="fas fa-code"></i> Developer</h4>
+                    <h4><i class="fas fa-code"></i> Pengembang</h4>
                     <p class="dev-info">
-                        Created by <strong>Farrel Aulia Irfealdo</strong><br>
-                        with love from Indonesia 🇮🇩
+                        Dibuat oleh <strong>Farrel Aulia Irfealdo</strong><br>
+                        dengan cinta dari Indonesia 🇮🇩
                     </p>
                 </div>
 
                 <div class="donate-section">
                     <a href="https://saweria.co/nullxd" target="_blank" class="donate-btn">
                         <i class="fas fa-coffee"></i>
-                        Support via Saweria
+                        Dukung via Saweria
                     </a>
                 </div>
             </div>
@@ -457,11 +489,7 @@
         // Service Worker
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', function() {
-                navigator.serviceWorker.register('sw.js').then(function(registration) {
-                    console.log('ServiceWorker registered');
-                }, function(err) {
-                    console.log('ServiceWorker failed:', err);
-                });
+                navigator.serviceWorker.register('sw.js');
             });
         }
     </script>

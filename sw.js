@@ -1,4 +1,4 @@
-const CACHE_NAME = 'domino-score-v2.0.1';
+const CACHE_NAME = 'domino-score-v2.2';
 const BASE_PATH = '/domino';
 
 const urlsToCache = [

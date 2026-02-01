@@ -1,29 +1,29 @@
 # 📝 CHANGELOG
 
-🌐 **Bahasa:** [English](CHANGELOG_EN.md) | [Indonesia](CHANGELOG.md)
+🌐 **Language:** [English](CHANGELOG_EN.md) | [Indonesia](CHANGELOG.md)
 
-> Catatan perubahan dan riwayat versi Domino Score NullXD
+> Version history and release notes for Domino Score NullXD
 
 ---
 
 ## Version 2.2 (2026-02-02) - Android Native Edition 🚀
 
 ### ✨ New Features
-- 📱 **Official APK Release:** Aplikasi Android native dengan ikon Cube official dan full-screen experience
-- 🎯 **Native App Experience:** Menghilangkan browser bar untuk pengalaman yang lebih immersive
-- 🛡️ **Safety Dialogs:** Konfirmasi dialog sebelum Reset dan Exit untuk mencegah aksi tidak disengaja
-- ⚡ **Hardware Acceleration:** Performa lebih cepat dengan GPU acceleration
+- 📱 **Official APK Release:** Native Android app with official Cube icon and full-screen experience
+- 🎯 **Native App Experience:** Removed browser bar for more immersive experience
+- 🛡️ **Safety Dialogs:** Confirmation dialogs before Reset and Exit to prevent accidental actions
+- ⚡ **Hardware Acceleration:** Faster performance with GPU acceleration
 
 ### 🔧 Improvements
-- 🎨 **Layout Optimization:** Kedua card pemain sekarang muat sempurna dalam satu layar (No Scroll)
-- 🚀 **Performance Boost:** Optimasi rendering dan animasi untuk pengalaman yang lebih smooth
-- 📱 **Android Optimization:** Khusus dioptimalkan untuk perangkat Android
-- 💾 **Better APK Packaging:** APK size lebih kecil dengan efficient asset loading
+- 🎨 **Layout Optimization:** Both player cards now fit perfectly on one screen (No Scroll)
+- 🚀 **Performance Boost:** Optimized rendering and animations for smoother experience
+- 📱 **Android Optimization:** Specifically optimized for Android devices
+- 💾 **Better APK Packaging:** Smaller APK size with efficient asset loading
 
 ### 🐛 Bug Fixes
-- ✅ Fixed score difference logic yang menunjukkan tim yang salah
-- ✅ Fixed layout overflow di layar kecil
-- ✅ Improved stability untuk long-running sessions
+- ✅ Fixed score difference logic showing wrong team
+- ✅ Fixed layout overflow on small screens
+- ✅ Improved stability for long-running sessions
 
 ---
 
@@ -34,39 +34,39 @@
 #### Score Difference Logic Fixed
 **File:** `js/app.js` - Lines 177-193
 
-**Masalah:**
+**Problem:**
 ```javascript
-// BEFORE - SALAH!
+// BEFORE - WRONG!
 if (scores[0] < scores[1]) {
-    diffEl.querySelector('.diff-text').textContent = `Tim Alpha Unggul +${diff}`;
-    // Padahal kalau scores[0] < scores[1], berarti Tim Beta yang unggul!
+    diffEl.querySelector('.diff-text').textContent = `Team Alpha Leading +${diff}`;
+    // But if scores[0] < scores[1], it means Team Beta is leading!
 }
 ```
 
-**Diperbaiki:**
+**Fixed:**
 ```javascript
-// AFTER - BENAR!
+// AFTER - CORRECT!
 if (scores[0] > scores[1]) {
-    // FIXED: Tim Alpha (player 0) unggul jika scores[0] > scores[1]
-    diffEl.querySelector('.diff-text').textContent = `Tim Alpha Unggul +${diff}`;
+    // FIXED: Team Alpha (player 0) leads if scores[0] > scores[1]
+    diffEl.querySelector('.diff-text').textContent = `Team Alpha Leading +${diff}`;
     diffEl.className = 'score-diff-card leading-p1';
 } else {
-    // FIXED: Tim Beta (player 1) unggul jika scores[1] > scores[0]
-    diffEl.querySelector('.diff-text').textContent = `Tim Beta Unggul +${diff}`;
+    // FIXED: Team Beta (player 1) leads if scores[1] > scores[0]
+    diffEl.querySelector('.diff-text').textContent = `Team Beta Leading +${diff}`;
     diffEl.className = 'score-diff-card leading-p2';
 }
 ```
 
 ### 🎨 Layout Optimizations
 
-**Masalah:** Kedua player card tidak muat dalam satu layar, harus scroll
+**Problem:** Both player cards didn't fit on one screen, scrolling required
 
-**Solusi:** Optimasi padding, margin, dan ukuran elemen
+**Solution:** Optimized padding, margins, and element sizes
 
-#### Detail Perubahan:
+#### Change Details:
 
-| Element | Before | After | Pengurangan |
-|---------|--------|-------|-------------|
+| Element | Before | After | Reduction |
+|---------|--------|-------|-----------|
 | **Container** |
 | padding | 20px | 12px | -40% |
 | **Header** |
@@ -86,15 +86,15 @@ if (scores[0] > scores[1]) {
 | **Action Buttons** |
 | height | 56px | 48px | -14% |
 
-#### Hasil:
-- **Total tinggi dikurangi:** ~200-250px
-- **Kedua card sekarang muat sempurna dalam satu layar** ✅
-- **Tidak perlu scroll lagi!** 🎉
+#### Result:
+- **Total height saved:** ~200-250px
+- **Both cards now fit perfectly on one screen** ✅
+- **No scrolling needed!** 🎉
 
-### 📊 Perbandingan Visual
+### 📊 Visual Comparison
 
 ```
-SEBELUM (Original):
+BEFORE (Original):
 ┌─────────────────┐
 │    Header       │ 88px
 ├─────────────────┤
@@ -105,15 +105,15 @@ SEBELUM (Original):
 │   Card          │ ~420px
 │                 │
 ├─────────────────┤
-│                 │  ← PERLU SCROLL!
+│                 │  ← SCROLLING NEEDED!
 │   Player 2      │
-│   Card          │ ~420px (TERSEMBUNYI)
+│   Card          │ ~420px (HIDDEN)
 │                 │
 └─────────────────┘
 Total: ~1000px+
 
 
-SESUDAH (Optimized):
+AFTER (Optimized):
 ┌─────────────────┐
 │    Header       │ 62px
 ├─────────────────┤
@@ -124,12 +124,12 @@ SESUDAH (Optimized):
 │   Card          │ ~310px
 │                 │
 ├─────────────────┤
-│                 │  ← SEMUA MUAT!
+│                 │  ← EVERYTHING FITS!
 │   Player 2      │
 │   Card          │ ~310px
 │                 │
 └─────────────────┘
-Total: ~750px (muat di hampir semua layar!)
+Total: ~750px (fits on most screens!)
 ```
 
 ---
@@ -137,33 +137,33 @@ Total: ~750px (muat di hampir semua layar!)
 ## Version 2.0.0 (2025-12) - Major Redesign 🎨
 
 ### ✨ Major Features
-- 🎨 **Complete UI/UX Redesign:** Interface modern dengan glassmorphism effect
-- 📱 **PWA Support:** Install sebagai aplikasi di desktop dan mobile
-- 🎵 **Sound Effects:** Audio feedback untuk click dan victory
+- 🎨 **Complete UI/UX Redesign:** Modern interface with glassmorphism effect
+- 📱 **PWA Support:** Install as app on desktop and mobile
+- 🎵 **Sound Effects:** Audio feedback for clicks and victory
 - 🎨 **4 Color Themes:** Purple (default), Blue, Green, Pink
-- 🌙 **Dark Mode:** Theme gelap untuk kenyamanan mata
-- 📊 **Score History:** Track semua perubahan skor
-- 🧮 **Calculator Mode:** Kalkulator terintegrasi untuk perhitungan cepat
+- 🌙 **Dark Mode:** Dark theme for eye comfort
+- 📊 **Score History:** Track all score changes
+- 🧮 **Calculator Mode:** Integrated calculator for quick calculations
 
 ### 🎯 Core Features
 - ✅ Real-time score tracking
-- ✅ Win counter untuk tiap tim
-- ✅ Progress bar visual
+- ✅ Win counter for each team
+- ✅ Visual progress bar
 - ✅ Score difference indicator
 - ✅ Customizable score limit
 
 ### 🔧 Technical Improvements
 - ⚡ Hardware accelerated animations
-- 💾 LocalStorage untuk auto-save
-- 🔄 Service Worker untuk offline mode
-- 📱 Responsive design untuk semua ukuran layar
+- 💾 LocalStorage for auto-save
+- 🔄 Service Worker for offline mode
+- 📱 Responsive design for all screen sizes
 
 ---
 
 ## Version 1.0.0 (2025-11) - Initial Release 🎉
 
 ### ✨ Features
-- ✅ Basic score tracking untuk 2 pemain
+- ✅ Basic score tracking for 2 players
 - ✅ Add/Remove score functionality
 - ✅ Win detection
 - ✅ Reset game
@@ -181,12 +181,12 @@ Total: ~750px (muat di hampir semua layar!)
 
 ### Version 2.1
 - ✅ **js/app.js:** Fixed score difference logic
-- ✅ **css/style.css:** Optimized layout untuk no-scroll design
+- ✅ **css/style.css:** Optimized layout for no-scroll design
 
 ### Version 2.0
 - ✅ **index.html:** Complete restructure
 - ✅ **css/style.css:** New design system
-- ✅ **js/app.js:** Refactored dengan new features
+- ✅ **js/app.js:** Refactored with new features
 - ✅ **manifest.json:** PWA configuration
 - ✅ **sw.js:** Service Worker implementation
 - ✅ **Audio files:** Added sound effects
@@ -218,14 +218,14 @@ Total: ~750px (muat di hampir semua layar!)
 ## 🐛 Known Issues
 
 ### Current Issues (v2.2)
-- Audio autoplay mungkin diblokir browser (memerlukan user interaction)
-- Beberapa browser lama mungkin tidak support semua CSS features
+- Audio autoplay might be blocked by browser (requires user interaction)
+- Some older browsers might not support all CSS features
 
 ### Fixed Issues
-- ✅ Score difference menunjukkan tim yang salah (v2.1)
-- ✅ Layout overflow di layar kecil (v2.1)
-- ✅ Progress bar tidak update dengan benar (v2.0)
-- ✅ History tidak tersimpan setelah refresh (v2.0)
+- ✅ Score difference showing wrong team (v2.1)
+- ✅ Layout overflow on small screens (v2.1)
+- ✅ Progress bar not updating correctly (v2.0)
+- ✅ History not saved after refresh (v2.0)
 
 ---
 
@@ -257,7 +257,7 @@ Nov 2025  ──►  Dec 2025  ──►  Jan 2026  ──►  Feb 2026
 
 ## 📞 Support & Feedback
 
-Menemukan bug atau punya saran?
+Found a bug or have suggestions?
 - 🐛 **Report Bug:** [GitHub Issues](https://github.com/nullxdbot/domino/issues)
 - 💡 **Request Feature:** [GitHub Issues](https://github.com/nullxdbot/domino/issues)
 - 💬 **Discussion:** [GitHub Discussions](https://github.com/nullxdbot/domino/discussions)

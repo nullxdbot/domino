@@ -350,10 +350,154 @@ body {
 }
 
 .player-name {
+
+.player-name.editable-name {
+    cursor: pointer;
+    position: relative;
+    padding-right: 18px;
+}
+
+.player-name.editable-name::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    font-size: 10px;
+    color: var(--text-muted);
+    opacity: 0.5;
+    transition: opacity 0.2s;
+}
+
+.player-name.editable-name:hover::after {
+    opacity: 1;
+}
     font-size: 14px;
+
+.player-name.editable-name {
+    cursor: pointer;
+    position: relative;
+    padding-right: 18px;
+}
+
+.player-name.editable-name::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    font-size: 10px;
+    color: var(--text-muted);
+    opacity: 0.5;
+    transition: opacity 0.2s;
+}
+
+.player-name.editable-name:hover::after {
+    opacity: 1;
+}
     font-weight: 700;
+
+.player-name.editable-name {
+    cursor: pointer;
+    position: relative;
+    padding-right: 18px;
+}
+
+.player-name.editable-name::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    font-size: 10px;
+    color: var(--text-muted);
+    opacity: 0.5;
+    transition: opacity 0.2s;
+}
+
+.player-name.editable-name:hover::after {
+    opacity: 1;
+}
     letter-spacing: 1px;
+
+.player-name.editable-name {
+    cursor: pointer;
+    position: relative;
+    padding-right: 18px;
+}
+
+.player-name.editable-name::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    font-size: 10px;
+    color: var(--text-muted);
+    opacity: 0.5;
+    transition: opacity 0.2s;
+}
+
+.player-name.editable-name:hover::after {
+    opacity: 1;
+}
     color: var(--text-primary);
+
+.player-name.editable-name {
+    cursor: pointer;
+    position: relative;
+    padding-right: 18px;
+}
+
+.player-name.editable-name::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    font-size: 10px;
+    color: var(--text-muted);
+    opacity: 0.5;
+    transition: opacity 0.2s;
+}
+
+.player-name.editable-name:hover::after {
+    opacity: 1;
+}
+}
+
+.player-name.editable-name {
+    cursor: pointer;
+    position: relative;
+    padding-right: 18px;
+}
+
+.player-name.editable-name::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    font-size: 10px;
+    color: var(--text-muted);
+    opacity: 0.5;
+    transition: opacity 0.2s;
+}
+
+.player-name.editable-name:hover::after {
+    opacity: 1;
 }
 
 .win-badge {
@@ -514,12 +658,100 @@ body {
 
 /* Remaining Text */
 .remaining-text {
+
+.remaining-text.danger {
+    color: var(--danger);
+    font-weight: 700;
+    animation: pulse-text 1.2s ease-in-out infinite;
+}
+
+@keyframes pulse-text {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
     text-align: center;
+
+.remaining-text.danger {
+    color: var(--danger);
+    font-weight: 700;
+    animation: pulse-text 1.2s ease-in-out infinite;
+}
+
+@keyframes pulse-text {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
     font-size: 12px;
+
+.remaining-text.danger {
+    color: var(--danger);
+    font-weight: 700;
+    animation: pulse-text 1.2s ease-in-out infinite;
+}
+
+@keyframes pulse-text {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
     font-weight: 600;
+
+.remaining-text.danger {
+    color: var(--danger);
+    font-weight: 700;
+    animation: pulse-text 1.2s ease-in-out infinite;
+}
+
+@keyframes pulse-text {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
     color: var(--text-secondary);
+
+.remaining-text.danger {
+    color: var(--danger);
+    font-weight: 700;
+    animation: pulse-text 1.2s ease-in-out infinite;
+}
+
+@keyframes pulse-text {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
     margin-bottom: 10px;
+
+.remaining-text.danger {
+    color: var(--danger);
+    font-weight: 700;
+    animation: pulse-text 1.2s ease-in-out infinite;
+}
+
+@keyframes pulse-text {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
     letter-spacing: 0.5px;
+
+.remaining-text.danger {
+    color: var(--danger);
+    font-weight: 700;
+    animation: pulse-text 1.2s ease-in-out infinite;
+}
+
+@keyframes pulse-text {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+}
+
+.remaining-text.danger {
+    color: var(--danger);
+    font-weight: 700;
+    animation: pulse-text 1.2s ease-in-out infinite;
+}
+
+@keyframes pulse-text {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
 }
 
 /* History Section */
@@ -598,7 +830,7 @@ body {
 
 .hist-delete-icon {
     font-size: 10px;
-    opacity: 0;
+    opacity: 0.4;
     transition: opacity 0.2s ease;
 }
 
@@ -626,6 +858,18 @@ body {
     font-size: 16px;
     font-weight: 700;
     color: white;
+}
+
+.action-btn.undo {
+    flex: 0 0 48px;
+    background: rgba(139, 92, 246, 0.1);
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    color: var(--primary);
+}
+
+.action-btn.undo:hover {
+    background: rgba(139, 92, 246, 0.2);
+    transform: scale(1.05);
 }
 
 .action-btn.minus {
@@ -1560,4 +1804,129 @@ input:checked + .toggle-slider:before {
 
 .scoreboard.compact .history-section {
     display: none;
+}
+
+/* ===== CONFETTI ===== */
+.confetti-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.confetti-piece {
+    position: absolute;
+    top: -20px;
+    animation: confetti-fall 2.5s ease-in forwards;
+}
+
+@keyframes confetti-fall {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+    70% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(500px) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+/* ===== EDIT NAME INPUT ===== */
+.edit-name-input {
+    width: 100%;
+    padding: 14px 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    color: var(--text-primary);
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+    margin: 8px 0 20px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.edit-name-input:focus {
+    border-color: var(--primary);
+}
+
+.edit-name-input::placeholder {
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+/* ===== GAME OVER — DUAL SCORE DISPLAY ===== */
+.final-score-display {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--border-radius-sm);
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: relative;
+    z-index: 1;
+}
+
+.final-score-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 0;
+}
+
+.final-score-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-secondary);
+    letter-spacing: 0.5px;
+}
+
+.final-score-value {
+    font-size: 36px;
+    font-weight: 900;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.final-score-value.winner {
+    background: linear-gradient(135deg, var(--success), #34d399);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.final-score-value.loser {
+    background: linear-gradient(135deg, var(--danger), #f87171);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.winner-row .final-score-name {
+    color: var(--success);
+}
+
+.loser-row .final-score-name {
+    color: var(--danger);
+}
+
+.final-score-divider {
+    text-align: center;
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--text-muted);
+    letter-spacing: 2px;
+    padding: 4px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }

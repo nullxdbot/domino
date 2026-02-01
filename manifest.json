@@ -1,7 +1,7 @@
 {
   "name": "Domino Score NullXD",
   "short_name": "Domino Score",
-  "version": "2.0.1",
+  "version": "2.2",
   "description": "Score keeper untuk permainan domino",
   "start_url": "/domino/",
   "id": "/domino/",
@@ -64,25 +64,25 @@
   ],
   "screenshots": [
     {
-      "src": "img/screenshot1.png",
+      "src": "img/screenshot1.jpg",
       "sizes": "540x720",
       "type": "image/jpeg",
       "form_factor": "narrow",
-      "label": "Main score tracking screen"
+      "label": "Tampilan utama pelacakan skor"
     },
     {
-      "src": "img/screenshot2.png",
+      "src": "img/screenshot2.jpg",
       "sizes": "540x720",
       "type": "image/jpeg",
       "form_factor": "narrow",
-      "label": "Calculator interface"
+      "label": "Antarmuka kalkulator"
     },
     {
-      "src": "img/screenshot3.png",
+      "src": "img/screenshot3.jpg",
       "sizes": "540x720",
       "type": "image/jpeg",
       "form_factor": "narrow",
-      "label": "Settings panel"
+      "label": "Panel pengaturan"
     }
   ],
   "categories": ["games", "entertainment", "utilities"],
