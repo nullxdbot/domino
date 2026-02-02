@@ -20,7 +20,6 @@
 
     <div class="app-container">
         
-        <!-- Header -->
         <header class="app-header">
             <div class="brand-container">
                 <div class="brand-icon">
@@ -44,7 +43,6 @@
             </div>
         </header>
 
-        <!-- Score Difference Indicator -->
         <div class="score-diff-card" id="scoreDiff">
             <div class="diff-icon">
                 <i class="fas fa-balance-scale"></i>
@@ -54,7 +52,6 @@
 
         <main class="scoreboard" id="scoreboard">
             
-            <!-- Player 1 Card -->
             <div class="modern-player-card player-1" id="card-0">
                 <div class="winner-ribbon" id="badge-0">
                     <i class="fas fa-trophy"></i>
@@ -115,14 +112,12 @@
                 </div>
             </div>
 
-            <!-- VS Divider -->
             <div class="vs-section">
                 <div class="vs-circle">
                     <span>VS</span>
                 </div>
             </div>
 
-            <!-- Player 2 Card -->
             <div class="modern-player-card player-2" id="card-1">
                 <div class="winner-ribbon" id="badge-1">
                     <i class="fas fa-trophy"></i>
@@ -185,7 +180,6 @@
         </main>
     </div>
 
-    <!-- Calculator Modal -->
     <div class="overlay" id="calculatorOverlay" onclick="closeCalculatorOnOutside(event)">
         <div class="modern-modal calculator-modal">
             <div class="modal-handle"></div>
@@ -230,7 +224,6 @@
         </div>
     </div>
 
-    <!-- Settings Modal -->
     <div class="overlay" id="settingsOverlay" onclick="if(event.target.id==='settingsOverlay') toggleSettings()">
         <div class="modern-modal settings-modal">
             <div class="modal-handle"></div>
@@ -243,7 +236,6 @@
             </div>
             
             <div class="settings-content">
-                <!-- Theme Selection -->
                 <div class="setting-group setting-group-theme">
                     <div class="setting-label">
                         <i class="fas fa-palette"></i>
@@ -269,7 +261,6 @@
                     </div>
                 </div>
 
-                <!-- Limit Setting -->
                 <div class="setting-group">
                     <div class="setting-label">
                         <i class="fas fa-flag-checkered"></i>
@@ -281,7 +272,6 @@
                     </div>
                 </div>
 
-                <!-- Sound Toggle -->
                 <div class="setting-group">
                     <div class="setting-label">
                         <i class="fas fa-volume-high"></i>
@@ -293,7 +283,6 @@
                     </label>
                 </div>
 
-                <!-- Compact Mode -->
                 <div class="setting-group">
                     <div class="setting-label">
                         <i class="fas fa-compress"></i>
@@ -305,7 +294,6 @@
                     </label>
                 </div>
 
-                <!-- Action Buttons -->
                 <div class="settings-actions">
                     <button class="settings-btn primary" onclick="resetRound()">
                         <i class="fas fa-rotate"></i>
@@ -321,18 +309,23 @@
                     </button>
                 </div>
 
-                <!-- Social Links -->
                 <div class="social-section">
                     <p class="social-label">Ikuti Saya:</p>
                     <div class="social-links">
+                        <a href="https://whatsapp.com/channel/0029VawFbp2CHDyfgcHIo51h" target="_blank" class="social-link wa" style="background: #25D366;">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </a>
+                        <a href="https://t.me/farrelauliairfealdo" target="_blank" class="social-link tg">
+                            <i class="fa-brands fa-telegram"></i>
+                        </a>
                         <a href="https://www.instagram.com/farrelauliairfealdo_" target="_blank" class="social-link ig">
                             <i class="fa-brands fa-instagram"></i>
                         </a>
                         <a href="https://www.tiktok.com/@farrel.aulia.irfealdo" target="_blank" class="social-link tk">
                             <i class="fa-brands fa-tiktok"></i>
                         </a>
-                        <a href="https://t.me/farrelauliairfealdo" target="_blank" class="social-link tg">
-                            <i class="fa-brands fa-telegram"></i>
+                        <a href="https://youtube.com/@nullxd-md" target="_blank" class="social-link yt" style="background: #FF0000;">
+                            <i class="fa-brands fa-youtube"></i>
                         </a>
                     </div>
                     <p class="developer-credit">Dibuat dengan ❤️ oleh Farrel Aulia Irfealdo</p>
@@ -341,7 +334,6 @@
         </div>
     </div>
 
-    <!-- Game Over Modal -->
     <div class="overlay" id="gameOverModal">
         <div class="modern-modal gameover-modal">
             <div class="confetti-container" id="confetti"></div>
@@ -355,7 +347,6 @@
                 <span id="winnerName">Tim 1</span> Memenangkan Ronde Ini!
             </p>
             
-            <!-- Kedua skor ditampilkan -->
             <div class="final-score-display">
                 <div class="final-score-row winner-row">
                     <span class="final-score-name" id="finalWinnerName">—</span>
@@ -381,7 +372,6 @@
         </div>
     </div>
 
-    <!-- Confirm Modal -->
     <div class="overlay" id="confirmModal">
         <div class="modern-modal confirm-modal">
             <div class="confirm-icon">
@@ -395,7 +385,6 @@
         </div>
     </div>
 
-    <!-- Delete Score Modal -->
     <div class="delete-modal" id="deleteScoreModal">
         <div class="delete-modal-content">
             <div class="delete-icon">
@@ -409,7 +398,6 @@
         </div>
     </div>
 
-    <!-- Edit Name Modal -->
     <div class="delete-modal" id="editNameModal">
         <div class="delete-modal-content">
             <div class="delete-icon" style="color: var(--primary);">
@@ -426,7 +414,6 @@
         </div>
     </div>
 
-    <!-- About Modal -->
     <div class="overlay" id="aboutOverlay" onclick="if(event.target.id==='aboutOverlay') closeAbout()">
         <div class="modern-modal about-modal">
             <div class="modal-handle"></div>
@@ -470,23 +457,21 @@
                 </div>
 
                 <div class="donate-section">
-                    <a href="https://saweria.co/nullxd" target="_blank" class="donate-btn">
-                        <i class="fas fa-coffee"></i>
-                        Dukung via Saweria
+                    <a href="https://whatsapp.com/channel/0029VawFbp2CHDyfgcHIo51h" target="_blank" class="donate-btn">
+                        <i class="fa-brands fa-whatsapp"></i>
+                        Join WhatsApp Channel
                     </a>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Audio Elements -->
     <audio id="sfx-click" src="sfx/sfx-click.wav"></audio>
     <audio id="sfx-win" src="sfx/sfx-win.m4a"></audio>
 
     <script src="js/app.js"></script>
 
     <script>
-        // Service Worker
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', function() {
                 navigator.serviceWorker.register('sw.js');

@@ -41,7 +41,6 @@ body {
     padding-bottom: env(safe-area-inset-bottom);
 }
 
-/* ===== CONTAINER ===== */
 .app-container {
     max-width: 600px;
     margin: 0 auto;
@@ -53,7 +52,21 @@ body {
     z-index: 1;
 }
 
-/* ===== HEADER ===== */
+button:active, 
+.social-link:active, 
+.theme-option:active, 
+.settings-btn:active, 
+.score-display:active,
+.action-btn:active,
+.close-btn:active,
+.calc-btn:active,
+.gameover-btn:active,
+.donate-btn:active,
+.btn-icon:active,
+.quick-reset:active {
+    transform: scale(0.95) !important;
+}
+
 .app-header {
     background: var(--bg-card);
     backdrop-filter: blur(20px);
@@ -178,11 +191,6 @@ body {
     box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
 }
 
-.btn-icon.modern:active {
-    transform: scale(0.95);
-}
-
-/* ===== SCORE DIFFERENCE ===== */
 .score-diff-card {
     background: var(--bg-card);
     backdrop-filter: blur(20px);
@@ -234,7 +242,6 @@ body {
     color: white;
 }
 
-/* ===== PLAYER CARDS ===== */
 .scoreboard {
     display: flex;
     flex-direction: column;
@@ -269,7 +276,6 @@ body {
     background: linear-gradient(90deg, var(--secondary), #f472b6);
 }
 
-/* Winner Ribbon */
 .winner-ribbon {
     position: absolute;
     top: 20px;
@@ -291,7 +297,6 @@ body {
     font-size: 14px;
 }
 
-/* Quick Reset Button */
 .quick-reset.modern {
     position: absolute;
     top: 20px;
@@ -312,10 +317,8 @@ body {
 
 .quick-reset.modern:hover {
     background: rgba(239, 68, 68, 0.2);
-    transform: rotate(180deg) scale(1.1);
 }
 
-/* Player Header */
 .player-header {
     margin-bottom: 12px;
 }
@@ -350,130 +353,10 @@ body {
 }
 
 .player-name {
-
-.player-name.editable-name {
-    cursor: pointer;
-    position: relative;
-    padding-right: 18px;
-}
-
-.player-name.editable-name::after {
-    content: "";
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    font-family: "Font Awesome 6 Free";
-    font-weight: 900;
-    font-size: 10px;
-    color: var(--text-muted);
-    opacity: 0.5;
-    transition: opacity 0.2s;
-}
-
-.player-name.editable-name:hover::after {
-    opacity: 1;
-}
     font-size: 14px;
-
-.player-name.editable-name {
-    cursor: pointer;
-    position: relative;
-    padding-right: 18px;
-}
-
-.player-name.editable-name::after {
-    content: "";
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    font-family: "Font Awesome 6 Free";
-    font-weight: 900;
-    font-size: 10px;
-    color: var(--text-muted);
-    opacity: 0.5;
-    transition: opacity 0.2s;
-}
-
-.player-name.editable-name:hover::after {
-    opacity: 1;
-}
     font-weight: 700;
-
-.player-name.editable-name {
-    cursor: pointer;
-    position: relative;
-    padding-right: 18px;
-}
-
-.player-name.editable-name::after {
-    content: "";
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    font-family: "Font Awesome 6 Free";
-    font-weight: 900;
-    font-size: 10px;
-    color: var(--text-muted);
-    opacity: 0.5;
-    transition: opacity 0.2s;
-}
-
-.player-name.editable-name:hover::after {
-    opacity: 1;
-}
     letter-spacing: 1px;
-
-.player-name.editable-name {
-    cursor: pointer;
-    position: relative;
-    padding-right: 18px;
-}
-
-.player-name.editable-name::after {
-    content: "";
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    font-family: "Font Awesome 6 Free";
-    font-weight: 900;
-    font-size: 10px;
-    color: var(--text-muted);
-    opacity: 0.5;
-    transition: opacity 0.2s;
-}
-
-.player-name.editable-name:hover::after {
-    opacity: 1;
-}
     color: var(--text-primary);
-
-.player-name.editable-name {
-    cursor: pointer;
-    position: relative;
-    padding-right: 18px;
-}
-
-.player-name.editable-name::after {
-    content: "";
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    font-family: "Font Awesome 6 Free";
-    font-weight: 900;
-    font-size: 10px;
-    color: var(--text-muted);
-    opacity: 0.5;
-    transition: opacity 0.2s;
-}
-
-.player-name.editable-name:hover::after {
-    opacity: 1;
-}
 }
 
 .player-name.editable-name {
@@ -483,7 +366,7 @@ body {
 }
 
 .player-name.editable-name::after {
-    content: "";
+    content: "\f303";
     position: absolute;
     right: 0;
     top: 50%;
@@ -517,7 +400,6 @@ body {
     font-size: 14px;
 }
 
-/* Score Display */
 .score-display {
     background: rgba(255, 255, 255, 0.02);
     border-radius: var(--border-radius-sm);
@@ -548,11 +430,6 @@ body {
 
 .score-display:hover {
     background: rgba(255, 255, 255, 0.05);
-    transform: scale(1.02);
-}
-
-.score-display:active {
-    transform: scale(0.98);
 }
 
 .score-value {
@@ -617,7 +494,6 @@ body {
     font-size: 14px;
 }
 
-/* Progress Bar */
 .progress-bar {
     background: rgba(255, 255, 255, 0.05);
     border-radius: 12px;
@@ -643,7 +519,6 @@ body {
     background: linear-gradient(90deg, var(--secondary), #f472b6);
 }
 
-
 .progress-text {
     position: absolute;
     top: 50%;
@@ -656,91 +531,13 @@ body {
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-/* Remaining Text */
 .remaining-text {
-
-.remaining-text.danger {
-    color: var(--danger);
-    font-weight: 700;
-    animation: pulse-text 1.2s ease-in-out infinite;
-}
-
-@keyframes pulse-text {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
-}
     text-align: center;
-
-.remaining-text.danger {
-    color: var(--danger);
-    font-weight: 700;
-    animation: pulse-text 1.2s ease-in-out infinite;
-}
-
-@keyframes pulse-text {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
-}
     font-size: 12px;
-
-.remaining-text.danger {
-    color: var(--danger);
-    font-weight: 700;
-    animation: pulse-text 1.2s ease-in-out infinite;
-}
-
-@keyframes pulse-text {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
-}
     font-weight: 600;
-
-.remaining-text.danger {
-    color: var(--danger);
-    font-weight: 700;
-    animation: pulse-text 1.2s ease-in-out infinite;
-}
-
-@keyframes pulse-text {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
-}
     color: var(--text-secondary);
-
-.remaining-text.danger {
-    color: var(--danger);
-    font-weight: 700;
-    animation: pulse-text 1.2s ease-in-out infinite;
-}
-
-@keyframes pulse-text {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
-}
     margin-bottom: 10px;
-
-.remaining-text.danger {
-    color: var(--danger);
-    font-weight: 700;
-    animation: pulse-text 1.2s ease-in-out infinite;
-}
-
-@keyframes pulse-text {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
-}
     letter-spacing: 0.5px;
-
-.remaining-text.danger {
-    color: var(--danger);
-    font-weight: 700;
-    animation: pulse-text 1.2s ease-in-out infinite;
-}
-
-@keyframes pulse-text {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
-}
 }
 
 .remaining-text.danger {
@@ -754,7 +551,6 @@ body {
     50% { opacity: 0.5; }
 }
 
-/* History Section */
 .history-section {
     background: rgba(255, 255, 255, 0.02);
     border-radius: var(--border-radius-sm);
@@ -838,7 +634,6 @@ body {
     opacity: 1;
 }
 
-/* Card Actions */
 .card-actions {
     display: flex;
     gap: 10px;
@@ -869,7 +664,6 @@ body {
 
 .action-btn.undo:hover {
     background: rgba(139, 92, 246, 0.2);
-    transform: scale(1.05);
 }
 
 .action-btn.minus {
@@ -881,7 +675,6 @@ body {
 
 .action-btn.minus:hover {
     background: rgba(239, 68, 68, 0.2);
-    transform: scale(1.05);
 }
 
 .action-btn.plus {
@@ -894,11 +687,6 @@ body {
     box-shadow: 0 8px 24px rgba(139, 92, 246, 0.6);
 }
 
-.action-btn:active {
-    transform: scale(0.95);
-}
-
-/* VS Section */
 .vs-section {
     display: flex;
     align-items: center;
@@ -941,7 +729,6 @@ body {
     right: 0;
 }
 
-/* ===== OVERLAY & MODALS ===== */
 .overlay {
     position: fixed;
     top: 0;
@@ -1029,7 +816,6 @@ body {
     transform: rotate(90deg);
 }
 
-/* ===== CALCULATOR ===== */
 .calculator-modal {
     padding-bottom: 24px;
 }
@@ -1086,7 +872,6 @@ body {
 
 .calc-btn.number:hover {
     background: rgba(255, 255, 255, 0.1);
-    transform: scale(1.05);
 }
 
 .calc-btn.operator {
@@ -1096,7 +881,6 @@ body {
 
 .calc-btn.operator:hover {
     background: linear-gradient(135deg, rgba(139, 92, 246, 0.3), rgba(236, 72, 153, 0.3));
-    transform: scale(1.05);
 }
 
 .calc-btn.function {
@@ -1107,7 +891,6 @@ body {
 
 .calc-btn.function:hover {
     background: rgba(239, 68, 68, 0.2);
-    transform: scale(1.05);
 }
 
 .calc-btn.submit {
@@ -1118,7 +901,6 @@ body {
 }
 
 .calc-btn.submit:hover {
-    transform: scale(1.05);
     box-shadow: 0 4px 16px rgba(139, 92, 246, 0.4);
 }
 
@@ -1126,11 +908,6 @@ body {
     grid-column: span 2;
 }
 
-.calc-btn:active {
-    transform: scale(0.95);
-}
-
-/* ===== SETTINGS MODAL ===== */
 .settings-modal {
     padding-bottom: 24px;
 }
@@ -1165,7 +942,6 @@ body {
     color: var(--primary);
 }
 
-/* Theme Options */
 .theme-options {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -1229,7 +1005,6 @@ body {
     transform: translateY(-2px);
 }
 
-/* Input Group */
 .input-group {
     display: flex;
     align-items: center;
@@ -1260,7 +1035,6 @@ body {
     font-weight: 600;
 }
 
-/* Toggle Switch */
 .toggle-switch {
     position: relative;
     width: 56px;
@@ -1306,7 +1080,6 @@ input:checked + .toggle-slider:before {
     transform: translateX(24px);
 }
 
-/* Settings Actions */
 .settings-actions {
     display: flex;
     flex-direction: column;
@@ -1365,7 +1138,6 @@ input:checked + .toggle-slider:before {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
-/* Social Section */
 .social-section {
     margin-top: 32px;
     padding-top: 24px;
@@ -1415,6 +1187,16 @@ input:checked + .toggle-slider:before {
     color: white;
 }
 
+.social-link.wa {
+    background: #25D366;
+    color: white;
+}
+
+.social-link.yt {
+    background: #FF0000;
+    color: white;
+}
+
 .social-link:hover {
     transform: translateY(-4px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
@@ -1425,7 +1207,6 @@ input:checked + .toggle-slider:before {
     color: var(--text-muted);
 }
 
-/* ===== GAME OVER MODAL ===== */
 .gameover-modal {
     text-align: center;
     padding: 40px 24px;
@@ -1529,7 +1310,6 @@ input:checked + .toggle-slider:before {
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
 }
 
-/* ===== CONFIRM MODAL ===== */
 .confirm-modal {
     text-align: center;
     padding: 40px 24px;
@@ -1579,7 +1359,6 @@ input:checked + .toggle-slider:before {
     transform: translateY(-2px);
 }
 
-/* ===== DELETE MODAL ===== */
 .delete-modal {
     position: fixed;
     top: 0;
@@ -1649,7 +1428,6 @@ input:checked + .toggle-slider:before {
     transform: translateY(-2px);
 }
 
-/* ===== ABOUT MODAL ===== */
 .about-modal {
     max-height: 85vh;
     overflow-y: auto;
@@ -1773,98 +1551,6 @@ input:checked + .toggle-slider:before {
     box-shadow: 0 8px 24px rgba(255, 107, 107, 0.6);
 }
 
-/* ===== RESPONSIVE ===== */
-@media (max-width: 480px) {
-    .brand-title {
-        font-size: 15px;
-    }
-    
-    .score-value {
-        font-size: 60px;
-    }
-    
-    .calc-display span {
-        font-size: 40px;
-    }
-    
-    .calc-btn {
-        height: 56px;
-        font-size: 18px;
-    }
-}
-
-/* ===== COMPACT MODE ===== */
-.scoreboard.compact .modern-player-card {
-    padding: 20px;
-}
-
-.scoreboard.compact .score-value {
-    font-size: 56px;
-}
-
-.scoreboard.compact .history-section {
-    display: none;
-}
-
-/* ===== CONFETTI ===== */
-.confetti-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    pointer-events: none;
-    z-index: 0;
-}
-
-.confetti-piece {
-    position: absolute;
-    top: -20px;
-    animation: confetti-fall 2.5s ease-in forwards;
-}
-
-@keyframes confetti-fall {
-    0% {
-        transform: translateY(0) rotate(0deg);
-        opacity: 1;
-    }
-    70% {
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(500px) rotate(720deg);
-        opacity: 0;
-    }
-}
-
-/* ===== EDIT NAME INPUT ===== */
-.edit-name-input {
-    width: 100%;
-    padding: 14px 16px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 12px;
-    color: var(--text-primary);
-    font-family: 'Poppins', sans-serif;
-    font-size: 16px;
-    font-weight: 700;
-    text-align: center;
-    margin: 8px 0 20px;
-    outline: none;
-    transition: border-color 0.3s ease;
-}
-
-.edit-name-input:focus {
-    border-color: var(--primary);
-}
-
-.edit-name-input::placeholder {
-    color: var(--text-muted);
-    font-weight: 500;
-}
-
-/* ===== GAME OVER — DUAL SCORE DISPLAY ===== */
 .final-score-display {
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -1929,4 +1615,60 @@ input:checked + .toggle-slider:before {
     padding: 4px 0;
     border-top: 1px solid rgba(255, 255, 255, 0.08);
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.edit-name-input {
+    width: 100%;
+    padding: 14px 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    color: var(--text-primary);
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+    margin: 8px 0 20px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.edit-name-input:focus {
+    border-color: var(--primary);
+}
+
+.edit-name-input::placeholder {
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.confetti-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.confetti-piece {
+    position: absolute;
+    top: -20px;
+    animation: confetti-fall 2.5s ease-in forwards;
+}
+
+@keyframes confetti-fall {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+    70% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(500px) rotate(720deg);
+        opacity: 0;
+    }
 }
