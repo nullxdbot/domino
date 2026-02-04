@@ -4,479 +4,598 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Domino Score NullXD</title>
-    
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    
     <link rel="stylesheet" href="css/style.css">
-    
-    <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#6366f1">
-    
-    <link rel="icon" href="img/icon-192.png" type="image/png">
-    <link rel="apple-touch-icon" href="img/icon-192.png">
 </head>
 <body>
 
-    <div class="app-container">
-        
-        <header class="app-header">
-            <div class="brand-container">
-                <div class="brand-icon">
-                    <i class="fas fa-dice-d6"></i>
-                </div>
-                <div class="brand-text">
-                    <span class="brand-title">DOMINO SCORE</span>
-                    <span class="brand-subtitle">by NullXD</span>
-                </div>
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <symbol id="ic-dice" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="2" y="2" width="20" height="20" rx="3"/>
+      <circle cx="8" cy="8" r="1.5" fill="currentColor" stroke="none"/>
+      <circle cx="16" cy="8" r="1.5" fill="currentColor" stroke="none"/>
+      <circle cx="8" cy="16" r="1.5" fill="currentColor" stroke="none"/>
+      <circle cx="16" cy="16" r="1.5" fill="currentColor" stroke="none"/>
+      <circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none"/>
+    </symbol>
+    <symbol id="ic-crown" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M2 18h20M4 18L5 9l4 4 3-6 3 6 4-4 1 9"/>
+    </symbol>
+    <symbol id="ic-sliders" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 6h16M4 12h16M4 18h16"/>
+      <circle cx="8" cy="6" r="2" fill="var(--bg-secondary)" stroke="currentColor"/>
+      <circle cx="16" cy="12" r="2" fill="var(--bg-secondary)" stroke="currentColor"/>
+      <circle cx="8" cy="18" r="2" fill="var(--bg-secondary)" stroke="currentColor"/>
+    </symbol>
+    <symbol id="ic-balance" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 22V13M12 2v2"/>
+      <circle cx="12" cy="4" r="1" fill="currentColor" stroke="none"/>
+      <path d="M5 20h14"/>
+      <path d="M2 8l5 8H2z"/>
+      <path d="M17 8l5 8h-5z"/>
+      <line x1="12" y1="4" x2="3" y2="6"/>
+      <line x1="12" y1="4" x2="21" y2="6"/>
+    </symbol>
+    <symbol id="ic-hand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M9 12V5a2 2 0 014 0v4"/>
+      <path d="M13 9v2a2 2 0 004 0V9"/>
+      <path d="M17 11v2a2 2 0 004 0v-2"/>
+      <path d="M9 12v6a2 2 0 002 2h5a2 2 0 002-2v-3"/>
+    </symbol>
+    <symbol id="ic-rotate-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 12a9 9 0 11-9-9 9.75 9.75 0 018.56 5"/>
+      <path d="M21 3v6h-6"/>
+    </symbol>
+    <symbol id="ic-rotate-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-8.56 5"/>
+      <path d="M3 3v6h6"/>
+    </symbol>
+    <symbol id="ic-minus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+      <path d="M5 12h14"/>
+    </symbol>
+    <symbol id="ic-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+      <path d="M12 5v14M5 12h14"/>
+    </symbol>
+    <symbol id="ic-history" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-8.56 5"/>
+      <path d="M3 3v6h6"/>
+      <path d="M12 7v5l3 3"/>
+    </symbol>
+    <symbol id="ic-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+      <path d="M18 6L6 18M6 6l12 12"/>
+    </symbol>
+    <symbol id="ic-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M20 6L9 17l-5-5"/>
+    </symbol>
+    <symbol id="ic-backspace" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M7 21h10a2 2 0 002-2V9l-7-7H7a2 2 0 00-2 2v16a2 2 0 002 2z"/>
+      <path d="M9 12l4 4m-4 0l4-4"/>
+    </symbol>
+    <symbol id="ic-trophy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M6 9H4.5a2.5 2.5 0 010-5C7 4 7 2 7 2h10s0 2 2.5 2a2.5 2.5 0 010 5H18"/>
+      <path d="M6 9v4a6 6 0 0012 0V9"/>
+      <path d="M8 22h8"/>
+      <path d="M12 17v5"/>
+    </symbol>
+    <symbol id="ic-play" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polygon points="5,3 19,12 5,21" fill="currentColor" stroke="none"/>
+    </symbol>
+    <symbol id="ic-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+      <circle cx="12" cy="12" r="3"/>
+    </symbol>
+    <symbol id="ic-warn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+      <line x1="12" y1="9" x2="12" y2="13"/>
+      <line x1="12" y1="17" x2="12.01" y2="17"/>
+    </symbol>
+    <symbol id="ic-trash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/>
+    </symbol>
+    <symbol id="ic-pen" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/>
+      <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/>
+    </symbol>
+    <symbol id="ic-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"/>
+      <line x1="12" y1="16" x2="12" y2="12"/>
+      <line x1="12" y1="8" x2="12.01" y2="8"/>
+    </symbol>
+    <symbol id="ic-star" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+      <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/>
+    </symbol>
+    <symbol id="ic-palette" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"/>
+      <circle cx="8" cy="14" r="1.5" fill="currentColor" stroke="none"/>
+      <circle cx="12" cy="9" r="1.5" fill="currentColor" stroke="none"/>
+      <circle cx="16" cy="14" r="1.5" fill="currentColor" stroke="none"/>
+    </symbol>
+    <symbol id="ic-flag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/>
+      <line x1="4" y1="22" x2="4" y2="15"/>
+    </symbol>
+    <symbol id="ic-volume" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polygon points="11,5 6,9 2,9 2,15 6,15 11,19" fill="currentColor" stroke="currentColor"/>
+      <path d="M15.54 8.46a5 5 0 000 7.07"/>
+      <path d="M19.07 4.93a10 10 0 010 14.14"/>
+    </symbol>
+    <symbol id="ic-compress" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="4,14 4,20 10,20"/>
+      <line x1="20" y1="4" x2="14" y2="10"/>
+      <polyline points="14,4 20,4 20,10"/>
+      <line x1="4" y1="20" x2="10" y2="14"/>
+    </symbol>
+    <symbol id="ic-rotate" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M23 4v6h-6"/>
+      <path d="M1 20v-6h6"/>
+      <path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/>
+    </symbol>
+    <symbol id="ic-code" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="16,18 22,12 16,6"/>
+      <polyline points="8,6 2,12 8,18"/>
+    </symbol>
+    <symbol id="ic-coffee" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M17 8h1a4 4 0 010 8h-1"/>
+      <path d="M3 8h14v9a4 4 0 01-4 4H7a4 4 0 01-4-4z"/>
+      <line x1="6" y1="1" x2="6" y2="4"/>
+      <line x1="10" y1="1" x2="10" y2="4"/>
+    </symbol>
+    <symbol id="ic-whatsapp" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.966-.273-.098-.471-.148-.669.149-.197.297-.763.966-.934 1.164-.172.198-.345.223-.602.074-.297-.149-1.255-.463-2.391-1.475-.884-.794-1.482-1.772-1.655-2.069-.173-.297-.018-.458.13-.607.134-.133.297-.345.446-.518.149-.173.198-.297.297-.495.099-.198.05-.371-.025-.52-.074-.149-.669-1.611-.916-2.19-.242-.573-.487-.495-.669-.504-.173-.009-.371-.011-.569-.011-.198 0-.52.074-.794.371-2.74 2.74-2.74 2.74 0 0 2.74 2.74 0 0l.149.297a12 12 0 005.15 5.576l.297.149c.297.149.494.124.669-.074.174-.198.74-.964.917-1.16.173-.198.347-.173.619-.074z"/>
+      <path d="M20.432 3.568a10.54 10.54 0 00-7.47-3.07 10.54 10.54 0 00-10.54 10.54c0 1.86.49 3.587 1.345 5.085L2.5 21.5l3.947-1.027a10.496 10.496 0 005.045 1.277 10.54 10.54 0 0011.06-9.822 10.54 10.54 0 00-2.12-8.36z"/>
+    </symbol>
+    <symbol id="ic-telegram" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm5.562 8.161l-1.97 9.289c-.146.658-.527.824-1.063.513l-2.937-2.16-1.416 1.364c-.157.157-.289.289-.592.289l.211-2.98 5.418-4.895c.235-.211-.051-.328-.365-.117l-6.7 4.217-2.88-.9c-.626-.195-.638-.626.131-.858l11.275-4.345c.521-.195.977.131-.136.856z"/>
+    </symbol>
+    <symbol id="ic-instagram" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+    </symbol>
+    <symbol id="ic-tiktok" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V9.37a8.16 8.16 0 004.78 1.53V7.45a4.84 4.84 0 01-1-.76z"/>
+    </symbol>
+    <symbol id="ic-youtube" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+    </symbol>
+    <symbol id="ic-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"/>
+      <line x1="2" y1="12" x2="22" y2="12"/>
+      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="app-container">
+    <header class="app-header">
+        <div class="brand-container">
+            <div class="brand-icon">
+                <svg class="svg-icon" style="width:24px;height:24px;color:#fff"><use href="#ic-dice"/></svg>
             </div>
-            <div class="header-actions">
-                <div class="round-badge">
-                    <div class="badge-content">
-                        <i class="fas fa-crown"></i>
-                        <span>Ronde <strong id="roundCount">1</strong></span>
-                    </div>
-                </div>
-                <button class="btn-icon modern" onclick="toggleSettings()">
-                    <i class="fas fa-sliders"></i>
-                </button>
-            </div>
-        </header>
-
-        <div class="score-diff-card" id="scoreDiff">
-            <div class="diff-icon">
-                <i class="fas fa-balance-scale"></i>
-            </div>
-            <div class="diff-text">Pertandingan Seimbang</div>
-        </div>
-
-        <main class="scoreboard" id="scoreboard">
-            
-            <div class="modern-player-card player-1" id="card-0">
-                <div class="winner-ribbon" id="badge-0">
-                    <i class="fas fa-trophy"></i>
-                    <span>Pemenang!</span>
-                </div>
-                
-                <button class="quick-reset modern" onclick="quickResetPlayer(0)" title="Reset skor">
-                    <i class="fas fa-rotate-right"></i>
-                </button>
-                
-                <div class="player-header">
-                    <div class="player-info">
-                        <span class="player-number">01</span>
-                        <span class="player-name editable-name" id="player-name-0" onclick="openEditName(0)" title="Ketuk untuk ubah nama">TIM ALPHA</span>
-                        <div class="win-badge" title="Total kemenangan">
-                            <i class="fas fa-star"></i>
-                            <span id="win-0">0</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="score-display" onclick="openCalculator(0)">
-                    <div class="score-value" id="score-0">0</div>
-                    <div class="score-tap-hint">
-                        <i class="fas fa-hand-pointer"></i>
-                        <span>Ketuk untuk tambah</span>
-                    </div>
-                </div>
-
-                <div class="progress-bar">
-                    <div class="progress-fill" id="progress-0" style="width: 0%"></div>
-                    <div class="progress-text" id="progress-text-0">0 / 101</div>
-                </div>
-
-                <div class="remaining-text" id="remain-0">Batas tersisa: 101</div>
-
-                <div class="history-section">
-                    <div class="history-header">
-                        <i class="fas fa-history"></i>
-                        <span>Riwayat</span>
-                    </div>
-                    <div class="history-chips" id="history-0">
-                        <div class="empty-history">Belum ada skor</div>
-                    </div>
-                </div>
-
-                <div class="card-actions">
-                    <button class="action-btn undo" id="undo-btn-0" onclick="undoLastScore(0)" style="display:none;" title="Batalkan skor terakhir">
-                        <i class="fas fa-rotate-left"></i>
-                    </button>
-                    <button class="action-btn minus" onclick="updateScore(0, -1)" title="Kurangi 1">
-                        <i class="fas fa-minus"></i>
-                    </button>
-                    <button class="action-btn plus" onclick="openCalculator(0)">
-                        <i class="fas fa-plus"></i>
-                        <span>Tambah Skor</span>
-                    </button>
-                </div>
-            </div>
-
-            <div class="vs-section">
-                <div class="vs-circle">
-                    <span>VS</span>
-                </div>
-            </div>
-
-            <div class="modern-player-card player-2" id="card-1">
-                <div class="winner-ribbon" id="badge-1">
-                    <i class="fas fa-trophy"></i>
-                    <span>Pemenang!</span>
-                </div>
-                
-                <button class="quick-reset modern" onclick="quickResetPlayer(1)" title="Reset skor">
-                    <i class="fas fa-rotate-right"></i>
-                </button>
-                
-                <div class="player-header">
-                    <div class="player-info">
-                        <span class="player-number">02</span>
-                        <span class="player-name editable-name" id="player-name-1" onclick="openEditName(1)" title="Ketuk untuk ubah nama">TIM BETA</span>
-                        <div class="win-badge" title="Total kemenangan">
-                            <i class="fas fa-star"></i>
-                            <span id="win-1">0</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="score-display" onclick="openCalculator(1)">
-                    <div class="score-value" id="score-1">0</div>
-                    <div class="score-tap-hint">
-                        <i class="fas fa-hand-pointer"></i>
-                        <span>Ketuk untuk tambah</span>
-                    </div>
-                </div>
-
-                <div class="progress-bar">
-                    <div class="progress-fill" id="progress-1" style="width: 0%"></div>
-                    <div class="progress-text" id="progress-text-1">0 / 101</div>
-                </div>
-
-                <div class="remaining-text" id="remain-1">Batas tersisa: 101</div>
-
-                <div class="history-section">
-                    <div class="history-header">
-                        <i class="fas fa-history"></i>
-                        <span>Riwayat</span>
-                    </div>
-                    <div class="history-chips" id="history-1">
-                        <div class="empty-history">Belum ada skor</div>
-                    </div>
-                </div>
-
-                <div class="card-actions">
-                    <button class="action-btn undo" id="undo-btn-1" onclick="undoLastScore(1)" style="display:none;" title="Batalkan skor terakhir">
-                        <i class="fas fa-rotate-left"></i>
-                    </button>
-                    <button class="action-btn minus" onclick="updateScore(1, -1)" title="Kurangi 1">
-                        <i class="fas fa-minus"></i>
-                    </button>
-                    <button class="action-btn plus" onclick="openCalculator(1)">
-                        <i class="fas fa-plus"></i>
-                        <span>Tambah Skor</span>
-                    </button>
-                </div>
-            </div>
-        </main>
-    </div>
-
-    <div class="overlay" id="calculatorOverlay" onclick="closeCalculatorOnOutside(event)">
-        <div class="modern-modal calculator-modal">
-            <div class="modal-handle"></div>
-            
-            <div class="calc-header">
-                <span>Kalkulator</span>
-                <button class="close-btn" onclick="document.getElementById('calculatorOverlay').classList.remove('active')">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            
-            <div class="calc-display">
-                <span id="calcDisplay">0</span>
-            </div>
-            
-            <div class="calc-buttons">
-                <button class="calc-btn function" onclick="clearCalc()">AC</button>
-                <button class="calc-btn function" onclick="backspace()"><i class="fas fa-delete-left"></i></button>
-                <button class="calc-btn operator" onclick="appendOperator('/')">÷</button>
-                <button class="calc-btn operator" onclick="appendOperator('*')">×</button>
-                
-                <button class="calc-btn number" onclick="appendNumber('7')">7</button>
-                <button class="calc-btn number" onclick="appendNumber('8')">8</button>
-                <button class="calc-btn number" onclick="appendNumber('9')">9</button>
-                <button class="calc-btn operator" onclick="appendOperator('-')">−</button>
-                
-                <button class="calc-btn number" onclick="appendNumber('4')">4</button>
-                <button class="calc-btn number" onclick="appendNumber('5')">5</button>
-                <button class="calc-btn number" onclick="appendNumber('6')">6</button>
-                <button class="calc-btn operator" onclick="appendOperator('+')">+</button>
-                
-                <button class="calc-btn number" onclick="appendNumber('1')">1</button>
-                <button class="calc-btn number" onclick="appendNumber('2')">2</button>
-                <button class="calc-btn number" onclick="appendNumber('3')">3</button>
-                <button class="calc-btn submit" onclick="doneCalculator()">
-                    <i class="fas fa-check"></i>
-                </button>
-                
-                <button class="calc-btn number zero" onclick="appendNumber('0')">0</button>
-                <button class="calc-btn number" onclick="appendNumber('.')">.</button>
+            <div class="brand-text">
+                <span class="brand-title">DOMINO SCORE</span>
+                <span class="brand-subtitle" data-i18n="subtitle">by NullXD</span>
             </div>
         </div>
-    </div>
-
-    <div class="overlay" id="settingsOverlay" onclick="if(event.target.id==='settingsOverlay') toggleSettings()">
-        <div class="modern-modal settings-modal">
-            <div class="modal-handle"></div>
-            
-            <div class="modal-header">
-                <h3><i class="fas fa-sliders"></i> Pengaturan</h3>
-                <button class="close-btn" onclick="toggleSettings()">
-                    <i class="fas fa-times"></i>
-                </button>
+        <div class="header-actions">
+            <div class="round-badge">
+                <svg class="svg-icon" style="width:14px;height:14px;color:var(--accent)"><use href="#ic-crown"/></svg>
+                <span data-i18n="round">Ronde</span>&nbsp;<strong id="roundCount">1</strong>
             </div>
-            
-            <div class="settings-content">
-                <div class="setting-group setting-group-theme">
-                    <div class="setting-label">
-                        <i class="fas fa-palette"></i>
-                        <span>Tema Warna</span>
-                    </div>
-                    <div class="theme-options">
-                        <button class="theme-option purple active" onclick="setTheme('purple')">
-                            <div class="theme-preview"></div>
-                            <span>Purple</span>
-                        </button>
-                        <button class="theme-option blue" onclick="setTheme('blue')">
-                            <div class="theme-preview"></div>
-                            <span>Blue</span>
-                        </button>
-                        <button class="theme-option green" onclick="setTheme('green')">
-                            <div class="theme-preview"></div>
-                            <span>Green</span>
-                        </button>
-                        <button class="theme-option pink" onclick="setTheme('pink')">
-                            <div class="theme-preview"></div>
-                            <span>Pink</span>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="setting-group">
-                    <div class="setting-label">
-                        <i class="fas fa-flag-checkered"></i>
-                        <span>Batas Skor</span>
-                    </div>
-                    <div class="input-group">
-                        <input type="number" id="limitInput" value="101" onchange="updateLimit(this.value)" min="10" max="999">
-                        <span class="input-suffix">poin</span>
-                    </div>
-                </div>
-
-                <div class="setting-group">
-                    <div class="setting-label">
-                        <i class="fas fa-volume-high"></i>
-                        <span>Efek Suara</span>
-                    </div>
-                    <label class="toggle-switch">
-                        <input type="checkbox" id="soundToggle" onchange="toggleSound()" checked>
-                        <span class="toggle-slider"></span>
-                    </label>
-                </div>
-
-                <div class="setting-group">
-                    <div class="setting-label">
-                        <i class="fas fa-compress"></i>
-                        <span>Mode Ringkas</span>
-                    </div>
-                    <label class="toggle-switch">
-                        <input type="checkbox" id="compactToggle" onchange="toggleCompactMode()">
-                        <span class="toggle-slider"></span>
-                    </label>
-                </div>
-
-                <div class="settings-actions">
-                    <button class="settings-btn primary" onclick="resetRound()">
-                        <i class="fas fa-rotate"></i>
-                        <span>Ronde Baru</span>
-                    </button>
-                    <button class="settings-btn danger" onclick="hardReset()">
-                        <i class="fas fa-trash"></i>
-                        <span>Reset Semua</span>
-                    </button>
-                    <button class="settings-btn info" onclick="openAbout()">
-                        <i class="fas fa-info-circle"></i>
-                        <span>Tentang Aplikasi</span>
-                    </button>
-                </div>
-
-                <div class="social-section">
-                    <p class="social-label">Ikuti Saya:</p>
-                    <div class="social-links">
-                        <a href="https://whatsapp.com/channel/0029VawFbp2CHDyfgcHIo51h" target="_blank" class="social-link wa" style="background: #25D366;">
-                            <i class="fa-brands fa-whatsapp"></i>
-                        </a>
-                        <a href="https://t.me/farrelauliairfealdo" target="_blank" class="social-link tg">
-                            <i class="fa-brands fa-telegram"></i>
-                        </a>
-                        <a href="https://www.instagram.com/farrelauliairfealdo_" target="_blank" class="social-link ig">
-                            <i class="fa-brands fa-instagram"></i>
-                        </a>
-                        <a href="https://www.tiktok.com/@farrel.aulia.irfealdo" target="_blank" class="social-link tk">
-                            <i class="fa-brands fa-tiktok"></i>
-                        </a>
-                        <a href="https://youtube.com/@nullxd-md" target="_blank" class="social-link yt" style="background: #FF0000;">
-                            <i class="fa-brands fa-youtube"></i>
-                        </a>
-                    </div>
-                    <p class="developer-credit">Dibuat dengan ❤️ oleh Farrel Aulia Irfealdo</p>
-                </div>
-            </div>
+            <button class="btn-icon modern" onclick="toggleSettings()">
+                <svg class="svg-icon" style="width:20px;height:20px;color:var(--text-primary)"><use href="#ic-sliders"/></svg>
+            </button>
         </div>
+    </header>
+
+    <div class="score-diff-card" id="scoreDiff">
+        <div class="diff-icon">
+            <svg class="svg-icon" style="width:18px;height:18px;color:var(--text-primary)"><use href="#ic-balance"/></svg>
+        </div>
+        <div class="diff-text" data-i18n="match_balanced">Pertandingan Seimbang</div>
     </div>
 
-    <div class="overlay" id="gameOverModal">
-        <div class="modern-modal gameover-modal">
-            <div class="confetti-container" id="confetti"></div>
-            
-            <div class="trophy-icon">
-                <i class="fas fa-trophy"></i>
+    <main class="scoreboard" id="scoreboard">
+        <div class="modern-player-card player-1" id="card-0">
+            <div class="winner-ribbon" id="badge-0">
+                <svg class="svg-icon" style="width:14px;height:14px;color:#fff"><use href="#ic-trophy"/></svg>
+                <span data-i18n="winner_badge">Pemenang!</span>
             </div>
-            
-            <h2 class="congrats-text">Menang!</h2>
-            <p class="winner-announce">
-                <span id="winnerName">Tim 1</span> Memenangkan Ronde Ini!
-            </p>
-            
-            <div class="final-score-display">
-                <div class="final-score-row winner-row">
-                    <span class="final-score-name" id="finalWinnerName">—</span>
-                    <span class="final-score-value winner" id="finalScoreWinner">0</span>
-                </div>
-                <div class="final-score-divider">VS</div>
-                <div class="final-score-row loser-row">
-                    <span class="final-score-name" id="finalLoserName">—</span>
-                    <span class="final-score-value loser" id="finalScoreLoser">0</span>
+            <button class="quick-reset modern" onclick="quickResetPlayer(0)" title="Reset skor">
+                <svg class="svg-icon" style="width:16px;height:16px;color:var(--danger)"><use href="#ic-rotate-right"/></svg>
+            </button>
+            <div class="player-header">
+                <div class="player-info">
+                    <span class="player-number">01</span>
+                    <span class="player-name editable-name" id="player-name-0" onclick="openEditName(0)" title="Ketuk untuk ubah nama">TIM ALPHA</span>
+                    <svg class="svg-icon edit-icon" style="width:10px;height:10px;color:var(--text-muted);opacity:0.5;" onclick="openEditName(0)"><use href="#ic-pen"/></svg>
+                    <div class="win-badge" title="Total kemenangan">
+                        <svg class="svg-icon" style="width:14px;height:14px;color:var(--accent)"><use href="#ic-star"/></svg>
+                        <span id="win-0">0</span>
+                    </div>
                 </div>
             </div>
-            
-            <div class="gameover-actions">
-                <button class="gameover-btn primary" onclick="resetRound(); document.getElementById('gameOverModal').classList.remove('active')">
-                    <i class="fas fa-play"></i>
-                    Ronde Baru
+            <div class="score-display" onclick="openCalculator(0)">
+                <div class="score-value" id="score-0">0</div>
+                <div class="score-tap-hint">
+                    <svg class="svg-icon" style="width:14px;height:14px;color:var(--text-muted)"><use href="#ic-hand"/></svg>
+                    <span data-i18n="tap_hint">Ketuk untuk tambah</span>
+                </div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-0" style="width:0%"></div>
+                <div class="progress-text" id="progress-text-0">0 / 101</div>
+            </div>
+            <div class="remaining-text"><span data-i18n="limit_remain">Batas tersisa</span>: <span id="remain-num-0">101</span></div>
+            <div class="history-section">
+                <div class="history-header">
+                    <svg class="svg-icon" style="width:12px;height:12px;color:var(--text-secondary)"><use href="#ic-history"/></svg>
+                    <span data-i18n="history">Riwayat</span>
+                </div>
+                <div class="history-chips" id="history-0">
+                    <div class="empty-history" data-i18n="no_history">Belum ada skor</div>
+                </div>
+            </div>
+            <div class="card-actions">
+                <button class="action-btn undo" id="undo-btn-0" onclick="undoLastScore(0)" style="display:none;" title="Batalkan skor terakhir">
+                    <svg class="svg-icon" style="width:18px;height:18px;color:var(--primary)"><use href="#ic-rotate-left"/></svg>
                 </button>
-                <button class="gameover-btn secondary" onclick="document.getElementById('gameOverModal').classList.remove('active')">
-                    <i class="fas fa-eye"></i>
-                    Lihat Skor
+                <button class="action-btn minus" onclick="updateScore(0, -1)" title="Kurangi 1">
+                    <svg class="svg-icon" style="width:18px;height:18px;color:var(--danger)"><use href="#ic-minus"/></svg>
+                </button>
+                <button class="action-btn plus" onclick="openCalculator(0)">
+                    <svg class="svg-icon" style="width:18px;height:18px;color:#fff"><use href="#ic-plus"/></svg>
+                    <span data-i18n="add_score">Tambah Skor</span>
                 </button>
             </div>
         </div>
-    </div>
 
-    <div class="overlay" id="confirmModal">
-        <div class="modern-modal confirm-modal">
-            <div class="confirm-icon">
-                <i class="fas fa-exclamation-triangle"></i>
-            </div>
-            <h3 id="confirmMessage">Apakah Anda yakin?</h3>
-            <div class="confirm-actions">
-                <button class="confirm-btn cancel" onclick="closeConfirmModal()">Batal</button>
-                <button class="confirm-btn confirm" onclick="executeConfirm()">Konfirmasi</button>
-            </div>
+        <div class="vs-section">
+            <div class="vs-circle"><span>VS</span></div>
         </div>
-    </div>
 
-    <div class="delete-modal" id="deleteScoreModal">
-        <div class="delete-modal-content">
-            <div class="delete-icon">
-                <i class="fas fa-trash-alt"></i>
+        <div class="modern-player-card player-2" id="card-1">
+            <div class="winner-ribbon" id="badge-1">
+                <svg class="svg-icon" style="width:14px;height:14px;color:#fff"><use href="#ic-trophy"/></svg>
+                <span data-i18n="winner_badge">Pemenang!</span>
             </div>
-            <p id="deleteScoreMessage">Hapus skor ini?</p>
-            <div class="delete-actions">
-                <button class="delete-btn cancel" onclick="closeDeleteScoreModal()">Batal</button>
-                <button class="delete-btn confirm" onclick="executeDeleteScore()">Hapus</button>
+            <button class="quick-reset modern" onclick="quickResetPlayer(1)" title="Reset skor">
+                <svg class="svg-icon" style="width:16px;height:16px;color:var(--danger)"><use href="#ic-rotate-right"/></svg>
+            </button>
+            <div class="player-header">
+                <div class="player-info">
+                    <span class="player-number">02</span>
+                    <span class="player-name editable-name" id="player-name-1" onclick="openEditName(1)" title="Ketuk untuk ubah nama">TIM BETA</span>
+                    <svg class="svg-icon edit-icon" style="width:10px;height:10px;color:var(--text-muted);opacity:0.5;" onclick="openEditName(1)"><use href="#ic-pen"/></svg>
+                    <div class="win-badge" title="Total kemenangan">
+                        <svg class="svg-icon" style="width:14px;height:14px;color:var(--accent)"><use href="#ic-star"/></svg>
+                        <span id="win-1">0</span>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-
-    <div class="delete-modal" id="editNameModal">
-        <div class="delete-modal-content">
-            <div class="delete-icon" style="color: var(--primary);">
-                <i class="fas fa-pen"></i>
+            <div class="score-display" onclick="openCalculator(1)">
+                <div class="score-value" id="score-1">0</div>
+                <div class="score-tap-hint">
+                    <svg class="svg-icon" style="width:14px;height:14px;color:var(--text-muted)"><use href="#ic-hand"/></svg>
+                    <span data-i18n="tap_hint">Ketuk untuk tambah</span>
+                </div>
             </div>
-            <p>Ubah Nama Tim</p>
-            <input type="hidden" id="editNamePlayer" value="0">
-            <input type="text" id="editNameInput" class="edit-name-input" placeholder="Nama tim..." maxlength="16"
-                   onkeydown="if(event.key==='Enter') saveEditName()">
-            <div class="delete-actions">
-                <button class="delete-btn cancel" onclick="closeEditNameModal()">Batal</button>
-                <button class="delete-btn confirm" style="background: linear-gradient(135deg, var(--primary), var(--secondary)); border: none;" onclick="saveEditName()">Simpan</button>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-1" style="width:0%"></div>
+                <div class="progress-text" id="progress-text-1">0 / 101</div>
             </div>
-        </div>
-    </div>
-
-    <div class="overlay" id="aboutOverlay" onclick="if(event.target.id==='aboutOverlay') closeAbout()">
-        <div class="modern-modal about-modal">
-            <div class="modal-handle"></div>
-            
-            <div class="modal-header">
-                <h3><i class="fas fa-info-circle"></i> Tentang Aplikasi</h3>
-                <button class="close-btn" onclick="closeAbout()">
-                    <i class="fas fa-times"></i>
+            <div class="remaining-text"><span data-i18n="limit_remain">Batas tersisa</span>: <span id="remain-num-1">101</span></div>
+            <div class="history-section">
+                <div class="history-header">
+                    <svg class="svg-icon" style="width:12px;height:12px;color:var(--text-secondary)"><use href="#ic-history"/></svg>
+                    <span data-i18n="history">Riwayat</span>
+                </div>
+                <div class="history-chips" id="history-1">
+                    <div class="empty-history" data-i18n="no_history">Belum ada skor</div>
+                </div>
+            </div>
+            <div class="card-actions">
+                <button class="action-btn undo" id="undo-btn-1" onclick="undoLastScore(1)" style="display:none;" title="Batalkan skor terakhir">
+                    <svg class="svg-icon" style="width:18px;height:18px;color:var(--primary)"><use href="#ic-rotate-left"/></svg>
+                </button>
+                <button class="action-btn minus" onclick="updateScore(1, -1)" title="Kurangi 1">
+                    <svg class="svg-icon" style="width:18px;height:18px;color:var(--danger)"><use href="#ic-minus"/></svg>
+                </button>
+                <button class="action-btn plus" onclick="openCalculator(1)">
+                    <svg class="svg-icon" style="width:18px;height:18px;color:#fff"><use href="#ic-plus"/></svg>
+                    <span data-i18n="add_score">Tambah Skor</span>
                 </button>
             </div>
-            
-            <div class="about-content">
-                <div class="app-logo-section">
-                    <div class="app-logo">
-                        <i class="fas fa-dice-d6"></i>
-                    </div>
-                    <h2>Domino Score NullXD</h2>
-                    <p class="version">Versi 2.2</p>
-                </div>
+        </div>
+    </main>
+</div>
 
-                <div class="about-section">
-                    <h4><i class="fas fa-star"></i> Fitur</h4>
-                    <ul class="feature-list">
-                        <li><i class="fas fa-check"></i> UI Modern & Elegan</li>
-                        <li><i class="fas fa-check"></i> Pelacakan Skor Real-time</li>
-                        <li><i class="fas fa-check"></i> Kalkulator Bawaan</li>
-                        <li><i class="fas fa-check"></i> Pilihan Tema Warna</li>
-                        <li><i class="fas fa-check"></i> Riwayat Skor & Undo</li>
-                        <li><i class="fas fa-check"></i> Nama Tim Dapat Diedit</li>
-                        <li><i class="fas fa-check"></i> Penyimpanan Otomatis</li>
-                        <li><i class="fas fa-check"></i> Dukungan PWA</li>
-                    </ul>
-                </div>
+<div class="overlay" id="calculatorOverlay" onclick="closeCalculatorOnOutside(event)">
+    <div class="modern-modal calculator-modal">
+        <div class="modal-handle"></div>
+        <div class="calc-header">
+            <span data-i18n="calculator">Kalkulator</span>
+            <button class="close-btn" onclick="document.getElementById('calculatorOverlay').classList.remove('active'); history.back();">
+                <svg class="svg-icon" style="width:16px;height:16px;color:var(--text-primary)"><use href="#ic-x"/></svg>
+            </button>
+        </div>
+        <div class="calc-display"><span id="calcDisplay">0</span></div>
+        <div class="calc-buttons">
+            <button class="calc-btn function" onclick="clearCalc()">AC</button>
+            <button class="calc-btn function" onclick="backspace()">
+                <svg class="svg-icon" style="width:20px;height:20px;color:var(--danger)"><use href="#ic-backspace"/></svg>
+            </button>
+            <button class="calc-btn operator" onclick="appendOperator('/')">÷</button>
+            <button class="calc-btn operator" onclick="appendOperator('*')">×</button>
+            <button class="calc-btn number" onclick="appendNumber('7')">7</button>
+            <button class="calc-btn number" onclick="appendNumber('8')">8</button>
+            <button class="calc-btn number" onclick="appendNumber('9')">9</button>
+            <button class="calc-btn operator" onclick="appendOperator('-')">−</button>
+            <button class="calc-btn number" onclick="appendNumber('4')">4</button>
+            <button class="calc-btn number" onclick="appendNumber('5')">5</button>
+            <button class="calc-btn number" onclick="appendNumber('6')">6</button>
+            <button class="calc-btn operator" onclick="appendOperator('+')">+</button>
+            <button class="calc-btn number" onclick="appendNumber('1')">1</button>
+            <button class="calc-btn number" onclick="appendNumber('2')">2</button>
+            <button class="calc-btn number" onclick="appendNumber('3')">3</button>
+            <button class="calc-btn submit" onclick="doneCalculator()">
+                <svg class="svg-icon" style="width:22px;height:22px;color:#fff"><use href="#ic-check"/></svg>
+            </button>
+            <button class="calc-btn number zero" onclick="appendNumber('0')">0</button>
+            <button class="calc-btn number" onclick="appendNumber('.')">.</button>
+        </div>
+    </div>
+</div>
 
-                <div class="about-section">
-                    <h4><i class="fas fa-code"></i> Pengembang</h4>
-                    <p class="dev-info">
-                        Dibuat oleh <strong>Farrel Aulia Irfealdo</strong><br>
-                        dengan cinta dari Indonesia 🇮🇩
-                    </p>
+<div class="overlay" id="settingsOverlay" onclick="if(event.target.id==='settingsOverlay') toggleSettings()">
+    <div class="modern-modal settings-modal">
+        <div class="modal-handle"></div>
+        <div class="modal-header">
+            <h3>
+                <svg class="svg-icon" style="width:20px;height:20px;color:var(--primary)"><use href="#ic-sliders"/></svg>
+                <span data-i18n="settings">Pengaturan</span>
+            </h3>
+            <button class="close-btn" onclick="toggleSettings()">
+                <svg class="svg-icon" style="width:16px;height:16px;color:var(--text-primary)"><use href="#ic-x"/></svg>
+            </button>
+        </div>
+        <div class="settings-content">
+            <div class="setting-group">
+                <div class="setting-label">
+                    <svg class="svg-icon" style="width:18px;height:18px;color:var(--primary)"><use href="#ic-globe"/></svg>
+                    <span data-i18n="language">Bahasa / Language</span>
                 </div>
+                <div class="theme-options" style="margin-top:0; display:flex; gap:10px;">
+                    <button class="theme-option" style="flex:1;" onclick="setLanguage('id')">
+                        <span>Indonesia</span>
+                    </button>
+                    <button class="theme-option" style="flex:1;" onclick="setLanguage('en')">
+                        <span>English</span>
+                    </button>
+                </div>
+            </div>
+            <div class="setting-group setting-group-theme">
+                <div class="setting-label">
+                    <svg class="svg-icon" style="width:18px;height:18px;color:var(--primary)"><use href="#ic-palette"/></svg>
+                    <span data-i18n="theme">Tema Warna</span>
+                </div>
+                <div class="theme-options">
+                    <button class="theme-option purple active" onclick="setTheme('purple')">
+                        <div class="theme-preview"></div><span>Purple</span>
+                    </button>
+                    <button class="theme-option blue" onclick="setTheme('blue')">
+                        <div class="theme-preview"></div><span>Blue</span>
+                    </button>
+                    <button class="theme-option green" onclick="setTheme('green')">
+                        <div class="theme-preview"></div><span>Green</span>
+                    </button>
+                    <button class="theme-option pink" onclick="setTheme('pink')">
+                        <div class="theme-preview"></div><span>Pink</span>
+                    </button>
+                </div>
+            </div>
+            <div class="setting-group">
+                <div class="setting-label">
+                    <svg class="svg-icon" style="width:18px;height:18px;color:var(--primary)"><use href="#ic-flag"/></svg>
+                    <span data-i18n="score_limit">Batas Skor</span>
+                </div>
+                <div class="input-group">
+                    <input type="number" id="limitInput" value="101" onchange="updateLimit(this.value)" min="10" max="999">
+                    <span class="input-suffix" data-i18n="points">poin</span>
+                </div>
+            </div>
+            <div class="setting-group">
+                <div class="setting-label">
+                    <svg class="svg-icon" style="width:18px;height:18px;color:var(--primary)"><use href="#ic-volume"/></svg>
+                    <span data-i18n="sound_effect">Efek Suara</span>
+                </div>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="soundToggle" onchange="toggleSound()" checked>
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+            <div class="setting-group">
+                <div class="setting-label">
+                    <svg class="svg-icon" style="width:18px;height:18px;color:var(--primary)"><use href="#ic-compress"/></svg>
+                    <span data-i18n="compact_mode">Mode Ringkas</span>
+                </div>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="compactToggle" onchange="toggleCompactMode()">
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+            <div class="settings-actions">
+                <button class="settings-btn primary" onclick="resetRound()">
+                    <svg class="svg-icon" style="width:18px;height:18px;color:var(--primary)"><use href="#ic-rotate"/></svg>
+                    <span data-i18n="new_round">Ronde Baru</span>
+                </button>
+                <button class="settings-btn danger" onclick="hardReset()">
+                    <svg class="svg-icon" style="width:18px;height:18px;color:var(--danger)"><use href="#ic-trash"/></svg>
+                    <span data-i18n="reset_all">Reset Semua</span>
+                </button>
+                <button class="settings-btn info" onclick="openAbout()">
+                    <svg class="svg-icon" style="width:18px;height:18px;color:#3b82f6"><use href="#ic-info"/></svg>
+                    <span data-i18n="about_app">Tentang Aplikasi</span>
+                </button>
+            </div>
+            <div class="social-section">
+                <p class="social-label" data-i18n="follow_me">Ikuti Saya:</p>
+                <div class="social-links">
+                    <a href="https://whatsapp.com/channel/0029VawFbp2CHDyfgcHIo51h" target="_blank" class="social-link wa">
+                        <svg class="svg-icon" style="width:20px;height:20px;color:#fff"><use href="#ic-whatsapp"/></svg>
+                    </a>
+                    <a href="https://t.me/farrelauliairfealdo" target="_blank" class="social-link tg">
+                        <svg class="svg-icon" style="width:20px;height:20px;color:#fff"><use href="#ic-telegram"/></svg>
+                    </a>
+                    <a href="https://www.instagram.com/farrelauliairfealdo_" target="_blank" class="social-link ig">
+                        <svg class="svg-icon" style="width:20px;height:20px;color:#fff"><use href="#ic-instagram"/></svg>
+                    </a>
+                    <a href="https://www.tiktok.com/@farrel.aulia.irfealdo" target="_blank" class="social-link tk">
+                        <svg class="svg-icon" style="width:20px;height:20px;color:#fff"><use href="#ic-tiktok"/></svg>
+                    </a>
+                    <a href="https://youtube.com/@nullxd-md" target="_blank" class="social-link yt">
+                        <svg class="svg-icon" style="width:20px;height:20px;color:#fff"><use href="#ic-youtube"/></svg>
+                    </a>
+                </div>
+                <p class="developer-credit" data-i18n="dev_credit">Dibuat dengan ❤️ oleh Farrel Aulia Irfealdo</p>
+            </div>
+        </div>
+    </div>
+</div>
 
-                <div class="donate-section">
-                    <a href="https://whatsapp.com/channel/0029VawFbp2CHDyfgcHIo51h" target="_blank" class="donate-btn">
-                        <i class="fa-brands fa-whatsapp"></i>
-                        Join WhatsApp Channel
+<div class="overlay" id="gameOverModal">
+    <div class="modern-modal gameover-modal">
+        <div class="confetti-container" id="confetti"></div>
+        <div class="trophy-icon">
+            <svg class="svg-icon" style="width:80px;height:80px;color:var(--accent)"><use href="#ic-trophy"/></svg>
+        </div>
+        <h2 class="congrats-text" data-i18n="win_title">Menang!</h2>
+        <p class="winner-announce"><span id="winnerName">Tim 1</span> <span data-i18n="won_round">Memenangkan Ronde Ini!</span></p>
+        <div class="final-score-display">
+            <div class="final-score-row winner-row">
+                <span class="final-score-name" id="finalWinnerName">—</span>
+                <span class="final-score-value winner" id="finalScoreWinner">0</span>
+            </div>
+            <div class="final-score-divider">VS</div>
+            <div class="final-score-row loser-row">
+                <span class="final-score-name" id="finalLoserName">—</span>
+                <span class="final-score-value loser" id="finalScoreLoser">0</span>
+            </div>
+        </div>
+        <div class="gameover-actions">
+            <button class="gameover-btn primary" onclick="resetRound(); document.getElementById('gameOverModal').classList.remove('active');">
+                <svg class="svg-icon" style="width:18px;height:18px;color:#fff"><use href="#ic-play"/></svg>
+                <span data-i18n="new_round">Ronde Baru</span>
+            </button>
+            <button class="gameover-btn secondary" onclick="document.getElementById('gameOverModal').classList.remove('active');">
+                <svg class="svg-icon" style="width:18px;height:18px;color:var(--text-primary)"><use href="#ic-eye"/></svg>
+                <span data-i18n="view_score">Lihat Skor</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="overlay" id="confirmModal">
+    <div class="modern-modal confirm-modal">
+        <div class="confirm-icon">
+            <svg class="svg-icon" style="width:64px;height:64px;color:var(--warning)"><use href="#ic-warn"/></svg>
+        </div>
+        <h3 id="confirmMessage" data-i18n="are_you_sure">Apakah Anda yakin?</h3>
+        <div class="confirm-actions">
+            <button class="confirm-btn cancel" onclick="closeConfirmModal()" data-i18n="cancel">Batal</button>
+            <button class="confirm-btn confirm" onclick="executeConfirm()" data-i18n="confirm">Konfirmasi</button>
+        </div>
+    </div>
+</div>
+
+<div class="delete-modal" id="deleteScoreModal">
+    <div class="delete-modal-content">
+        <div class="delete-icon">
+            <svg class="svg-icon" style="width:56px;height:56px;color:var(--danger)"><use href="#ic-trash"/></svg>
+        </div>
+        <p id="deleteScoreMessage" data-i18n="delete_confirm">Hapus skor ini?</p>
+        <div class="delete-actions">
+            <button class="delete-btn cancel" onclick="closeDeleteScoreModal()" data-i18n="cancel">Batal</button>
+            <button class="delete-btn confirm" onclick="executeDeleteScore()" data-i18n="delete">Hapus</button>
+        </div>
+    </div>
+</div>
+
+<div class="delete-modal" id="editNameModal">
+    <div class="delete-modal-content">
+        <div class="delete-icon" style="color:var(--primary);">
+            <svg class="svg-icon" style="width:56px;height:56px;color:var(--primary)"><use href="#ic-pen"/></svg>
+        </div>
+        <p data-i18n="change_name">Ubah Nama Tim</p>
+        <input type="hidden" id="editNamePlayer" value="0">
+        <input type="text" id="editNameInput" class="edit-name-input" placeholder="..." maxlength="16" onkeydown="if(event.key==='Enter') saveEditName()">
+        <div class="delete-actions">
+            <button class="delete-btn cancel" onclick="closeEditNameModal()" data-i18n="cancel">Batal</button>
+            <button class="delete-btn confirm" style="background:linear-gradient(135deg,var(--primary),var(--secondary));border:none;" onclick="saveEditName()" data-i18n="save">Simpan</button>
+        </div>
+    </div>
+</div>
+
+<div class="overlay" id="aboutOverlay" onclick="if(event.target.id==='aboutOverlay') closeAbout()">
+    <div class="modern-modal about-modal">
+        <div class="modal-handle"></div>
+        <div class="modal-header">
+            <h3>
+                <svg class="svg-icon" style="width:20px;height:20px;color:var(--primary)"><use href="#ic-info"/></svg>
+                <span data-i18n="about_app">Tentang Aplikasi</span>
+            </h3>
+            <button class="close-btn" onclick="closeAbout()">
+                <svg class="svg-icon" style="width:16px;height:16px;color:var(--text-primary)"><use href="#ic-x"/></svg>
+            </button>
+        </div>
+        <div class="about-content">
+            <div class="app-logo-section">
+                <div class="app-logo">
+                    <svg class="svg-icon" style="width:48px;height:48px;color:#fff"><use href="#ic-dice"/></svg>
+                </div>
+                <h2>Domino Score NullXD</h2>
+                <p class="version">Versi 2.3</p>
+            </div>
+            <div class="about-section">
+                <h4>
+                    <svg class="svg-icon" style="width:16px;height:16px;color:var(--primary)"><use href="#ic-star"/></svg>
+                    <span data-i18n="features">Fitur & Pembaruan</span>
+                </h4>
+                <ul class="feature-list">
+                    <li><svg class="svg-icon" style="width:16px;height:16px;color:var(--success)"><use href="#ic-check"/></svg> <span data-i18n="feat_ui">UI Modern & Responsif</span></li>
+                    <li><svg class="svg-icon" style="width:16px;height:16px;color:var(--success)"><use href="#ic-check"/></svg> <span data-i18n="feat_score">Sistem Skor & Kalkulator</span></li>
+                    <li><svg class="svg-icon" style="width:16px;height:16px;color:var(--success)"><use href="#ic-check"/></svg> <span data-i18n="feat_theme">Tema: Purple, Blue, Green, Pink</span></li>
+                    <li><svg class="svg-icon" style="width:16px;height:16px;color:var(--success)"><use href="#ic-check"/></svg> <span data-i18n="feat_history">Riwayat, Undo & Reset Aman</span></li>
+                    <li><svg class="svg-icon" style="width:16px;height:16px;color:var(--success)"><use href="#ic-check"/></svg> <span data-i18n="feat_storage">Penyimpanan Data Otomatis</span></li>
+                    <li><svg class="svg-icon" style="width:16px;height:16px;color:var(--success)"><use href="#ic-check"/></svg> <span data-i18n="feat_lang">Multi-bahasa (ID/EN)</span></li>
+                </ul>
+            </div>
+            <div class="about-section">
+                <h4>
+                    <svg class="svg-icon" style="width:16px;height:16px;color:var(--primary)"><use href="#ic-code"/></svg>
+                    <span data-i18n="developer">Pengembang</span>
+                </h4>
+                <p class="dev-info" data-i18n="dev_desc">Dibuat oleh <strong>Farrel Aulia Irfealdo</strong><br>dengan cinta dari Indonesia 🇮🇩</p>
+            </div>
+            <div class="donate-section">
+                <div class="donate-buttons">
+                    <a href="https://whatsapp.com/channel/0029VawFbp2CHDyfgcHIo51h" target="_blank" class="donate-btn wa">
+                        <svg class="svg-icon" style="width:18px;height:18px;color:#fff"><use href="#ic-whatsapp"/></svg>
+                        Join WhatsApp
+                    </a>
+                    <a href="https://saweria.co/nullxd" target="_blank" class="donate-btn sw">
+                        <svg class="svg-icon" style="width:18px;height:18px;color:#fff"><use href="#ic-coffee"/></svg>
+                        Saweria
                     </a>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <audio id="sfx-click" src="sfx/sfx-click.wav"></audio>
-    <audio id="sfx-win" src="sfx/sfx-win.m4a"></audio>
+<audio id="sfx-click" src="sfx/sfx-click.wav"></audio>
+<audio id="sfx-win" src="sfx/sfx-win.m4a"></audio>
 
-    <script src="js/app.js"></script>
-
-    <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function() {
-                navigator.serviceWorker.register('sw.js');
-            });
-        }
-    </script>
+<script src="js/app.js"></script>
 </body>
 </html>

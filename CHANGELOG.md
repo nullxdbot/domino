@@ -1,4 +1,4 @@
-# 📝 CHANGELOG
+# 📝 CATATAN PERUBAHAN
 
 🌐 **Bahasa:** [English](CHANGELOG_EN.md) | [Indonesia](CHANGELOG.md)
 
@@ -6,268 +6,101 @@
 
 ---
 
-## Version 2.2 (2026-02-02) - Android Native Edition 🚀
+## Versi 2.3 (2026-02-04) - Update Multi-bahasa & Kode Bersih 🌍
 
-### ✨ New Features
-- 📱 **Official APK Release:** Aplikasi Android native dengan ikon Cube official dan full-screen experience
-- 🎯 **Native App Experience:** Menghilangkan browser bar untuk pengalaman yang lebih immersive
-- 🛡️ **Safety Dialogs:** Konfirmasi dialog sebelum Reset dan Exit untuk mencegah aksi tidak disengaja
-- ⚡ **Hardware Acceleration:** Performa lebih cepat dengan GPU acceleration
+### ✨ Fitur Baru
+- 🌍 **Dukungan Multi-bahasa:** Dukungan penuh **Bahasa Indonesia** dan **English**. Ganti bahasa secara instan melalui menu Pengaturan.
+- 💾 **Persistensi Bahasa:** Aplikasi otomatis mengingat pilihan bahasa terakhir Anda.
 
-### 🔧 Improvements
-- 🎨 **Layout Optimization:** Kedua card pemain sekarang muat sempurna dalam satu layar (No Scroll)
-- 🚀 **Performance Boost:** Optimasi rendering dan animasi untuk pengalaman yang lebih smooth
-- 📱 **Android Optimization:** Khusus dioptimalkan untuk perangkat Android
-- 💾 **Better APK Packaging:** APK size lebih kecil dengan efficient asset loading
+### 🔧 Peningkatan
+- 🧹 **Arsitektur Kode Bersih:** Pembersihan total kode (HTML/CSS/JS), menghapus komentar yang tidak perlu, dan merapikan struktur agar lebih ringan.
+- ⚡ **Peningkatan Performa:** Kode dioptimalkan untuk kecepatan eksekusi yang lebih baik.
+- 🎨 **UI Dinamis:** Teks antarmuka sekarang menyesuaikan panjang karakter bahasa secara dinamis agar layout tetap rapi.
 
-### 🐛 Bug Fixes
-- ✅ Fixed score difference logic yang menunjukkan tim yang salah
-- ✅ Fixed layout overflow di layar kecil
-- ✅ Improved stability untuk long-running sessions
+### 🐛 Perbaikan Bug
+- ✅ Memperbaiki glitch tampilan saat berpindah bahasa.
+- ✅ Memastikan status "Ronde" dan "Skor" tersimpan dengan aman saat refresh.
+- ✅ Perbaikan konsistensi teks pada dialog konfirmasi.
 
 ---
 
-## Version 2.1 (2026-01-30) - Optimization Update
+## Versi 2.2 (2026-02-02) - Edisi Android Native 🚀
 
-### 🐛 Critical Bug Fixes
+### ✨ Fitur Baru
+- 📱 **Rilis APK Resmi:** Aplikasi Android native dengan ikon Cube official.
+- 🎯 **Pengalaman Layar Penuh:** Tampilan penuh tanpa gangguan browser bar.
+- 🛡️ **Dialog Keamanan:** Dialog konfirmasi sebelum Reset dan Exit untuk mencegah aksi tidak disengaja.
 
-#### Score Difference Logic Fixed
-**File:** `js/app.js` - Lines 177-193
+### 🔧 Peningkatan
+- 🎨 **Optimasi Layout:** Kedua card pemain sekarang muat sempurna dalam satu layar (Tanpa Scroll).
+- 🚀 **Peningkatan Performa:** Optimasi rendering dan animasi untuk pengalaman yang lebih smooth.
+- 📱 **Optimasi Android:** Khusus dioptimalkan untuk layar perangkat Android.
+
+### 🐛 Perbaikan Bug
+- ✅ Memperbaiki logika selisih skor yang menunjukkan tim yang salah.
+- ✅ Memperbaiki layout overflow di layar kecil.
+- ✅ Meningkatkan stabilitas untuk sesi permainan yang panjang.
+
+---
+
+## Versi 2.1 (2026-01-30) - Update Optimasi
+
+### 🐛 Perbaikan Bug Kritis
+
+#### Perbaikan Logika Selisih Skor
+**File:** `js/app.js`
 
 **Masalah:**
-```javascript
-// BEFORE - SALAH!
-if (scores[0] < scores[1]) {
-    diffEl.querySelector('.diff-text').textContent = `Tim Alpha Unggul +${diff}`;
-    // Padahal kalau scores[0] < scores[1], berarti Tim Beta yang unggul!
-}
-```
+Indikator "Unggul" sebelumnya terbalik (menampilkan tim yang kalah sebagai yang unggul).
 
 **Diperbaiki:**
-```javascript
-// AFTER - BENAR!
-if (scores[0] > scores[1]) {
-    // FIXED: Tim Alpha (player 0) unggul jika scores[0] > scores[1]
-    diffEl.querySelector('.diff-text').textContent = `Tim Alpha Unggul +${diff}`;
-    diffEl.className = 'score-diff-card leading-p1';
-} else {
-    // FIXED: Tim Beta (player 1) unggul jika scores[1] > scores[0]
-    diffEl.querySelector('.diff-text').textContent = `Tim Beta Unggul +${diff}`;
-    diffEl.className = 'score-diff-card leading-p2';
-}
-```
+Logika perbandingan skor diperbaiki sehingga lencana dan teks "Unggul" selalu menunjuk ke tim dengan skor lebih tinggi.
 
-### 🎨 Layout Optimizations
+### 🎨 Optimasi Layout
 
-**Masalah:** Kedua player card tidak muat dalam satu layar, harus scroll
+**Masalah:** Kedua player card tidak muat dalam satu layar, harus scroll.
 
-**Solusi:** Optimasi padding, margin, dan ukuran elemen
-
-#### Detail Perubahan:
-
-| Element | Before | After | Pengurangan |
-|---------|--------|-------|-------------|
-| **Container** |
-| padding | 20px | 12px | -40% |
-| **Header** |
-| padding | 20px 24px | 14px 20px | -30% |
-| margin-bottom | 24px | 12px | -50% |
-| **Score Diff Card** |
-| padding | 16px 20px | 10px 16px | -35% |
-| margin-bottom | 24px | 12px | -50% |
-| **Player Cards** |
-| padding | 24px | 16px | -33% |
-| gap between cards | 20px | 12px | -40% |
-| **Score Display** |
-| padding | 32px 20px | 20px 16px | -38% |
-| font-size | 72px | 56px | -22% |
-| **Progress Bar** |
-| height | 40px | 32px | -20% |
-| **Action Buttons** |
-| height | 56px | 48px | -14% |
+**Solusi:** Optimasi padding, margin, dan ukuran elemen.
 
 #### Hasil:
-- **Total tinggi dikurangi:** ~200-250px
+- **Total tinggi dikurangi:** ~250px
 - **Kedua card sekarang muat sempurna dalam satu layar** ✅
 - **Tidak perlu scroll lagi!** 🎉
 
-### 📊 Perbandingan Visual
+---
 
-```
-SEBELUM (Original):
-┌─────────────────┐
-│    Header       │ 88px
-├─────────────────┤
-│  Score Diff     │ 52px
-├─────────────────┤
-│                 │
-│   Player 1      │
-│   Card          │ ~420px
-│                 │
-├─────────────────┤
-│                 │  ← PERLU SCROLL!
-│   Player 2      │
-│   Card          │ ~420px (TERSEMBUNYI)
-│                 │
-└─────────────────┘
-Total: ~1000px+
+## Versi 2.0.0 (2025-12) - Redesain Besar-besaran 🎨
 
+### ✨ Fitur Utama
+- 🎨 **Redesain UI/UX Lengkap:** Antarmuka modern dengan efek glassmorphism.
+- 🎵 **Efek Suara:** Umpan balik audio untuk klik dan kemenangan.
+- 🎨 **4 Tema Warna:** Ungu (default), Biru, Hijau, Pink.
+- 🌙 **Mode Gelap:** Tema gelap untuk kenyamanan mata.
+- 📊 **Riwayat Skor:** Lacak semua perubahan skor.
+- 🧮 **Mode Kalkulator:** Kalkulator terintegrasi untuk perhitungan cepat.
 
-SESUDAH (Optimized):
-┌─────────────────┐
-│    Header       │ 62px
-├─────────────────┤
-│  Score Diff     │ 34px
-├─────────────────┤
-│                 │
-│   Player 1      │
-│   Card          │ ~310px
-│                 │
-├─────────────────┤
-│                 │  ← SEMUA MUAT!
-│   Player 2      │
-│   Card          │ ~310px
-│                 │
-└─────────────────┘
-Total: ~750px (muat di hampir semua layar!)
-```
+### 🎯 Fitur Inti
+- ✅ Pelacakan skor real-time.
+- ✅ Penghitung kemenangan untuk tiap tim.
+- ✅ Progress bar visual.
+- ✅ Indikator selisih skor.
+- ✅ Target skor yang dapat disesuaikan.
 
 ---
 
-## Version 2.0.0 (2025-12) - Major Redesign 🎨
+## Versi 1.0.0 (2025-11) - Rilis Awal 🎉
 
-### ✨ Major Features
-- 🎨 **Complete UI/UX Redesign:** Interface modern dengan glassmorphism effect
-- 📱 **PWA Support:** Install sebagai aplikasi di desktop dan mobile
-- 🎵 **Sound Effects:** Audio feedback untuk click dan victory
-- 🎨 **4 Color Themes:** Purple (default), Blue, Green, Pink
-- 🌙 **Dark Mode:** Theme gelap untuk kenyamanan mata
-- 📊 **Score History:** Track semua perubahan skor
-- 🧮 **Calculator Mode:** Kalkulator terintegrasi untuk perhitungan cepat
-
-### 🎯 Core Features
-- ✅ Real-time score tracking
-- ✅ Win counter untuk tiap tim
-- ✅ Progress bar visual
-- ✅ Score difference indicator
-- ✅ Customizable score limit
-
-### 🔧 Technical Improvements
-- ⚡ Hardware accelerated animations
-- 💾 LocalStorage untuk auto-save
-- 🔄 Service Worker untuk offline mode
-- 📱 Responsive design untuk semua ukuran layar
-
----
-
-## Version 1.0.0 (2025-11) - Initial Release 🎉
-
-### ✨ Features
-- ✅ Basic score tracking untuk 2 pemain
-- ✅ Add/Remove score functionality
-- ✅ Win detection
-- ✅ Reset game
-- ✅ Simple, clean interface
-
----
-
-## 📋 File Changes Summary
-
-### Version 2.2
-- ✅ **APK Build:** Native Android packaging
-- ✅ **index.html:** Added exit confirmation
-- ✅ **manifest.json:** Updated for native app
-- ✅ **Icons:** New Cube icon set
-
-### Version 2.1
-- ✅ **js/app.js:** Fixed score difference logic
-- ✅ **css/style.css:** Optimized layout untuk no-scroll design
-
-### Version 2.0
-- ✅ **index.html:** Complete restructure
-- ✅ **css/style.css:** New design system
-- ✅ **js/app.js:** Refactored dengan new features
-- ✅ **manifest.json:** PWA configuration
-- ✅ **sw.js:** Service Worker implementation
-- ✅ **Audio files:** Added sound effects
-
----
-
-## ✅ Testing & Compatibility
-
-### Tested Platforms
-- ✅ Mobile Chrome (Android)
-- ✅ Mobile Safari (iOS)
-- ✅ Desktop Chrome
-- ✅ Desktop Firefox
-- ✅ Desktop Safari
-- ✅ Edge
-- ✅ PWA (Desktop & Mobile)
-- ✅ Native Android APK
-
-### Screen Sizes Tested
-- ✅ 667px (iPhone SE)
-- ✅ 736px (iPhone 8 Plus)
-- ✅ 812px (iPhone X)
-- ✅ 844px (iPhone 12)
-- ✅ 896px (iPhone 11 Pro Max)
-- ✅ 1920x1080 (Desktop)
-
----
-
-## 🐛 Known Issues
-
-### Current Issues (v2.2)
-- Audio autoplay mungkin diblokir browser (memerlukan user interaction)
-- Beberapa browser lama mungkin tidak support semua CSS features
-
-### Fixed Issues
-- ✅ Score difference menunjukkan tim yang salah (v2.1)
-- ✅ Layout overflow di layar kecil (v2.1)
-- ✅ Progress bar tidak update dengan benar (v2.0)
-- ✅ History tidak tersimpan setelah refresh (v2.0)
-
----
-
-## 📅 Release Timeline
-
-```
-Nov 2025  ──►  Dec 2025  ──►  Jan 2026  ──►  Feb 2026
-   v1.0         v2.0          v2.1          v2.2
-  Initial    Major Redesign  Bug Fixes   Android Native
-```
-
----
-
-## 🔮 Upcoming Features
-
-### Planned for v2.3
-- [ ] Multi-player support (3-4 players)
-- [ ] Game statistics & analytics
-- [ ] Export/Import game data
-- [ ] Cloud sync (optional)
-
-### Planned for v3.0
-- [ ] Tournament mode
-- [ ] Multiple language support (i18n)
-- [ ] Custom themes builder
-- [ ] Advanced statistics
-
----
-
-## 📞 Support & Feedback
-
-Menemukan bug atau punya saran?
-- 🐛 **Report Bug:** [GitHub Issues](https://github.com/nullxdbot/domino/issues)
-- 💡 **Request Feature:** [GitHub Issues](https://github.com/nullxdbot/domino/issues)
-- 💬 **Discussion:** [GitHub Discussions](https://github.com/nullxdbot/domino/discussions)
+### ✨ Fitur
+- ✅ Pelacakan skor dasar untuk 2 pemain.
+- ✅ Fungsi tambah/kurang skor.
+- ✅ Deteksi kemenangan.
+- ✅ Reset permainan.
+- ✅ Antarmuka sederhana dan bersih.
 
 ---
 
 <div align="center">
 
-**Made with ❤️ by Farrel Aulia Irfealdo (NullXD)**
-
-🇮🇩 Indonesia
+**[⬆ Kembali ke Atas](#-catatan-perubahan)**
 
 </div>
