@@ -83,7 +83,7 @@ button:active, .social-link:active, .theme-option:active, .settings-btn:active, 
     margin: 0 auto;
     padding: 14px 14px 20px;
     padding-top: max(14px, env(safe-area-inset-top));
-    padding-bottom: max(100px, env(safe-area-inset-bottom));
+    padding-bottom: max(140px, env(safe-area-inset-bottom));
     position: relative;
     z-index: 1;
     height: 100vh;
