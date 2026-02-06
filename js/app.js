@@ -978,9 +978,8 @@ function spawnConfetti() {
 }
 
 // ========================================
-// 🎵 MUSIC PLAYER FEATURE - FIXED
-// Replace bagian music player di app.js
-// ======================================== 
+// 🎵 MUSIC PLAYER FEATURE
+// ========================================
 
 const NEOXR_API_KEY = 'SelfFrrl'
 const NEOXR_API_URL = 'https://api.neoxr.eu/api/yts'
@@ -1011,26 +1010,29 @@ const musicPrevBtn = document.getElementById('music-prev-btn')
 const musicNextBtn = document.getElementById('music-next-btn')
 const musicClosePlayerBtn = document.getElementById('music-close-player-btn')
 
-// Initialize after DOM ready
-document.addEventListener('DOMContentLoaded', () => {
-    // Deteksi jika running di Android WebView (APK)
-    const isAndroidApp = /android/i.test(navigator.userAgent) && 
-                         window.location.protocol === 'file:'
-    
-    if (musicBtn) {
-        // Sembunyikan tombol music jika di Android APK
-        if (isAndroidApp) {
-            musicBtn.style.display = 'none'
-            console.log('🚫 Music Player disabled (Android APK mode)')
-        } else {
-            musicBtn.style.display = 'flex'
-            // Load YouTube API dengan delay untuk memastikan page sudah ready
-            setTimeout(() => {
-                loadYouTubeAPI()
-            }, 1000)
+// Initialize music player after DOM ready
+const originalDOMContentLoaded = document.querySelector('script')
+if (originalDOMContentLoaded) {
+    window.addEventListener('load', () => {
+        // Deteksi jika running di Android WebView (APK)
+        const isAndroidApp = /android/i.test(navigator.userAgent) && 
+                             window.location.protocol === 'file:'
+        
+        if (musicBtn) {
+            // Sembunyikan tombol music jika di Android APK
+            if (isAndroidApp) {
+                musicBtn.style.display = 'none'
+                console.log('🚫 Music Player disabled (Android APK mode)')
+            } else {
+                musicBtn.style.display = 'flex'
+                // Load YouTube API dengan delay untuk memastikan page sudah ready
+                setTimeout(() => {
+                    loadYouTubeAPI()
+                }, 1000)
+            }
         }
-    }
-})
+    })
+}
 
 // Load YouTube IFrame API
 function loadYouTubeAPI() {
@@ -1103,8 +1105,7 @@ function onPlayerStateChange(event) {
 
 function onPlayerError(event) {
     console.error('YouTube Player Error:', event.data)
-    // Error tapi jangan ganggu user dengan alert
-    // Coba lagu berikutnya secara otomatis
+    // Auto skip ke lagu berikutnya
     if (currentMusicIndex < musicQueue.length - 1) {
         setTimeout(() => playNext(), 1000)
     }
@@ -1175,7 +1176,6 @@ async function searchMusic() {
     } catch (error) {
         console.error('Search error:', error)
         musicLoading.style.display = 'none'
-        // Tampilkan pesan error di empty state
         musicEmpty.innerHTML = `
             <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                 <circle cx="12" cy="12" r="10"/>
@@ -1232,14 +1232,12 @@ function formatViews(views) {
 function playSong(queue, index) {
     if (!isPlayerReady) {
         console.log('Player belum siap, tunggu...')
-        // Retry setelah 2 detik
         setTimeout(() => playSong(queue, index), 2000)
         return
     }
     
     if (!ytPlayer || !ytPlayer.loadVideoById) {
-        console.error('YouTube player error. Silakan refresh halaman.')
-        // Auto refresh setelah 3 detik jika dalam environment yang tepat
+        console.error('YouTube player error')
         if (window.location.protocol !== 'file:') {
             setTimeout(() => window.location.reload(), 3000)
         }
@@ -1254,7 +1252,6 @@ function playSong(queue, index) {
     
     if (!videoId) {
         console.error('Video ID tidak ditemukan, skip...')
-        // Coba lagu berikutnya
         if (currentMusicIndex < queue.length - 1) {
             playSong(queue, currentMusicIndex + 1)
         }
@@ -1273,7 +1270,6 @@ function playSong(queue, index) {
         console.log('Playing:', song.title)
     } catch (error) {
         console.error('Play error:', error)
-        // Silent fail, coba lagu berikutnya
         if (currentMusicIndex < musicQueue.length - 1) {
             setTimeout(() => playNext(), 1000)
         }
