@@ -976,3 +976,378 @@ function spawnConfetti() {
         container.appendChild(piece)
     }
 }
+
+// ========================================
+// 🎵 MUSIC PLAYER FEATURE - FIXED
+// Replace bagian music player di app.js
+// ======================================== 
+
+const NEOXR_API_KEY = 'SelfFrrl'
+const NEOXR_API_URL = 'https://api.neoxr.eu/api/yts'
+
+let musicQueue = []
+let currentMusicIndex = -1
+let ytPlayer = null
+let isPlayerReady = false
+let isPlaying = false
+
+// DOM Elements
+const musicBtn = document.getElementById('music-btn')
+const musicModal = document.getElementById('music-modal')
+const musicCloseBtn = document.getElementById('music-close-btn')
+const musicSearchInput = document.getElementById('music-search-input')
+const musicSearchBtn = document.getElementById('music-search-btn')
+const musicLoading = document.getElementById('music-loading')
+const musicResults = document.getElementById('music-results')
+const musicEmpty = document.getElementById('music-empty')
+const musicPlayer = document.getElementById('music-player')
+const musicPlayerThumb = document.getElementById('music-player-thumb')
+const musicPlayerTitle = document.getElementById('music-player-title')
+const musicPlayerArtist = document.getElementById('music-player-artist')
+const musicPlayBtn = document.getElementById('music-play-btn')
+const musicPlayIcon = document.getElementById('music-play-icon')
+const musicPauseIcon = document.getElementById('music-pause-icon')
+const musicPrevBtn = document.getElementById('music-prev-btn')
+const musicNextBtn = document.getElementById('music-next-btn')
+const musicClosePlayerBtn = document.getElementById('music-close-player-btn')
+
+// Initialize after DOM ready
+document.addEventListener('DOMContentLoaded', () => {
+    // Deteksi jika running di Android WebView (APK)
+    const isAndroidApp = /android/i.test(navigator.userAgent) && 
+                         window.location.protocol === 'file:'
+    
+    if (musicBtn) {
+        // Sembunyikan tombol music jika di Android APK
+        if (isAndroidApp) {
+            musicBtn.style.display = 'none'
+            console.log('🚫 Music Player disabled (Android APK mode)')
+        } else {
+            musicBtn.style.display = 'flex'
+            // Load YouTube API dengan delay untuk memastikan page sudah ready
+            setTimeout(() => {
+                loadYouTubeAPI()
+            }, 1000)
+        }
+    }
+})
+
+// Load YouTube IFrame API
+function loadYouTubeAPI() {
+    if (window.YT && window.YT.Player) {
+        console.log('YouTube API already loaded')
+        initYouTubePlayer()
+        return
+    }
+    
+    const tag = document.createElement('script')
+    tag.src = 'https://www.youtube.com/iframe_api'
+    tag.async = true
+    const firstScriptTag = document.getElementsByTagName('script')[0]
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag)
+    
+    window.onYouTubeIframeAPIReady = () => {
+        console.log('YouTube API ready')
+        initYouTubePlayer()
+    }
+}
+
+// Initialize YouTube Player
+function initYouTubePlayer() {
+    const container = document.getElementById('youtube-player-container')
+    if (!container) {
+        console.error('YouTube player container not found')
+        return
+    }
+    
+    try {
+        ytPlayer = new YT.Player('youtube-player-container', {
+            height: '0',
+            width: '0',
+            playerVars: {
+                'autoplay': 0,
+                'controls': 0,
+                'playsinline': 1,
+                'rel': 0,
+                'modestbranding': 1
+            },
+            events: {
+                'onReady': onPlayerReady,
+                'onStateChange': onPlayerStateChange,
+                'onError': onPlayerError
+            }
+        })
+    } catch (error) {
+        console.error('Failed to init YouTube player:', error)
+    }
+}
+
+function onPlayerReady(event) {
+    isPlayerReady = true
+    console.log('✅ YouTube Player Ready')
+}
+
+function onPlayerStateChange(event) {
+    const playerState = event.data
+    
+    if (playerState === YT.PlayerState.PLAYING) {
+        isPlaying = true
+        updatePlayButton(true)
+    } else if (playerState === YT.PlayerState.PAUSED) {
+        isPlaying = false
+        updatePlayButton(false)
+    } else if (playerState === YT.PlayerState.ENDED) {
+        playNext()
+    }
+}
+
+function onPlayerError(event) {
+    console.error('YouTube Player Error:', event.data)
+    // Error tapi jangan ganggu user dengan alert
+    // Coba lagu berikutnya secara otomatis
+    if (currentMusicIndex < musicQueue.length - 1) {
+        setTimeout(() => playNext(), 1000)
+    }
+}
+
+// Modal Controls
+if (musicBtn) {
+    musicBtn.addEventListener('click', () => {
+        musicModal.classList.add('active')
+        if (musicSearchInput) musicSearchInput.focus()
+    })
+}
+
+if (musicCloseBtn) {
+    musicCloseBtn.addEventListener('click', () => {
+        musicModal.classList.remove('active')
+    })
+}
+
+if (musicModal) {
+    musicModal.addEventListener('click', (e) => {
+        if (e.target === musicModal) {
+            musicModal.classList.remove('active')
+        }
+    })
+}
+
+// Search Music
+if (musicSearchBtn) {
+    musicSearchBtn.addEventListener('click', searchMusic)
+}
+
+if (musicSearchInput) {
+    musicSearchInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            searchMusic()
+        }
+    })
+}
+
+async function searchMusic() {
+    const query = musicSearchInput.value.trim()
+    
+    if (query.length < 3) {
+        // Highlight input merah sebentar
+        musicSearchInput.style.borderColor = '#ef4444'
+        setTimeout(() => {
+            musicSearchInput.style.borderColor = ''
+        }, 1000)
+        return
+    }
+    
+    musicLoading.style.display = 'flex'
+    musicResults.innerHTML = ''
+    musicEmpty.style.display = 'none'
+    
+    try {
+        const response = await fetch(`${NEOXR_API_URL}?q=${encodeURIComponent(query)}&apikey=${NEOXR_API_KEY}`)
+        const data = await response.json()
+        
+        musicLoading.style.display = 'none'
+        
+        if (data.status && data.data && data.data.length > 0) {
+            displayResults(data.data)
+        } else {
+            musicEmpty.style.display = 'flex'
+        }
+    } catch (error) {
+        console.error('Search error:', error)
+        musicLoading.style.display = 'none'
+        // Tampilkan pesan error di empty state
+        musicEmpty.innerHTML = `
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="12" y1="8" x2="12" y2="12"/>
+                <line x1="12" y1="16" x2="12.01" y2="16"/>
+            </svg>
+            <p>Gagal mencari. Cek koneksi internet.</p>
+        `
+        musicEmpty.style.display = 'flex'
+    }
+}
+
+function displayResults(songs) {
+    musicResults.innerHTML = ''
+    
+    songs.forEach((song, index) => {
+        const card = document.createElement('div')
+        card.className = 'music-song-card'
+        
+        const thumbnail = song.thumbnail || song.image || ''
+        const title = song.title || 'Unknown Title'
+        const artist = song.author?.name || 'Unknown Artist'
+        const duration = song.timestamp || song.duration?.timestamp || '0:00'
+        const views = formatViews(song.views || 0)
+        
+        card.innerHTML = `
+            <img class="music-song-thumb" src="${thumbnail}" alt="${title}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%2290%22%3E%3Crect fill=%22%23333%22 width=%22120%22 height=%2290%22/%3E%3C/svg%3E'">
+            <div class="music-song-info">
+                <div class="music-song-title">${title}</div>
+                <div class="music-song-artist">${artist}</div>
+                <div class="music-song-duration">${duration} • ${views} views</div>
+            </div>
+        `
+        
+        card.addEventListener('click', () => {
+            playSong(songs, index)
+            musicModal.classList.remove('active')
+        })
+        
+        musicResults.appendChild(card)
+    })
+}
+
+function formatViews(views) {
+    if (views >= 1000000) {
+        return (views / 1000000).toFixed(1) + 'M'
+    } else if (views >= 1000) {
+        return (views / 1000).toFixed(1) + 'K'
+    }
+    return views.toString()
+}
+
+// Play Song
+function playSong(queue, index) {
+    if (!isPlayerReady) {
+        console.log('Player belum siap, tunggu...')
+        // Retry setelah 2 detik
+        setTimeout(() => playSong(queue, index), 2000)
+        return
+    }
+    
+    if (!ytPlayer || !ytPlayer.loadVideoById) {
+        console.error('YouTube player error. Silakan refresh halaman.')
+        // Auto refresh setelah 3 detik jika dalam environment yang tepat
+        if (window.location.protocol !== 'file:') {
+            setTimeout(() => window.location.reload(), 3000)
+        }
+        return
+    }
+    
+    musicQueue = queue
+    currentMusicIndex = index
+    
+    const song = musicQueue[currentMusicIndex]
+    const videoId = song.videoId || song.id
+    
+    if (!videoId) {
+        console.error('Video ID tidak ditemukan, skip...')
+        // Coba lagu berikutnya
+        if (currentMusicIndex < queue.length - 1) {
+            playSong(queue, currentMusicIndex + 1)
+        }
+        return
+    }
+    
+    // Update player UI
+    musicPlayerThumb.src = song.thumbnail || song.image || ''
+    musicPlayerTitle.textContent = song.title || 'Unknown'
+    musicPlayerArtist.textContent = song.author?.name || 'Unknown Artist'
+    
+    // Load and play
+    try {
+        ytPlayer.loadVideoById(videoId)
+        musicPlayer.style.display = 'block'
+        console.log('Playing:', song.title)
+    } catch (error) {
+        console.error('Play error:', error)
+        // Silent fail, coba lagu berikutnya
+        if (currentMusicIndex < musicQueue.length - 1) {
+            setTimeout(() => playNext(), 1000)
+        }
+    }
+}
+
+// Player Controls
+if (musicPlayBtn) {
+    musicPlayBtn.addEventListener('click', togglePlayPause)
+}
+
+if (musicPrevBtn) {
+    musicPrevBtn.addEventListener('click', playPrevious)
+}
+
+if (musicNextBtn) {
+    musicNextBtn.addEventListener('click', playNext)
+}
+
+if (musicClosePlayerBtn) {
+    musicClosePlayerBtn.addEventListener('click', closePlayer)
+}
+
+function togglePlayPause() {
+    if (!ytPlayer || currentMusicIndex === -1) return
+    
+    try {
+        if (isPlaying) {
+            ytPlayer.pauseVideo()
+        } else {
+            ytPlayer.playVideo()
+        }
+    } catch (error) {
+        console.error('Toggle error:', error)
+    }
+}
+
+function playPrevious() {
+    if (currentMusicIndex > 0) {
+        playSong(musicQueue, currentMusicIndex - 1)
+    }
+}
+
+function playNext() {
+    if (currentMusicIndex < musicQueue.length - 1) {
+        playSong(musicQueue, currentMusicIndex + 1)
+    }
+}
+
+function closePlayer() {
+    try {
+        if (ytPlayer) {
+            ytPlayer.stopVideo()
+        }
+    } catch (error) {
+        console.error('Stop error:', error)
+    }
+    
+    musicPlayer.style.display = 'none'
+    currentMusicIndex = -1
+    isPlaying = false
+    updatePlayButton(false)
+}
+
+function updatePlayButton(playing) {
+    if (musicPlayIcon && musicPauseIcon) {
+        if (playing) {
+            musicPlayIcon.style.display = 'none'
+            musicPauseIcon.style.display = 'block'
+        } else {
+            musicPlayIcon.style.display = 'block'
+            musicPauseIcon.style.display = 'none'
+        }
+    }
+}
+
+console.log('🎵 Music Player Loaded!')
