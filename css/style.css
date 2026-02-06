@@ -34,7 +34,8 @@ body {
     background: var(--bg-primary);
     color: var(--text-primary);
     min-height: 100vh;
-    overflow-x: hidden;
+    height: 100vh;
+    overflow: hidden;
     position: relative;
     padding-top: env(safe-area-inset-top);
     padding-bottom: env(safe-area-inset-bottom);
@@ -85,6 +86,9 @@ button:active, .social-link:active, .theme-option:active, .settings-btn:active, 
     padding-bottom: max(100px, env(safe-area-inset-bottom));
     position: relative;
     z-index: 1;
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .app-header {
@@ -1915,4 +1919,22 @@ input:checked + .toggle-slider:before {
         transform: translateY(0);
         opacity: 1;
     }
+}
+
+/* Custom Scrollbar */
+.app-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.app-container::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.app-container::-webkit-scrollbar-thumb {
+    background: rgba(139, 92, 246, 0.3);
+    border-radius: 10px;
+}
+
+.app-container::-webkit-scrollbar-thumb:hover {
+    background: rgba(139, 92, 246, 0.5);
 }
