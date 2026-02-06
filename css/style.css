@@ -87,8 +87,7 @@ button:active, .social-link:active, .theme-option:active, .settings-btn:active, 
     position: relative;
     z-index: 1;
     height: 100vh;
-    overflow-y: auto;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 .app-header {
