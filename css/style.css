@@ -717,7 +717,7 @@ button:active, .social-link:active, .theme-option:active, .settings-btn:active, 
     display: flex;
     align-items: flex-end;
     justify-content: center;
-    z-index: 1000;
+    z-index: 10001;
     opacity: 0;
     visibility: hidden;
     transition: var(--transition);
