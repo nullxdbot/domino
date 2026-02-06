@@ -461,7 +461,7 @@ button:active, .social-link:active, .theme-option:active, .settings-btn:active, 
 
 .remaining-text {
     text-align: center;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 600;
     color: var(--text-secondary);
     margin-bottom: 10px;
@@ -811,18 +811,20 @@ button:active, .social-link:active, .theme-option:active, .settings-btn:active, 
 }
 
 .settings-modal {
-    padding-bottom: 22px;
+    padding-bottom: 16px;
+    max-height: 90vh;
+    overflow-y: auto;
 }
 
 .settings-content {
-    padding: 20px 22px;
+    padding: 12px 20px;
 }
 
 .setting-group {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 16px 0;
+    padding: 12px 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
@@ -841,28 +843,28 @@ button:active, .social-link:active, .theme-option:active, .settings-btn:active, 
 .theme-options {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+    gap: 8px;
     width: 100%;
-    margin-top: 14px;
+    margin-top: 10px;
 }
 
 .theme-option {
     background: rgba(255, 255, 255, 0.05);
     border: 2px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    padding: 14px 10px;
+    border-radius: 10px;
+    padding: 10px 8px;
     cursor: pointer;
     transition: var(--transition);
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 7px;
+    gap: 5px;
 }
 
 .theme-preview {
-    width: 44px;
-    height: 44px;
-    border-radius: 10px;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
     transition: var(--transition);
 }
 
@@ -980,21 +982,21 @@ input:checked + .toggle-slider:before {
 .settings-actions {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    margin-top: 20px;
+    gap: 8px;
+    margin-top: 14px;
 }
 
 .settings-btn {
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    padding: 14px 18px;
+    border-radius: 10px;
+    padding: 11px 14px;
     cursor: pointer;
     transition: var(--transition);
     display: flex;
     align-items: center;
-    gap: 11px;
-    font-size: 14px;
+    gap: 9px;
+    font-size: 13px;
     font-weight: 600;
     color: var(--text-primary);
 }
@@ -1020,30 +1022,30 @@ input:checked + .toggle-slider:before {
 }
 
 .social-section {
-    margin-top: 28px;
-    padding-top: 20px;
+    margin-top: 16px;
+    padding-top: 14px;
     border-top: 1px solid rgba(255, 255, 255, 0.08);
     text-align: center;
 }
 
 .social-label {
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 600;
     color: var(--text-secondary);
-    margin-bottom: 14px;
+    margin-bottom: 10px;
 }
 
 .social-links {
     display: flex;
     justify-content: center;
-    gap: 10px;
-    margin-bottom: 14px;
+    gap: 8px;
+    margin-bottom: 10px;
 }
 
 .social-link {
-    width: 46px;
-    height: 46px;
-    border-radius: 12px;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;

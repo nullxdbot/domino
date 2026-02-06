@@ -9,7 +9,7 @@ let roundCount = 1
 let lastWinner = null
 let compactMode = false
 let soundEnabled = true
-let playerNames = ['TIM ALPHA', 'TIM BETA']
+let playerNames = ['TIM NULLXD', 'TIM BETA']
 let isRoundActive = true
 let pendingAction = null
 let scoreAnimationTimers = [null, null]
@@ -297,7 +297,9 @@ function undoLastScore(player) {
 
 function checkWin(player) {
     if (scores[player] >= limit) {
-        gameOver(player)
+        const loser = player
+        const winner = player === 0 ? 1 : 0
+        gameOver(winner)
     }
 }
 
@@ -353,7 +355,7 @@ function render() {
             el0.innerText = getTxt('limit_reached')
             el0.classList.add('danger')
         } else {
-            el0.innerText = `${getTxt('limit_remain')}: ${sisa0}`
+            el0.innerText = `Sisa ${sisa0} lagi`
             el0.classList.remove('danger')
         }
     }
@@ -363,7 +365,7 @@ function render() {
             el1.innerText = getTxt('limit_reached')
             el1.classList.add('danger')
         } else {
-            el1.innerText = `${getTxt('limit_remain')}: ${sisa1}`
+            el1.innerText = `Sisa ${sisa1} lagi`
             el1.classList.remove('danger')
         }
     }
@@ -711,7 +713,7 @@ function performHardReset() {
     roundHistory = [[], []]
     roundCount = 1
     lastWinner = null
-    playerNames = ['TIM ALPHA', 'TIM BETA']
+    playerNames = ['TIM NULLXD', 'TIM BETA']
     isRoundActive = true
 
     document.getElementById('win-0').innerText = "0"

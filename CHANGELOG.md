@@ -6,6 +6,36 @@
 
 ---
 
+## Versi 2.4 (2026-02-06) - Optimal & Modern Design 🎯
+
+### ✨ Fitur Baru
+- 🎯 **Branding Update:** Nama default tim diubah dari "TIM ALPHA" menjadi "TIM NULLXD" untuk identitas brand yang lebih kuat.
+- 📦 **Mode Ringkas:** Mode compact yang benar-benar berfungsi untuk device dengan layar lebih kecil.
+- 🎨 **Font Custom:** Implementasi custom font di semua dialog untuk tampilan yang lebih unik.
+- 🌈 **Social Media Dialog Redesign:** Dialog social media dengan gradient background yang menarik dan modern.
+
+### 🔧 Peningkatan
+- 🏆 **Logika Domino Tradisional:** Memperbaiki logika menang/kalah sesuai aturan domino kampung - pemain yang mencapai/melewati limit 101 poin = KALAH (bukan menang).
+- 📱 **UI Full Screen Optimal:** Dioptimalkan khusus untuk layar 1440x3200 (395 ppi) agar pas full screen tanpa scroll.
+- 📊 **Info "Sisa X lagi":** Format teks lebih jelas dan informatif ("Sisa 46 lagi" vs "Batas tersisa: 46").
+- ⚡ **Spacing Optimization:** Optimasi menyeluruh untuk padding, margin, dan gap di semua elemen.
+- 🎨 **Visual Polish:** Icon lebih besar, text center, gradient backgrounds, dan shadow effects.
+
+### 📐 Detail Optimasi Layout
+- **App Container:** Padding disesuaikan (14px top, 20px bottom)
+- **Header:** Ukuran brand icon, font, dan button dioptimalkan
+- **Player Card:** Padding, score display, progress bar disesuaikan
+- **Action Button:** Height dinaikkan untuk touch target yang lebih baik
+- **History Section:** Max-height dan spacing dioptimalkan
+- **VS Circle:** Ukuran optimal untuk visual hierarchy
+
+### 🐛 Perbaikan Bug
+- ✅ Memperbaiki logika win/lose yang terbalik (yang mencapai limit sekarang benar-benar kalah).
+- ✅ Layout tidak lagi terpotong di device dengan layar 1440x3200.
+- ✅ Mode compact sekarang benar-benar berfungsi dengan CSS yang proper.
+
+---
+
 ## Versi 2.3 (2026-02-04) - Update Multi-bahasa & Kode Bersih 🌍
 
 ### ✨ Fitur Baru

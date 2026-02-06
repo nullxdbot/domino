@@ -1,14 +1,14 @@
 # 🎲 Domino Score NullXD
 
-[![Version](https://img.shields.io/badge/version-2.3-blue.svg)](https://github.com/nullxdbot/domino)
+[![Version](https://img.shields.io/badge/version-2.4-blue.svg)](https://github.com/nullxdbot/domino)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![APK](https://img.shields.io/badge/APK-Download-orange.svg)](https://www.mediafire.com/file/p9lg6t7t6jrxm1x/DominoNullXD_V2.3.apk/file)
+[![APK](https://img.shields.io/badge/APK-Download-orange.svg)](https://github.com/nullxdbot/domino/releases)
 
 > Aplikasi pencatat skor modern, indah, dan kaya fitur untuk permainan domino 🃏
 
 🌐 **Bahasa:** [English](README_EN.md) | [Indonesia](README.md)
 
-[🎮 Demo Langsung](https://nullxdbot.github.io/domino/) | [📱 Download APK v2.3](https://www.mediafire.com/file/p9lg6t7t6jrxm1x/DominoNullXD_V2.3.apk/file) | [🐛 Laporkan Bug](https://github.com/nullxdbot/domino/issues)
+[🎮 Demo Langsung](https://nullxdbot.github.io/domino/) | [📱 Download APK v2.4](https://github.com/nullxdbot/domino/releases) | [🐛 Laporkan Bug](https://github.com/nullxdbot/domino/issues)
 
 ---
 
@@ -84,9 +84,10 @@ Download aplikasi Android (Webview Wrapper):
 
 | Mirror | Link | Status |
 |---|---|---|
-| 🔥 MediaFire | [Download APK](https://www.mediafire.com/file/p9lg6t7t6jrxm1x/DominoNullXD_V2.3.apk/file) | ⚡ Cepat |
-| 📂 SFile.mobi | [Download APK](#) | ✅ Mirror 1 |
-| 📦 APKAdmin | [Download APK](#) | ✅ Mirror 2 |
+| 🔥 GitHub Releases | [Download APK](https://github.com/nullxdbot/domino/releases) | ⚡ Rekomendasi |
+| 📂 MediaFire | [Download APK](https://www.mediafire.com/file/x752c84mp872dhv/Domino-Score-V2.4.apk/file) | ✅ Mirror 1 |
+| 📦 APKAdmin | [Download APK](https://apkadmin.com/6ug3apbn85bg/Domino-Score-V2.4.apk.html) | ✅ Mirror 2 |
+| 📱 SfileMobi | [Download APK](https://sfile.co/jmsd5QsdIIJ) | ✅ Mirror 3 |
 
 </div>
 
@@ -96,19 +97,32 @@ Download aplikasi Android (Webview Wrapper):
 
 ```
 domino/
-├── index.html              # File HTML utama (v2.3 Multi-bahasa)
-├── README.md               # Dokumentasi
-├── CHANGELOG.md            # Riwayat versi
+├── index.html              # File HTML utama (v2.4)
+├── README.md               # Dokumentasi (Indonesia)
+├── README_EN.md            # Dokumentasi (English)
+├── CHANGELOG.md            # Riwayat versi (Indonesia)
+├── CHANGELOG_EN.md         # Riwayat versi (English)
+├── LICENSE                 # Lisensi MIT
 │
 ├── css/
-│   └── style.css           # Stylesheet utama (Bersih & Dioptimalkan)
+│   └── style.css           # Stylesheet utama (Optimal & Responsive)
+│
+├── fonts/
+│   └── BangAlbin.ttf       # Font kustom untuk dialog & UI
 │
 ├── js/
-│   └── app.js              # Logika utama (Bersih & Multi-bahasa)
+│   └── app.js              # Logika utama (Fixed Win Logic)
 │
 ├── img/
-│   ├── icon-*.png          # Ikon aplikasi
-│   └── screenshot*.png     # Gambar preview
+│   ├── icon.png            # Ikon aplikasi utama
+│   ├── icon-192.png        # Ikon PWA 192x192
+│   ├── icon-512.png        # Ikon PWA 512x512
+│   ├── logo.png            # Logo aplikasi
+│   ├── logo2.png           # Logo alternatif
+│   ├── Instagram.png       # Ikon social media
+│   ├── Telegram.png        # Ikon social media
+│   ├── TikTok.png          # Ikon social media
+│   └── YouTube.png         # Ikon social media
 │
 └── sfx/
     ├── sfx-click.wav       # Efek suara klik
@@ -119,14 +133,20 @@ domino/
 
 ## 📝 Catatan Perubahan
 
-### Versi 2.3 (Terbaru - Update Bersih)
+### Versi 2.4 (Terbaru - Optimal & Modern Design)
+- 🎯 **Branding:** TIM ALPHA → TIM NULLXD
+- 🏆 **Logika Domino Tradisional:** Pemain yang mencapai limit 101 = KALAH
+- 📱 **UI Full Screen:** Dioptimalkan untuk layar 1440x3200
+- 📦 **Mode Ringkas:** Mode compact yang benar-benar berfungsi untuk device kecil
+- 📊 **Info Lebih Jelas:** "Sisa X lagi" lebih informatif
+- 🎨 **Font Custom:** Font khusus di semua dialog
+- 🌈 **Dialog Modern:** Social Media dialog dengan gradient background
+- ⚡ **Performa:** Optimal spacing & layout
+
+### Versi 2.3
 - 🌍 **Multi-bahasa:** Menambahkan dukungan untuk Indonesia & English.
 - 🧹 **Kode Bersih:** Menghapus komentar yang tidak digunakan dan dependensi eksternal.
 - ⚡ **Performa:** Ukuran file lebih ringan dan eksekusi lebih cepat.
-
-### Versi 2.2
-- 📱 **APK Resmi:** Rilis wrapper Android.
-- 🛡️ **Keamanan:** Menambahkan dialog konfirmasi.
 
 📖 **Catatan Lengkap:** [CHANGELOG.md](CHANGELOG.md)
 
