@@ -9,7 +9,7 @@ let roundCount = 1
 let lastWinner = null
 let compactMode = false
 let soundEnabled = true
-let playerNames = ['TIM NULLXD', 'TIM BETA']
+let playerNames = ['TIM NULLXD', 'TIM ZENITH']
 let isRoundActive = true
 let pendingAction = null
 let scoreAnimationTimers = [null, null]
@@ -713,7 +713,7 @@ function performHardReset() {
     roundHistory = [[], []]
     roundCount = 1
     lastWinner = null
-    playerNames = ['TIM NULLXD', 'TIM BETA']
+    playerNames = ['TIM NULLXD', 'TIM ZENITH']
     isRoundActive = true
 
     document.getElementById('win-0').innerText = "0"
