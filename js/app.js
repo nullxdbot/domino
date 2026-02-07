@@ -632,7 +632,7 @@ function loadGameData() {
         lastWinner = data.lastWinner !== undefined ? data.lastWinner : null
         compactMode = data.compactMode || false
         soundEnabled = data.soundEnabled !== undefined ? data.soundEnabled : true
-        playerNames = data.playerNames || ['TIM ALPHA', 'TIM BETA']
+        playerNames = data.playerNames || ['TIM NULLXD', 'TIM ZENITH']
         isRoundActive = data.isRoundActive !== undefined ? data.isRoundActive : true
 
         const totalWins = wins[0] + wins[1]
