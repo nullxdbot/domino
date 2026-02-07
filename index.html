@@ -682,9 +682,65 @@
 <div id="youtube-player-container" style="display: none;"></div>
 <!-- ================================================================ -->
 
+<!-- Changelog Popup -->
+<div id="changelog-popup" class="changelog-overlay">
+    <div class="changelog-modal">
+        <div class="changelog-header">
+            <div style="display: flex; align-items: center; gap: 12px;">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+                    <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/>
+                </svg>
+                <h3>Changelog</h3>
+            </div>
+            <button class="changelog-close" onclick="closeChangelog()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="changelog-content">
+            <div class="changelog-version">v2.5 - Perfect Fit Layout</div>
+            <ul class="changelog-list">
+                <li><span class="changelog-tag fixed">Fixed</span> Disable scroll - stay layout</li>
+                <li><span class="changelog-tag fixed">Fixed</span> Music player overlay spacing</li>
+                <li><span class="changelog-tag improved">Improved</span> Ultra compact mode</li>
+                <li><span class="changelog-tag improved">Improved</span> Balanced spacing & sizing</li>
+                <li><span class="changelog-tag performance">Performance</span> All content fit 1 screen</li>
+                <li><span class="changelog-tag optimized">Optimized</span> Button, card, font sizes</li>
+            </ul>
+            
+            <div class="changelog-version previous">Previous (v2.4):</div>
+            <ul class="changelog-list previous">
+                <li><span class="changelog-tag new">New</span> TIM ALPHA → TIM NULLXD</li>
+                <li><span class="changelog-tag fixed">Fixed</span> Traditional Domino Win Logic</li>
+                <li><span class="changelog-tag improved">Improved</span> Full Screen UI (1440x3200)</li>
+                <li><span class="changelog-tag new">New</span> Compact Mode (Working)</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
 <audio id="sfx-click" src="sfx/sfx-click.wav"></audio>
 <audio id="sfx-win" src="sfx/sfx-win.m4a"></audio>
 
 <script src="js/app.js"></script>
+<script>
+// Show changelog popup on page load
+window.addEventListener('load', function() {
+    document.getElementById('changelog-popup').classList.add('active');
+});
+
+function closeChangelog() {
+    document.getElementById('changelog-popup').classList.remove('active');
+}
+
+// Close on overlay click
+document.getElementById('changelog-popup').addEventListener('click', function(e) {
+    if (e.target === this) {
+        closeChangelog();
+    }
+});
+</script>
 </body>
 </html>
