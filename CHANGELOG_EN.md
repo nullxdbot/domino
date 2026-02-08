@@ -6,6 +6,32 @@
 
 ---
 
+## Version 2.5 (2026-02-08) - Perfect Fit Layout 🎯
+
+### ✨ New Features
+- 🎯 **Branding Update:** Second team name changed from "TEAM BETA" to "TEAM ZENITH" for more unique identity.
+- 🎵 **Music Player:** YouTube integration for playing music directly in the app.
+- 🧮 **Built-in Calculator:** Integrated calculator for quick calculations.
+- 🌍 **Enhanced Multi-language:** Full support for Bahasa Indonesia & English with auto-save preferences.
+- 💾 **Auto-save Data:** All data automatically saved to localStorage.
+- 🎨 **4 Color Themes:** Purple, Blue, Green, Pink with easy selection.
+
+### 🔧 Improvements
+- 🚫 **Perfect Fit Layout:** All content (including About modal) fits perfectly on screen without scrolling.
+- 📦 **Ultra Compact Mode:** Ultra compact mode truly optimized for small screens.
+- ⚡ **Spacing Optimization:** Balanced spacing & sizing across all elements for neat appearance.
+- 📊 **Real-time Score Tracking:** More responsive score tracking system.
+- 🎨 **UI Polish:** Button, card, and font sizes optimized for best experience.
+- 📝 **Enhanced History & Undo:** More robust history and undo system.
+
+### 🐛 Bug Fixes
+- ✅ "About App" modal layout no longer cut off.
+- ✅ Music player overlay spacing fixed.
+- ✅ Scrollbars removed throughout UI for cleaner appearance.
+- ✅ All content fits in 1 screen without overflow.
+
+---
+
 ## Version 2.4 (2026-02-06) - Optimal & Modern Design 🎯
 
 ### ✨ New Features

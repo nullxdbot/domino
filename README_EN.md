@@ -1,6 +1,6 @@
 # 🎲 Domino Score NullXD
 
-[![Version](https://img.shields.io/badge/version-2.4-blue.svg)](https://github.com/nullxdbot/domino)
+[![Version](https://img.shields.io/badge/version-2.5-blue.svg)](https://github.com/nullxdbot/domino)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![APK](https://img.shields.io/badge/APK-Download-orange.svg)](https://github.com/nullxdbot/domino/releases)
 
@@ -8,7 +8,7 @@
 
 🌐 **Languages:** [English](README_EN.md) | [Indonesia](README.md)
 
-[🎮 Live Demo](https://nullxdbot.github.io/domino/) | [📱 Download APK v2.4](https://github.com/nullxdbot/domino/releases) | [🐛 Report Bug](https://github.com/nullxdbot/domino/issues)
+[🎮 Live Demo](https://nullxdbot.github.io/domino/) | [📱 Download APK v2.5](https://github.com/nullxdbot/domino/releases) | [🐛 Report Bug](https://github.com/nullxdbot/domino/issues)
 
 ---
 
@@ -28,27 +28,29 @@
 ### 🎯 Core Features
 - ✅ **Real-time Score Tracking** - Instant score updates
 - ✅ **Integrated Calculator** - Built-in calculator for quick calculations
-- ✅ **Score History** - Track all score changes
+- ✅ **Music Player** - Music player with YouTube integration
+- ✅ **Score History** - Track all score changes with undo
 - ✅ **Win Counter** - Count wins for each team
 - ✅ **Progress Bar** - Visual progress indicator towards target
 - ✅ **Score Difference Indicator** - View score difference in real-time
 
 ### 🎨 Design & UX
-- ✅ **Modern UI/UX** - Clean and intuitive interface
+- ✅ **Modern & Elegant UI/UX** - Clean and intuitive interface
 - ✅ **4 Color Themes** - Purple, Blue, Green, Pink
 - ✅ **Dark Mode** - Eye-friendly for night playing
 - ✅ **Glassmorphism Effects** - Modern visual aesthetics
 - ✅ **Smooth Animations** - Seamless transitions (Hardware Accelerated)
 - ✅ **Responsive Design** - Supports all screen sizes
-- ✅ **No-Scroll Layout** - Both cards fit perfectly on screen
+- ✅ **Perfect Fit Layout** - All content fits in one screen without scroll
+- ✅ **Ultra Compact Mode** - Super compact optimized mode
 
 ### 🔧 Advanced Features
-- ✅ **Multi-language Support** - 🇮🇩 Bahasa Indonesia & 🇺🇸 English (New in v2.3)
-- ✅ **Lightweight Code** - Clean and lightweight code structure
+- ✅ **Multi-language Support** - 🇮🇩 Bahasa Indonesia & 🇺🇸 English
 - ✅ **Auto-save** - Data automatically saved in browser/local storage
 - ✅ **Sound Effects** - Audio feedback (can be toggled)
 - ✅ **Security Dialog** - Confirmation before Reset/Exit
 - ✅ **Custom Score Target** - Set score target as you like
+- ✅ **Custom Team Names** - Edit team names as desired
 
 ---
 
@@ -85,9 +87,9 @@ Download Android app (Webview Wrapper):
 | Mirror | Link | Status |
 |---|---|---|
 | 🔥 GitHub Releases | [Download APK](https://github.com/nullxdbot/domino/releases) | ⚡ Recommended |
-| 📂 MediaFire | [Download APK](https://www.mediafire.com/file/x752c84mp872dhv/Domino-Score-V2.4.apk/file) | ✅ Mirror 1 |
-| 📦 APKAdmin | [Download APK](https://apkadmin.com/6ug3apbn85bg/Domino-Score-V2.4.apk.html) | ✅ Mirror 2 |
-| 📱 SfileMobi | [Download APK](https://sfile.co/jmsd5QsdIIJ) | ✅ Mirror 3 |
+| 📂 MediaFire | [Download APK](https://www.mediafire.com/file/uq0xsfg8v76ozs8/Domino-Score-V2.5.apk/file) | ✅ Mirror 1 |
+| 📦 APKAdmin | [Download APK](https://apkadmin.com/z6ypfmd3xd5f/Domino-Score-V2.5.apk.html) | ✅ Mirror 2 |
+| 📱 SfileMobi | [Download APK](https://sfile.co/76yzGDrHLuk) | ✅ Mirror 3 |
 
 </div>
 
@@ -97,7 +99,7 @@ Download Android app (Webview Wrapper):
 
 ```
 domino/
-├── index.html              # Main HTML file (v2.4)
+├── index.html              # Main HTML file (v2.5)
 ├── README.md               # Documentation (Indonesia)
 ├── README_EN.md            # Documentation (English)
 ├── CHANGELOG.md            # Version history (Indonesia)
@@ -105,13 +107,13 @@ domino/
 ├── LICENSE                 # MIT License
 │
 ├── css/
-│   └── style.css           # Main stylesheet (Optimal & Responsive)
+│   └── style.css           # Main stylesheet (Perfect Fit & Optimized)
 │
 ├── fonts/
 │   └── BangAlbin.ttf       # Custom font for dialogs & UI
 │
 ├── js/
-│   └── app.js              # Main logic (Fixed Win Logic)
+│   └── app.js              # Main logic (Multi-feature)
 │
 ├── img/
 │   ├── icon.png            # Main app icon
@@ -133,7 +135,20 @@ domino/
 
 ## 📝 Changelog
 
-### Version 2.4 (Latest - Optimal & Modern Design)
+### Version 2.5 (Latest - Perfect Fit Layout) 🎯
+- 🎯 **Branding:** TEAM BETA → TEAM ZENITH
+- 🎵 **Music Player:** YouTube integration for music playback
+- 🧮 **Built-in Calculator:** Integrated calculator in the app
+- 🌍 **Multi-language:** Full ID/EN support with auto-save preferences
+- 💾 **Auto-save:** Automatic data storage to localStorage
+- 🎨 **4 Themes:** Purple, Blue, Green, Pink
+- 🚫 **No Scroll:** Perfect layout without scroll in all modals
+- 📦 **Ultra Compact Mode:** Optimized ultra compact mode
+- ⚡ **Performance:** All content fits in 1 screen
+- 🎨 **UI Optimization:** Optimized button, card, font sizes
+- 📊 **History & Undo:** Improved history and undo system
+
+### Version 2.4
 - 🎯 **Branding:** TEAM ALPHA → TEAM NULLXD
 - 🏆 **Traditional Domino Logic:** Player who reaches limit 101 = LOSE
 - 📱 **Full Screen UI:** Optimized for 1440x3200 screens
@@ -144,9 +159,9 @@ domino/
 - ⚡ **Performance:** Optimal spacing & layout
 
 ### Version 2.3
-- 🌍 **Multi-language:** Added support for Indonesian & English.
-- 🧹 **Clean Code:** Removed unused comments and external dependencies.
-- ⚡ **Performance:** Lighter file size and faster execution.
+- 🌍 **Multi-language:** Added support for Indonesian & English
+- 🧹 **Clean Code:** Removed unused comments and external dependencies
+- ⚡ **Performance:** Lighter file size and faster execution
 
 📖 **Full Notes:** [CHANGELOG.md](CHANGELOG.md)
 

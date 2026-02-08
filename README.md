@@ -1,6 +1,6 @@
 # 🎲 Domino Score NullXD
 
-[![Version](https://img.shields.io/badge/version-2.4-blue.svg)](https://github.com/nullxdbot/domino)
+[![Version](https://img.shields.io/badge/version-2.5-blue.svg)](https://github.com/nullxdbot/domino)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![APK](https://img.shields.io/badge/APK-Download-orange.svg)](https://github.com/nullxdbot/domino/releases)
 
@@ -8,7 +8,7 @@
 
 🌐 **Bahasa:** [English](README_EN.md) | [Indonesia](README.md)
 
-[🎮 Demo Langsung](https://nullxdbot.github.io/domino/) | [📱 Download APK v2.4](https://github.com/nullxdbot/domino/releases) | [🐛 Laporkan Bug](https://github.com/nullxdbot/domino/issues)
+[🎮 Demo Langsung](https://nullxdbot.github.io/domino/) | [📱 Download APK v2.5](https://github.com/nullxdbot/domino/releases) | [🐛 Laporkan Bug](https://github.com/nullxdbot/domino/issues)
 
 ---
 
@@ -28,27 +28,29 @@
 ### 🎯 Fitur Utama
 - ✅ **Pelacakan Skor Real-time** - Update skor secara langsung
 - ✅ **Kalkulator Terintegrasi** - Kalkulator built-in untuk perhitungan cepat
-- ✅ **Riwayat Skor** - Lacak semua perubahan skor
+- ✅ **Music Player** - Pemutar musik dengan integrasi YouTube
+- ✅ **Riwayat Skor** - Lacak semua perubahan skor dengan undo
 - ✅ **Penghitung Kemenangan** - Hitung jumlah kemenangan tiap tim
 - ✅ **Progress Bar** - Indikator visual progress menuju target
 - ✅ **Indikator Selisih Skor** - Lihat selisih skor secara real-time
 
 ### 🎨 Desain & UX
-- ✅ **UI/UX Modern** - Antarmuka yang bersih dan intuitif
-- ✅ **4 Tema Warna** - Ungu, Biru, Hijau, Pink
+- ✅ **UI/UX Modern & Elegan** - Antarmuka yang bersih dan intuitif
+- ✅ **4 Tema Warna** - Purple, Blue, Green, Pink
 - ✅ **Mode Gelap** - Ramah mata untuk bermain malam hari
 - ✅ **Efek Glassmorphism** - Estetika visual modern
 - ✅ **Animasi Halus** - Transisi yang mulus (Hardware Accelerated)
 - ✅ **Desain Responsif** - Mendukung semua ukuran layar
-- ✅ **Layout Tanpa Scroll** - Kedua kartu muat sempurna di layar
+- ✅ **Perfect Fit Layout** - Semua konten muat di satu layar tanpa scroll
+- ✅ **Ultra Compact Mode** - Mode super ringkas yang dioptimalkan
 
 ### 🔧 Fitur Lanjutan
-- ✅ **Dukungan Multi-bahasa** - 🇮🇩 Bahasa Indonesia & 🇺🇸 English (Baru di v2.3)
-- ✅ **Kode Ringan** - Struktur kode yang bersih dan ringan
+- ✅ **Dukungan Multi-bahasa** - 🇮🇩 Bahasa Indonesia & 🇺🇸 English
 - ✅ **Auto-save** - Data tersimpan otomatis di browser/local storage
 - ✅ **Efek Suara** - Umpan balik audio (dapat di-toggle)
 - ✅ **Dialog Keamanan** - Konfirmasi sebelum Reset/Keluar
 - ✅ **Target Skor Kustom** - Atur target skor sesuka hati
+- ✅ **Nama Tim Custom** - Edit nama tim sesuai keinginan
 
 ---
 
@@ -85,9 +87,9 @@ Download aplikasi Android (Webview Wrapper):
 | Mirror | Link | Status |
 |---|---|---|
 | 🔥 GitHub Releases | [Download APK](https://github.com/nullxdbot/domino/releases) | ⚡ Rekomendasi |
-| 📂 MediaFire | [Download APK](https://www.mediafire.com/file/x752c84mp872dhv/Domino-Score-V2.4.apk/file) | ✅ Mirror 1 |
-| 📦 APKAdmin | [Download APK](https://apkadmin.com/6ug3apbn85bg/Domino-Score-V2.4.apk.html) | ✅ Mirror 2 |
-| 📱 SfileMobi | [Download APK](https://sfile.co/jmsd5QsdIIJ) | ✅ Mirror 3 |
+| 📂 MediaFire | [Download APK](https://www.mediafire.com/file/uq0xsfg8v76ozs8/Domino-Score-V2.5.apk/file) | ✅ Mirror 1 |
+| 📦 APKAdmin | [Download APK](https://apkadmin.com/z6ypfmd3xd5f/Domino-Score-V2.5.apk.html) | ✅ Mirror 2 |
+| 📱 SfileMobi | [Download APK](https://sfile.co/76yzGDrHLuk) | ✅ Mirror 3 |
 
 </div>
 
@@ -97,7 +99,7 @@ Download aplikasi Android (Webview Wrapper):
 
 ```
 domino/
-├── index.html              # File HTML utama (v2.4)
+├── index.html              # File HTML utama (v2.5)
 ├── README.md               # Dokumentasi (Indonesia)
 ├── README_EN.md            # Dokumentasi (English)
 ├── CHANGELOG.md            # Riwayat versi (Indonesia)
@@ -105,13 +107,13 @@ domino/
 ├── LICENSE                 # Lisensi MIT
 │
 ├── css/
-│   └── style.css           # Stylesheet utama (Optimal & Responsive)
+│   └── style.css           # Stylesheet utama (Perfect Fit & Optimized)
 │
 ├── fonts/
 │   └── BangAlbin.ttf       # Font kustom untuk dialog & UI
 │
 ├── js/
-│   └── app.js              # Logika utama (Fixed Win Logic)
+│   └── app.js              # Logika utama (Multi-feature)
 │
 ├── img/
 │   ├── icon.png            # Ikon aplikasi utama
@@ -133,20 +135,33 @@ domino/
 
 ## 📝 Catatan Perubahan
 
-### Versi 2.4 (Terbaru - Optimal & Modern Design)
+### Versi 2.5 (Terbaru - Perfect Fit Layout) 🎯
+- 🎯 **Branding:** TIM BETA → TIM ZENITH
+- 🎵 **Music Player:** Integrasi YouTube untuk memutar musik
+- 🧮 **Built-in Calculator:** Kalkulator terintegrasi dalam aplikasi
+- 🌍 **Multi-bahasa:** Dukungan penuh ID/EN dengan auto-save preferensi
+- 💾 **Auto-save:** Penyimpanan data otomatis ke localStorage
+- 🎨 **4 Tema:** Purple, Blue, Green, Pink
+- 🚫 **No Scroll:** Layout yang sempurna tanpa scroll di semua modal
+- 📦 **Ultra Compact Mode:** Mode ultra ringkas yang dioptimalkan
+- ⚡ **Performance:** Semua konten fit di 1 layar
+- 🎨 **Optimasi UI:** Button, card, font sizes dioptimalkan
+- 📊 **History & Undo:** Sistem riwayat dan undo yang ditingkatkan
+
+### Versi 2.4
 - 🎯 **Branding:** TIM ALPHA → TIM NULLXD
 - 🏆 **Logika Domino Tradisional:** Pemain yang mencapai limit 101 = KALAH
 - 📱 **UI Full Screen:** Dioptimalkan untuk layar 1440x3200
-- 📦 **Mode Ringkas:** Mode compact yang benar-benar berfungsi untuk device kecil
+- 📦 **Mode Ringkas:** Mode compact yang benar-benar berfungsi
 - 📊 **Info Lebih Jelas:** "Sisa X lagi" lebih informatif
 - 🎨 **Font Custom:** Font khusus di semua dialog
 - 🌈 **Dialog Modern:** Social Media dialog dengan gradient background
 - ⚡ **Performa:** Optimal spacing & layout
 
 ### Versi 2.3
-- 🌍 **Multi-bahasa:** Menambahkan dukungan untuk Indonesia & English.
-- 🧹 **Kode Bersih:** Menghapus komentar yang tidak digunakan dan dependensi eksternal.
-- ⚡ **Performa:** Ukuran file lebih ringan dan eksekusi lebih cepat.
+- 🌍 **Multi-bahasa:** Menambahkan dukungan untuk Indonesia & English
+- 🧹 **Kode Bersih:** Menghapus komentar yang tidak digunakan dan dependensi eksternal
+- ⚡ **Performa:** Ukuran file lebih ringan dan eksekusi lebih cepat
 
 📖 **Catatan Lengkap:** [CHANGELOG.md](CHANGELOG.md)
 

@@ -6,6 +6,32 @@
 
 ---
 
+## Versi 2.5 (2026-02-08) - Perfect Fit Layout 🎯
+
+### ✨ Fitur Baru
+- 🎯 **Branding Update:** Nama tim kedua diubah dari "TIM BETA" menjadi "TIM ZENITH" untuk identitas yang lebih unik.
+- 🎵 **Music Player:** Integrasi YouTube untuk memutar musik langsung di aplikasi.
+- 🧮 **Built-in Calculator:** Kalkulator terintegrasi untuk perhitungan cepat.
+- 🌍 **Multi-bahasa Ditingkatkan:** Dukungan penuh Bahasa Indonesia & English dengan auto-save preferensi.
+- 💾 **Auto-save Data:** Semua data tersimpan otomatis ke localStorage.
+- 🎨 **4 Tema Warna:** Purple, Blue, Green, Pink dengan pilihan yang mudah.
+
+### 🔧 Peningkatan
+- 🚫 **Perfect Fit Layout:** Semua konten (termasuk modal About) muat sempurna di layar tanpa scroll.
+- 📦 **Ultra Compact Mode:** Mode ultra ringkas yang benar-benar dioptimalkan untuk layar kecil.
+- ⚡ **Optimasi Spacing:** Balanced spacing & sizing di semua elemen untuk tampilan yang rapi.
+- 📊 **Real-time Score Tracking:** Sistem pelacakan skor yang lebih responsif.
+- 🎨 **UI Polish:** Button, card, dan font sizes dioptimalkan untuk pengalaman terbaik.
+- 📝 **History & Undo Ditingkatkan:** Sistem riwayat dan undo yang lebih robust.
+
+### 🐛 Perbaikan Bug
+- ✅ Layout modal "Tentang Aplikasi" tidak lagi terpotong.
+- ✅ Music player overlay spacing diperbaiki.
+- ✅ Scrollbar dihilangkan di seluruh UI untuk tampilan yang lebih bersih.
+- ✅ All content fit dalam 1 screen tanpa overflow.
+
+---
+
 ## Versi 2.4 (2026-02-06) - Optimal & Modern Design 🎯
 
 ### ✨ Fitur Baru
