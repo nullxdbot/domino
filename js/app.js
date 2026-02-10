@@ -8,6 +8,7 @@ let roundHistory = [[], []]
 let roundCount = 1
 let lastWinner = null
 let compactMode = false
+let iosMode = false
 let soundEnabled = true
 let playerNames = ['TIM NULLXD', 'TIM ZENITH']
 let isRoundActive = true
@@ -40,6 +41,7 @@ const translations = {
         points: "poin",
         sound_effect: "Efek Suara",
         compact_mode: "Mode Ringkas",
+        ios_mode: "Mode iOS",
         reset_all: "Reset Semua",
         about_app: "Tentang Aplikasi",
         follow_me: "Ikuti Saya:",
@@ -89,6 +91,7 @@ const translations = {
         points: "pts",
         sound_effect: "Sound Effect",
         compact_mode: "Compact Mode",
+        ios_mode: "iOS Mode",
         reset_all: "Reset All",
         about_app: "About App",
         follow_me: "Follow Me:",
@@ -572,6 +575,20 @@ function toggleCompactMode() {
     saveGameData()
 }
 
+function toggleIOSMode() {
+    const toggle = document.getElementById('iosToggle')
+    iosMode = toggle.checked
+    const sb = document.getElementById('scoreboard')
+
+    if (iosMode) {
+        sb.classList.add('ios-mode')
+    } else {
+        sb.classList.remove('ios-mode')
+    }
+
+    saveGameData()
+}
+
 function openEditName(player) {
     playClick()
     document.getElementById('editNamePlayer').value = player
@@ -611,6 +628,7 @@ function saveGameData() {
         roundCount: roundCount,
         lastWinner: lastWinner,
         compactMode: compactMode,
+        iosMode: iosMode,
         soundEnabled: soundEnabled,
         playerNames: playerNames,
         isRoundActive: isRoundActive
@@ -631,6 +649,7 @@ function loadGameData() {
         roundCount = data.roundCount || 1
         lastWinner = data.lastWinner !== undefined ? data.lastWinner : null
         compactMode = data.compactMode || false
+        iosMode = data.iosMode || false
         soundEnabled = data.soundEnabled !== undefined ? data.soundEnabled : true
         playerNames = data.playerNames || ['TIM NULLXD', 'TIM ZENITH']
         isRoundActive = data.isRoundActive !== undefined ? data.isRoundActive : true
@@ -648,10 +667,15 @@ function loadGameData() {
         document.getElementById('win-1').innerText = wins[1]
         document.getElementById('limitInput').value = limit
         document.getElementById('compactToggle').checked = compactMode
+        document.getElementById('iosToggle').checked = iosMode
         document.getElementById('soundToggle').checked = soundEnabled
 
         if (compactMode) {
             document.getElementById('scoreboard').classList.add('compact')
+        }
+
+        if (iosMode) {
+            document.getElementById('scoreboard').classList.add('ios-mode')
         }
 
         setTheme(currentTheme)

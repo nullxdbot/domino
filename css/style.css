@@ -301,6 +301,121 @@ button:active, .social-link:active, .theme-option:active, .settings-btn:active, 
     font-size: 14px;
 }
 
+/* ============================================ */
+/* iOS MODE - Ultra Compact for iPhone & Safari */
+/* ============================================ */
+.scoreboard.ios-mode {
+    gap: 4px;
+}
+
+.scoreboard.ios-mode .modern-player-card {
+    padding: 6px;
+}
+
+.scoreboard.ios-mode .player-header {
+    margin-bottom: 3px;
+}
+
+.scoreboard.ios-mode .player-number {
+    width: 26px;
+    height: 26px;
+    font-size: 11px;
+}
+
+.scoreboard.ios-mode .player-name {
+    font-size: 11px;
+}
+
+.scoreboard.ios-mode .score-display {
+    padding: 6px 6px 4px;
+    margin-bottom: 4px;
+}
+
+.scoreboard.ios-mode .score-value {
+    font-size: 36px;
+}
+
+.scoreboard.ios-mode .progress-bar {
+    height: 18px;
+    margin-bottom: 3px;
+}
+
+.scoreboard.ios-mode .progress-text {
+    font-size: 9px;
+}
+
+.scoreboard.ios-mode .remaining-text {
+    font-size: 9px;
+    margin-bottom: 3px;
+}
+
+.scoreboard.ios-mode .history-section {
+    padding: 4px;
+    margin-bottom: 4px;
+}
+
+.scoreboard.ios-mode .history-title {
+    font-size: 9px;
+}
+
+.scoreboard.ios-mode .history-chips {
+    max-height: 32px;
+    gap: 3px;
+}
+
+.scoreboard.ios-mode .hist-item {
+    padding: 3px 6px;
+    font-size: 10px;
+}
+
+.scoreboard.ios-mode .action-btn {
+    height: 36px;
+    font-size: 11px;
+    padding: 0 12px;
+}
+
+.scoreboard.ios-mode .vs-circle {
+    width: 32px;
+    height: 32px;
+    font-size: 12px;
+    margin: 3px 0;
+}
+
+/* iOS Mode: Adjust app container padding */
+body:has(.scoreboard.ios-mode) .app-container {
+    padding: 8px 12px 100px;
+    padding-top: max(8px, env(safe-area-inset-top));
+    padding-bottom: max(100px, env(safe-area-inset-bottom));
+}
+
+/* iOS Mode: Smaller header */
+body:has(.scoreboard.ios-mode) .app-header {
+    padding: 8px 12px;
+    margin-bottom: 5px;
+}
+
+body:has(.scoreboard.ios-mode) .app-title {
+    font-size: 16px;
+}
+
+body:has(.scoreboard.ios-mode) .app-subtitle {
+    font-size: 9px;
+}
+
+body:has(.scoreboard.ios-mode) .header-actions {
+    gap: 6px;
+}
+
+body:has(.scoreboard.ios-mode) .btn-icon {
+    width: 32px;
+    height: 32px;
+}
+
+body:has(.scoreboard.ios-mode) .btn-icon svg {
+    width: 16px;
+    height: 16px;
+}
+
 .modern-player-card {
     background: var(--bg-card);
     backdrop-filter: blur(20px);

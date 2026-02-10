@@ -432,6 +432,16 @@
                     <span class="toggle-slider"></span>
                 </label>
             </div>
+            <div class="setting-group">
+                <div class="setting-label">
+                    <svg class="svg-icon" style="width:18px;height:18px;color:var(--secondary)"><use href="#ic-compress"/></svg>
+                    <span data-i18n="ios_mode">Mode iOS</span>
+                </div>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="iosToggle" onchange="toggleIOSMode()">
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
             <div class="settings-actions">
                 <button class="settings-btn primary" onclick="resetRound()">
                     <svg class="svg-icon" style="width:18px;height:18px;color:var(--primary)"><use href="#ic-rotate"/></svg>
@@ -702,31 +712,49 @@
             </button>
         </div>
         <div class="changelog-content">
-            <div class="changelog-version">v2.5 - Perfect Fit Layout</div>
+            <div class="changelog-version">v2.6 - iOS Safari Optimization</div>
             <ul class="changelog-list">
-                <li><span class="changelog-tag new">New</span> TIM BETA → TIM ZENITH</li>
+                <li><span class="changelog-tag new">New</span> iOS Mode - Ultra compact for Safari</li>
+                <li><span class="changelog-tag fixed">Fixed</span> UI cut-off on iPhone Safari</li>
+                <li><span class="changelog-tag fixed">Fixed</span> Layout fits iPhone 11 & smaller</li>
+                <li><span class="changelog-tag improved">Improved</span> Better viewport handling</li>
+                <li><span class="changelog-tag optimized">Optimized</span> Smaller fonts & spacing for iOS</li>
+            </ul>
+            
+            <div class="changelog-version previous">v2.5 - Perfect Fit Layout:</div>
+            <ul class="changelog-list previous">
+                <li><span class="changelog-tag new">New</span> TIM ALPHA → TIM NULLXD, TIM BETA → TIM ZENITH</li>
                 <li><span class="changelog-tag new">New</span> Music Player (YouTube Integration)</li>
                 <li><span class="changelog-tag new">New</span> Built-in Calculator</li>
                 <li><span class="changelog-tag new">New</span> Multi-language support (ID/EN)</li>
                 <li><span class="changelog-tag new">New</span> Auto save data (localStorage)</li>
                 <li><span class="changelog-tag new">New</span> Theme: Purple, Blue, Green, Pink</li>
+                <li><span class="changelog-tag new">New</span> Editable team names</li>
+                <li><span class="changelog-tag new">New</span> Sound effects toggle</li>
                 <li><span class="changelog-tag fixed">Fixed</span> Disable scroll - stay layout</li>
                 <li><span class="changelog-tag fixed">Fixed</span> Music player overlay spacing</li>
                 <li><span class="changelog-tag fixed">Fixed</span> About modal no scroll fit screen</li>
+                <li><span class="changelog-tag fixed">Fixed</span> Score limit validation</li>
+                <li><span class="changelog-tag fixed">Fixed</span> Traditional Domino Win Logic</li>
                 <li><span class="changelog-tag improved">Improved</span> Ultra compact mode</li>
                 <li><span class="changelog-tag improved">Improved</span> Balanced spacing & sizing</li>
                 <li><span class="changelog-tag improved">Improved</span> Real-time score tracking</li>
                 <li><span class="changelog-tag improved">Improved</span> History & undo system</li>
+                <li><span class="changelog-tag improved">Improved</span> Win detection logic</li>
+                <li><span class="changelog-tag improved">Improved</span> Round management</li>
+                <li><span class="changelog-tag improved">Improved</span> Full Screen UI (1440x3200)</li>
                 <li><span class="changelog-tag performance">Performance</span> All content fit 1 screen</li>
+                <li><span class="changelog-tag performance">Performance</span> Faster localStorage save</li>
                 <li><span class="changelog-tag optimized">Optimized</span> Button, card, font sizes</li>
+                <li><span class="changelog-tag optimized">Optimized</span> Animation transitions</li>
             </ul>
             
-            <div class="changelog-version previous">Previous (v2.4):</div>
+            <div class="changelog-version previous">v2.4 and Earlier:</div>
             <ul class="changelog-list previous">
-                <li><span class="changelog-tag new">New</span> TIM ALPHA → TIM NULLXD</li>
-                <li><span class="changelog-tag fixed">Fixed</span> Traditional Domino Win Logic</li>
-                <li><span class="changelog-tag improved">Improved</span> Full Screen UI (1440x3200)</li>
-                <li><span class="changelog-tag new">New</span> Compact Mode (Working)</li>
+                <li><span class="changelog-tag new">New</span> Modern UI with gradient themes</li>
+                <li><span class="changelog-tag new">New</span> Compact Mode</li>
+                <li><span class="changelog-tag improved">Improved</span> Score tracking system</li>
+                <li><span class="changelog-tag improved">Improved</span> Mobile responsiveness</li>
             </ul>
         </div>
     </div>
