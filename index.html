@@ -194,6 +194,7 @@
                 <svg class="svg-icon" style="width:20px;height:20px;color:var(--text-primary)"><use href="#ic-sliders"/></svg>
             </button>
         </div>
+        <div id="modeBadge" class="mode-badge-wrap" style="display:none"></div>
     </header>
 
     <div class="score-diff-card" id="scoreDiff">
@@ -215,7 +216,7 @@
             <div class="player-header">
                 <div class="player-info">
                     <span class="player-number">01</span>
-                    <span class="player-name editable-name" id="player-name-0" onclick="openEditName(0)" title="Ketuk untuk ubah nama">TIM NULLXD</span>
+                    <span class="player-name editable-name" id="player-name-0" onclick="openEditName(0)" title="Ketuk untuk ubah nama">TIM ALPHA</span>
                     <svg class="svg-icon edit-icon" style="width:10px;height:10px;color:var(--text-muted);opacity:0.5;" onclick="openEditName(0)"><use href="#ic-pen"/></svg>
                     <div class="win-badge" title="Total kemenangan">
                         <svg class="svg-icon" style="width:14px;height:14px;color:var(--accent)"><use href="#ic-star"/></svg>
@@ -273,7 +274,7 @@
             <div class="player-header">
                 <div class="player-info">
                     <span class="player-number">02</span>
-                    <span class="player-name editable-name" id="player-name-1" onclick="openEditName(1)" title="Ketuk untuk ubah nama">TIM ZENITH</span>
+                    <span class="player-name editable-name" id="player-name-1" onclick="openEditName(1)" title="Ketuk untuk ubah nama">TIM BETA</span>
                     <svg class="svg-icon edit-icon" style="width:10px;height:10px;color:var(--text-muted);opacity:0.5;" onclick="openEditName(1)"><use href="#ic-pen"/></svg>
                     <div class="win-badge" title="Total kemenangan">
                         <svg class="svg-icon" style="width:14px;height:14px;color:var(--accent)"><use href="#ic-star"/></svg>
@@ -370,109 +371,187 @@
         <div class="settings-content">
             <div class="setting-group">
                 <div class="setting-label">
-                    <svg class="svg-icon" style="width:18px;height:18px;color:var(--primary)"><use href="#ic-globe"/></svg>
-                    <span data-i18n="language">Bahasa / Language</span>
+                    <svg class="svg-icon" style="width:18px;height:18px;color:var(--primary)"><use href="#ic-dice"/></svg>
+                    <span>Mode Permainan</span>
                 </div>
-                <div class="theme-options" style="margin-top:0; display:flex; gap:10px;">
-                    <button class="theme-option" style="flex:1;" onclick="setLanguage('id')">
-                        <span>Indonesia</span>
+                <div style="display:flex;gap:6px;margin-top:6px;width:100%;">
+                    <button class="mode-btn active" data-mode="normal" onclick="switchMode('normal')" style="flex:1;padding:10px 6px;border-radius:10px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);color:var(--text-primary);cursor:pointer;transition:all 0.2s;display:flex;flex-direction:column;align-items:center;gap:5px;font-family:Poppins,sans-serif;">
+                        <svg class="svg-icon" style="width:18px;height:18px;color:var(--primary)"><use href="#ic-dice"/></svg>
+                        <span style="font-size:12px;font-weight:700;">Normal</span>
                     </button>
-                    <button class="theme-option" style="flex:1;" onclick="setLanguage('en')">
-                        <span>English</span>
+                    <button class="mode-btn" data-mode="alig" onclick="switchMode('alig')" style="flex:1;padding:10px 6px;border-radius:10px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);color:var(--text-primary);cursor:pointer;transition:all 0.2s;display:flex;flex-direction:column;align-items:center;gap:5px;font-family:Poppins,sans-serif;">
+                        <span style="font-size:18px;line-height:1;">🀱</span>
+                        <span style="font-size:12px;font-weight:700;">Alig</span>
+                    </button>
+                    <button class="mode-btn" data-mode="qq" onclick="switchMode('qq')" style="flex:1;padding:10px 6px;border-radius:10px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);color:var(--text-primary);cursor:pointer;transition:all 0.2s;display:flex;flex-direction:column;align-items:center;gap:5px;font-family:Poppins,sans-serif;">
+                        <span style="font-size:18px;line-height:1;">🃏</span>
+                        <span style="font-size:12px;font-weight:700;">Qiu Qiu</span>
                     </button>
                 </div>
             </div>
-            <div class="setting-group setting-group-theme">
+            <!-- Alig player count (only shown in alig mode) -->
+            <div class="setting-group" id="aligCountSetting" style="display:none">
                 <div class="setting-label">
-                    <svg class="svg-icon" style="width:18px;height:18px;color:var(--primary)"><use href="#ic-palette"/></svg>
-                    <span data-i18n="theme">Tema Warna</span>
+                    <span style="font-size:16px;">👥</span>
+                    <span>Jumlah Pemain (Alig)</span>
                 </div>
-                <div class="theme-options">
-                    <button class="theme-option purple active" onclick="setTheme('purple')">
-                        <div class="theme-preview"></div><span>Purple</span>
-                    </button>
-                    <button class="theme-option blue" onclick="setTheme('blue')">
-                        <div class="theme-preview"></div><span>Blue</span>
-                    </button>
-                    <button class="theme-option green" onclick="setTheme('green')">
-                        <div class="theme-preview"></div><span>Green</span>
-                    </button>
-                    <button class="theme-option pink" onclick="setTheme('pink')">
-                        <div class="theme-preview"></div><span>Pink</span>
-                    </button>
+                <div style="display:flex;gap:6px;margin-top:6px;">
+                    <button class="alig-count-btn active" data-count="2" onclick="changeAligPlayerCount(2)" style="flex:1;padding:7px;border-radius:9px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);color:var(--text-primary);font-family:Poppins,sans-serif;font-size:12px;cursor:pointer;font-weight:600;">2</button>
+                    <button class="alig-count-btn" data-count="3" onclick="changeAligPlayerCount(3)" style="flex:1;padding:7px;border-radius:9px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);color:var(--text-primary);font-family:Poppins,sans-serif;font-size:12px;cursor:pointer;font-weight:600;">3</button>
+                    <button class="alig-count-btn" data-count="4" onclick="changeAligPlayerCount(4)" style="flex:1;padding:7px;border-radius:9px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);color:var(--text-primary);font-family:Poppins,sans-serif;font-size:12px;cursor:pointer;font-weight:600;">4</button>
+                    <button class="alig-count-btn" data-count="5" onclick="changeAligPlayerCount(5)" style="flex:1;padding:7px;border-radius:9px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);color:var(--text-primary);font-family:Poppins,sans-serif;font-size:12px;cursor:pointer;font-weight:600;">5</button>
+                </div>
+            </div>
+            <!-- Alig taruhan (only shown in alig mode) -->
+            <div class="setting-group" id="aligBetSetting" style="display:none;flex-direction:column;align-items:flex-start;">
+                <div class="setting-label" style="margin-bottom:6px;">
+                    <svg class="svg-icon" style="width:16px;height:16px;color:var(--primary)"><use href="#ic-flag"/></svg>
+                    <span>Taruhan (Alig)</span>
+                </div>
+                <div style="display:flex;gap:6px;width:100%;align-items:center;">
+                    <div style="flex:1;text-align:center">
+                        <div style="font-size:10px;color:var(--text-muted);margin-bottom:3px">Pos 2</div>
+                        <input type="number" id="aligBet0" value="1000" min="0" step="500" onchange="updateAligBet(0,this.value)" style="width:100%;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:5px 4px;color:var(--text-primary);font-family:Poppins,sans-serif;font-size:11px;text-align:center;">
+                    </div>
+                    <div style="flex:1;text-align:center">
+                        <div style="font-size:10px;color:var(--text-muted);margin-bottom:3px">Pos 3</div>
+                        <input type="number" id="aligBet1" value="2000" min="0" step="500" onchange="updateAligBet(1,this.value)" style="width:100%;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:5px 4px;color:var(--text-primary);font-family:Poppins,sans-serif;font-size:11px;text-align:center;">
+                    </div>
+                    <div style="flex:1;text-align:center">
+                        <div style="font-size:10px;color:var(--text-muted);margin-bottom:3px">Pos 4</div>
+                        <input type="number" id="aligBet2" value="3000" min="0" step="500" onchange="updateAligBet(2,this.value)" style="width:100%;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:5px 4px;color:var(--text-primary);font-family:Poppins,sans-serif;font-size:11px;text-align:center;">
+                    </div>
+                    <div style="flex:1;text-align:center">
+                        <div style="font-size:10px;color:var(--text-muted);margin-bottom:3px">Pos 5</div>
+                        <input type="number" id="aligBet3" value="4000" min="0" step="500" onchange="updateAligBet(3,this.value)" style="width:100%;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:5px 4px;color:var(--text-primary);font-family:Poppins,sans-serif;font-size:11px;text-align:center;">
+                    </div>
+                </div>
+            </div>
+            <!-- QQ player count (only shown in qq mode) -->
+            <div class="setting-group" id="qqCountSetting" style="display:none">
+                <div class="setting-label">
+                    <span style="font-size:16px;">🃏</span>
+                    <span>Jumlah Pemain (QQ)</span>
+                </div>
+                <div style="display:flex;gap:4px;margin-top:6px;flex-wrap:wrap;">
+                    <button class="qq-count-btn active" data-count="2" onclick="changeQQPlayerCount(2)" style="flex:1;min-width:28px;padding:7px 4px;border-radius:9px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);color:var(--text-primary);font-family:Poppins,sans-serif;font-size:12px;cursor:pointer;font-weight:600;">2</button>
+                    <button class="qq-count-btn" data-count="3" onclick="changeQQPlayerCount(3)" style="flex:1;min-width:28px;padding:7px 4px;border-radius:9px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);color:var(--text-primary);font-family:Poppins,sans-serif;font-size:12px;cursor:pointer;font-weight:600;">3</button>
+                    <button class="qq-count-btn" data-count="4" onclick="changeQQPlayerCount(4)" style="flex:1;min-width:28px;padding:7px 4px;border-radius:9px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);color:var(--text-primary);font-family:Poppins,sans-serif;font-size:12px;cursor:pointer;font-weight:600;">4</button>
+                    <button class="qq-count-btn" data-count="5" onclick="changeQQPlayerCount(5)" style="flex:1;min-width:28px;padding:7px 4px;border-radius:9px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);color:var(--text-primary);font-family:Poppins,sans-serif;font-size:12px;cursor:pointer;font-weight:600;">5</button>
+                    <button class="qq-count-btn" data-count="6" onclick="changeQQPlayerCount(6)" style="flex:1;min-width:28px;padding:7px 4px;border-radius:9px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);color:var(--text-primary);font-family:Poppins,sans-serif;font-size:12px;cursor:pointer;font-weight:600;">6</button>
+                    <button class="qq-count-btn" data-count="7" onclick="changeQQPlayerCount(7)" style="flex:1;min-width:28px;padding:7px 4px;border-radius:9px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);color:var(--text-primary);font-family:Poppins,sans-serif;font-size:12px;cursor:pointer;font-weight:600;">7</button>
+                    <button class="qq-count-btn" data-count="8" onclick="changeQQPlayerCount(8)" style="flex:1;min-width:28px;padding:7px 4px;border-radius:9px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);color:var(--text-primary);font-family:Poppins,sans-serif;font-size:12px;cursor:pointer;font-weight:600;">8</button>
                 </div>
             </div>
             <div class="setting-group">
-                <div class="setting-label">
-                    <svg class="svg-icon" style="width:18px;height:18px;color:var(--primary)"><use href="#ic-flag"/></svg>
-                    <span data-i18n="score_limit">Batas Skor</span>
+                <div style="display:flex;gap:10px;width:100%;align-items:flex-start;">
+                    <div style="flex:1;">
+                        <div class="setting-label" style="margin-bottom:6px;">
+                            <svg class="svg-icon" style="width:15px;height:15px;color:var(--primary)"><use href="#ic-globe"/></svg>
+                            <span style="font-size:12px;" data-i18n="language">Bahasa</span>
+                        </div>
+                        <div style="display:flex;gap:5px;">
+                            <button class="theme-option" style="flex:1;padding:6px 4px;" onclick="setLanguage('id')"><span style="font-size:11px;">🇮🇩 ID</span></button>
+                            <button class="theme-option" style="flex:1;padding:6px 4px;" onclick="setLanguage('en')"><span style="font-size:11px;">🇬🇧 EN</span></button>
+                        </div>
+                    </div>
+                    <div style="flex:1.4;">
+                        <div class="setting-label" style="margin-bottom:6px;">
+                            <svg class="svg-icon" style="width:15px;height:15px;color:var(--primary)"><use href="#ic-palette"/></svg>
+                            <span style="font-size:12px;" data-i18n="theme">Tema Warna</span>
+                        </div>
+                        <div style="display:flex;gap:5px;">
+                            <button class="theme-option purple active" onclick="setTheme('purple')" style="flex:1;padding:5px 3px;gap:2px;">
+                                <div class="theme-preview" style="width:16px;height:16px;margin:0 auto;border-radius:4px;"></div>
+                                <span style="font-size:9px;">Purple</span>
+                            </button>
+                            <button class="theme-option blue" onclick="setTheme('blue')" style="flex:1;padding:5px 3px;gap:2px;">
+                                <div class="theme-preview" style="width:16px;height:16px;margin:0 auto;border-radius:4px;"></div>
+                                <span style="font-size:9px;">Blue</span>
+                            </button>
+                            <button class="theme-option green" onclick="setTheme('green')" style="flex:1;padding:5px 3px;gap:2px;">
+                                <div class="theme-preview" style="width:16px;height:16px;margin:0 auto;border-radius:4px;"></div>
+                                <span style="font-size:9px;">Green</span>
+                            </button>
+                            <button class="theme-option pink" onclick="setTheme('pink')" style="flex:1;padding:5px 3px;gap:2px;">
+                                <div class="theme-preview" style="width:16px;height:16px;margin:0 auto;border-radius:4px;"></div>
+                                <span style="font-size:9px;">Pink</span>
+                            </button>
+                        </div>
+                    </div>
                 </div>
-                <div class="input-group">
-                    <input type="number" id="limitInput" value="101" onchange="updateLimit(this.value)" min="10" max="999">
+            </div>
+            <div class="setting-group" style="padding:9px 0;">
+                <div class="setting-label">
+                    <svg class="svg-icon" style="width:15px;height:15px;color:var(--primary)"><use href="#ic-flag"/></svg>
+                    <span style="font-size:12px;" data-i18n="score_limit">Batas Skor</span>
+                </div>
+                <div class="input-group" style="padding:5px 10px;">
+                    <input type="number" id="limitInput" value="101" onchange="updateLimit(this.value)" min="10" max="999" style="width:44px;font-size:14px;">
                     <span class="input-suffix" data-i18n="points">poin</span>
                 </div>
             </div>
-            <div class="setting-group">
-                <div class="setting-label">
-                    <svg class="svg-icon" style="width:18px;height:18px;color:var(--primary)"><use href="#ic-volume"/></svg>
-                    <span data-i18n="sound_effect">Efek Suara</span>
+            <div class="setting-group" style="padding:9px 0;">
+                <div style="display:flex;align-items:center;width:100%;gap:8px;">
+                    <div style="display:flex;align-items:center;gap:6px;flex:1;">
+                        <svg class="svg-icon" style="width:15px;height:15px;color:var(--primary)"><use href="#ic-volume"/></svg>
+                        <span style="font-size:11px;color:var(--text-secondary);" data-i18n="sound_effect">Efek Suara</span>
+                        <label class="toggle-switch" style="margin-left:auto;">
+                            <input type="checkbox" id="soundToggle" onchange="toggleSound()" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <div style="width:1px;height:20px;background:var(--border);"></div>
+                    <div style="display:flex;align-items:center;gap:6px;flex:1;">
+                        <svg class="svg-icon" style="width:15px;height:15px;color:var(--primary)"><use href="#ic-compress"/></svg>
+                        <span style="font-size:11px;color:var(--text-secondary);" data-i18n="compact_mode">Ringkas</span>
+                        <label class="toggle-switch" style="margin-left:auto;">
+                            <input type="checkbox" id="compactToggle" onchange="toggleCompactMode()">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <div style="width:1px;height:20px;background:var(--border);"></div>
+                    <div style="display:flex;align-items:center;gap:6px;flex:1;">
+                        <svg class="svg-icon" style="width:15px;height:15px;color:var(--secondary)"><use href="#ic-compress"/></svg>
+                        <span style="font-size:11px;color:var(--text-secondary);" data-i18n="ios_mode">iOS</span>
+                        <label class="toggle-switch" style="margin-left:auto;">
+                            <input type="checkbox" id="iosToggle" onchange="toggleIOSMode()">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
                 </div>
-                <label class="toggle-switch">
-                    <input type="checkbox" id="soundToggle" onchange="toggleSound()" checked>
-                    <span class="toggle-slider"></span>
-                </label>
             </div>
-            <div class="setting-group">
-                <div class="setting-label">
-                    <svg class="svg-icon" style="width:18px;height:18px;color:var(--primary)"><use href="#ic-compress"/></svg>
-                    <span data-i18n="compact_mode">Mode Ringkas</span>
-                </div>
-                <label class="toggle-switch">
-                    <input type="checkbox" id="compactToggle" onchange="toggleCompactMode()">
-                    <span class="toggle-slider"></span>
-                </label>
-            </div>
-            <div class="setting-group">
-                <div class="setting-label">
-                    <svg class="svg-icon" style="width:18px;height:18px;color:var(--secondary)"><use href="#ic-compress"/></svg>
-                    <span data-i18n="ios_mode">Mode iOS</span>
-                </div>
-                <label class="toggle-switch">
-                    <input type="checkbox" id="iosToggle" onchange="toggleIOSMode()">
-                    <span class="toggle-slider"></span>
-                </label>
-            </div>
-            <div class="settings-actions">
-                <button class="settings-btn primary" onclick="resetRound()">
-                    <svg class="svg-icon" style="width:18px;height:18px;color:var(--primary)"><use href="#ic-rotate"/></svg>
+            <div class="settings-actions" style="flex-direction:row;gap:6px;margin-top:6px;">
+                <button class="settings-btn primary" onclick="resetRound()" style="flex:1;padding:9px 6px;font-size:12px;justify-content:center;gap:5px;">
+                    <svg class="svg-icon" style="width:14px;height:14px;color:var(--primary)"><use href="#ic-rotate"/></svg>
                     <span data-i18n="new_round">Ronde Baru</span>
                 </button>
-                <button class="settings-btn danger" onclick="hardReset()">
-                    <svg class="svg-icon" style="width:18px;height:18px;color:var(--danger)"><use href="#ic-trash"/></svg>
+                <button class="settings-btn danger" onclick="hardReset()" style="flex:1;padding:9px 6px;font-size:12px;justify-content:center;gap:5px;">
+                    <svg class="svg-icon" style="width:14px;height:14px;color:var(--danger)"><use href="#ic-trash"/></svg>
                     <span data-i18n="reset_all">Reset Semua</span>
                 </button>
-                <button class="settings-btn info" onclick="openAbout()">
-                    <svg class="svg-icon" style="width:18px;height:18px;color:#3b82f6"><use href="#ic-info"/></svg>
-                    <span data-i18n="about_app">Tentang Aplikasi</span>
+                <button class="settings-btn info" onclick="openAbout()" style="flex:1;padding:9px 6px;font-size:12px;justify-content:center;gap:5px;">
+                    <svg class="svg-icon" style="width:14px;height:14px;color:#3b82f6"><use href="#ic-info"/></svg>
+                    <span data-i18n="about_app">Tentang</span>
                 </button>
             </div>
             <div class="social-section">
                 <p class="social-label" data-i18n="follow_me">Ikuti Saya:</p>
                 <div class="social-links">
                     <a href="https://whatsapp.com/channel/0029VawFbp2CHDyfgcHIo51h" target="_blank" class="social-link wa">
-                        <svg class="svg-icon" style="width:20px;height:20px;color:#fff"><use href="#ic-whatsapp"/></svg>
+                        <img src="img/WhatsApp.png" style="width:18px;height:18px;object-fit:contain;">
                     </a>
                     <a href="https://t.me/farrelauliairfealdo" target="_blank" class="social-link tg">
-                        <svg class="svg-icon" style="width:20px;height:20px;color:#fff"><use href="#ic-telegram"/></svg>
+                        <img src="img/Telegram.png" style="width:18px;height:18px;object-fit:contain;">
                     </a>
                     <a href="https://www.instagram.com/farrelauliairfealdo_" target="_blank" class="social-link ig">
-                        <svg class="svg-icon" style="width:20px;height:20px;color:#fff"><use href="#ic-instagram"/></svg>
+                        <img src="img/Instagram.png" style="width:18px;height:18px;object-fit:contain;">
                     </a>
                     <a href="https://www.tiktok.com/@farrel.aulia.irfealdo" target="_blank" class="social-link tk">
-                        <svg class="svg-icon" style="width:20px;height:20px;color:#fff"><use href="#ic-tiktok"/></svg>
+                        <img src="img/TikTok.png" style="width:18px;height:18px;object-fit:contain;">
                     </a>
                     <a href="https://youtube.com/@nullxd-md" target="_blank" class="social-link yt">
-                        <svg class="svg-icon" style="width:20px;height:20px;color:#fff"><use href="#ic-youtube"/></svg>
+                        <img src="img/YouTube.png" style="width:18px;height:18px;object-fit:contain;">
                     </a>
                 </div>
                 <p class="developer-credit" data-i18n="dev_credit">Dibuat dengan ❤️ oleh Farrel Aulia Irfealdo</p>
@@ -546,7 +625,7 @@
         </div>
         <p data-i18n="change_name">Ubah Nama Tim</p>
         <input type="hidden" id="editNamePlayer" value="0">
-        <input type="text" id="editNameInput" class="edit-name-input" placeholder="..." maxlength="16" onkeydown="if(event.key==='Enter') saveEditName()">
+        <input type="text" id="editNameInput" class="edit-name-input" placeholder="..." maxlength="16" autocapitalize="characters" onkeydown="if(event.key==='Enter') saveEditName()">
         <div class="delete-actions">
             <button class="delete-btn cancel" onclick="closeEditNameModal()" data-i18n="cancel">Batal</button>
             <button class="delete-btn confirm" style="background:linear-gradient(135deg,var(--primary),var(--secondary));border:none;" onclick="saveEditName()" data-i18n="save">Simpan</button>
@@ -569,27 +648,91 @@
         <div class="about-content">
             <div class="app-logo-section">
                 <div class="app-logo">
-                    <svg class="svg-icon" style="width:28px;height:28px;color:#fff"><use href="#ic-dice"/></svg>
+                    <img src="img/icon-512.png" alt="Domino Score NullXD" onerror="this.parentElement.innerHTML='<svg class=\'svg-icon\' style=\'width:64px;height:64px;color:#fff\'><use href=\'#ic-dice\'></use></svg>'" style="width:110px;height:110px;object-fit:cover;border-radius:22px;display:block;margin:0 auto;">
                 </div>
                 <h2>Domino Score NullXD</h2>
-                <p class="version">Versi 2.5</p>
+                <span class="version">✦ Versi 2.10 ✦</span>
             </div>
+
+            <!-- Changelog -->
+            <div class="about-section">
+                <h4>
+                    <svg class="svg-icon" style="width:14px;height:14px;color:var(--accent)"><use href="#ic-star"/></svg>
+                    Changelog
+                </h4>
+                <div style="display:flex;flex-direction:column;gap:0px;">
+
+                    <div class="cl-card latest">
+                        <div class="cl-ver latest">v2.10 <span class="cl-badge">TERBARU</span></div>
+                        <div class="cl-lines">
+                            + Alig: chip history warna beda tiap tambah skor<br>
+                            + Alig: progress bar lebih tebal + animasi pulse mendekati limit<br>
+                            + Alig: tombol + Tambah lebih besar & mudah di-tap<br>
+                            + Alig: selisih skor vs pemenang tampil di hasil & riwayat<br>
+                            + Settings: layout compact, tidak perlu scroll<br>
+                            + Settings: mode selector 3 tombol horizontal<br>
+                            + Settings: Bahasa & Tema dalam 1 baris berdampingan<br>
+                            + Social icons pakai gambar PNG asli
+                        </div>
+                    </div>
+
+                    <div class="cl-card v29">
+                        <div class="cl-ver v29">v2.9</div>
+                        <div class="cl-lines">
+                            + QQ: modal tap tengah jadi popup bawah layar<br>
+                            + QQ: mode Tambah/Kurang & Set Nilai dengan preview realtime<br>
+                            + Fix UI modal QQ yang berantakan di versi sebelumnya
+                        </div>
+                    </div>
+
+                    <div class="cl-card v28">
+                        <div class="cl-ver v28">v2.8</div>
+                        <div class="cl-lines">
+                            + Mode QQ (Qiu Qiu): catatan hutang/saldo 2–8 pemain<br>
+                            + Step input manual bebas, riwayat jadi modal<br>
+                            + Layout Alig redesign compact vertikal, support 5 pemain
+                        </div>
+                    </div>
+
+                    <div class="cl-card v27">
+                        <div class="cl-ver v27">v2.7</div>
+                        <div class="cl-lines">
+                            + History permainan Alig lengkap per ronde<br>
+                            + Sistem hutang bersih antar pemain otomatis<br>
+                            + Ronde Alig punya counter sendiri
+                        </div>
+                    </div>
+
+                    <div class="cl-card old">
+                        <div class="cl-ver old">v2.4 – v2.6</div>
+                        <div class="cl-lines">
+                            + Mode Alig (2–5 pemain) dengan input batu & kalkulator<br>
+                            + Payment modal otomatis setelah ronde selesai<br>
+                            + UI Modern, Compact Mode, Tema Warna, Multi-bahasa
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Fitur aktif -->
             <div class="about-section">
                 <h4>
                     <svg class="svg-icon" style="width:14px;height:14px;color:var(--primary)"><use href="#ic-star"/></svg>
-                    <span data-i18n="features">Fitur & Pembaruan</span>
+                    <span data-i18n="features">Fitur</span>
                 </h4>
                 <ul class="feature-list">
-                    <li><svg class="svg-icon" style="width:14px;height:14px;color:var(--success)"><use href="#ic-check"/></svg> <span data-i18n="feat_ui">Perfect Fit Layout - No Scroll</span></li>
-                    <li><svg class="svg-icon" style="width:14px;height:14px;color:var(--success)"><use href="#ic-check"/></svg> <span data-i18n="feat_compact">Ultra Compact Mode (Optimized)</span></li>
-                    <li><svg class="svg-icon" style="width:14px;height:14px;color:var(--success)"><use href="#ic-check"/></svg> <span data-i18n="feat_music">Music Player (YouTube Integration)</span></li>
-                    <li><svg class="svg-icon" style="width:14px;height:14px;color:var(--success)"><use href="#ic-check"/></svg> <span data-i18n="feat_score">Sistem Skor & Kalkulator</span></li>
-                    <li><svg class="svg-icon" style="width:14px;height:14px;color:var(--success)"><use href="#ic-check"/></svg> <span data-i18n="feat_theme">Tema: Purple, Blue, Green, Pink</span></li>
-                    <li><svg class="svg-icon" style="width:14px;height:14px;color:var(--success)"><use href="#ic-check"/></svg> <span data-i18n="feat_history">Riwayat, Undo & Reset Aman</span></li>
-                    <li><svg class="svg-icon" style="width:14px;height:14px;color:var(--success)"><use href="#ic-check"/></svg> <span data-i18n="feat_storage">Penyimpanan Data Otomatis</span></li>
-                    <li><svg class="svg-icon" style="width:14px;height:14px;color:var(--success)"><use href="#ic-check"/></svg> <span data-i18n="feat_lang">Multi-bahasa (ID/EN)</span></li>
+                    <li><svg class="svg-icon" style="width:14px;height:14px;color:var(--success)"><use href="#ic-check"/></svg> <span>Mode Normal, Alig & Qiu Qiu</span></li>
+                    <li><svg class="svg-icon" style="width:14px;height:14px;color:var(--success)"><use href="#ic-check"/></svg> <span>Kalkulator & Input Batu (Alig)</span></li>
+                    <li><svg class="svg-icon" style="width:14px;height:14px;color:var(--success)"><use href="#ic-check"/></svg> <span>Statistik & Riwayat Lengkap per Ronde</span></li>
+                    <li><svg class="svg-icon" style="width:14px;height:14px;color:var(--success)"><use href="#ic-check"/></svg> <span>Catatan Hutang ± dengan Step Bebas (QQ)</span></li>
+                    <li><svg class="svg-icon" style="width:14px;height:14px;color:var(--success)"><use href="#ic-check"/></svg> <span>Rekap Hutang Bersih Antar Pemain</span></li>
+                    <li><svg class="svg-icon" style="width:14px;height:14px;color:var(--success)"><use href="#ic-check"/></svg> <span>Tema: Purple, Blue, Green, Pink</span></li>
+                    <li><svg class="svg-icon" style="width:14px;height:14px;color:var(--success)"><use href="#ic-check"/></svg> <span>Multi-bahasa (ID/EN)</span></li>
+                    <li><svg class="svg-icon" style="width:14px;height:14px;color:var(--success)"><use href="#ic-check"/></svg> <span>Simpan Otomatis</span></li>
                 </ul>
             </div>
+
             <div class="about-section">
                 <h4>
                     <svg class="svg-icon" style="width:14px;height:14px;color:var(--primary)"><use href="#ic-code"/></svg>
@@ -613,36 +756,133 @@
     </div>
 </div>
 
+<audio id="sfx-click" src="sfx/sfx-click.wav"></audio>
+<audio id="sfx-win" src="sfx/sfx-win.m4a"></audio>
+
+<!-- ===== ALIG PERSISTENT MODALS (outside board so they survive createAligBoard rebuilds) ===== -->
+
+<!-- Score Input -->
+<div class="alig-input-overlay" id="aligInputOverlay" style="display:none" onclick="if(event.target.id==='aligInputOverlay')closeAligInput()">
+    <div class="alig-input-modal">
+        <div class="alig-modal-handle"></div>
+        <div class="alig-input-title">Tambah Skor Sisa Batu</div>
+        <div class="alig-input-name" id="aligInputName"></div>
+        <div class="alig-tab-bar">
+            <button class="alig-tab active" id="tabBatu" onclick="switchAligTab('batu')">🀱 Ketuk Batu</button>
+            <button class="alig-tab" id="tabAngka" onclick="switchAligTab('angka')">🔢 Ketik Angka</button>
+        </div>
+        <div id="aligTabBatu">
+            <div class="alig-stone-info">Ketuk nilai batu yang tersisa di tangan:</div>
+            <div class="alig-quick-stones">
+                <button class="alig-stone-btn stone-zero" onclick="aligAddStone(0)">0</button>
+                <button class="alig-stone-btn" onclick="aligAddStone(1)">1</button>
+                <button class="alig-stone-btn" onclick="aligAddStone(2)">2</button>
+                <button class="alig-stone-btn" onclick="aligAddStone(3)">3</button>
+                <button class="alig-stone-btn" onclick="aligAddStone(4)">4</button>
+                <button class="alig-stone-btn" onclick="aligAddStone(5)">5</button>
+                <button class="alig-stone-btn" onclick="aligAddStone(6)">6</button>
+                <button class="alig-stone-btn" onclick="aligAddStone(7)">7</button>
+                <button class="alig-stone-btn" onclick="aligAddStone(8)">8</button>
+                <button class="alig-stone-btn" onclick="aligAddStone(9)">9</button>
+                <button class="alig-stone-btn" onclick="aligAddStone(10)">10</button>
+                <button class="alig-stone-btn" onclick="aligAddStone(11)">11</button>
+                <button class="alig-stone-btn" onclick="aligAddStone(12)">12</button>
+            </div>
+            <div class="alig-stone-selected" id="aligStoneSelected"><span style="color:var(--text-muted);font-size:12px">Belum ada batu dipilih</span></div>
+            <button class="alig-stone-clear" onclick="aligClearStones()">✕ Reset Semua Batu</button>
+        </div>
+        <div id="aligTabAngka" style="display:none">
+            <div class="alig-stone-info">Ketik total skor atau hitung dulu:</div>
+            <div class="alig-calc-display" id="aligCalcDisplay">0</div>
+            <div class="alig-calc-grid">
+                <button class="alig-calc-btn fn" onclick="aligCalcClear()">AC</button>
+                <button class="alig-calc-btn fn" onclick="aligCalcBack()">⌫</button>
+                <button class="alig-calc-btn op" onclick="aligCalcOp('+')">+</button>
+                <button class="alig-calc-btn op" onclick="aligCalcOp('-')">−</button>
+                <button class="alig-calc-btn num" onclick="aligCalcNum('7')">7</button>
+                <button class="alig-calc-btn num" onclick="aligCalcNum('8')">8</button>
+                <button class="alig-calc-btn num" onclick="aligCalcNum('9')">9</button>
+                <button class="alig-calc-btn op" onclick="aligCalcOp('*')">×</button>
+                <button class="alig-calc-btn num" onclick="aligCalcNum('4')">4</button>
+                <button class="alig-calc-btn num" onclick="aligCalcNum('5')">5</button>
+                <button class="alig-calc-btn num" onclick="aligCalcNum('6')">6</button>
+                <button class="alig-calc-btn op" onclick="aligCalcOp('/')">÷</button>
+                <button class="alig-calc-btn num" onclick="aligCalcNum('1')">1</button>
+                <button class="alig-calc-btn num" onclick="aligCalcNum('2')">2</button>
+                <button class="alig-calc-btn num" onclick="aligCalcNum('3')">3</button>
+                <button class="alig-calc-btn num zero" onclick="aligCalcNum('0')">0</button>
+            </div>
+        </div>
+        <div class="alig-input-total">Total: <span id="aligInputTotal">0</span></div>
+        <div class="alig-input-actions">
+            <button class="alig-input-cancel" onclick="closeAligInput()">Batal</button>
+            <button class="alig-input-confirm" onclick="confirmAligScore()">✓ Tambah</button>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Name -->
+<div class="alig-input-overlay" id="aligEditNameOverlay" style="display:none" onclick="if(event.target.id==='aligEditNameOverlay')closeAligEditName()">
+    <div class="alig-input-modal">
+        <div class="alig-modal-handle"></div>
+        <div class="alig-input-title">Ubah Nama Pemain</div>
+        <input type="hidden" id="aligEditNamePlayer" value="0">
+        <input type="text" id="aligEditNameInput" class="edit-name-input" placeholder="Nama pemain..." maxlength="14" autocapitalize="characters" onkeydown="if(event.key==='Enter')saveAligName()" style="margin:14px 0">
+        <div class="alig-input-actions">
+            <button class="alig-input-cancel" onclick="closeAligEditName()">Batal</button>
+            <button class="alig-input-confirm" onclick="saveAligName()">Simpan</button>
+        </div>
+    </div>
+</div>
+
+<!-- Payment Result -->
+<div class="alig-pay-overlay" id="aligPayModal" style="display:none">
+    <div class="alig-pay-modal" id="aligPayContent"></div>
+</div>
+
+<!-- Game History -->
+<div class="alig-pay-overlay" id="aligHistoryModal" style="display:none" onclick="if(event.target.id==='aligHistoryModal')closeAligHistory()">
+    <div class="alig-pay-modal" id="aligHistoryContent" style="max-height:85vh;overflow-y:auto"></div>
+</div>
+
+<!-- Confirm New Round -->
+<div class="alig-pay-overlay" id="aligConfirmModal" style="display:none">
+    <div class="alig-pay-modal" style="padding:24px 20px">
+        <div class="alig-pay-title" style="font-size:17px">Mulai Ronde Baru?</div>
+        <p style="text-align:center;color:var(--text-secondary);font-size:13px;margin:8px 0 20px">Skor ronde ini akan di-reset ke 0.<br>Kemenangan tetap tersimpan.</p>
+        <div class="alig-pay-actions">
+            <button class="alig-pay-btn-close" onclick="closeAligConfirm()">Batal</button>
+            <button class="alig-pay-btn-new" onclick="aligNewRound()">
+                🔄 Ya, Ronde Baru
+            </button>
+        </div>
+    </div>
+</div>
+
+
 <!-- ========================= MUSIC PLAYER ========================= -->
-<!-- Music Search Modal -->
 <div id="music-modal" class="music-modal">
     <div class="music-modal-content">
         <div class="music-modal-header">
             <h3>🎵 Music Search</h3>
             <button class="music-close-btn" id="music-close-btn">&times;</button>
         </div>
-        
         <div class="music-search-box">
             <input type="text" id="music-search-input" placeholder="Cari lagu (min. 3 karakter)..." />
             <button id="music-search-btn">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="11" cy="11" r="8"/>
-                    <path d="m21 21-4.35-4.35"/>
+                    <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
                 </svg>
             </button>
         </div>
-        
-        <div id="music-loading" class="music-loading" style="display: none;">
+        <div id="music-loading" class="music-loading" style="display:none;">
             <div class="music-spinner"></div>
             <p>Mencari musik...</p>
         </div>
-        
         <div id="music-results" class="music-results"></div>
-        
-        <div id="music-empty" class="music-empty" style="display: none;">
+        <div id="music-empty" class="music-empty" style="display:none;">
             <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <circle cx="12" cy="12" r="10"/>
-                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+                <circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
                 <line x1="12" y1="17" x2="12.01" y2="17"/>
             </svg>
             <p>Tidak ada hasil</p>
@@ -650,8 +890,7 @@
     </div>
 </div>
 
-<!-- Music Player (bottom floating) -->
-<div id="music-player" class="music-player" style="display: none;">
+<div id="music-player" class="music-player" style="display:none;">
     <div class="music-player-content">
         <div class="music-player-thumbnail">
             <img id="music-player-thumb" src="" alt="thumbnail" />
@@ -662,124 +901,27 @@
         </div>
         <div class="music-player-controls">
             <button id="music-prev-btn" class="music-control-btn">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/>
-                </svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6 8.5 6V6z"/></svg>
             </button>
             <button id="music-play-btn" class="music-control-btn music-play-main">
-                <svg id="music-play-icon" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                    <polygon points="5,3 19,12 5,21"/>
-                </svg>
-                <svg id="music-pause-icon" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" style="display: none;">
-                    <rect x="6" y="4" width="4" height="16"/>
-                    <rect x="14" y="4" width="4" height="16"/>
-                </svg>
+                <svg id="music-play-icon" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+                <svg id="music-pause-icon" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
             </button>
             <button id="music-next-btn" class="music-control-btn">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M16 18h2V6h-2zm-11-6l8.5-6v12z"/>
-                </svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M16 18h2V6h-2zm-11-6 8.5-6v12z"/></svg>
             </button>
             <button id="music-close-player-btn" class="music-control-btn">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <line x1="18" y1="6" x2="6" y2="18"/>
-                    <line x1="6" y1="6" x2="18" y2="18"/>
+                    <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
                 </svg>
             </button>
         </div>
     </div>
 </div>
 
-<!-- Hidden YouTube Player -->
-<div id="youtube-player-container" style="display: none;"></div>
+<div id="youtube-player-container" style="display:none;"></div>
 <!-- ================================================================ -->
 
-<!-- Changelog Popup -->
-<div id="changelog-popup" class="changelog-overlay">
-    <div class="changelog-modal">
-        <div class="changelog-header">
-            <div style="display: flex; align-items: center; gap: 12px;">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
-                    <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/>
-                </svg>
-                <h3>Changelog</h3>
-            </div>
-            <button class="changelog-close" onclick="closeChangelog()">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                    <path d="M18 6L6 18M6 6l12 12"/>
-                </svg>
-            </button>
-        </div>
-        <div class="changelog-content">
-            <div class="changelog-version">v2.6 - iOS Safari Optimization</div>
-            <ul class="changelog-list">
-                <li><span class="changelog-tag new">New</span> iOS Mode - Ultra compact for Safari</li>
-                <li><span class="changelog-tag fixed">Fixed</span> UI cut-off on iPhone Safari</li>
-                <li><span class="changelog-tag fixed">Fixed</span> Layout fits iPhone 11 & smaller</li>
-                <li><span class="changelog-tag improved">Improved</span> Better viewport handling</li>
-                <li><span class="changelog-tag optimized">Optimized</span> Smaller fonts & spacing for iOS</li>
-            </ul>
-            
-            <div class="changelog-version previous">v2.5 - Perfect Fit Layout:</div>
-            <ul class="changelog-list previous">
-                <li><span class="changelog-tag new">New</span> TIM ALPHA → TIM NULLXD, TIM BETA → TIM ZENITH</li>
-                <li><span class="changelog-tag new">New</span> Music Player (YouTube Integration)</li>
-                <li><span class="changelog-tag new">New</span> Built-in Calculator</li>
-                <li><span class="changelog-tag new">New</span> Multi-language support (ID/EN)</li>
-                <li><span class="changelog-tag new">New</span> Auto save data (localStorage)</li>
-                <li><span class="changelog-tag new">New</span> Theme: Purple, Blue, Green, Pink</li>
-                <li><span class="changelog-tag new">New</span> Editable team names</li>
-                <li><span class="changelog-tag new">New</span> Sound effects toggle</li>
-                <li><span class="changelog-tag fixed">Fixed</span> Disable scroll - stay layout</li>
-                <li><span class="changelog-tag fixed">Fixed</span> Music player overlay spacing</li>
-                <li><span class="changelog-tag fixed">Fixed</span> About modal no scroll fit screen</li>
-                <li><span class="changelog-tag fixed">Fixed</span> Score limit validation</li>
-                <li><span class="changelog-tag fixed">Fixed</span> Traditional Domino Win Logic</li>
-                <li><span class="changelog-tag improved">Improved</span> Ultra compact mode</li>
-                <li><span class="changelog-tag improved">Improved</span> Balanced spacing & sizing</li>
-                <li><span class="changelog-tag improved">Improved</span> Real-time score tracking</li>
-                <li><span class="changelog-tag improved">Improved</span> History & undo system</li>
-                <li><span class="changelog-tag improved">Improved</span> Win detection logic</li>
-                <li><span class="changelog-tag improved">Improved</span> Round management</li>
-                <li><span class="changelog-tag improved">Improved</span> Full Screen UI (1440x3200)</li>
-                <li><span class="changelog-tag performance">Performance</span> All content fit 1 screen</li>
-                <li><span class="changelog-tag performance">Performance</span> Faster localStorage save</li>
-                <li><span class="changelog-tag optimized">Optimized</span> Button, card, font sizes</li>
-                <li><span class="changelog-tag optimized">Optimized</span> Animation transitions</li>
-            </ul>
-            
-            <div class="changelog-version previous">v2.4 and Earlier:</div>
-            <ul class="changelog-list previous">
-                <li><span class="changelog-tag new">New</span> Modern UI with gradient themes</li>
-                <li><span class="changelog-tag new">New</span> Compact Mode</li>
-                <li><span class="changelog-tag improved">Improved</span> Score tracking system</li>
-                <li><span class="changelog-tag improved">Improved</span> Mobile responsiveness</li>
-            </ul>
-        </div>
-    </div>
-</div>
-
-<audio id="sfx-click" src="sfx/sfx-click.wav"></audio>
-<audio id="sfx-win" src="sfx/sfx-win.m4a"></audio>
-
 <script src="js/app.js"></script>
-<script>
-// Show changelog popup on page load
-window.addEventListener('load', function() {
-    document.getElementById('changelog-popup').classList.add('active');
-});
-
-function closeChangelog() {
-    document.getElementById('changelog-popup').classList.remove('active');
-}
-
-// Close on overlay click
-document.getElementById('changelog-popup').addEventListener('click', function(e) {
-    if (e.target === this) {
-        closeChangelog();
-    }
-});
-</script>
 </body>
 </html>
