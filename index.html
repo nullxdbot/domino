@@ -704,11 +704,39 @@
                     </div>
 
                     <div class="cl-card old">
-                        <div class="cl-ver old">v2.4 – v2.6</div>
+                        <div class="cl-ver old">v2.6</div>
                         <div class="cl-lines">
-                            + Mode Alig (2–5 pemain) dengan input batu & kalkulator<br>
-                            + Payment modal otomatis setelah ronde selesai<br>
-                            + UI Modern, Compact Mode, Tema Warna, Multi-bahasa
+                            + iOS Mode – ultra compact untuk Safari<br>
+                            ~ Fixed UI terpotong di iPhone Safari<br>
+                            ~ Fixed layout iPhone 11 & lebih kecil<br>
+                            ~ Improved viewport handling
+                        </div>
+                    </div>
+
+                    <div class="cl-card old">
+                        <div class="cl-ver old">v2.5</div>
+                        <div class="cl-lines">
+                            + Music Player (YouTube Integration)<br>
+                            + Kalkulator bawaan<br>
+                            + Multi-bahasa (ID/EN)<br>
+                            + Auto save data (localStorage)<br>
+                            + Tema: Purple, Blue, Green, Pink<br>
+                            + Nama tim dapat diedit<br>
+                            + Efek suara toggle<br>
+                            ~ Fixed disable scroll – stay layout<br>
+                            ~ Fixed music player overlay spacing<br>
+                            ~ Fixed score limit validation<br>
+                            ~ Improved compact mode & spacing
+                        </div>
+                    </div>
+
+                    <div class="cl-card old">
+                        <div class="cl-ver old">v2.4</div>
+                        <div class="cl-lines">
+                            + Mode Alig (2–5 pemain)<br>
+                            + Input batu & kalkulator Alig<br>
+                            + Payment modal otomatis setelah ronde<br>
+                            + UI modern & elegan
                         </div>
                     </div>
 
@@ -923,5 +951,107 @@
 <!-- ================================================================ -->
 
 <script src="js/app.js"></script>
+
+<!-- ========================= CHANGELOG POPUP ========================= -->
+<div id="changelog-popup" class="changelog-overlay">
+    <div class="changelog-modal">
+        <div class="changelog-header">
+            <div style="display:flex;align-items:center;gap:12px;">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+                    <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/>
+                </svg>
+                <h3>Changelog</h3>
+            </div>
+            <button class="changelog-close" onclick="closeChangelog()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="changelog-content">
+
+            <div class="changelog-version">v2.10 – QQ & Alig Overhaul</div>
+            <ul class="changelog-list">
+                <li><span class="changelog-tag new">New</span> Mode Qiu Qiu – saldo ±, 2–8 pemain, step bebas</li>
+                <li><span class="changelog-tag new">New</span> Chip history Alig warna beda tiap entri</li>
+                <li><span class="changelog-tag improved">Improved</span> Progress bar animasi pulse mendekati limit</li>
+                <li><span class="changelog-tag improved">Improved</span> Settings layout compact (Bahasa & Tema 1 baris)</li>
+                <li><span class="changelog-tag improved">Improved</span> Social icons pakai PNG asli</li>
+                <li><span class="changelog-tag new">New</span> Mode badge di header saat Alig/QQ aktif</li>
+            </ul>
+
+            <div class="changelog-version previous">v2.9</div>
+            <ul class="changelog-list previous">
+                <li><span class="changelog-tag new">New</span> Riwayat hutang bersih antar pemain (Alig)</li>
+                <li><span class="changelog-tag improved">Improved</span> Kalkulator Alig lebih responsif</li>
+                <li><span class="changelog-tag fixed">Fixed</span> Bug reset ronde Alig</li>
+            </ul>
+
+            <div class="changelog-version previous">v2.8</div>
+            <ul class="changelog-list previous">
+                <li><span class="changelog-tag new">New</span> Mode selector 3 tombol (Normal / Alig / QQ)</li>
+                <li><span class="changelog-tag improved">Improved</span> Alig: input batu lebih cepat</li>
+                <li><span class="changelog-tag fixed">Fixed</span> Payment modal tidak muncul di beberapa device</li>
+            </ul>
+
+            <div class="changelog-version previous">v2.7</div>
+            <ul class="changelog-list previous">
+                <li><span class="changelog-tag new">New</span> History permainan Alig lengkap per ronde</li>
+                <li><span class="changelog-tag new">New</span> Sistem hutang bersih antar pemain otomatis</li>
+                <li><span class="changelog-tag new">New</span> Ronde Alig punya counter sendiri</li>
+            </ul>
+
+            <div class="changelog-version previous">v2.6 – iOS Safari Optimization</div>
+            <ul class="changelog-list previous">
+                <li><span class="changelog-tag new">New</span> iOS Mode – ultra compact untuk Safari</li>
+                <li><span class="changelog-tag fixed">Fixed</span> UI terpotong di iPhone Safari</li>
+                <li><span class="changelog-tag fixed">Fixed</span> Layout iPhone 11 & lebih kecil</li>
+                <li><span class="changelog-tag improved">Improved</span> Better viewport handling</li>
+            </ul>
+
+            <div class="changelog-version previous">v2.5 – Perfect Fit Layout</div>
+            <ul class="changelog-list previous">
+                <li><span class="changelog-tag new">New</span> Music Player (YouTube Integration)</li>
+                <li><span class="changelog-tag new">New</span> Kalkulator bawaan</li>
+                <li><span class="changelog-tag new">New</span> Multi-bahasa (ID/EN)</li>
+                <li><span class="changelog-tag new">New</span> Auto save data (localStorage)</li>
+                <li><span class="changelog-tag new">New</span> Tema: Purple, Blue, Green, Pink</li>
+                <li><span class="changelog-tag new">New</span> Nama tim dapat diedit</li>
+                <li><span class="changelog-tag new">New</span> Efek suara toggle</li>
+                <li><span class="changelog-tag fixed">Fixed</span> Score limit validation</li>
+                <li><span class="changelog-tag improved">Improved</span> Compact mode & spacing</li>
+            </ul>
+
+            <div class="changelog-version previous">v2.4 and Earlier</div>
+            <ul class="changelog-list previous">
+                <li><span class="changelog-tag new">New</span> Mode Alig (2–5 pemain)</li>
+                <li><span class="changelog-tag new">New</span> Input batu & kalkulator Alig</li>
+                <li><span class="changelog-tag new">New</span> UI Modern dengan gradient themes</li>
+                <li><span class="changelog-tag improved">Improved</span> Mobile responsiveness</li>
+            </ul>
+
+        </div>
+    </div>
+</div>
+<!-- ================================================================== -->
+
+<script>
+window.addEventListener('load', function() {
+    const seen = localStorage.getItem('cl_seen_v2.10')
+    if (!seen) {
+        document.getElementById('changelog-popup').classList.add('active')
+        localStorage.setItem('cl_seen_v2.10', '1')
+    }
+})
+function closeChangelog() {
+    document.getElementById('changelog-popup').classList.remove('active')
+}
+document.addEventListener('click', function(e) {
+    const overlay = document.getElementById('changelog-popup')
+    if (e.target === overlay) closeChangelog()
+})
+</script>
+
 </body>
 </html>
